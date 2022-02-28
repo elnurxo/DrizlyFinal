@@ -825,12 +825,15 @@ body::-webkit-scrollbar-thumb {
   display: block;
   color: #24282f;
 }
+.categoriessection .categoriescol header i {
+  display: none;
+}
 .categoriessection .categoriescol .categoriesmobile {
   display: none;
 }
 .categoriessection .categoriescol ul li {
   padding: 0.85vw 0.7vw 0;
-  display: block;
+  display: block !important;
   text-align: center;
 }
 .categoriessection .categoriescol ul li a {
@@ -1075,7 +1078,7 @@ html {
     height: 100% !important;
   }
   .shopnow .col img {
-    width: 75vw;
+    width: 68vw;
     height: 227px;
     margin-top: 10vw;
   }
@@ -1091,9 +1094,40 @@ html {
     cursor: pointer;
     font-size: 5.3vw !important;
   }
-  .categoriessection .categoriescol header .categoriescol {
-    width: 100%;
+  .categoriessection .categoriescol header i {
+    display: block !important;
+    position: absolute;
+    font-size: 16px;
+    right: 28px;
+    top: 24px;
+  }
+
+  .categoriescol {
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
     position: relative;
+  }
+  .categoriescol ul {
+    display: none;
+    background-color: #ffffff;
+  }
+  .categoriescol ul li a {
+    padding: 18px 0 0 30px;
+    text-align: left !important;
+  }
+
+  .categoriessection {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding: 0;
   }
 
   .categoriesmobile {

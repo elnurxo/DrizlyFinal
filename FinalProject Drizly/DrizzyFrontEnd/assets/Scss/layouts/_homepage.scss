@@ -238,6 +238,9 @@
             text-align: center;
             display: block;
             color: #24282f;
+            i{
+                display: none;
+            }
         }
         .categoriesmobile{
             display: none;
@@ -245,7 +248,7 @@
         ul{
             li{
                 padding: 0.85vw 0.7vw 0;
-                display: block;
+                display: block !important;
                 text-align: center;
                 a{
                     color: #24282f;
@@ -455,7 +458,7 @@ html{
                 height: 100% !important;
             }
             img{
-                width: 75vw;
+                width: 68vw;
                 height: 227px;
                 margin-top: 10vw;
             }
@@ -471,10 +474,35 @@ html{
         text-transform: uppercase;
         cursor: pointer;
         font-size: 5.3vw !important;
-        .categoriescol{
-            width: 100%;
-            position: relative;
+        i{
+            display: block !important;
+            position: absolute;
+            font-size: 16px;
+            right: 28px;
+            top: 24px;
         }
+    }
+    .categoriescol{
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        position: relative;
+        ul{
+            display: none;
+            background-color: #ffffff;
+            li{   
+                a{
+                    padding: 18px 0 0 30px;
+                    text-align: left !important;
+                }
+            }
+        }
+    }
+    .categoriessection{
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        padding: 0;
     }
     .categoriesmobile{
         display: block !important;
