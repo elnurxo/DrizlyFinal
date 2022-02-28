@@ -1,0 +1,127 @@
+.age-gate-modal{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    position: fixed;
+    display: flex;
+    .age-gate-overlay{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        position: fixed;
+        touch-action: none;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+    .age-modal{
+        flex-direction: column;
+        align-items: center;
+        margin: auto;
+        width: 450px;
+        min-height: 416px;
+        background: #fff;
+        box-shadow: 0 15px 35px rgba(36,40,47,.15);
+        border-radius: 3px;
+        display: flex;
+        img{
+            height: 75px;
+            width: 85px;
+            margin-top: 36px;
+            margin-bottom: 24px;
+        }
+        .welcome-to-drizly{
+            letter-spacing: 0.2px;
+            margin: 0;
+            font-family: BrandonText-Regular,Arial,sans-serif;
+            font-size: 16px;
+            line-height: 22px;
+            color: #6a7279;
+        }
+        .are-you-21{
+            // width: 300px;
+            text-align: center;
+            margin: 0 0 8px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            font-size: 35px;
+            line-height: 51px;
+            color: #24282f;
+        }
+        .age-desc-modal{
+            margin: 0 0 36px;
+            height: 44px;
+            font-family:Arial, Helvetica, sans-serif;
+            font-weight: lighter;
+            font-size: 15px;
+            line-height: 22px;
+            color: #484d55;
+            width: 300px;
+            text-align: center;
+        }
+        .age-submit-wrapper{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 24px 0;
+            min-height: 117px;
+            max-height: 147px;
+            width: 100%;
+            background: #f7f7f7;
+            .age-submit{
+                display: flex;
+                justify-content: center;
+                button{
+                    width: 146px;
+                    height: 46px;
+                    border-radius: 3px;
+                    text-align: center;
+                    font-size: 16px;
+                    line-height: 23px;
+                    font-family:Arial, Helvetica, sans-serif;
+                    font-weight: bolder;
+                }
+                .age-no{
+                    background: #fff;
+                    border: 2px solid #24282f;
+                    color: #24282f;
+                    margin-right: 8px;
+                }
+                .age-yes{
+                    background: #e12c2c;
+                    color: #fff;
+                    border: none;
+                }
+            }
+            .age-no-clicked{
+                padding-top: 12px;
+                width: 300px;
+                height: 100%;
+                font-family:"Open Sans";
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 22px;
+                text-align: center;
+                color: #24282f;
+                margin: 0 0 10px;
+                a{
+                    color: #e12c2c;
+                    text-decoration: underline;
+                    padding-top: 12px;
+                    width: 300px;
+                    height: 100%;
+                    font-family: BrandonText-Regular,Arial,sans-serif;
+                    font-size: 16px;
+                    line-height: 22px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+  }
+//  Disable Scroll at Modal
+// body{
+//     overflow: hidden; 
+//   }

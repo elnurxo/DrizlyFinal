@@ -1,0 +1,15 @@
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Data.deps.json
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Data.runtimeconfig.json
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Data.runtimeconfig.dev.json
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Data.dll
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Data.pdb
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Core.dll
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\bin\Debug\netcoreapp3.1\DrizlyFinal.Core.pdb
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.csproj.AssemblyReference.cache
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.AssemblyInfoInputs.cache
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.AssemblyInfo.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.csproj.CopyComplete
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.dll
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.pdb
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Data\obj\Debug\netcoreapp3.1\DrizlyFinal.Data.genruntimeconfig.cache
