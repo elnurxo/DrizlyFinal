@@ -20,6 +20,7 @@ $(function () {
     $(".categoriesmobile").click(function(){
        if($(window).width() <= 480){
         if($(this).next().css("display")=="none"){
+            console.log("block ele")
             $(this).next().css("display","block")
             $(this).prev().find("i").addClass("fa-chevron-up")
             $(this).prev().find("i").removeClass("fa-chevron-down")         
@@ -32,14 +33,7 @@ $(function () {
             return;
         }
        }
-       else{
-        $(this).next().css("display","block")
-       } 
     });
-    if($(window).width() >= 480){
-        console.log("480den boyukdu")
-        $(".categoriesmobile").next().css("display","block")
-    }
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {
@@ -61,3 +55,16 @@ window.addEventListener("DOMContentLoaded", () => {
         overflow: "visible"
     });
   }
+
+  //CATEGORIES DISPLAY BLOCK/NONE ON RESIZE
+  var onresize = function() {
+    width = document.body.clientWidth;
+    console.log(width);
+    if(width>480){
+        $(".categoriesmobile").next().css("display","block")
+    }
+    else{
+        $(".categoriesmobile").next().css("display","none")
+    }
+ }
+ window.addEventListener("az", onresize);

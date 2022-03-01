@@ -883,6 +883,95 @@ body::-webkit-scrollbar-thumb {
   transition: 0.2s ease-in-out;
 }
 
+.quotebannersection {
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.quotebannersection .image-side {
+  width: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.quotebannersection .image-side .quote-image-container img {
+  width: 100%;
+}
+.quotebannersection .image-side .quote-image-container .desktop-svg-quote {
+  position: absolute;
+  height: 100%;
+  width: 135px;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+.quotebannersection .image-side .quote-image-container .mobile-svg-quote {
+  display: none;
+}
+.quotebannersection .quote-side {
+  width: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.quotebannersection .quote-side blackquote {
+  border-left: none;
+  max-width: 36vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+.quotebannersection .quote-side blackquote svg {
+  position: absolute;
+  left: -1vw;
+  top: -1.1vw;
+  width: 4.5vw;
+  height: 4vw;
+}
+.quotebannersection .quote-side blackquote .quote-paragraph {
+  font-family: "Open Sans";
+  color: #24282f;
+  font-size: 2.2vw;
+  font-weight: 900;
+  line-height: 4vw;
+  text-align: left;
+  margin: 0 0 2.2vw;
+  position: relative;
+}
+.quotebannersection .quote-side cite {
+  font-family: "Open Sans";
+  font-size: 2.4vw;
+  line-height: 3.8vw;
+  width: 100%;
+  max-width: 36vw;
+  color: #24282f;
+  text-align: left;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -904,6 +993,11 @@ html {
 
   .herosection {
     min-height: 350px !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .categoriescol {
+    width: 50% !important;
   }
 }
 @media only screen and (max-width: 480px) {
@@ -1151,6 +1245,59 @@ html {
 @media only screen and (max-width: 768px) {
   .categoriescol ul li a {
     font-size: 14px !important;
+  }
+}
+@media only screen and (max-width: 667px) {
+  .quotebannersection {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .quotebannersection .image-side {
+    width: 100% !important;
+  }
+  .quotebannersection .quote-side {
+    width: 100%;
+    padding: 20px;
+  }
+  .quotebannersection .quote-side blackquote {
+    max-width: 65vw !important;
+  }
+  .quotebannersection .quote-side blackquote .quote-paragraph {
+    letter-spacing: 0.3px;
+    padding-bottom: 6px;
+    text-align: center !important;
+    font-size: 3.7vw !important;
+  }
+  .quotebannersection .quote-side cite {
+    font-size: 4vw !important;
+    text-align: center !important;
+  }
+  .quotebannersection .quote-image-container {
+    width: 100%;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: 62vw;
+    max-height: 280px;
+  }
+  .quotebannersection .quote-image-container img {
+    height: 70vw;
+    max-height: 495px;
+  }
+  .quotebannersection .quote-image-container .desktop-svg-quote {
+    display: none !important;
+  }
+  .quotebannersection .quote-image-container .mobile-svg-quote {
+    display: block !important;
+    position: absolute;
+    top: initial;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
   }
 }
 #loadingwrapper {
