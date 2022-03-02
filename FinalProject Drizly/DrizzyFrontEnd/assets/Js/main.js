@@ -1,4 +1,25 @@
-$(function () {   
+$(function () {  
+    //Slick Slider
+    $('.brand-active-carousel').slick({
+		arrows: false,
+		slidesToShow: 4,
+        autoplay: true,
+        autoplaySpeed: 1000,
+		responsive: [
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1
+				}
+			}
+		]
+	}); 
     //NAVBAR SCROLL
     $(document).scroll(function () {
         if ($(window).width() > 992) 
@@ -16,6 +37,25 @@ $(function () {
             $("#navbar").addClass("scrollactive"); 
         }
     });
+    //BRAND SLIDER
+    $('.brand-active-carousel').slick({
+		arrows: false,
+		slidesToShow: 4,
+		responsive: [
+			{
+				breakpoint: 992,
+				settings: {
+					slidesToShow: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1
+				}
+			}
+		]
+	});
     //CATEGORIES MOBILE ACCORDION
     $(".categoriesmobile").click(function(){
        if($(window).width() <= 480){
@@ -55,7 +95,6 @@ window.addEventListener("DOMContentLoaded", () => {
         overflow: "visible"
     });
   }
-
   //CATEGORIES DISPLAY BLOCK/NONE ON RESIZE
   var onresize = function() {
     width = document.body.clientWidth;
@@ -67,4 +106,4 @@ window.addEventListener("DOMContentLoaded", () => {
         $(".categoriesmobile").next().css("display","none")
     }
  }
- window.addEventListener("az", onresize);
+ window.addEventListener("resize", onresize);

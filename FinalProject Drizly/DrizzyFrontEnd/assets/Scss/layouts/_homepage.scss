@@ -362,8 +362,68 @@
         }
     }
 }
+.brand-area{
+    padding: 31px;
+    border-top: 1px dotted rgb(235,235,228);
+    border-bottom: 1px dotted rgb(235,235,228);
+    .brand-item{
+        margin:  0 auto !important;
+        img{
+            margin:  0 auto !important;
+            width: 250px;
+            transition: .2s ease-in-out;
+            &:hover{
+                transform: scale(0.9);
+            }
+        }
+    }
+}
+.recentcommentsection{
+    padding: 4vw 0;  
+    .customer-rate-ul{
+        li{
+            display: inline-block;
+            color: 	#ffa534;
+        }
+    }
+    .recentcomment-header{
+        font-family: "Open Sans";
+        font-size: 2.5vw;
+        font-weight: 900;
+        line-height: 3.95vw;
+        color: #24282f;
+        margin: 0 0 9px;
+        user-select: none;
+    }
+    .comment-card{ 
+        border: none !important;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        transition: .2s ease-in-out;
+        p,h5{
+            user-select: none;
+        }
+        &:hover{
+            transform: scale(0.9);
+        }
+        .card-title{
+            cursor: pointer;
+        }
+        .comment-date{
+            cursor: pointer;
+        }
+    }
+}
 html{
     scroll-behavior: smooth;
+}
+@media only screen and (max-width: 1200px){
+    .brand-area{
+        .brand-item{
+            img{
+                width: 200px !important;
+            }
+        }
+    }
 }
 @media only screen and (max-width: 350px) {
     .shopnow{
@@ -391,8 +451,7 @@ html{
         width: 50% !important;
     }
 }
-@media only screen and (max-width: 480px)
- {
+@media only screen and (max-width: 480px){
     .herosection {
         height: calc(248px + 82vw);
     }
@@ -593,12 +652,26 @@ html{
         z-index: 10;
         max-height: 62px;
     }
+    .recentcommentsection{
+        padding: 11vw 0;
+    }
  }  
-@media only screen and (max-width: 900px)
- {
+@media only screen and (max-width: 900px){
     .herosection {
         padding-top: 56px;
     }
+    .brand-area{
+        .brand-item{
+            img{
+                width: 150px !important;
+            }
+        }
+    }
+ }
+ @media only screen and (max-width: 992px){
+     .comment-card{
+         margin-bottom: 15px;
+     }
  }
 @media only screen and (max-width: 768px) {
     .categoriescol{
@@ -609,6 +682,9 @@ html{
                     }
                 }
             }
+ }
+ .recentcomment-header{
+     font-size: 20px !important;
  }
 }
 @media only screen and (max-width: 667px){

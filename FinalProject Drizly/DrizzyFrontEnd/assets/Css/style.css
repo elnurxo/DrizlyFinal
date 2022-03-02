@@ -972,10 +972,77 @@ body::-webkit-scrollbar-thumb {
   text-align: left;
 }
 
+.brand-area {
+  padding: 31px;
+  border-top: 1px dotted #ebebe4;
+  border-bottom: 1px dotted #ebebe4;
+}
+.brand-area .brand-item {
+  margin: 0 auto !important;
+}
+.brand-area .brand-item img {
+  margin: 0 auto !important;
+  width: 250px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.brand-area .brand-item img:hover {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+
+.recentcommentsection {
+  padding: 4vw 0;
+}
+.recentcommentsection .customer-rate-ul li {
+  display: inline-block;
+  color: #ffa534;
+}
+.recentcommentsection .recentcomment-header {
+  font-family: "Open Sans";
+  font-size: 2.5vw;
+  font-weight: 900;
+  line-height: 3.95vw;
+  color: #24282f;
+  margin: 0 0 9px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.recentcommentsection .comment-card {
+  border: none !important;
+  -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.recentcommentsection .comment-card p, .recentcommentsection .comment-card h5 {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.recentcommentsection .comment-card:hover {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+.recentcommentsection .comment-card .card-title {
+  cursor: pointer;
+}
+.recentcommentsection .comment-card .comment-date {
+  cursor: pointer;
+}
+
 html {
   scroll-behavior: smooth;
 }
 
+@media only screen and (max-width: 1200px) {
+  .brand-area .brand-item img {
+    width: 200px !important;
+  }
+}
 @media only screen and (max-width: 350px) {
   .shopnow .col img {
     margin-top: 0vw !important;
@@ -1236,15 +1303,32 @@ html {
     z-index: 10;
     max-height: 62px;
   }
+
+  .recentcommentsection {
+    padding: 11vw 0;
+  }
 }
 @media only screen and (max-width: 900px) {
   .herosection {
     padding-top: 56px;
   }
+
+  .brand-area .brand-item img {
+    width: 150px !important;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .comment-card {
+    margin-bottom: 15px;
+  }
 }
 @media only screen and (max-width: 768px) {
   .categoriescol ul li a {
     font-size: 14px !important;
+  }
+
+  .recentcomment-header {
+    font-size: 20px !important;
   }
 }
 @media only screen and (max-width: 667px) {
@@ -1304,8 +1388,8 @@ html {
   position: fixed;
   width: 100%;
   height: 100vh;
-  background: #21242de7 url("https://i.gifer.com/47tt.gif") no-repeat center;
-  font-size: 30px;
+  background: #000000 url("https://i.gifer.com/2Azk.gif") no-repeat center;
+  font-size: 1px;
   z-index: 999;
   display: none;
   visibility: hidden;
