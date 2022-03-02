@@ -55,8 +55,18 @@ $(function () {
        }
     });
     //MOBILE NAVBAR HAMBURGER CLICK
-    $(".search-mobile").click(function(){
-        console.log("jskfh");
+    $(".hamburger-mobile").click(function(){
+        if($(this).children().attr("class")=="fas fa-bars"){
+           $(this).children().removeClass("fa-bars");
+           $(this).children().addClass("fa-times");
+           return;
+        }
+        else{
+            $(this).children().removeClass("fa-times");
+            $(this).children().addClass("fa-bars");
+            return;
+        }
+        // console.log($(this).children().attr("class"));
     })
 });
 // LOADER

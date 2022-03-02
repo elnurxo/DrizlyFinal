@@ -110,6 +110,9 @@ body::-webkit-scrollbar-thumb {
 #navbar .navbar-sections .navbar-mobile-menu {
   display: none;
 }
+#navbar .navbar-sections .navbar-mobile-menu .hamburger-mobile {
+  color: black;
+}
 #navbar .navbar-sections .navbar-leftside {
   -webkit-box-pack: start;
       -ms-flex-pack: start;

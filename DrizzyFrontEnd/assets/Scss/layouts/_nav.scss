@@ -57,6 +57,9 @@
         }
         .navbar-mobile-menu{
             display: none;
+            .hamburger-mobile{
+                color: black;
+            }
         }
         .navbar-leftside{
             justify-content: flex-start;
