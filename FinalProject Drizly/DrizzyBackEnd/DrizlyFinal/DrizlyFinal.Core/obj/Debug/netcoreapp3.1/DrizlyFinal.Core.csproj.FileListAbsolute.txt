@@ -1,8 +1,0 @@
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\bin\Debug\netcoreapp3.1\DrizlyFinal.Core.deps.json
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\bin\Debug\netcoreapp3.1\DrizlyFinal.Core.dll
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\bin\Debug\netcoreapp3.1\DrizlyFinal.Core.pdb
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\obj\Debug\netcoreapp3.1\DrizlyFinal.Core.AssemblyInfoInputs.cache
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\obj\Debug\netcoreapp3.1\DrizlyFinal.Core.AssemblyInfo.cs
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\obj\Debug\netcoreapp3.1\DrizlyFinal.Core.csproj.CoreCompileInputs.cache
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\obj\Debug\netcoreapp3.1\DrizlyFinal.Core.dll
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizzyBackEnd\DrizlyFinal\DrizlyFinal.Core\obj\Debug\netcoreapp3.1\DrizlyFinal.Core.pdb
