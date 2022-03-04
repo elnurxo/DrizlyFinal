@@ -112,6 +112,7 @@ $(function () {
         }
         else{
             $(this).next().find(".show-more").css("display","block");
+            $(this).next().find(".show-more").text("More");
             if($(this).find(".filter-plus-minus").text()=="+"){
                 $(this).find(".filter-plus-minus").text("-");
                 $(this).next().css("height","180px");
