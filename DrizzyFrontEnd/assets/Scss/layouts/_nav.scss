@@ -66,6 +66,43 @@
             flex: 1 1;
         }
     }
+    .navbar-mobile-dropdown{
+        display: none;
+        ul{
+            a{
+                text-decoration: none;
+                color: black;
+                li{
+
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                    text-align: center;
+                    height: 55px;
+                    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+                    span{
+                        padding: 0 80px;
+                        text-transform: uppercase;
+                        font-family: "Open Sans";
+                        color: rgba(0, 0, 0, 0.87);
+                        font-size: 1rem;
+                        line-height: 1.5;
+                        font-weight: bolder;
+                        i{
+                            position: absolute;
+                            right: 18px;
+                            top: 37%;
+                        }
+                    }
+    
+                }
+            }
+
+        }
+    }
 }
 .navbar-search{
     padding: 0 16px;

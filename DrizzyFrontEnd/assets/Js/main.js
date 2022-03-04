@@ -59,15 +59,67 @@ $(function () {
         if($(this).children().attr("class")=="fas fa-bars"){
            $(this).children().removeClass("fa-bars");
            $(this).children().addClass("fa-times");
+           $(".navbar-mobile-dropdown").css("display","block");
            return;
         }
         else{
             $(this).children().removeClass("fa-times");
             $(this).children().addClass("fa-bars");
+            $(".navbar-mobile-dropdown").css("display","none");
             return;
         }
         // console.log($(this).children().attr("class"));
     })
+    // FILTER SIDEBAR CLICK
+    $(".more-filter").click(function(){
+        if($(".filter-body").css("visibility")=="hidden"){
+            $(".filter-sidebar").css("transform","translate(0px, 0px)");
+            $(".filter-body").css("visibility","visible");
+            return;
+        }
+    });
+    $(".filter-btn-mobile").click(function(){
+        if($(".filter-body").css("visibility")=="hidden"){
+            $(".filter-sidebar").css("transform","translate(0px, 0px)");
+            $(".filter-body").css("visibility","visible");
+            return;
+        }
+    });
+    $(".exit-filter-sidebar").click(function(){
+        $(".filter-sidebar").css("transform","translate(320px, 0px)");
+        $(".filter-body").css("visibility","hidden");
+        return;
+    });
+    //MAKE INPUT CHECKED ON CLICK OF a TAG
+    $(".filter-link").click(function(){
+        $(this).find("input").attr('checked','true');
+    });
+    //FILTER MOBILE ITEMS CLICK
+    $(".filter-list-button").click(function(){
+        if($(".filter-plus-minus").text()=="+"){
+            $(".filter-side-dropdown").css("height","180px");
+            $(".filters-ul").css("height","142px");
+            $(".filter-plus-minus").text("-")
+        }
+        else{
+            $(".filter-side-dropdown").css("height","0");
+            $(".filter-plus-minus").text("+")
+        }
+    });
+    //SHOW MORE SIDE-BAR FILTER
+    $(".show-more").click(function(){
+        if($(this).text()=="More"){
+            $(".filter-side-dropdown").css("height","auto");
+            $(".filters-ul").css("height","auto");
+            $(this).text("Less");
+        }
+        else{
+            $(".filter-side-dropdown").css("height","180px");
+            $(".filters-ul").css("height","142px");
+            $(this).text("More");
+        }
+       
+    });
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {
@@ -93,10 +145,13 @@ window.addEventListener("DOMContentLoaded", () => {
   var onresize = function() {
     width = document.body.clientWidth;
     if(width>480){
-        $(".categoriesmobile").next().css("display","block")
+        $(".categoriesmobile").next().css("display","block");
     }
     else{
         $(".categoriesmobile").next().css("display","none")
+    }
+    if(width>992){
+        $(".navbar-mobile-dropdown").css("display","none");
     }
  }
  window.addEventListener("resize", onresize);
