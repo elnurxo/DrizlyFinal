@@ -96,29 +96,45 @@ $(function () {
     });
     //FILTER MOBILE ITEMS CLICK
     $(".filter-list-button").click(function(){
-        if($(".filter-plus-minus").text()=="+"){
-            $(".filter-side-dropdown").css("height","180px");
-            $(".filters-ul").css("height","142px");
-            $(".filter-plus-minus").text("-")
+        let itemcount = $(this).next().find(".filter-link").length;
+        let dropdownheight = itemcount * 38;
+        if(itemcount<=4){
+            $(this).next().find(".show-more").css("display","none");
+            if($(this).find(".filter-plus-minus").text()=="+"){
+                $(this).find(".filter-plus-minus").text("-");
+                $(this).next().css("height",dropdownheight+"px");
+                $(this).next().find(".filters-ul").css("height","auto");
+            }
+            else{
+                $(this).next().css("height","0");
+                $(this).find(".filter-plus-minus").text("+");
+            }
         }
         else{
-            $(".filter-side-dropdown").css("height","0");
-            $(".filter-plus-minus").text("+")
+            $(this).next().find(".show-more").css("display","block");
+            if($(this).find(".filter-plus-minus").text()=="+"){
+                $(this).find(".filter-plus-minus").text("-");
+                $(this).next().css("height","180px");
+                $(this).next().find(".filters-ul").css("height","142px");
+            }
+            else{
+                $(this).next().css("height","0");
+                $(this).find(".filter-plus-minus").text("+");
+            }
         }
     });
     //SHOW MORE SIDE-BAR FILTER
     $(".show-more").click(function(){
         if($(this).text()=="More"){
-            $(".filter-side-dropdown").css("height","auto");
-            $(".filters-ul").css("height","auto");
+            $(this).closest(".filter-side-dropdown").css("height","auto");
+            $(this).prev(".filters-ul").css("height","auto");
             $(this).text("Less");
         }
         else{
-            $(".filter-side-dropdown").css("height","180px");
-            $(".filters-ul").css("height","142px");
+            $(this).closest(".filter-side-dropdown").css("height","180px");
+            $(this).prev(".filters-ul").css("height","142px");
             $(this).text("More");
-        }
-       
+        }     
     });
 });
 // LOADER
