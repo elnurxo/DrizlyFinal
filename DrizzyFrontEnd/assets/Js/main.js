@@ -37,6 +37,45 @@ $(function () {
 			}
 		]
 	});
+    //PRODUCTS-SHOP-SLIDER
+    $('.drink-slider').slick({
+        arrows: true,
+        infinite: true,
+		slidesToShow: 6,
+        slidesToScroll: 1,
+        // autoplay: true,
+        // autoplaySpeed: 1200,
+		responsive: [
+            {
+                breakpoint: 1400,
+				settings: {
+					arrows: false
+				}
+            },
+
+			{
+				breakpoint: 992,
+				settings: {
+                    arrows: false,
+					slidesToShow: 4
+				}
+			},
+            {
+				breakpoint: 768,
+				settings: {
+                    arrows: false,
+					slidesToShow: 2
+				}
+			},
+			{
+				breakpoint: 480,
+				settings: {
+                    arrows: false,
+					slidesToShow: 1
+				}
+			}
+		]
+	});
     //CATEGORIES MOBILE ACCORDION
     $(".categoriesmobile").click(function(){
        if($(window).width() <= 480){

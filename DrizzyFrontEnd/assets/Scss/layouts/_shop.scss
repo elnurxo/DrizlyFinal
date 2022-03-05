@@ -174,7 +174,168 @@ main{
                 background-color: #f0eeee;
             }
         }
+    .products-slider-section{
+        display: flex;
+        max-width: 1350px;
+        margin: auto;
+        padding: 0;
+        .products-container{
+            width: 100%;
+            padding-top: 10px;      
+        }
+    }
+    .products-shop{
+        .products-slider{
+            margin-top: 0;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #e5e7e8;
+            li{
+                position: relative;
+                background: #fff;
+                border-radius: 3px;
+                list-style-type: none;              
+            }
+        }
+    }  
+    .category-name{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Open Sans";
+        p{
+            font-weight: 800;
+            font-size: 28px;
+            margin: 16px 0;
+            color: #24282f;
+        }
+        a{
+            text-align: right;
+            font-size: 16px;
+            font-weight: 700;
+            color: #e12c2c;
+            margin: 16px 0;
+            text-transform: uppercase;
+        }
+    }
+    .drinks-slider-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+        background: #fff;
+        padding: 5px 0;
+        .drink-slider{
+            display: flex;
+            white-space: nowrap;
+            flex-wrap: nowrap;
+            width: 100%;
+            transform: translateZ(0);
+            margin: -2px;
+        }
+    }
+    .drink-slides{
+        width: 20%;
+        height: 382px;
+        padding: 2px;
+        .whole-product-slide{
+            text-decoration: none;
+            display: block;
+            position: relative;
+            transition: box-shadow .25s cubic-bezier(.4,0,.2,1) 0ms;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 4px;
+            &:hover{
+                box-shadow: 1px 1px 0 4px #e5e7e8;
+                .basket-icon{
+                    right: 5% !important;
+                }   
+            }
+        }
+    }
+    .drink-slide-info{
+        position: relative;
+        margin: 20px 24px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        img{
+            margin: 0 auto;
+            width: 126px;
+            height: 189px;
+            flex: none;
+            align-self: center;
+            vertical-align: middle;
+        }
+        .drink-name{
+            margin: 8px 0 0;
+            p{
+                font-family: "Open Sans";
+                font-size: 15px;
+                line-height: 22px;
+                margin: 0;
+                color: #24282f;
+                height: 44px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: pre-line;
+            }
+        }
+        .drink-price{                         
+            margin: 8px 0 0;
+            p{
+                font-family: "Open Sans";
+                font-weight: 900;
+                font-size: 16px;
+                line-height: 23px;
+                color: #24282f;
+                margin: 0 4px 0 0;
+                display: inline-block;
+            }
+            .old-price-wrapper{
+                text-decoration: line-through;         
+            }
+        }
+    }
+    .drink-rate{
+        display: flex;
+        align-items: flex-end;
+        margin: 4px 0 0;
+        height: 16px;
+        i{
+            font-size: 14px;
+            margin-right: 5px;
+            color: orange;
+        }  
+        .review-count{
+            font-family: "Open Sans";
+            font-size: 12px;
+            line-height: 12px;
+            color: #6a7279;
+            margin: 0 0 0 6px;
+        }  
+    }
+    .add-to-basket{
+        display: flex;
+        align-items: flex-end;
+        margin: 4px 0 0;
+        height: 16px;
+        .basket-icon{
+            position: absolute;
+            top: 5%;
+            right: -20%;
+            color: rgb(43, 42, 42);
+            font-size: 25px;
+            transition: .2s linear;
+            &:hover{
+                transform: scale(0.9);
+                color: rgb(26, 25, 25);
+            }
+    }
 }
+    .slick-prev:before, .slick-next:before{
+        color: #e12c2c;
+    }
 
 @media only screen and (max-width: 900px){
     .shop-hero{
@@ -210,4 +371,17 @@ main{
     .filter-btn-mobile{
         display: block !important;
     }
+    .drink-name{
+        p{
+            text-align: center !important;
+        }
+    }
+    .drink-price{
+        text-align: center !important;
+        margin: 0 !important;
+    }
+    .drink-rate{
+        justify-content: center !important;
+    }
+ }
 }

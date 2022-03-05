@@ -2305,41 +2305,251 @@ main .more-filter span {
 main .more-filter:hover {
   background-color: #f0eeee;
 }
-
+main .products-slider-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1350px;
+  margin: auto;
+  padding: 0;
+}
+main .products-slider-section .products-container {
+  width: 100%;
+  padding-top: 10px;
+}
+main .products-shop .products-slider {
+  margin-top: 0;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e5e7e8;
+}
+main .products-shop .products-slider li {
+  position: relative;
+  background: #fff;
+  border-radius: 3px;
+  list-style-type: none;
+}
+main .category-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: "Open Sans";
+}
+main .category-name p {
+  font-weight: 800;
+  font-size: 28px;
+  margin: 16px 0;
+  color: #24282f;
+}
+main .category-name a {
+  text-align: right;
+  font-size: 16px;
+  font-weight: 700;
+  color: #e12c2c;
+  margin: 16px 0;
+  text-transform: uppercase;
+}
+main .drinks-slider-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  width: 100%;
+  background: #fff;
+  padding: 5px 0;
+}
+main .drinks-slider-wrapper .drink-slider {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  white-space: nowrap;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  width: 100%;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  margin: -2px;
+}
+main .drink-slides {
+  width: 20%;
+  height: 382px;
+  padding: 2px;
+}
+main .drink-slides .whole-product-slide {
+  text-decoration: none;
+  display: block;
+  position: relative;
+  -webkit-transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms, -webkit-box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 4px;
+}
+main .drink-slides .whole-product-slide:hover {
+  -webkit-box-shadow: 1px 1px 0 4px #e5e7e8;
+          box-shadow: 1px 1px 0 4px #e5e7e8;
+}
+main .drink-slides .whole-product-slide:hover .basket-icon {
+  right: 5% !important;
+}
+main .drink-slide-info {
+  position: relative;
+  margin: 20px 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left;
+}
+main .drink-slide-info img {
+  margin: 0 auto;
+  width: 126px;
+  height: 189px;
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  vertical-align: middle;
+}
+main .drink-slide-info .drink-name {
+  margin: 8px 0 0;
+}
+main .drink-slide-info .drink-name p {
+  font-family: "Open Sans";
+  font-size: 15px;
+  line-height: 22px;
+  margin: 0;
+  color: #24282f;
+  height: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+}
+main .drink-slide-info .drink-price {
+  margin: 8px 0 0;
+}
+main .drink-slide-info .drink-price p {
+  font-family: "Open Sans";
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 23px;
+  color: #24282f;
+  margin: 0 4px 0 0;
+  display: inline-block;
+}
+main .drink-slide-info .drink-price .old-price-wrapper {
+  text-decoration: line-through;
+}
+main .drink-rate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin: 4px 0 0;
+  height: 16px;
+}
+main .drink-rate i {
+  font-size: 14px;
+  margin-right: 5px;
+  color: orange;
+}
+main .drink-rate .review-count {
+  font-family: "Open Sans";
+  font-size: 12px;
+  line-height: 12px;
+  color: #6a7279;
+  margin: 0 0 0 6px;
+}
+main .add-to-basket {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  margin: 4px 0 0;
+  height: 16px;
+}
+main .add-to-basket .basket-icon {
+  position: absolute;
+  top: 5%;
+  right: -20%;
+  color: #2b2a2a;
+  font-size: 25px;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+main .add-to-basket .basket-icon:hover {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  color: #1a1919;
+}
+main .slick-prev:before, main .slick-next:before {
+  color: #e12c2c;
+}
 @media only screen and (max-width: 900px) {
-  .shop-hero {
+  main .shop-hero {
     display: block;
     height: auto !important;
     border-bottom: 8px solid #e12c2c;
   }
-  .shop-hero .shop-product-content {
+  main .shop-hero .shop-product-content {
     position: static !important;
     width: 100% !important;
     min-height: 300px !important;
     height: auto;
   }
-  .shop-hero .shop-product-content p {
+  main .shop-hero .shop-product-content p {
     padding: 0 32px;
     line-height: 30px;
   }
-  .shop-hero .shop-hero-image img {
+  main .shop-hero .shop-hero-image img {
     position: static !important;
     width: 100% !important;
     height: 200px !important;
   }
-  .shop-hero .shop-image-line {
+  main .shop-hero .shop-image-line {
     display: none !important;
   }
 }
 @media only screen and (max-width: 768px) {
-  .more-filter {
+  main .more-filter {
     display: none !important;
   }
-
-  .filter-btn-mobile {
+  main .filter-btn-mobile {
     display: block !important;
   }
+  main .drink-name p {
+    text-align: center !important;
+  }
+  main .drink-price {
+    text-align: center !important;
+    margin: 0 !important;
+  }
+  main .drink-rate {
+    -webkit-box-pack: center !important;
+        -ms-flex-pack: center !important;
+            justify-content: center !important;
+  }
 }
+
 .filter-body {
   visibility: hidden;
   top: 0;
@@ -2516,6 +2726,14 @@ main .more-filter:hover {
   color: #24282f;
   margin-bottom: 12px;
   width: 100%;
+}
+.filter-body .filter-side .filters-ul li .form-check {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 .filter-body .filter-side .filters-ul li:hover {
   color: #E12C2C;
