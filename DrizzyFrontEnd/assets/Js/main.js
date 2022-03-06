@@ -43,8 +43,8 @@ $(function () {
         infinite: true,
 		slidesToShow: 6,
         slidesToScroll: 1,
-        // autoplay: true,
-        // autoplaySpeed: 1200,
+        autoplay: true,
+        autoplaySpeed: 1200,
 		responsive: [
             {
                 breakpoint: 1400,
@@ -176,6 +176,17 @@ $(function () {
             $(this).text("More");
         }     
     });
+    //SHOW MORE CATEGORY ABOUT
+    $(".category-show-more-btn").click(function(){
+        if($(this).text()=="Show More"){
+            $(".category-content").removeClass("show-more-less-category");
+            $(this).text("Show Less");
+        }
+        else{
+            $(".category-content").addClass("show-more-less-category");
+            $(this).text("Show More");
+        }
+    })
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {

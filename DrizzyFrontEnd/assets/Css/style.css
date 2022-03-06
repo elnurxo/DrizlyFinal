@@ -2317,18 +2317,22 @@ main .products-slider-section .products-container {
   width: 100%;
   padding-top: 10px;
 }
+main .products-shop .promotion-wrapper a img {
+  width: 100%;
+}
 main .products-shop .products-slider {
   margin-top: 0;
   margin-bottom: 10px;
-  border-bottom: 1px solid #e5e7e8;
 }
-main .products-shop .products-slider li {
+main .products-shop .products-slider .category-slide {
   position: relative;
   background: #fff;
   border-radius: 3px;
   list-style-type: none;
+  border-bottom: 1px solid #e5e7e8;
 }
 main .category-name {
+  margin: 32px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2413,6 +2417,24 @@ main .drink-slide-info {
       -ms-flex-direction: column;
           flex-direction: column;
   text-align: left;
+}
+main .drink-slide-info .drink-on-sale {
+  background-color: rgba(36, 40, 47, 0.75);
+  padding: 6px 0;
+  border-radius: 3px;
+  color: #fff;
+  font-family: "Open Sans";
+  font-weight: 900;
+  position: absolute;
+  font-size: 13px;
+  width: 100%;
+  text-align: center;
+  top: 159px;
+  height: 28px;
+  min-width: 100px;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
 }
 main .drink-slide-info img {
   margin: 0 auto;
@@ -2500,6 +2522,64 @@ main .add-to-basket .basket-icon:hover {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
   color: #1a1919;
+}
+main .products-about {
+  position: relative;
+  margin-bottom: 6em;
+}
+main .products-about .category-about-content {
+  margin-top: 18px;
+  overflow: hidden;
+}
+main .products-about .category-about-content h2 {
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 28px;
+  line-height: 34px;
+  font-family: "Open Sans";
+  font-weight: 900;
+  color: #24282f;
+  margin: 0 0 8px;
+}
+main .products-about .category-about-content h3 {
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 16px;
+  line-height: 34px;
+  font-family: "Open Sans";
+  font-weight: 800;
+  color: #24282f;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+main .products-about .category-about-content p {
+  font-size: 16px;
+  line-height: 22px;
+  padding-left: 16px;
+  padding-right: 16px;
+  font-family: "Open Sans";
+  color: #24282f;
+}
+main .products-about .category-about-show-more .category-show-more-btn {
+  padding-left: 16px;
+  font-family: "Open Sans";
+  font-weight: bolder;
+  color: #e12c2c;
+  font-size: 16px;
+  line-height: 22px;
+  margin-top: 10px;
+  background: none;
+  border: none;
+  outline: none;
+}
+main .products-about .category-about-show-more .category-show-more-btn:focus {
+  border: none;
+  outline: none;
+}
+main .show-more-less-category {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 main .slick-prev:before, main .slick-next:before {
   color: #e12c2c;
