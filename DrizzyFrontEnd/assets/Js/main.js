@@ -187,6 +187,29 @@ $(function () {
             $(this).text("Show More");
         }
     })
+    //SORTING BUTTON CLICK DROPDOWN
+    $(".sorting-button").click(function(){
+        if($(this).next().hasClass("fa-chevron-down")){
+            $(this).next().removeClass("fa-chevron-down");
+            $(this).next().addClass("fa-chevron-up");
+            $(".sorting-dropdown").css("display","block");
+        }
+        else{
+            $(this).next().removeClass("fa-chevron-up");
+            $(this).next().addClass("fa-chevron-down");
+            $(".sorting-dropdown").css("display","none");
+        }
+   
+    });
+    //SORTING DROP-DOWN ITEM CLICK
+    $(".sorting-list-item").click(function(){
+        let sortingitem = $(this).text();
+        let sorting = $(".sorting-button span");
+        sorting.text(sortingitem);
+        $(".sorting-button").next().removeClass("fa-chevron-up");
+        $(".sorting-button").next().addClass("fa-chevron-down");
+        $(".sorting-dropdown").css("display","none");
+    });
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {
