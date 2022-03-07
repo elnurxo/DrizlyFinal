@@ -69,6 +69,9 @@
     .filter-side{
         padding: 16px 0;
         border-bottom: 1px solid #c5c8cb;
+        &:last-child{
+            border-bottom: none;
+        }
         .filter-list-button{
             display: flex;
             justify-content: space-between;
@@ -109,12 +112,12 @@
             }
         }
         .filter-side-dropdown{
-            height: 0;
+            height: auto;
             overflow: hidden;
             transition: .2s linear;      
         }
         .filters-ul{
-            height: 0;
+            height: 142px;
             overflow: hidden;
             a{
                 display: inline-block;

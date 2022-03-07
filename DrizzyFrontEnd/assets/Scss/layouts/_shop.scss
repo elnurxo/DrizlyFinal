@@ -208,7 +208,10 @@ main{
                 background: #fff;
                 border-radius: 3px;
                 list-style-type: none; 
-                border-bottom: 1px solid #e5e7e8;             
+                border-bottom: 1px solid #e5e7e8;    
+                &:last-child{
+                    border-bottom: none;
+                }         
             }
         }
     }  
