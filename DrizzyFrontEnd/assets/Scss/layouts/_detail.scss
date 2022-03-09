@@ -185,6 +185,74 @@
                     margin-bottom: 5px;
                 }
             }
+            .progress-review-container{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                height: 32px;
+                span{
+                    font-family: "Open Sans";
+                    font-size: 16px;
+                    line-height: 22px;
+                    color: #24282f;
+                }
+                .progress-bar-container{
+                    width: calc(100% - 70px);
+                    height: 16px;
+                    margin-top: 3px;
+                    border-radius: 5px;
+                    background-color: #f7f7f7;
+                    position: relative;
+                    overflow: hidden;
+                    .progress-bar-inner{
+                        background-color: #eee;
+                        border-radius: 5px;
+                        position: relative;
+                        height: 100%;
+                        width: 300px;
+                        background-color: #f19c20;
+                     
+                    }
+                }
+            }
+            .write-review-container{
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                width: 100%;
+                padding-top: 8px;
+                .write-review-btn{
+                    cursor: pointer;
+                    min-width: 136px;
+                    max-width: 345px;
+                    width: auto;
+                    border: 1px solid #DEE1E3;
+                    background-color: #FFFFFF;
+                    display: inline-flex;
+                    position: relative;
+                    align-items: center;
+                    border-radius: 4px;
+                    justify-content: center;
+                    padding: 11px 23px;
+                    span{
+                        font-size: 1rem;
+                        font-family: "Open Sans";
+                        font-weight: 700;
+                        line-height: 2rem;
+                        letter-spacing: 0.02em;
+                        color: #E12C2C;
+                    }
+                }
+            }
+            .review-form{
+               h2{
+                font-family: "Open Sans";
+                font-weight: bolder;
+                font-size: 20px;
+                color: #24282f;
+                margin: 0;
+               } 
+            }
         }
         }
         .name-container{
@@ -202,11 +270,13 @@
                 color: #24282f;
             }
             .product-label{
+                display: inline-block;
                 width: 100px;
                 text-align: center;
                 border-radius: 3px;
                 background-color: rgba(36, 40, 47, 0.75);
                 p{
+                    display: inline-block;
                     white-space: pre;
                     font-size: 14px;
                     font-family: "Open Sans";
@@ -253,48 +323,10 @@
                     margin-bottom: 5px;
                 }
             }
-            .progress-review-container{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                height: 32px;
-                span{
-                    font-family: "Open Sans";
-                    font-size: 16px;
-                    line-height: 22px;
-                    color: #24282f;
-                }
-                .progess-bar-container{
-                    box-shadow: 0 4px 5px rgb(0, 0, 0, 0.1);
-                    width: calc(100% - 70px);
-                    height: 16px;
-                    margin-top: 3px;
-                    background-color: #f7f7f7;
-                    position: relative;
-                    overflow: hidden;
-                    .progress-bar-inner{
-                        background-color: #eee;
-                        border-radius: 5px;
-                        position: relative;
-                        height: 7px;
-                        width: 300px;
-                        background-color: #6F39B0;
-                        width: 0;
-                        transition: width 0.4s linear;
-                        top: 0;
-                        position: absolute;
-                        left: 0;
-                        width: 100%;
-                        bottom: 0;
-                        transition: transform 0.2s linear;
-                        transform-origin: left;
-                    }
-                    }
-                }
-                .rate-count{
-                    text-align: right;
-                    width: 40px;
-                }
+            .rate-count{
+                text-align: right;
+                width: 40px;
+             }
             }
             .product-rightside-detail{
                 font-size: 16px;
@@ -338,6 +370,9 @@
                 .old-price{
                     text-decoration: line-through;
                 }
+            }
+            .drink-on-sale{
+                color: #e12c2c;
             }
             .add-to-basket-btn{
                 text-decoration: none;

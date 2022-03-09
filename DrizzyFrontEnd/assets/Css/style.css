@@ -4249,6 +4249,91 @@ main .slick-prev:before, main .slick-next:before {
   line-height: 22px;
   margin-bottom: 5px;
 }
+.detail-main .left-side-detail .product-detail .product-details-content .progress-review-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 32px;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .progress-review-container span {
+  font-family: "Open Sans";
+  font-size: 16px;
+  line-height: 22px;
+  color: #24282f;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .progress-review-container .progress-bar-container {
+  width: calc(100% - 70px);
+  height: 16px;
+  margin-top: 3px;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  position: relative;
+  overflow: hidden;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .progress-review-container .progress-bar-container .progress-bar-inner {
+  background-color: #eee;
+  border-radius: 5px;
+  position: relative;
+  height: 100%;
+  width: 300px;
+  background-color: #f19c20;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .write-review-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+  padding-top: 8px;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .write-review-container .write-review-btn {
+  cursor: pointer;
+  min-width: 136px;
+  max-width: 345px;
+  width: auto;
+  border: 1px solid #DEE1E3;
+  background-color: #FFFFFF;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  position: relative;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 4px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 11px 23px;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .write-review-container .write-review-btn span {
+  font-size: 1rem;
+  font-family: "Open Sans";
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: 0.02em;
+  color: #E12C2C;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .review-form h2 {
+  font-family: "Open Sans";
+  font-weight: bolder;
+  font-size: 20px;
+  color: #24282f;
+  margin: 0;
+}
 .detail-main .left-side-detail .name-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4274,12 +4359,14 @@ main .slick-prev:before, main .slick-next:before {
   color: #24282f;
 }
 .detail-main .left-side-detail .name-container .product-label {
+  display: inline-block;
   width: 100px;
   text-align: center;
   border-radius: 3px;
   background-color: rgba(36, 40, 47, 0.75);
 }
 .detail-main .left-side-detail .name-container .product-label p {
+  display: inline-block;
   white-space: pre;
   font-size: 14px;
   font-family: "Open Sans";
@@ -4335,57 +4422,6 @@ main .slick-prev:before, main .slick-next:before {
   line-height: 22px;
   margin-bottom: 5px;
 }
-.detail-main .left-side-detail .name-container .progress-review-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  height: 32px;
-}
-.detail-main .left-side-detail .name-container .progress-review-container span {
-  font-family: "Open Sans";
-  font-size: 16px;
-  line-height: 22px;
-  color: #24282f;
-}
-.detail-main .left-side-detail .name-container .progress-review-container .progess-bar-container {
-  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
-  width: calc(100% - 70px);
-  height: 16px;
-  margin-top: 3px;
-  background-color: #f7f7f7;
-  position: relative;
-  overflow: hidden;
-}
-.detail-main .left-side-detail .name-container .progress-review-container .progess-bar-container .progress-bar-inner {
-  background-color: #eee;
-  border-radius: 5px;
-  position: relative;
-  height: 7px;
-  width: 300px;
-  background-color: #6F39B0;
-  width: 0;
-  -webkit-transition: width 0.4s linear;
-  transition: width 0.4s linear;
-  top: 0;
-  position: absolute;
-  left: 0;
-  width: 100%;
-  bottom: 0;
-  -webkit-transition: -webkit-transform 0.2s linear;
-  transition: -webkit-transform 0.2s linear;
-  transition: transform 0.2s linear;
-  transition: transform 0.2s linear, -webkit-transform 0.2s linear;
-  -webkit-transform-origin: left;
-          transform-origin: left;
-}
 .detail-main .left-side-detail .name-container .rate-count {
   text-align: right;
   width: 40px;
@@ -4432,6 +4468,9 @@ main .slick-prev:before, main .slick-next:before {
 }
 .detail-main .left-side-detail .drink-price .old-price {
   text-decoration: line-through;
+}
+.detail-main .left-side-detail .drink-on-sale {
+  color: #e12c2c;
 }
 .detail-main .left-side-detail .add-to-basket-btn {
   text-decoration: none;
