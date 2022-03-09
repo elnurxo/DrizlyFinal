@@ -8,6 +8,8 @@
          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
          <!-- My Css -->
          <link rel="stylesheet" href="assets/Css/style.css">
+         <!-- Range Slide Css -->
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.css" integrity="sha512-4f6+KwNIOYFZQbwKMGj45wlzFWwuLfqDl5B8TCp4E2G9JlWzPHENy7LkdalNirz5AMHQtwQ4cyzBFA6mq+UJJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
          <!-- Slick Slider -->
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
@@ -745,99 +747,46 @@
                                 <button class="show-more">More</button>
                             </div> 
                         </div>
-                        <div class="filter-side">
+                        <div class="filter-side" style="height: 137px;">
                             <button class="filter-list-button">
-                                <div class="filter-list">
-                                    <p>ABV</p>
-                                    <h5 class="filter-plus-minus">-</h5>
+                                <div class="filter-list mb-3">
+                                    <p>Filter by ABV</p>
                                 </div>
                             </button>
-                            <div class="filter-side-dropdown">
-                                <ul class="filters-ul">
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input  form="filterForm" type="radio"> 
-                                        <p class="filter-name"> < 1.0%</p>
-                                        <p class="filter-count">(<span>102</span>)</p>
+                                <div class="sidebar-body">
+                                    <div class="abv-range-wrap">
+                                        <div class="abv-range" data-min="0" data-max="100"></div>
+                                        <div class="range-slider-abv">
+                                            <form action="#">
+                                                <div class="abv-input">
+                                                    <label for="amountabv">ABV: </label>
+                                                    <input type="text" id="amountabv">
+                                                </div>                      
+                                            </form>
                                         </div>
-                                     </li>
-                                   </a>
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input  form="filterForm" type="radio"> 
-                                        <p class="filter-name">1.0% - 4.9%</p>
-                                        <p class="filter-count">(<span>8</span>)</p>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="filter-side">
+                            <button class="filter-list-button">
+                                <div class="filter-list mb-3">
+                                    <p>Filter by Price</p>
+                                </div>
+                            </button>
+                                <div class="sidebar-body">
+                                    <div class="price-range-wrap">
+                                        <div class="price-range" data-min="20" data-max="400"></div>
+                                        <div class="range-slider">
+                                            <form action="#">
+                                                <div class="price-input">
+                                                    <label for="amount">Price: </label>
+                                                    <input type="text" id="amount">
+                                                </div>
+                                                <button class="filter-btn">filter</button>
+                                            </form>
                                         </div>
-                                     </li>
-                                   </a>
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">5.0% - 6.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>   
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">7.0% - 9.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>     
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">10.0% - 11.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>     
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">12.0% - 14.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>                         
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">15.0% - 39.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>     
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name">40.0% - 49.9%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a> 
-                                   <a class="filter-link" href="#">
-                                    <li>
-                                        <div class="form-check">
-                                        <input form="filterForm" type="radio"> 
-                                        <p class="filter-name"> > 50.0%</p>
-                                        <p class="filter-count">(<span>23</span>)</p>
-                                        </div>  
-                                     </li>
-                                   </a>     
-                                </ul>
-                                <button class="show-more">More</button>
-                            </div> 
+                                    </div>
+                                </div>
                         </div>
                     </div>
             </div>
@@ -1203,106 +1152,57 @@
                        <button class="show-more">More</button>
                    </div> 
                </div>
-               <div class="filter-side">   
-                   <button class="filter-list-button">
-                       <div class="filter-list">
-                           <p>ABV</p>
-                           <h5 class="filter-plus-minus">-</h5>
-                       </div>
-                   </button>
-                   <div class="filter-side-dropdown">
-                       <ul class="filters-ul">
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input  form="filterForm" type="radio"> 
-                               <p class="filter-name"> < 1.0%</p>
-                               <p class="filter-count">(<span>102</span>)</p>
-                               </div>
-                            </li>
-                          </a>
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input  form="filterForm" type="radio"> 
-                               <p class="filter-name">1.0% - 4.9%</p>
-                               <p class="filter-count">(<span>8</span>)</p>
-                               </div>
-                            </li>
-                          </a>
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">5.0% - 6.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>   
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">7.0% - 9.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>     
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">10.0% - 11.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>     
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">12.0% - 14.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>                         
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">15.0% - 39.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>     
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name">40.0% - 49.9%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a> 
-                          <a class="filter-link" href="#">
-                           <li>
-                               <div class="form-check">
-                               <input form="filterForm" type="radio"> 
-                               <p class="filter-name"> > 50.0%</p>
-                               <p class="filter-count">(<span>23</span>)</p>
-                               </div>  
-                            </li>
-                          </a>     
-                       </ul>
-                       <button class="show-more">More</button>
-                   </div> 
-               </div>
+               <div class="filter-side" style="height: 137px;">
+                <button class="filter-list-button">
+                    <div class="filter-list mb-3">
+                        <p>Filter by ABV</p>
+                    </div>
+                </button>
+                    <div class="sidebar-body">
+                        <div class="abv-range-wrap">
+                            <div class="abv-range" data-min="0" data-max="100"></div>
+                            <div class="range-slider-abv">
+                                <form action="#">
+                                    <div class="abv-input">
+                                        <label for="amountabvmobile">ABV: </label>
+                                        <input type="text" id="amountabvmobile">
+                                    </div>                      
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+              </div>
+               <div class="filter-side">
+                <button class="filter-list-button">
+                    <div class="filter-list mb-3">
+                        <p>Filter by Price</p>
+                    </div>
+                </button>
+                    <div class="sidebar-body">
+                        <div class="price-range-wrap">
+                            <div class="price-range" data-min="20" data-max="400"></div>
+                            <div class="range-slider">
+                                <form action="#">
+                                    <div class="price-input">
+                                        <label for="amountmobile">Price: </label>
+                                        <input type="text" id="amountmobile">
+                                    </div>
+                                    <button class="filter-btn mb-2">filter</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
            </div>
         </div>
     </div>
 </body>
 <!-- Jquery Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Price Rnage Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.js" integrity="sha512-nNk6WlQNxdoGe0WKkh2lL6BssgsB6xa0NcP5tAjJiMFqRyxDZO7UuMXLlU2SqZ+mjG5fYomolQO1iir97pETnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <!-- My Script -->
 <script src="assets/Js/main.js"></script>
 <!-- Slick Slider -->

@@ -535,6 +535,168 @@
         }
     }
 }
+.price-range-wrap 
+{
+    padding-top: 8px; 
+    .price-range {
+        border-radius: 0;
+        margin-right: 13px;
+        margin-bottom: 20px; 
+        position: relative;
+        text-align: left;
+    }
+    .price-range.ui-widget-content {
+        border: none;
+        background: #eeeeee;
+        height: 10px;
+        border-radius: 20px; 
+        .ui-slider-range {
+            background-color: #e12c2c;
+            border-radius: 0; 
+            position: absolute;
+            z-index: 1;
+            font-size: .7em;
+            display: block;
+            border: 0;
+            background-position: 0 0;
+            top: 0;
+            height: 100%;
+        }
+        .ui-slider-handle {
+            position: absolute;
+            z-index: 2;
+            margin-left: -0.6em;
+            border: none;
+            background-color: #fff;
+            height: 20px;
+            width: 20px;
+            outline: none;
+            top: -5px;
+            cursor: ew-resize;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+            &::before{
+                    top: 50%;
+                    left: 50%;
+                    content: "";
+                    width: 8px;
+                    height: 8px;
+                    position: absolute;
+                    background-color: #e12c2c;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+            }
+        }
+    }
+    .range-slider {
+        color: #333333;
+        margin-top: 22px;
+        .price-input {
+            margin-bottom: 20px; 
+            label {
+                color: #333333;
+                margin-bottom: 0; 
+            }
+            input {
+                color: #666666;
+                border: none;
+                outline: none;
+                pointer-events: none; 
+            }
+        }
+        button.filter-btn {
+            border: none;
+            color: #333333;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            line-height: 36px;
+            padding: 0 15px;
+            border-radius: 3px;
+            background-color: #ebebeb; 
+            transition: .2s ease-in-out;
+            &:hover{
+                color: #fff;
+                background-color: #e12c2c; 
+            }
+        }
+    }
+
+}
+.abv-range-wrap 
+{
+    padding-top: 8px; 
+    .abv-range {
+        border-radius: 0;
+        margin-right: 13px;
+        margin-bottom: 20px; 
+        position: relative;
+        text-align: left;
+    }
+    .abv-range.ui-widget-content {
+        border: none;
+        background: #eeeeee;
+        height: 10px;
+        border-radius: 20px; 
+        .ui-slider-range {
+            background-color: #e12c2c;
+            border-radius: 0; 
+            position: absolute;
+            z-index: 1;
+            font-size: .7em;
+            display: block;
+            border: 0;
+            background-position: 0 0;
+            top: 0;
+            height: 100%;
+        }
+        .ui-slider-handle {
+            position: absolute;
+            z-index: 2;
+            margin-left: -0.6em;
+            border: none;
+            background-color: #fff;
+            height: 20px;
+            width: 20px;
+            outline: none;
+            top: -5px;
+            cursor: ew-resize;
+            border-radius: 50%;
+            box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+            &::before{
+                    top: 50%;
+                    left: 50%;
+                    content: "";
+                    width: 8px;
+                    height: 8px;
+                    position: absolute;
+                    background-color: #e12c2c;
+                    border-radius: 50%;
+                    transform: translate(-50%, -50%);
+            }
+        }
+    }
+    .range-slider-abv {
+        color: #333333;
+        margin-top: 22px;
+        .abv-input {
+            margin-bottom: 20px; 
+            label {
+                color: #333333;
+                margin-bottom: 0; 
+            }
+            input {
+                color: #666666;
+                border: none;
+                outline: none;
+                pointer-events: none; 
+            }
+        }
+    }
+    
+}
+
 @media only screen and  (max-width: 576px){
         .category-name-sorting p{
             display: none !important;
