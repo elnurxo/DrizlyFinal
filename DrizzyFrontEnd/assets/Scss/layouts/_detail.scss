@@ -201,6 +201,20 @@
                 font-size: 26px;
                 color: #24282f;
             }
+            .product-label{
+                width: 100px;
+                text-align: center;
+                border-radius: 3px;
+                background-color: rgba(36, 40, 47, 0.75);
+                p{
+                    white-space: pre;
+                    font-size: 14px;
+                    font-family: "Open Sans";
+                    line-height: 36px;
+                    margin: auto;
+                    color: #fff;
+                }
+            }
             .product-rate{
                 line-height: 2.4;
                 padding: 0 6px 8px 0;
@@ -250,7 +264,8 @@
                     line-height: 22px;
                     color: #24282f;
                 }
-                .progess-bar{
+                .progess-bar-container{
+                    box-shadow: 0 4px 5px rgb(0, 0, 0, 0.1);
                     width: calc(100% - 70px);
                     height: 16px;
                     margin-top: 3px;
@@ -258,6 +273,14 @@
                     position: relative;
                     overflow: hidden;
                     .progress-bar-inner{
+                        background-color: #eee;
+                        border-radius: 5px;
+                        position: relative;
+                        height: 7px;
+                        width: 300px;
+                        background-color: #6F39B0;
+                        width: 0;
+                        transition: width 0.4s linear;
                         top: 0;
                         position: absolute;
                         left: 0;
@@ -296,9 +319,24 @@
             }
             .drink-size{
                 margin-bottom: 0;
+                color: #e12c2c;
+                font-weight: bold;
                 span{
-                    color: #e12c2c;
-                    font-weight: bold;
+                    font-weight: normal;
+                  color: #24282f;
+                }
+            }
+            .drink-price{
+                margin-bottom: 0;
+                color: #e12c2c;
+                font-weight: bold;
+                span{
+                    font-family: "Open Sans";
+                    font-weight: normal;
+                    color: #24282f;
+                }
+                .old-price{
+                    text-decoration: line-through;
                 }
             }
             .add-to-basket-btn{

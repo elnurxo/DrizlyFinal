@@ -4273,6 +4273,20 @@ main .slick-prev:before, main .slick-next:before {
   font-size: 26px;
   color: #24282f;
 }
+.detail-main .left-side-detail .name-container .product-label {
+  width: 100px;
+  text-align: center;
+  border-radius: 3px;
+  background-color: rgba(36, 40, 47, 0.75);
+}
+.detail-main .left-side-detail .name-container .product-label p {
+  white-space: pre;
+  font-size: 14px;
+  font-family: "Open Sans";
+  line-height: 36px;
+  margin: auto;
+  color: #fff;
+}
 .detail-main .left-side-detail .name-container .product-rate {
   line-height: 2.4;
   padding: 0 6px 8px 0;
@@ -4340,7 +4354,9 @@ main .slick-prev:before, main .slick-next:before {
   line-height: 22px;
   color: #24282f;
 }
-.detail-main .left-side-detail .name-container .progress-review-container .progess-bar {
+.detail-main .left-side-detail .name-container .progress-review-container .progess-bar-container {
+  -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
   width: calc(100% - 70px);
   height: 16px;
   margin-top: 3px;
@@ -4348,7 +4364,16 @@ main .slick-prev:before, main .slick-next:before {
   position: relative;
   overflow: hidden;
 }
-.detail-main .left-side-detail .name-container .progress-review-container .progess-bar .progress-bar-inner {
+.detail-main .left-side-detail .name-container .progress-review-container .progess-bar-container .progress-bar-inner {
+  background-color: #eee;
+  border-radius: 5px;
+  position: relative;
+  height: 7px;
+  width: 300px;
+  background-color: #6F39B0;
+  width: 0;
+  -webkit-transition: width 0.4s linear;
+  transition: width 0.4s linear;
   top: 0;
   position: absolute;
   left: 0;
@@ -4388,10 +4413,25 @@ main .slick-prev:before, main .slick-next:before {
 }
 .detail-main .left-side-detail .drink-size {
   margin-bottom: 0;
-}
-.detail-main .left-side-detail .drink-size span {
   color: #e12c2c;
   font-weight: bold;
+}
+.detail-main .left-side-detail .drink-size span {
+  font-weight: normal;
+  color: #24282f;
+}
+.detail-main .left-side-detail .drink-price {
+  margin-bottom: 0;
+  color: #e12c2c;
+  font-weight: bold;
+}
+.detail-main .left-side-detail .drink-price span {
+  font-family: "Open Sans";
+  font-weight: normal;
+  color: #24282f;
+}
+.detail-main .left-side-detail .drink-price .old-price {
+  text-decoration: line-through;
 }
 .detail-main .left-side-detail .add-to-basket-btn {
   text-decoration: none;

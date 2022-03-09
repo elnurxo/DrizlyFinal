@@ -323,3 +323,13 @@ window.addEventListener("DOMContentLoaded", () => {
  " - %" + rangeSliderabv.slider("values", 1));
  amountabvmobile.val(" %" + rangeSliderabv.slider("values", 0) +
  " - %" + rangeSliderabv.slider("values", 1));
+
+ //PROGRESS-BAR COMMENT REVIEW
+ const progressContainer = document.querySelector('.progress-bar-container');
+ setPercentage();
+ function setPercentage() {
+    const percentage = progressContainer.getAttribute('data-percentage') + '%';
+    const progressEl = progressContainer.querySelector('.progress');
+  
+  progressEl.style.width = percentage;
+ }
