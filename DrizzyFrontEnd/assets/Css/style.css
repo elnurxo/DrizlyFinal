@@ -4582,6 +4582,37 @@ main .slick-prev:before, main .slick-next:before {
   white-space: pre-line;
   margin: 0 0 10px;
 }
+.detail-main .left-side-detail .product-detail .product-details-content .comments-pagination {
+  text-align: center;
+  padding: 20px 0 18px;
+  margin-top: 2.5em;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .comments-pagination .pagination-box li {
+  display: inline-block;
+  margin-right: 10px;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .comments-pagination .pagination-box li a {
+  text-decoration: none;
+  color: #333333;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  padding: 0 10px;
+  text-align: center;
+  line-height: 37px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .comments-pagination .pagination-box li a:hover {
+  background: #e12c2c;
+  color: white;
+}
+.detail-main .left-side-detail .product-detail .product-details-content .comments-pagination .pagination-box .active-pagination {
+  background: #e12c2c;
+  color: white;
+}
 .detail-main .left-side-detail .name-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4704,17 +4735,17 @@ main .slick-prev:before, main .slick-next:before {
   font-weight: normal;
   color: #24282f;
 }
-.detail-main .left-side-detail .drink-price {
+.detail-main .left-side-detail .drink-price-detail {
   margin-bottom: 0;
   color: #e12c2c;
   font-weight: bold;
 }
-.detail-main .left-side-detail .drink-price span {
+.detail-main .left-side-detail .drink-price-detail span {
   font-family: "Open Sans";
   font-weight: normal;
   color: #24282f;
 }
-.detail-main .left-side-detail .drink-price .old-price {
+.detail-main .left-side-detail .drink-price-detail .old-price {
   text-decoration: line-through;
 }
 .detail-main .left-side-detail .drink-on-sale {
@@ -4740,5 +4771,90 @@ main .slick-prev:before, main .slick-next:before {
 .detail-main .left-side-detail .add-to-basket-btn:hover {
   -webkit-box-shadow: 6px 6px 0 #a42121;
           box-shadow: 6px 6px 0 #a42121;
+}
+
+@media only screen and (max-width: 1112px) {
+  .product-rate {
+    display: block !important;
+  }
+}
+@media only screen and (max-width: 990px) {
+  .product-rate {
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+  }
+
+  .left-side-detail {
+    -webkit-box-flex: 0 !important;
+        -ms-flex-positive: 0 !important;
+            flex-grow: 0 !important;
+    max-width: 100% !important;
+    -ms-flex-preferred-size: 100% !important;
+        flex-basis: 100% !important;
+  }
+
+  .product-image-name {
+    -webkit-box-orient: vertical !important;
+    -webkit-box-direction: normal !important;
+        -ms-flex-direction: column !important;
+            flex-direction: column !important;
+  }
+  .product-image-name .image-container img {
+    margin-left: 0 !important;
+    max-width: 200px !important;
+    height: 300px !important;
+  }
+  .product-image-name .add-to-basket-btn {
+    width: 167% !important;
+    padding: 25px !important;
+    line-height: 0vw !important;
+    font-size: 1.6vw !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .product-detail {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .product-name {
+    font-size: 20px !important;
+  }
+
+  .product-rate {
+    padding-top: 0px !important;
+  }
+
+  .rate-number {
+    font-size: 16px !important;
+    padding-left: 4px !important;
+    padding-right: 4px !important;
+  }
+
+  .product-rate .rate-count {
+    font-size: 11px !important;
+  }
+
+  .product-rightside-detail {
+    font-size: 12px !important;
+  }
+
+  .product-image-name .add-to-basket-btn {
+    font-size: 3.4vw !important;
+  }
+
+  .row-name {
+    width: 40% !important;
+    padding: 2% 2% 2% 5% !important;
+  }
+
+  .pagination-box li {
+    margin-right: 0 !important;
+  }
+
+  .progress-review-container .rate-count {
+    font-size: 16px !important;
+  }
 }
 /*# sourceMappingURL=style.css.map */

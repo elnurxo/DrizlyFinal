@@ -450,6 +450,38 @@
                     }
                 }
             }
+            .comments-pagination{
+                text-align: center;
+                padding: 20px 0 18px;
+                margin-top: 2.5em;
+                .pagination-box{
+                    li{
+                        display: inline-block;
+                        margin-right: 10px;
+                        a{
+                            text-decoration: none;
+                            color: #333333;
+                            height: 40px;
+                            width: 40px;
+                            display: inline-block;
+                            padding: 0 10px;
+                            text-align: center;
+                            line-height: 37px;
+                            border: 1px solid #e5e5e5;
+                            border-radius: 4px;
+                            transition: .2s ease-in-out;
+                            &:hover{
+                                background: #e12c2c;
+                                color: white;
+                            }
+                        }               
+                    }
+                    .active-pagination{
+                        background: #e12c2c;
+                        color: white;
+                    }
+                }
+            }
         }
         }
         .name-container{
@@ -555,7 +587,7 @@
                   color: #24282f;
                 }
             }
-            .drink-price{
+            .drink-price-detail{
                 margin-bottom: 0;
                 color: #e12c2c;
                 font-weight: bold;
@@ -591,4 +623,79 @@
                 }
             }
         }
+}
+@media only screen and  (max-width: 1112px){
+    .product-rate{
+        display: block !important;
+    }
+}
+@media only screen and  (max-width: 990px){
+    .product-rate{
+        display: flex !important;
+    }
+    .left-side-detail{
+        flex-grow: 0 !important;
+        max-width: 100% !important;
+        flex-basis: 100% !important;
+    }
+    .product-image-name{
+        flex-direction: column !important;
+        .image-container{
+            img{
+                margin-left: 0 !important;
+                max-width: 200px !important;
+                height: 300px !important;
+            }
+        }
+        .add-to-basket-btn{
+            width: 167% !important;
+            padding: 25px !important;
+            line-height: 0vw !important;
+            font-size: 1.6vw !important;
+        }
+    }
+}
+@media only screen and (max-width:600px){
+    .product-detail{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    .product-name{
+        font-size: 20px !important;
+    }
+    .product-rate{
+        padding-top: 0px !important;
+    }
+    .rate-number{
+        font-size: 16px !important;
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+    .product-rate{
+        .rate-count{
+            font-size: 11px !important;
+        }
+    }
+    .product-rightside-detail{
+        font-size: 12px !important;
+    }
+    .product-image-name{
+        .add-to-basket-btn{
+            font-size: 3.4vw !important;
+        }
+    }
+    .row-name{
+        width: 40% !important;
+        padding: 2% 2% 2% 5% !important;
+    }
+    .pagination-box{
+        li{
+           margin-right: 0 !important;
+        }
+    }
+    .progress-review-container{
+        .rate-count{
+            font-size: 16px !important;
+        }
+    }
 }
