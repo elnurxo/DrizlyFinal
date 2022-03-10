@@ -332,7 +332,94 @@
                                 </div>
                                 <form class="review-form" action="#">
                                     <h2>Write a review</h2>
+                                    <div class="rating-stars">
+                                        <div class="stars-wrapper">
+                                            <label>Rating</label>
+                                            <div class="stars">
+                                                  <input class="star star-5" value="5" id="star-5" type="radio" name="star"/>
+                                                  <label class="star star-5" for="star-5"></label>
+                                                  <input class="star star-4" value="4" id="star-4" type="radio" name="star"/>
+                                                  <label class="star star-4" for="star-4"></label>
+                                                  <input class="star star-3" value="3" id="star-3" type="radio" name="star"/>
+                                                  <label class="star star-3" for="star-3"></label>
+                                                  <input class="star star-2" value="2" id="star-2" type="radio" name="star"/>
+                                                  <label class="star star-2" for="star-2"></label>
+                                                  <input class="star star-1" value="1" id="star-1" type="radio" name="star"/>
+                                                  <label class="star star-1" for="star-1"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="your-review-wrapper">
+                                        <div class="form__group">
+                                            <label for="message" class="form__label">Your Review</label>
+                                            <textarea id="message" class="form__field" placeholder="Your Message" rows="4"></textarea>
+                                          </div>
+                                    </div>
+                                    <span class="submit-cancel-wrapper">
+                                        <button class="submit-review-btn" type="submit">
+                                            <span>Submit</span>
+                                        </button>
+                                        <button class="cancel-review-btn">
+                                            <span>Cancel</span>
+                                        </button>
+                                    </span>
                                 </form>
+                                <ul class="comments-ul">
+                                    <li>
+                                        <article>
+                                            <span class="comment-rate">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                            <span class="comment">
+                                                <span class="customer-name-date">
+                                                    <span class="customer-name">Carlos Reynoso</span>
+                                                    <span class="comment-date">Mar 7 2022</span>
+                                                </span>
+                                                <p class="comment-content">Can’t ever go wrong with fireball</p>
+                                            </span>
+                                        </article>
+                                    </li>
+                                    <li>
+                                        <article>
+                                            <span class="comment-rate">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                            <span class="comment">
+                                                <span class="customer-name-date">
+                                                    <span class="customer-name">Carlos Reynoso</span>
+                                                    <span class="comment-date">Mar 7 2022</span>
+                                                </span>
+                                                <p class="comment-content">Can’t ever go wrong with fireball</p>
+                                            </span>
+                                        </article>
+                                    </li>
+                                    <li>
+                                        <article>
+                                            <span class="comment-rate">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </span>
+                                            <span class="comment">
+                                                <span class="customer-name-date">
+                                                    <span class="customer-name">Carlos Reynoso</span>
+                                                    <span class="comment-date">Mar 7 2022</span>
+                                                </span>
+                                                <p class="comment-content">Can’t ever go wrong with fireball</p>
+                                            </span>
+                                        </article>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -486,6 +573,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <!-- My Script -->
 <script src="assets/Js/main.js"></script>
+<!-- Progress Bar Script -->
+<script src="assets/Js/review-progress.js"></script>
 <!-- Slick Slider -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 <!-- Font Awesome -->

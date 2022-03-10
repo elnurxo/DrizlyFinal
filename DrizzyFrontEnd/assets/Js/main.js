@@ -245,6 +245,24 @@ $(function () {
              return;
          }   
     })
+    //WRITE A REVIEW BUTTON CLICK
+    $(".write-review-btn").click(function(){
+        $(this).css("display","none");
+        $(".review-form").css("height","auto");
+        $(".review-form").css("overflow","visible");
+    });
+    //CANCEL TO WRITE A REVIEW BUTTON CLICK
+    $(".cancel-review-btn").click(function(){
+        $(".write-review-btn").css("display","block");
+        $(".review-form").css("height","0");
+        $(".review-form").css("overflow","hidden");
+    });
+     //SUBMIT TO WRITE A REVIEW BUTTON CLICK
+     $(".submit-review-btn").click(function(){
+        $(".write-review-btn").css("display","block");
+        $(".review-form").css("height","0");
+        $(".review-form").css("overflow","hidden");
+    });
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {
@@ -280,38 +298,11 @@ window.addEventListener("DOMContentLoaded", () => {
         $(".navbar-mobile-search-wrapper").css("display","none");
     }
  }
+ //STAR COMMENT LOG
+ $(':radio').change(function() {
+    console.log('New star rating: ' + this.value);
+  });
  window.addEventListener("resize", onresize);
- //PROGRESS-BAR COMMENT REVIEW
- let progressContainerfive = document.querySelector('.star-five-container');
- let progressContainerfour = document.querySelector('.star-four-container');
- let progressContainerthree = document.querySelector('.star-three-container');
- let progressContainertwo = document.querySelector('.star-two-container');
- let progressContainerone = document.querySelector('.star-one-container');
-
- setPercentage();
- function setPercentage() {
-    //Star Five
-    let percentagefive = progressContainerfive.getAttribute('data-percentage') + '%';
-    let progressElfive = document.querySelector('.star-five');
-    progressElfive.style.width = percentagefive;
-    //Star Four
-    let percentagefour = progressContainerfour.getAttribute('data-percentage') + '%';
-    let progressElfour = document.querySelector('.star-four');
-    progressElfour.style.width = percentagefour;
-    //Star Three
-    let percentagethree = progressContainerthree.getAttribute('data-percentage') + '%';
-    let progressElthree = document.querySelector('.star-three');
-    progressElthree.style.width = percentagethree;
-    //Star Two
-    let percentagetwo = progressContainertwo.getAttribute('data-percentage') + '%';
-    let progressEltwo = document.querySelector('.star-two');
-    progressEltwo.style.width = percentagetwo;
-    //Star One
-    let percentageone = progressContainerone.getAttribute('data-percentage') + '%';
-    let progressElone = document.querySelector('.star-one');
-    progressElone.style.width = percentageone;
- }
-
 
  //PRICE RANGING FILTER
 
