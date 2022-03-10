@@ -1,0 +1,91 @@
+.about-us-section{
+    .breadcumb-aboutus{
+       .desktop-breadcumb{
+           img{
+             width: 100%;
+             border: 0;
+             vertical-align: middle;
+           }
+       } 
+       .mobile-breadcumb{
+           display: none;
+           img{
+            width: 100%;
+            border: 0;
+            vertical-align: middle;
+          }
+       }
+    }
+    .about-us-content{
+        h1{
+            font-weight: bolder;
+            font-size: 33px;
+            color: rgb(72,77,85);
+            font-family: "Open Sans";
+            padding-top: 20px;
+        }
+        p{
+            font-family: "Open Sans";
+            color: rgb(72,77,85);
+        }
+    }
+    .about-us-image{
+        margin-top: 25px;
+        margin-bottom: 25px;
+        text-align: center;
+        img{
+            width: 350px;
+        }
+        .aboutus-rightside{
+            text-align: left !important;
+            h2{
+                font-weight: bolder;
+                font-size: 24px;
+                color: rgb(72,77,85);
+                font-family: "Open Sans";
+            }
+            p{
+                font-size: 16px;
+                font-family:"Open Sans";
+                color: rgb(72,77,85);
+            }
+            .shop-now{
+                text-decoration: none;
+                background-color: #e12c2c;
+                border-radius: 3px;
+                line-height: 3.2vw;
+                color: #ffffff;
+                font-family: "Open Sans";
+                font-size: 1vw;
+                font-weight: 600;
+                text-transform: uppercase;
+                text-align: center;
+                max-height: 3.45vw;
+                padding: 0px 60px;
+                display: inline-block;
+                transition: all 0.2s ease-in-out;
+                &:hover{
+                    box-shadow: 6px 6px 0 #a42121;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+    .desktop-breadcumb{
+        display: none !important;
+    }
+    .mobile-breadcumb{
+        display: block !important;
+    }
+    .shop-now{
+        line-height: 1.2vw !important;
+        font-size: 2.7vw !important;
+        padding: 25px 80px !important;
+    }
+    .about-us-image{
+        img{
+            width: 290px !important;
+        }
+    }
+}

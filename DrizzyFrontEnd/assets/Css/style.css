@@ -4857,4 +4857,91 @@ main .slick-prev:before, main .slick-next:before {
     font-size: 16px !important;
   }
 }
+.about-us-section .breadcumb-aboutus .desktop-breadcumb img {
+  width: 100%;
+  border: 0;
+  vertical-align: middle;
+}
+.about-us-section .breadcumb-aboutus .mobile-breadcumb {
+  display: none;
+}
+.about-us-section .breadcumb-aboutus .mobile-breadcumb img {
+  width: 100%;
+  border: 0;
+  vertical-align: middle;
+}
+.about-us-section .about-us-content h1 {
+  font-weight: bolder;
+  font-size: 33px;
+  color: #484d55;
+  font-family: "Open Sans";
+  padding-top: 20px;
+}
+.about-us-section .about-us-content p {
+  font-family: "Open Sans";
+  color: #484d55;
+}
+.about-us-section .about-us-image {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.about-us-section .about-us-image img {
+  width: 350px;
+}
+.about-us-section .about-us-image .aboutus-rightside {
+  text-align: left !important;
+}
+.about-us-section .about-us-image .aboutus-rightside h2 {
+  font-weight: bolder;
+  font-size: 24px;
+  color: #484d55;
+  font-family: "Open Sans";
+}
+.about-us-section .about-us-image .aboutus-rightside p {
+  font-size: 16px;
+  font-family: "Open Sans";
+  color: #484d55;
+}
+.about-us-section .about-us-image .aboutus-rightside .shop-now {
+  text-decoration: none;
+  background-color: #e12c2c;
+  border-radius: 3px;
+  line-height: 3.2vw;
+  color: #ffffff;
+  font-family: "Open Sans";
+  font-size: 1vw;
+  font-weight: 600;
+  text-transform: uppercase;
+  text-align: center;
+  max-height: 3.45vw;
+  padding: 0px 60px;
+  display: inline-block;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.about-us-section .about-us-image .aboutus-rightside .shop-now:hover {
+  -webkit-box-shadow: 6px 6px 0 #a42121;
+          box-shadow: 6px 6px 0 #a42121;
+}
+
+@media only screen and (max-width: 768px) {
+  .desktop-breadcumb {
+    display: none !important;
+  }
+
+  .mobile-breadcumb {
+    display: block !important;
+  }
+
+  .shop-now {
+    line-height: 1.2vw !important;
+    font-size: 2.7vw !important;
+    padding: 25px 80px !important;
+  }
+
+  .about-us-image img {
+    width: 290px !important;
+  }
+}
 /*# sourceMappingURL=style.css.map */
