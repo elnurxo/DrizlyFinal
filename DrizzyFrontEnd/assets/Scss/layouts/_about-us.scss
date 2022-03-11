@@ -70,6 +70,61 @@
             }
         }
     }
+    .our-team{
+        h1{
+            font-weight: bolder;
+            font-size: 33px;
+            color: rgb(72,77,85);
+            font-family: "Open Sans";
+            padding-top: 20px;
+        }
+        .team-member{
+            text-align: center;
+            padding-bottom: 30px;
+            img{
+                width: 204px;
+                height: 204px;
+            }
+            p{
+                font-weight: bolder;
+                font-size: 19px;
+                color: rgb(72,77,85);
+                font-family: "Open Sans";
+                padding-top: 10px;
+                margin: 0 0 10px;
+                margin-bottom: 0;
+            }
+            span{
+                letter-spacing: 0.1px;
+                font-size: 17px;
+                font-family: "Open Sans";
+                color: rgb(72,77,85);
+            }
+        }
+    }
+    .in-the-news{
+        h1{
+            font-weight: bolder;
+            font-size: 28px;
+            color: rgb(72,77,85);
+            font-family: "Open Sans";
+            padding-top: 20px;
+            padding-bottom: 11px;
+        } 
+        p{
+            font-size: 18px;
+            font-family: "Open Sans";
+            color: rgb(72,77,85);
+        }
+        .news{
+            text-align: center;
+            padding-bottom: 30px;
+            img{
+                width: 200px;
+                height: 100%;
+            }
+        }
+    }
 }
 @media only screen and (max-width: 768px) {
     .desktop-breadcumb{

@@ -4924,6 +4924,57 @@ main .slick-prev:before, main .slick-next:before {
   -webkit-box-shadow: 6px 6px 0 #a42121;
           box-shadow: 6px 6px 0 #a42121;
 }
+.about-us-section .our-team h1 {
+  font-weight: bolder;
+  font-size: 33px;
+  color: #484d55;
+  font-family: "Open Sans";
+  padding-top: 20px;
+}
+.about-us-section .our-team .team-member {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.about-us-section .our-team .team-member img {
+  width: 204px;
+  height: 204px;
+}
+.about-us-section .our-team .team-member p {
+  font-weight: bolder;
+  font-size: 19px;
+  color: #484d55;
+  font-family: "Open Sans";
+  padding-top: 10px;
+  margin: 0 0 10px;
+  margin-bottom: 0;
+}
+.about-us-section .our-team .team-member span {
+  letter-spacing: 0.1px;
+  font-size: 17px;
+  font-family: "Open Sans";
+  color: #484d55;
+}
+.about-us-section .in-the-news h1 {
+  font-weight: bolder;
+  font-size: 28px;
+  color: #484d55;
+  font-family: "Open Sans";
+  padding-top: 20px;
+  padding-bottom: 11px;
+}
+.about-us-section .in-the-news p {
+  font-size: 18px;
+  font-family: "Open Sans";
+  color: #484d55;
+}
+.about-us-section .in-the-news .news {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.about-us-section .in-the-news .news img {
+  width: 200px;
+  height: 100%;
+}
 
 @media only screen and (max-width: 768px) {
   .desktop-breadcumb {
