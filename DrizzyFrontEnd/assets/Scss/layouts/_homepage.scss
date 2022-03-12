@@ -204,21 +204,8 @@
                 max-width: 21.9vw;
                 position: relative;
                 margin-right: 15px;
-                .circle{
-                    position: absolute;
-                    background-color: #e5e7e8;
-                    border-radius: 50%;
-                    color: #ffffff;
-                    z-index: -1;
-                    height: 10.5vw;
-                    width: 10.5vw;
-                    line-height: 10.5vw;
-                    font-size: 6.3vw;
-                    font-weight: 900;
-                    text-align: center;
-                    opacity: 0.5;
-                }
                 .circle-text{
+                    text-align: center;
                    h3{
                     font-family: "Open Sans";
                     font-size: 1.4vw;
@@ -517,6 +504,42 @@
         }
     }
 }
+.recently-bought-section{
+    h2{
+        font-family: "Open Sans";
+        font-size: 2vw;
+        font-weight: 900;
+        line-height: 3.95vw;
+        color: #24282f;
+        margin: 0 0 9px;
+        user-select: none;
+    }
+    .product{
+        padding: 2px;
+        .whole-product-slide{
+            text-decoration: none;
+            display: block;
+            position: relative;
+            transition: box-shadow .25s cubic-bezier(.4,0,.2,1) 0ms;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 4px;
+            &:hover{
+                box-shadow: 1px 1px 0 4px #e5e7e8;
+                .basket-icon{
+                    right: 5% !important;
+                }   
+            }
+        }
+        .whole-product-slide{
+            .drink-slide-info{
+                a{
+                    text-align: center !important;
+                }
+            }
+        }
+    }
+}
 html{
     scroll-behavior: smooth;
 }
@@ -643,18 +666,8 @@ html{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                .circle{
-                    margin: auto;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    width: 40vw;
-                    height: 40vw;
-                    font-size: 28vw;
-                    line-height: 39vw;
-                }
                 .circle-text{
-
+                    text-align: center;
                     h3{
                         text-align: center;
                         font-size: 5.5vw;
