@@ -537,6 +537,10 @@ body::-webkit-scrollbar-thumb {
           align-items: flex-end;
   padding-right: 20px;
 }
+.navbar-signin img {
+  border-radius: 50%;
+  margin-left: 5px;
+}
 .navbar-signin a {
   color: #484d55;
   padding: 0;
@@ -645,7 +649,7 @@ body::-webkit-scrollbar-thumb {
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 300;
   position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -762,6 +766,7 @@ body::-webkit-scrollbar-thumb {
   border: none;
 }
 .age-gate-modal .age-modal .age-submit-wrapper .age-no-clicked {
+  display: none;
   padding-top: 12px;
   width: 300px;
   height: 100%;

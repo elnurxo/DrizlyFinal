@@ -263,6 +263,15 @@ $(function () {
         $(".review-form").css("height","0");
         $(".review-form").css("overflow","hidden");
     });
+    //AGE MODAL CLICK
+    $(".age-no").click(function(){
+        $(".age-no-clicked").css("display","block");
+        $(".age-yes").attr("disabled", true);
+        $(".age-yes").css("background","#d27c7c");
+    });
+    $(".age-yes").click(function(){
+        $(".age-gate-modal").css("display","none");
+    });
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {

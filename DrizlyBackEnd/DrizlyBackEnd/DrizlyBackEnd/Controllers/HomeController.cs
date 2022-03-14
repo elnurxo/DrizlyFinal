@@ -23,6 +23,7 @@ namespace DrizlyBackEnd.Controllers
             {
                 Settings = _context.Settings.ToList(),
                 Partnerships = _context.Partnerships.ToList(),
+                Services = _context.Services.ToList()
             };
             return View(homeVM);
         }

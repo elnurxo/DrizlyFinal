@@ -10,5 +10,6 @@ namespace DrizlyBackEnd.ViewModels
     {
         public List<Settings> Settings { get; set; }
         public List<Partnership> Partnerships { get; set; }
+        public List<Service> Services { get; set; }
     }
 }

@@ -6,12 +6,30 @@
 
   <ItemGroup>
     <Folder Include="Areas\" />
-    <Folder Include="Helpers\" />
     <Folder Include="Migrations\" />
     <Folder Include="Enums\" />
-    <Folder Include="wwwroot\assets\Media\Partners\" />
     <Folder Include="wwwroot\assets\Media\Products\" />
-    <Folder Include="wwwroot\assets\Media\Settings\" />
+    <Folder Include="wwwroot\uploads\users\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\Css\style.css.map" />
+    <None Include="wwwroot\assets\Js\main.js" />
+    <None Include="wwwroot\assets\Js\review-progress.js" />
+    <None Include="wwwroot\assets\Scss\base\_reset.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_about-us.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_agemodal.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_detail.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_filtersidebar.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_footer.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_homepage.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_loading.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_nav.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_navloginregister.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_register.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_shop-paginatedlist.scss" />
+    <None Include="wwwroot\assets\Scss\layouts\_shop.scss" />
+    <None Include="wwwroot\assets\Scss\style.scss" />
   </ItemGroup>
 
   <ItemGroup>

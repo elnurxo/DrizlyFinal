@@ -15,6 +15,6 @@ namespace DrizlyBackEnd.Models
         public DbSet<Settings> Settings { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Partnership> Partnerships { get; set; }
-
+        public DbSet<Service> Services { get; set; }
     }
 }

@@ -1,0 +1,216 @@
+﻿@{
+    Layout = null;
+}
+@using DrizlyBackEnd.Services
+@inject LayoutService layoutService
+@{
+    var settings = layoutService.GetSettings();
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
+    <!-- My Script -->
+    <script src="assets/Js/main.js" defer></script>
+    <!-- Bootstrap Link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My Css -->
+    <link rel="stylesheet" href="assets/Css/style.css">
+    <!-- Fav Ico -->
+    <link rel="icon" type="image/x-icon" href="assets/Media/drizlyfavico.ico">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Libre+Baskerville:wght@700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Roboto+Slab:wght@500;600&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
+    <title>Drizly: Login</title>
+</head>
+<body>
+    <!-- Loading Start -->
+    <div id="loadingwrapper">
+    </div>
+    <!-- Header Start -->
+    <header id="navbarlogin">
+        <div class="navbar-sections-login">
+            <nav class="navbar-links navbar-leftside">
+                <ul class="navbar-left-ul">
+                    <li class="navbar-left-li">
+                        <a asp-controller="home" asp-action="index" class="drizlybearlink">
+                            <img src="~/assets/Media/Settings/@settings["logo"]">
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="register-main login-main">
+        <div class="register-wrapper">
+            <h1>Sign in</h1>
+            <form class="register-form">
+                <div class="form-group">
+                    <label for="exampleInputUserName">User Name</label>
+                    <input id="exampleInputUserName" type="text" class="form-control" placeholder="Enter User Name">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">SIGN IN</button>
+            </form>
+        </div>
+        <p class="text-center alreadyaccount">
+            Don't have an account yet?
+            <span>
+                <a href="register.html"><strong>Create an account now</strong></a>
+            </span>
+        </p>
+    </main>
+    <!-- Footer Start here -->
+    <footer class="container-fluid">
+        <div class="row">
+            <div class="footer-cols follow">
+                <h6>Follow Us</h6>
+                <ul class="footer-links">
+
+                    <li>
+                        <a><i class="fa fa-facebook" aria-hidden="true"></i></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-twitter" aria-hidden="true"></i></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-instagram" aria-hidden="true"></i></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-pinterest" aria-hidden="true"></i></i></a>
+                    </li>
+                </ul>
+                <h6>Get the App</h6>
+                <ul class="footer-links">
+                    <li>
+                        <a><i class="fa fa-apple" aria-hidden="true"></i></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fa fa-android" aria-hidden="true"></i></i></a>
+                    </li>
+                </ul>
+                <h6>Payment Options</h6>
+                <ul class="footer-links">
+                    <li>
+                        <a><i class="fa fa-cc-visa" aria-hidden="true"></i></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fab fa-cc-amex"></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fab fa-cc-mastercard"></i></a>
+                    </li>
+                    <li>
+                        <a><i class="fab fa-cc-discover"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-cols about">
+                <h6>About</h6>
+                <ul class="footer-uls">
+                    <li>
+                        <a href="#">Careers</i></a>
+                    </li>
+                    <li>
+                        <a href="#">About Us</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Drizly Cities</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Gifts</i></a>
+                    </li>
+                    <li>
+                        <a href="#">FAQ</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Press</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Store Finder</i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-cols get-in-touch">
+                <h6>Get in touch</h6>
+                <ul class="footer-uls">
+                    <li>
+                        <a href="#">Support</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Alcohol support resources</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Accessibility</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Returns</i></a>
+                    </li>
+                    <li>
+                        <a href="#">General</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Media</i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-cols partner">
+                <h6>Partner with us</h6>
+                <ul class="footer-uls">
+                    <li>
+                        <a href="#">For Business</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Retailers</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Brands</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Data</i></a>
+                    </li>
+                    <li>
+                        <a href="#">Become a affiliate</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="footer-cols politics">
+                <div class="policy-links">
+                    <a href="#" class="footer-link" target="_blank">
+                        Privacy Notice
+                    </a>
+                    <span class="divider">|</span>
+                    <a href="#" class="footer-link" target="_blank">
+                        Terms of Service
+                    </a>
+                    <span class="divider">|</span>
+                    <a href="#" class="footer-link" target="_blank">
+                        Interest Based Ads
+                    </a>
+                    <span class="divider">|</span>
+                    <a href="#" class="footer-link" target="_blank">
+                        CA Privacy Rights
+                    </a>
+                    <span class="divider">|</span>
+                    <a href="#" class="footer-link" target="_blank">
+                        Do Not Sell My Personal Information
+                    </a>
+                </div>
+                <p class="drizlyrights">© Drizly All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+</html>

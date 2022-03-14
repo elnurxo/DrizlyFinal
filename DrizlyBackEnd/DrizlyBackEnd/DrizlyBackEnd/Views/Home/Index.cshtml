@@ -47,8 +47,8 @@
 
             </div>
         </div>
-        <img class="left-hero float-left" src="https://products2.imgix.drizly.com/homepage_hipster_girl.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=30&w=368">
-        <img class="right-hero float-right" src="https://products2.imgix.drizly.com/homepage_jacket_girl.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=10&w=400">
+        <img class="left-hero float-left" src="~/assets/Media/Settings/@Model.Settings.Find(c => c.Key == "LeftSideHero")?.Value">
+        <img class="right-hero float-right" src="~/assets/Media/Settings/@Model.Settings.Find(c => c.Key == "RightSideHero")?.Value">
         <svg role="presentation" class="red-angle-desktop" viewbox="0 0 100 100" preserveAspectRatio="none">
             <polygon fill="#A42121" points="0,77 0,85 100,8 100,1"></polygon>
             <polygon fill="#E12C2C" points="0,84 0,100 100,100 100,7"></polygon>
@@ -64,27 +64,17 @@
             <h2>Talk Drizly to me.</h2>
             <p>Our Services:</p>
             <ul class="steps-howitworks">
-                <li>
-                    <div class="circle-text">
-                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-1.png" alt="">
-                        <h3>Free Delivery</h3>
-                        <p>Create an account to shop and add products to your basket and get free delivery.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="circle-text">
-                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-2.png" alt="">
-                        <h3>Online Support</h3>
-                        <p>Browse thousands of new, local, well-known and not-so-well-known products. Select your favorites, pick your local liquor store(s) and press that magical order button.</p>
-                    </div>
-                </li>
-                <li>
-                    <div class="circle-text">
-                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-3.png" alt="">
-                        <h3>Money Return</h3>
-                        <p>We’ll let you know when your driver is on their way with the goods and BOOM, drinks delivered in under 60 minutes.</p>
-                    </div>
-                </li>
+                @foreach (var service in Model.Services)
+                {
+                    <li>
+                        <div class="circle-text">
+                            <img src="~/assets/Media/Services/@service.Image" alt="service">
+                            <h3>@service.Title</h3>
+                            <p>@service.Desc</p>
+                        </div>
+                    </li>
+                }
+
             </ul>
             <a href="register.html" class="lets-do-this" role="button">Let's get start</a>
         </span>
@@ -107,12 +97,12 @@
     <!-- You want it We Got It,Shop Now Section -->
     <section class="shopnow">
         <div class="col image-col">
-            <img src="https://products2.imgix.drizly.com/homepage_you_want_it_we_got_it.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=75&w=1340" alt="shop-now-image">
+            <img src="~/assets/Media/Settings/@Model.Settings.Find(c => c.Key == "Promotion1Image")?.Value" alt="shop-now-image">
         </div>
         <div class="col">
             <article>
-                <h2>You want it? We got it.</h2>
-                <p>Rosé? Check. Tito's? Check. That one killer pale ale you tried the other day? Check.We have the biggest selection for on-demand alcohol in the history of ever.</p>
+                <h2>@Model.Settings.Find(c => c.Key == "Promotion1Title")?.Value</h2>
+                <p>@Model.Settings.Find(c => c.Key == "Promotion1Desc")?.Value</p>
                 <a href="#" role="button">Check ‘Em Out</a>
             </article>
         </div>
@@ -453,7 +443,7 @@
     <section class="quotebannersection">
         <div class=" image-side">
             <div class="quote-image-container">
-                <img src="https://i.insider.com/5c5b0eb7eb3ce807db26f844?width=700">
+                <img src="~/assets/Media/Settings/@Model.Settings.Find(c => c.Key == "QuoteImage")?.Value" alt="quote-image">
                 <svg class="desktop-svg-quote" viewBox="0 0 100 100" preserveAspectRatio="none">
                     <polygon fill="#E12C2C" points="100,0 88,0 0,100 12,100"></polygon>
                     <polygon fill="#FFFFFF" points="100,0 12,100 100,100"></polygon>
@@ -477,10 +467,10 @@
                         </g>
                     </g>
                 </svg>
-                <p class="quote-paragraph">I used to think drinking was bad for me, so I gave up thinking.</p>
+                <p class="quote-paragraph">@Model.Settings.Find(c => c.Key == "QuoteContent")?.Value</p>
             </blackquote>
-            <cite>- Customer</cite>
-        </div>
+            <cite>- @Model.Settings.Find(c => c.Key == "QuoteOwner")?.Value<cite>
+</div>
     </section>
     <!-- Recent Comments Section -->
     <section class="recentcommentsection">

@@ -1,4 +1,3 @@
-C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.csproj.AssemblyReference.cache
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.AssemblyInfoInputs.cache
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.AssemblyInfo.cs
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.csproj.CoreCompileInputs.cache
@@ -159,3 +158,6 @@ C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBa
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.dll
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.pdb
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.genruntimeconfig.cache
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.csproj.AssemblyReference.cache

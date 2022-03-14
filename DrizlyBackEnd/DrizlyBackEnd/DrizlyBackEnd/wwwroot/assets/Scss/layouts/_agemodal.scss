@@ -3,7 +3,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 999;
+    z-index: 300;
     position: fixed;
     display: flex;
     .age-gate-overlay{
@@ -96,6 +96,7 @@
                 }
             }
             .age-no-clicked{
+                display: none;
                 padding-top: 12px;
                 width: 300px;
                 height: 100%;
