@@ -1,0 +1,699 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Drizly: Your Online Liquor Store - Buy Beer, Wine & Liquor";
+}
+
+<main>
+    <!-- Hero Section -->
+    <section class="herosection">
+        <div class="hero-content-centered">
+            <h1>Let the drinks come to you.</h1>
+            <h2>Beer, wine and liquor delivered in under 60 minutes.</h2>
+            <div class="search-hero-wrapper">
+                <div class="search-hero">
+                    <div class="search-input-hero">
+                        <input type="search" placeholder="Search the drink that you are looking for...">
+                        <div class="hero-search-dropdown" style="display: none;">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="search-submit-button"><i class="fas fa-arrow-right"></i></button>
+                </div>
+
+            </div>
+        </div>
+        <img class="left-hero float-left" src="https://products2.imgix.drizly.com/homepage_hipster_girl.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=30&w=368">
+        <img class="right-hero float-right" src="https://products2.imgix.drizly.com/homepage_jacket_girl.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=10&w=400">
+        <svg role="presentation" class="red-angle-desktop" viewbox="0 0 100 100" preserveAspectRatio="none">
+            <polygon fill="#A42121" points="0,77 0,85 100,8 100,1"></polygon>
+            <polygon fill="#E12C2C" points="0,84 0,100 100,100 100,7"></polygon>
+        </svg>
+        <svg role="presentation" class="red-angle-mobile" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <polygon fill="#A42121" points="0,37 0,45 100,8 100,1"></polygon>
+            <polygon fill="#E12C2C" points="0,44 0,100 100,100 100,8"></polygon>
+        </svg>
+    </section>
+    <!-- How It Works Section -->
+    <section class="howitworkssection">
+        <span>
+            <h2>Talk Drizly to me.</h2>
+            <p>Our Services:</p>
+            <ul class="steps-howitworks">
+                <li>
+                    <div class="circle-text">
+                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-1.png" alt="">
+                        <h3>Free Delivery</h3>
+                        <p>Create an account to shop and add products to your basket and get free delivery.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="circle-text">
+                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-2.png" alt="">
+                        <h3>Online Support</h3>
+                        <p>Browse thousands of new, local, well-known and not-so-well-known products. Select your favorites, pick your local liquor store(s) and press that magical order button.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="circle-text">
+                        <img src="https://template.hasthemes.com/juan/juan/assets/img/icon/policy-3.png" alt="">
+                        <h3>Money Return</h3>
+                        <p>We’ll let you know when your driver is on their way with the goods and BOOM, drinks delivered in under 60 minutes.</p>
+                    </div>
+                </li>
+            </ul>
+            <a href="register.html" class="lets-do-this" role="button">Let's get start</a>
+        </span>
+    </section>
+    <!-- Brands Slider Section -->
+    <section class="brand-area section-padding">
+        <div class="row">
+            <div class="col-12">
+                <div class="brand-active-carousel">
+                    @foreach (var partner in Model.Partnerships)
+                    {
+                        <div class="brand-item">
+                            <img src="~/assets/Media/Partners/@partner.Image" alt="partner-image">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- You want it We Got It,Shop Now Section -->
+    <section class="shopnow">
+        <div class="col image-col">
+            <img src="https://products2.imgix.drizly.com/homepage_you_want_it_we_got_it.png?auto=format%2Ccompress&ch=Width%2CDPR&fm=png&q=75&w=1340" alt="shop-now-image">
+        </div>
+        <div class="col">
+            <article>
+                <h2>You want it? We got it.</h2>
+                <p>Rosé? Check. Tito's? Check. That one killer pale ale you tried the other day? Check.We have the biggest selection for on-demand alcohol in the history of ever.</p>
+                <a href="#" role="button">Check ‘Em Out</a>
+            </article>
+        </div>
+    </section>
+    <!-- Categories Section -->
+    <section class="categoriessection">
+        <article class="categoriescol col-lg-3 ">
+            <header>Beer <i class="fas fa-chevron-down"></i></header>
+            <input class="categoriesmobile" type="checkbox">
+            <ul>
+                <li>
+                    <a href="#">Lager</a>
+                </li>
+                <li>
+                    <a href="#">IPA</a>
+                </li>
+                <li>
+                    <a href="#">Belgian Ale</a>
+                </li>
+                <li>
+                    <a href="#">Cider</a>
+                </li>
+                <li>
+                    <a href="#">Kegs</a>
+                </li>
+                <li>
+                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </article>
+        <article class="categoriescol col-lg-3 ">
+            <header>Wine <i class="fas fa-chevron-down"></i></header>
+            <input class="categoriesmobile" type="checkbox">
+            <ul>
+                <li>
+                    <a href="#">White Wine</a>
+                </li>
+                <li>
+                    <a href="#">Red Wine</a>
+                </li>
+                <li>
+                    <a href="#">Champagne</a>
+                </li>
+                <li>
+                    <a href="#">Rose Wine</a>
+                </li>
+                <li>
+                    <a href="#">Sake</a>
+                </li>
+                <li>
+                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </article>
+        <article class="categoriescol col-lg-3 ">
+            <header>Liquor <i class="fas fa-chevron-down"></i></header>
+            <input class="categoriesmobile" type="checkbox">
+            <ul>
+                <li>
+                    <a href="#">Vodka</a>
+                </li>
+                <li>
+                    <a href="#">Buorbon Whiskey</a>
+                </li>
+                <li>
+                    <a href="#">Tequila</a>
+                </li>
+                <li>
+                    <a href="#">Gin</a>
+                </li>
+                <li>
+                    <a href="#">Rum</a>
+                </li>
+                <li>
+                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </article>
+        <article class="categoriescol col-lg-3 ">
+            <header>Extras <i class="fas fa-chevron-down"></i></header>
+            <input class="categoriesmobile" type="checkbox">
+            <ul>
+                <li>
+                    <a href="#">Mixers</a>
+                </li>
+                <li>
+                    <a href="#">Energy Drinks<i class="fab fa-star-of-david"></i></a>
+                </li>
+                <li>
+                    <a href="#">Mineral Water</a>
+                </li>
+                <li>
+                    <a href="#">Fruit Juices</a>
+                </li>
+                <li>
+                    <a href="#">Soft Drinks</a>
+                </li>
+                <li>
+                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
+                </li>
+            </ul>
+        </article>
+    </section>
+    <!-- Bestseller Drinks Section -->
+    <section class="bestsellersection">
+        <ul class="products-slider">
+            <li class="category-slide">
+                <div class="category-name">
+                    <p>On Sale</p>
+                </div>
+                <div class="drinks-slider-wrapper">
+                    <ul class="drink-slider">
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <div class="drink-on-sale">On Sale</div>
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <div class="drink-on-sale">Best Seller</div>
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <div class="drink-on-sale">Featured</div>
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="drink-slides">
+                            <div class="whole-product-slide">
+                                <div class="drink-slide-info">
+                                    <a href="#">
+                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                    </a>
+                                    <div class="drink-name">
+                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                                    </div>
+                                    <div class="drink-price">
+                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                    </div>
+                                    <div class="drink-rate">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fa fa-star-o" aria-hidden="true"></i>
+                                        <span class="review-count">214</span>
+                                    </div>
+                                </div>
+                                <div class="add-to-basket">
+                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </section>
+    <!-- Quote Banner Section -->
+    <section class="quotebannersection">
+        <div class=" image-side">
+            <div class="quote-image-container">
+                <img src="https://i.insider.com/5c5b0eb7eb3ce807db26f844?width=700">
+                <svg class="desktop-svg-quote" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polygon fill="#E12C2C" points="100,0 88,0 0,100 12,100"></polygon>
+                    <polygon fill="#FFFFFF" points="100,0 12,100 100,100"></polygon>
+                </svg>
+                <svg class="mobile-svg-quote" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <polygon fill="#E12C2C" points="0,92 100,0 100,8 0,100"></polygon>
+                    <polygon fill="#FFFFFF" points="0,100 100,8 100,100"></polygon>
+                </svg>
+            </div>
+        </div>
+        <div class="quote-side">
+            <blackquote>
+                <svg role="presentation" width="65px" height="53px" viewBox="0 0 65 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.15452939">
+                        <g transform="translate(-102.000000, -1340.000000)" fill="#333333">
+                            <g transform="translate(-96.000000, 418.000000)">
+                                <g transform="translate(198.000000, 922.000000)">
+                                    <path d="M51.075,52.425 C44.425,52.425 35.15,47.35 35.15,32.125 C35.15,13.75 47.4,4.125 51.425,0.8 C52.65,-0.075 53.875,-0.425 55.275,1.15 L57.9,3.775 C59.125,5.175 58.775,6.75 57.725,7.625 C55.8,9.025 45.475,16.725 45.3,28.625 C45.3,28.625 48.275,27.4 52.3,27.4 C59.125,27.4 64.9,32.825 64.9,39.825 C64.9,46.65 59.125,52.425 51.075,52.425 Z M16.25,52.425 C9.6,52.425 0.325,47.35 0.325,32.125 C0.325,13.75 12.575,4.125 16.6,0.8 C17.825,-0.075 19.05,-0.425 20.45,1.15 L23.075,3.775 C24.3,5.175 23.95,6.75 22.9,7.625 C20.975,9.025 10.65,16.725 10.475,28.625 C10.475,28.625 13.45,27.4 17.475,27.4 C24.3,27.4 30.075,32.825 30.075,39.825 C30.075,46.65 24.3,52.425 16.25,52.425 Z"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+                <p class="quote-paragraph">I used to think drinking was bad for me, so I gave up thinking.</p>
+            </blackquote>
+            <cite>- Customer</cite>
+        </div>
+    </section>
+    <!-- Recent Comments Section -->
+    <section class="recentcommentsection">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="recentcomment-header">Recent Comments</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Elnur Khalilov</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <ul class="customer-rate-ul">
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                </ul>
+                            </h6>
+                            <p class="card-text">Its OK but its lack of save features makes it not the best.</p>
+                            <p class="comment-date text-muted font-weight-light font-italic">22.02.2022 16:28pm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Rashad Mammadov</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <ul class="customer-rate-ul">
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                </ul>
+                            </h6>
+                            <p class="card-text">It wouldn't let me create and organize lists. No titles, no deleting..</p>
+                            <p class="comment-date text-muted font-weight-light font-italic">12.18.2021 19:10pm</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Polad Agayev</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <ul class="customer-rate-ul">
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                </ul>
+                            </h6>
+                            <p class="card-text">La aplicación es buena, aunque he tenido mejores en itunes.</p>
+                            <p class="comment-date text-muted font-weight-light font-italic">09.11.2022 10:16am</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card comment-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tabriz Sapharov</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                <ul class="customer-rate-ul">
+                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                                </ul>
+                            </h6>
+                            <p class="card-text">I wanted a list that I could add to if I have another thing to add, sadly no.</p>
+                            <p class="comment-date text-muted font-weight-light font-italic">31.05.2022 22:49pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Recently Bought Section -->
+    <section class="recently-bought-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Recently Bought</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="product">
+                        <div class="whole-product-slide">
+                            <div class="drink-slide-info">
+                                <a href="#">
+                                    <div class="drink-on-sale">On Sale</div>
+                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                </a>
+                                <div class="drink-name">
+                                    <p>Vdoodoo Ranger Juice Force IPA</p>
+                                </div>
+                                <div class="drink-price">
+                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                </div>
+                                <div class="drink-rate">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <span class="review-count">214</span>
+                                </div>
+                            </div>
+                            <div class="add-to-basket">
+                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="product">
+                        <div class="whole-product-slide">
+                            <div class="drink-slide-info">
+                                <a href="#">
+                                    <div class="drink-on-sale">On Sale</div>
+                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                </a>
+                                <div class="drink-name">
+                                    <p>Vdoodoo Ranger Juice Force IPA</p>
+                                </div>
+                                <div class="drink-price">
+                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                </div>
+                                <div class="drink-rate">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <span class="review-count">214</span>
+                                </div>
+                            </div>
+                            <div class="add-to-basket">
+                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="product">
+                        <div class="whole-product-slide">
+                            <div class="drink-slide-info">
+                                <a href="#">
+                                    <div class="drink-on-sale">On Sale</div>
+                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                </a>
+                                <div class="drink-name">
+                                    <p>Vdoodoo Ranger Juice Force IPA</p>
+                                </div>
+                                <div class="drink-price">
+                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                </div>
+                                <div class="drink-rate">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <span class="review-count">214</span>
+                                </div>
+                            </div>
+                            <div class="add-to-basket">
+                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="product">
+                        <div class="whole-product-slide">
+                            <div class="drink-slide-info">
+                                <a href="#">
+                                    <div class="drink-on-sale">On Sale</div>
+                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
+                                </a>
+                                <div class="drink-name">
+                                    <p>Vdoodoo Ranger Juice Force IPA</p>
+                                </div>
+                                <div class="drink-price">
+                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
+                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                </div>
+                                <div class="drink-rate">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                                    <span class="review-count">214</span>
+                                </div>
+                            </div>
+                            <div class="add-to-basket">
+                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+</main>

@@ -1,0 +1,17 @@
+*,ul{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    box-sizing: border-box;
+}
+p,h1,h2,h3,h4,h5,h6,span{
+  font-family: "Nunito Sans";
+}
+body::-webkit-scrollbar {  
+    width: 1em;
+    background-color: transparent;
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: rgba(169, 169, 169, 0.548);
+  }

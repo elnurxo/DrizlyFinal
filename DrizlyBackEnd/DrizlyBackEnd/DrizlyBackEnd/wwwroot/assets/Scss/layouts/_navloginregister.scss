@@ -1,0 +1,29 @@
+#navbarlogin{
+    z-index: 800;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    color: #24282f;
+    font-size: 16px;
+    .navbar-sections-login{
+        display: flex;
+        flex: none;
+        position: relative;
+        height: 64px;
+        border-bottom: 1px solid #e5e7e8;
+        .navbar-links{
+            display: inline-flex;
+            align-items: center;
+            min-width: 0;
+            padding: 8px 12px;
+        }
+        .navbar-leftside{
+            justify-content: center;
+            flex: 1 1;
+        }
+    }
+}

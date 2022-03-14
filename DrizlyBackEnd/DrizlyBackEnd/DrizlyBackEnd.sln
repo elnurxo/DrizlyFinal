@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrizlyBackEnd", "DrizlyBackEnd\DrizlyBackEnd.csproj", "{A8164AC1-0CF3-4C07-86EF-EDD0AD216529}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8164AC1-0CF3-4C07-86EF-EDD0AD216529}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8164AC1-0CF3-4C07-86EF-EDD0AD216529}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8164AC1-0CF3-4C07-86EF-EDD0AD216529}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8164AC1-0CF3-4C07-86EF-EDD0AD216529}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E95C33CE-593D-4844-8F3C-0483FB3375E4}
+	EndGlobalSection
+EndGlobal

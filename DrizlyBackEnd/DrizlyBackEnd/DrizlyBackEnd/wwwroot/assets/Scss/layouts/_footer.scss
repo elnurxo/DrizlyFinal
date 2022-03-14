@@ -1,0 +1,194 @@
+footer{
+    background-color: #e5e7e8;
+    color: #24282f;
+    padding: 48px 0;
+    width: 100%;
+    .row{
+        margin: 0 auto;
+        max-width: 88vw;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        .footer-cols{
+            min-width: 15.5vw;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            h6{
+                font-family: "Open Sans";
+                font-weight: 900;
+                font-size: 1.5vw;
+                line-height: 2.4vw;
+                margin-bottom: 12px;
+                color: #24282f;
+            }
+            .footer-links{              
+                padding-bottom: 10px;
+                li{
+                    margin-right:15px;
+                    float: left;
+                    i{
+                        font-size: 25px;
+                        color: #e12c2c;
+                        transition: .2s ease-in-out;
+                        &:hover{
+                            transform: scale(0.9);
+                            color: #7e1a1a;
+                        }
+                    }
+                    .fa-cc-visa{
+                        color: rgb(34, 77, 186);
+                    }
+                    .fa-cc-amex{
+                        color: rgb(0, 126, 205);
+                    }
+                    .fa-cc-mastercard{
+                        color: rgb(53, 58, 72);
+                    }
+                    .fa-cc-discover{
+                        color: rgb(255, 162, 0);
+                    }
+                }
+            }
+            .footer-uls{
+                margin-top: 0;
+                margin-bottom: 10px;
+                li{
+                    margin-bottom: 10px;
+                    a{
+                        font-family: "Open Sans";
+                        font-weight: normal;
+                        font-size: 1.1vw;
+                        line-height: 1.6vw;
+                        color: #24282f;
+                        margin: 0;
+                        &:hover{
+                            text-decoration-color:#e12c2c;
+                        }
+                    }
+                }
+            }
+            .policy-links{
+                padding: 0 5px;
+                margin-top: 17px;
+                display: flex;
+                .footer-link{
+                    font-family: "Open Sans";
+                    font-weight: normal;
+                    font-size: 1vw;
+                    letter-spacing: 0.3px;
+                    line-height: 1.6vw;
+                    color: #24282f;
+                    margin: 0;
+                    &:hover{
+                        text-decoration-color: #e12c2c;
+                    }
+                }  
+                .divider{
+                    margin: 0 5px;
+                    font-family: "Open Sans";
+                    font-weight: normal;
+                    font-size: 1.12vw;
+                    line-height: 1.6vw;
+                    color: #24282f;
+                }            
+            }
+            .drizlyrights{
+                padding-top: 10px;
+                font-size: 1.15vw;
+            }
+        }
+        .politics{
+            align-items: center;        
+        }
+
+    }
+}
+@media only screen and (max-width: 480px)
+{
+   footer .row{
+       flex-direction: column !important;
+       align-items: center !important;
+       .footer-cols{
+           align-items: center !important;
+            li{
+                i{
+                   font-size: 25px !important;
+                }
+            }
+            h6{
+                font-size: 5.5vw !important;
+                line-height: 9vw !important;
+                margin-bottom: 12px !important;
+            }
+            .footer-uls{
+                li{
+                    margin-bottom: 10px !important;
+                }
+            }
+       }
+       .policy-links{
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin-bottom: 25px;
+        span{
+            display:  none;
+        }
+        .footer-link{
+            margin-bottom: 16px !important;
+        }
+       }
+   }
+   .footer-uls{
+       text-align: center !important;
+       li{
+           margin-bottom: 0px !important;
+       }
+   }
+   footer h6{
+       font-size: 6.5vw !important;
+       line-height: 9vw !important;
+   }
+   footer a{
+       font-size: 16px !important;
+       line-height: 22px !important;
+   } 
+   .drizlyrights{
+    font-size: 4.5vw !important; 
+   }
+}
+@media only screen and (max-width: 1200px){
+    .footer-links{
+        li{
+            a{
+                i{
+                    font-size: 20px !important;
+                }
+            }
+        }
+    }
+}
+@media only screen and (max-width:992px) {
+    .footer-links{
+        li{
+            a{
+                i{
+                    font-size: 15px !important;
+                }
+            }
+        }
+    }
+    .footer-uls{
+        li{
+            margin-bottom: 0px !important;
+        }
+    }
+    .footer-cols{
+        h6{
+            margin-bottom: 0px !important;
+        }
+    }
+}

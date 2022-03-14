@@ -1,0 +1,60 @@
+.register-main{
+    display: block;
+    padding-bottom: 500px;
+    padding-top: 55px;
+    background-image: url("../Media/registerbackgroundimage.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 900px;
+    .register-wrapper{
+        margin: 45px auto auto;
+        width: 500px;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid #e5e7e8;
+        border-radius: 6px;
+        padding: 45px 50px;
+        h1{
+            color: #24282f;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 700;
+            font-size: 27px;
+            margin: 0;
+        }
+        .register-form{
+            padding-top: 24px;
+            button{
+                color: white;
+                box-shadow: none;
+                border-color: #e12c2c;
+                outline-color: #e12c2c;
+                background-color: #e12c2c;
+                padding: 7px 27px;
+            }
+        }
+    }
+    .alreadyaccount{
+        text-align: center;
+        color:  white;
+        margin-top: 10px;
+        font-size: 20px;
+        font-family: "Open Sans";
+        span{
+            a{
+                color: #e12c2c;
+                font-family: "Open Sans";
+            }
+        }
+    }
+}
+.login-main{
+    height: 600px !important; 
+}
+@media only screen and (max-width: 576px) {
+    .register-wrapper{
+        width: 100% !important;
+    }
+    .alreadyaccount{
+        font-size: 15px !important;
+    }
+}
