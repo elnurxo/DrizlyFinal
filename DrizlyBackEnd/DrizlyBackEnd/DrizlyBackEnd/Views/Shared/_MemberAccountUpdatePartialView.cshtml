@@ -1,0 +1,89 @@
+﻿@model MemberUpdateViewModel
+
+<form asp-action="edit" method="post" enctype="multipart/form-data">
+    <div class="profile-pic-wrapper">
+        <input type="hidden" name="Image" asp-for="Image" />
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="single-input-item">
+                <label asp-for="FullName">Full Name</label>
+                <input type="text" asp-for="FullName" id="full-name" placeholder="Full Name" />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="single-input-item">
+                <label asp-for="UserName">User Name</label>
+                <input type="text" asp-for="UserName" id="user-name" placeholder="User Name" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Email" class="required">Email Addres</label>
+        <input type="email" asp-for="Email" id="email" placeholder="Email Address" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="ImageFile" class="required">Profile Picture</label>
+        <input type="file" asp-for="ImageFile" placeholder="Image" />
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="single-input-item">
+                <label asp-for="Country">Country</label>
+                <input type="text" asp-for="Country" placeholder="Country" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="single-input-item">
+                <label asp-for="City">City</label>
+                <input type="text" asp-for="City" placeholder="City" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Address">Address</label>
+        <input type="text" asp-for="Address" placeholder="Address" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Phone">Phone</label>
+        <input type="text" asp-for="Phone" placeholder="Phone" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <fieldset>
+        <legend>Password change</legend>
+        <div class="single-input-item">
+            <label asp-for="CurrentPassword" class="required">Current Password</label>
+            <input type="password" asp-for="CurrentPassword" placeholder="Current Password" />
+            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="single-input-item">
+                    <label asp-for="Password" class="required">New Password</label>
+                    <input type="password" asp-for="Password" placeholder="New Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="single-input-item">
+                    <label asp-for="ConfirmPassword" class="required">Confirm Password</label>
+                    <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="col-lg-12">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    </div>
+    <div class="single-input-item">
+        <button type="submit" class="check-btn text-center">Save Changes</button>
+    </div>
+</form>

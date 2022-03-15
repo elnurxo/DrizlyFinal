@@ -272,6 +272,24 @@ $(function () {
     $(".age-yes").click(function(){
         $(".age-gate-modal").css("display","none");
     });
+    //MY ACCOUNT TAB
+    $(".tab-naviagtion__item").click(function (event) {
+        event.preventDefault();
+        $(".myaccount-tab-menu a").removeClass("active");
+        $(this).addClass("active");
+        let index=$(this).attr("id");
+        $(".tab-pane").removeClass("active");
+        $(".tab-pane").removeClass("show");
+        $(`.${index}-content`).addClass("active");
+        $(`.${index}-content`).addClass("show");
+    });
+    //PROFILE PICTURE DELETE
+    $(".remove-img-box").click(function () {
+        console.log("sdjhfsjkdimage");
+        $(".profile-picture").attr("src", "/uploads/users/avatar.png");
+        $(".profile-pic-wrapper").remove();
+        $(this).css("display", "none");
+    });
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {

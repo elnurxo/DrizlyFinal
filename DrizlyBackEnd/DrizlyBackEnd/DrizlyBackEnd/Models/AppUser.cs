@@ -19,6 +19,12 @@ namespace DrizlyBackEnd.Models
         [NotMapped]
         public IFormFile ImageFile { get; set; }
         public string Image { get; set;  }
+        [StringLength(maximumLength: 50)]
+        public string Country { get; set; }
+        [StringLength(maximumLength: 50)]
+        public string City { get; set; }
+        [StringLength(maximumLength: 350)]
+        public string Address { get; set; }
 
     }
 }
