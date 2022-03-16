@@ -163,3 +163,8 @@ C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBa
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.csproj.AssemblyReference.cache
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Account\Profile.cshtml.g.cs
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_MemberAccountUpdatePartialView.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Dashboard\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewImports.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewStart.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Setting\Index.cshtml.g.cs

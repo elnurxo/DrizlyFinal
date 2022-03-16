@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\" />
     <Folder Include="Migrations\" />
     <Folder Include="Enums\" />
     <Folder Include="wwwroot\assets\Media\Products\" />
