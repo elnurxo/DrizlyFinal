@@ -56,6 +56,11 @@ namespace DrizlyBackEnd.Controllers
                 ModelState.AddModelError("Age", "Age must be at least 21");
                 return View();
             }
+            if (registerVM.UserName.Length<3)
+            {
+                ModelState.AddModelError("UserName", "username must be at least 3 symbols!");
+                return View();
+            }
 
             member = new AppUser
             {
@@ -190,16 +195,16 @@ namespace DrizlyBackEnd.Controllers
                 if (memberVM.ImageFile.ContentType != "image/jpeg" && memberVM.ImageFile.ContentType != "image/png")
                 {
                     ModelState.AddModelError("ImageFile", "file type must be image/jpeg or image/png");
-                    return View();
+                    return View("Profile", profileVM);
                 }
 
                 if (memberVM.ImageFile.Length > 4194304)
                 {
                     ModelState.AddModelError("ImageFile", "file size must be less than 4mb");
-                    return View();
+                    return View("Profile", profileVM);
                 }
 
-                member.Image = FileManager.Save(_env.WebRootPath, "uploads/users", memberVM.ImageFile);
+                 member.Image = FileManager.Save(_env.WebRootPath, "uploads/users", memberVM.ImageFile);
             }
             else
             {
@@ -207,7 +212,7 @@ namespace DrizlyBackEnd.Controllers
                 {
                     if (member.Image != null)
                     {
-                        FileManager.Delete(_env.WebRootPath, "uploads/users", memberVM.Image);
+                        FileManager.Delete(_env.WebRootPath, "uploads/users", member.Image);
                     }
                     member.Image = null;
                 }

@@ -19,6 +19,8 @@
     <title>@ViewData["Title"]</title>
     <!-- Bootstrap Link -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Toastr Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- My Css -->
     <link href="~/assets/Css/style.css" rel="stylesheet" />
     <!-- Slick Slider -->
@@ -32,6 +34,10 @@
     <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Libre+Baskerville:wght@700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Roboto+Slab:wght@500;600&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+    @if (TempData["Success"] != null)
+    {
+        <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+    }
     <!-- Loading Start -->
     <div id="loadingwrapper">
     </div>
@@ -125,7 +131,7 @@
                     @if (member != null)
                     {
                         <a asp-controller="account" asp-action="profile">@member.FullName</a>
-                        <img style="border-radius:50%;margin-left: 5px;" width="20" src="~/uploads/users/@(member.Image==null?"avatar.png":member.Image)" />
+                        <img style="border-radius:50%;margin-left: 5px;" width="20" height="20" src="~/uploads/users/@(member.Image==null?"avatar.png":member.Image)" />
                         if (member.Image != null)
                         {
                         }
@@ -405,4 +411,31 @@
 <script src="~/assets/Js/review-progress.js"></script>
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+@*Toastr Script*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+    $(document).ready(function () {
+        if ($("#success-toaster").length) {
+            toastr["success"]($("#success-toaster").val());
+        }
+    });
+</script>
+@RenderSection("Scripts", required: false)
 </html>

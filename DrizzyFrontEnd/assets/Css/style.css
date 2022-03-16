@@ -5020,4 +5020,235 @@ main .slick-prev:before, main .slick-next:before {
     width: 290px !important;
   }
 }
+.breadcrumb-wrap {
+  padding: 55px 0 60px;
+}
+.breadcrumb-wrap .breadcrumb-title {
+  font-size: 24px;
+  padding-bottom: 15px;
+  text-transform: uppercase;
+}
+.breadcrumb-wrap .breadcrumb {
+  background: transparent;
+  margin-bottom: 0;
+  padding: 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.breadcrumb-wrap .breadcrumb .breadcrumb-item {
+  font-size: 16px;
+  line-height: 1;
+  text-transform: capitalize;
+}
+.breadcrumb-wrap .breadcrumb .breadcrumb-item a {
+  text-decoration: none;
+  color: black;
+}
+.breadcrumb-wrap .breadcrumb .active {
+  color: #e12c2c;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+  .breadcrumb-wrap {
+    padding: 28px 0 35px;
+  }
+}
+.myaccount-tab-menu {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.myaccount-tab-menu a {
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  color: #333333;
+  font-weight: 500;
+  font-size: 15px;
+  display: block;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.myaccount-tab-menu a:last-child {
+  border-bottom: 1px solid #ccc;
+}
+.myaccount-tab-menu a:hover, .myaccount-tab-menu a .myaccount-tab-menu a.active {
+  background-color: #e12c2c;
+  border-color: #e12c2c;
+  color: #fff;
+}
+.myaccount-tab-menu a i.fa {
+  font-size: 14px;
+  text-align: center;
+  width: 25px;
+}
+
+@media only screen and (max-width: 768px) {
+  #myaccountContent {
+    margin-top: 30px;
+  }
+}
+.myaccount-content {
+  border: 1px solid #eeeeee;
+  padding: 30px;
+}
+.myaccount-content h3 {
+  font-size: 20px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+.myaccount-content img {
+  -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+          box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 50%;
+  -webkit-transition: 0.2s ease-in-out;
+  transition: 0.2s ease-in-out;
+}
+.myaccount-content img:hover {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+}
+.myaccount-content h2 {
+  font-size: 14px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  font-weight: 500;
+  color: #616060;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.myaccount-content .single-input-item {
+  margin-top: 20px;
+}
+.myaccount-content .single-input-item label {
+  color: #333333;
+  text-transform: capitalize;
+  font-size: 14px;
+}
+.myaccount-content .single-input-item input, .myaccount-content .single-input-item textarea {
+  color: #666666;
+  border: 1px solid #ccc;
+  padding: 12px 10px;
+  width: 100%;
+  font-size: 14px;
+  background: #f7f7f7;
+}
+.myaccount-content .single-input-item input:active, .myaccount-content .single-input-item input:focus,
+.myaccount-content .single-input-item textarea:active,
+.myaccount-content .single-input-item textarea:focus {
+  border-color: #e3a51e;
+  background-color: #fff;
+}
+.myaccount-content .single-input-item .nice-select {
+  width: 100%;
+  border-radius: 0;
+  height: 48px;
+  border-color: #ccc;
+  background-color: #f7f7f7;
+}
+.myaccount-content .single-input-item .nice-select .current {
+  color: #666666;
+}
+
+@media only screen and (max-width: 576px) {
+  .myaccount-content {
+    padding: 20px 15px;
+  }
+}
+.myaccount-content form {
+  margin-top: -20px;
+}
+.myaccount-content h3 {
+  font-size: 20px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+.myaccount-content .welcome a {
+  color: #333333;
+}
+.myaccount-content .welcome a:hover {
+  color: #e12c2c;
+}
+.myaccount-content .welcome strong {
+  font-weight: 600;
+  color: #e12c2c;
+}
+.myaccount-content fieldset {
+  margin-top: 20px;
+}
+.myaccount-content fieldset legend {
+  font-size: 20px;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333333;
+}
+
+.myaccount-table {
+  white-space: nowrap;
+  font-size: 14px;
+}
+.myaccount-table table th,
+.myaccount-table .myaccount-table .table th {
+  color: #333333;
+  padding: 10px;
+  font-weight: 500;
+  background-color: #f8f8f8;
+  border-color: #ccc;
+  border-bottom: 0;
+}
+.myaccount-table .myaccount-table .table td {
+  padding: 10px;
+  vertical-align: middle;
+  border-color: #ccc;
+}
+
+.myaccount-tab-menu .active {
+  background: #e12c2c;
+  color: white;
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  transition: transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28), -webkit-transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.check-btn {
+  border: none;
+  outline: none;
+  background-color: #e12c2c;
+  border-radius: 3px;
+  line-height: 2.8vw;
+  color: #ffffff;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  max-height: 3.45vw;
+  padding: 0 20px;
+  -webkit-transition: 0.2s linear;
+  transition: 0.2s linear;
+}
+.check-btn:hover {
+  -webkit-box-shadow: 6px 6px 0 #a42121;
+          box-shadow: 6px 6px 0 #a42121;
+}
 /*# sourceMappingURL=style.css.map */
