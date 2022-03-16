@@ -117,6 +117,43 @@ namespace DrizlyBackEnd.Controllers
             return RedirectToAction("index", "home");
         }
 
+        //LOGIN ACTION
+        public IActionResult Login()
+        {
+            return View();
+        }
+        //LOGIN POST ACTION
+        [HttpPost]
+        public async Task<IActionResult> Login(MemberLoginViewModel loginVM)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            AppUser member = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginVM.UserName && !x.IsAdmin);
+            if (member == null)
+            {
+                ModelState.AddModelError("", "username or password is incorrect!");
+                return View();
+            }
+
+            var result = await _signInManager.PasswordSignInAsync(member, loginVM.Password, loginVM.IsPersistent, true);
+            if (result.IsLockedOut)
+            {
+                ModelState.AddModelError("", "too many false attempts, try again after 2 minutes ~.~");
+                return View();
+            }
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "username or password is incorrect!");
+                return View();
+            }
+
+
+            return RedirectToAction("index", "home");
+        }
+
+
         //PROFILE ACTION
         [Authorize(Roles = "Member")]
         public async Task<IActionResult> Profile()
@@ -245,6 +282,12 @@ namespace DrizlyBackEnd.Controllers
                 if (!await _userManager.CheckPasswordAsync(member, memberVM.CurrentPassword))
                 {
                     ModelState.AddModelError("CurrentPassword", "Current Password is incorrect!");
+                    return View("Profile", profileVM);
+                }
+
+                if (memberVM.CurrentPassword == memberVM.Password)
+                {
+                    ModelState.AddModelError("Password", "New Password is same as the current password");
                     return View("Profile", profileVM);
                 }
 

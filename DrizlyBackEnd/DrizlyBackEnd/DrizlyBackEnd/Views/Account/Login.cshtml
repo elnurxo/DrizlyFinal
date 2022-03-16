@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MemberLoginViewModel
+@{
     Layout = null;
 }
 @using DrizlyBackEnd.Services
@@ -15,13 +16,13 @@
     <!-- Jquery Script -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <!-- My Script -->
-    <script src="assets/Js/main.js" defer></script>
+    <script src="~/assets/Js/main.js" defer></script>
     <!-- Bootstrap Link -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- My Css -->
-    <link rel="stylesheet" href="assets/Css/style.css">
+    <link rel="stylesheet" href="~/assets/Css/style.css">
     <!-- Fav Ico -->
-    <link rel="icon" type="image/x-icon" href="assets/Media/drizlyfavico.ico">
+    <link rel="icon" type="image/x-icon" href="~/assets/Media/drizlyfavico.ico">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -39,7 +40,7 @@
                 <ul class="navbar-left-ul">
                     <li class="navbar-left-li">
                         <a asp-controller="home" asp-action="index" class="drizlybearlink">
-                            <img src="~/assets/Media/Settings/@settings["logo"]">
+                            <img src="~/assets/Media/Settings/@settings["HeaderLogo"]">
                         </a>
                     </li>
 
@@ -50,22 +51,29 @@
     <main class="register-main login-main">
         <div class="register-wrapper">
             <h1>Sign in</h1>
-            <form class="register-form">
+            <form class="register-form" asp-action="login" method="post">
                 <div class="form-group">
-                    <label for="exampleInputUserName">User Name</label>
-                    <input id="exampleInputUserName" type="text" class="form-control" placeholder="Enter User Name">
+                    <label asp-for="UserName">User Name</label>
+                    <input type="text" placeholder="User Name" class="form-control" asp-for="UserName" required />
+                    <span class="text-danger" asp-validation-for="UserName"></span>
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    <label asp-for="Password">Password</label>
+                    <input type="password" placeholder="Enter your Password" class="form-control" asp-for="Password" required />
+                    <span class="text-danger" asp-validation-for="Password"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">SIGN IN</button>
+                <div class="custom-control custom-checkbox mb-3">
+                    <input type="checkbox" class="custom-control-input" asp-for="IsPersistent">
+                    <label class="custom-control-label" asp-for="IsPersistent">Remember Me</label>
+                </div>
+                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                <button type="submit" class="btn btn-primary mt-2">SIGN IN</button>
             </form>
         </div>
         <p class="text-center alreadyaccount">
             Don't have an account yet?
             <span>
-                <a href="register.html"><strong>Create an account now</strong></a>
+                <a asp-controller="account" asp-action="register"><strong>Create an account now</strong></a>
             </span>
         </p>
     </main>
