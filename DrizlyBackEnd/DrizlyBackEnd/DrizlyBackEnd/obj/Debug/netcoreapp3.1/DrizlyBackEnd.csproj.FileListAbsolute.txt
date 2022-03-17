@@ -347,3 +347,4 @@ C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\ob
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.pdb
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.genruntimeconfig.cache
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Partnership\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Partnership\Create.cshtml.g.cs
