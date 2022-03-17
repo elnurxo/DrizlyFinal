@@ -49,36 +49,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
-                        <p>Cory Rellas</p>
-                        <span>Chief Executive Officer & Co-Founder</span>
-                    </div>
+                    @foreach (var employee in Model.Employees)
+                    {
+                        <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                            <img src="~/uploads/employees/@employee.Image" style="border-radius: 50%; object-fit:cover;" alt="team-member">
+                            <p>@employee.FullName</p>
+                            <span>@employee.Position.Name</span>
+                        </div>
+                    }
+
                 </div>
             </div>
             <div class="in-the-news">

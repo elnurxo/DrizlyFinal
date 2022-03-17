@@ -9,5 +9,7 @@ namespace DrizlyBackEnd.ViewModels
     public class AboutUsViewModel
     {
             public List<Settings> Settings { get; set; }
+            public List<Employee> Employees { get; set; }
+            
     }
 }
