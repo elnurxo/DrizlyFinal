@@ -1,0 +1,73 @@
+﻿@model Settings
+@{
+    ViewData["Title"] = "Edit Setting";
+}
+<head>
+    <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+</head>
+
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Settings Edit</h3>
+                    <a asp-action="index" class="btn btn-success">Go Back</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Edit @Model.Key</div>
+                        <hr>
+                        <h6>Last Update Date: <span class="text-info">@Model.LastUpdateDate</span></h6>
+                        <hr>
+                        <form asp-action="edit" method="post" enctype="multipart/form-data">
+
+                            <div class="form-row">
+                                @if (Model.Key == "HeaderLogo" ||
+                                  Model.Key == "LeftSideHero" ||
+                                  Model.Key == "RightSideHero" ||
+                                  Model.Key == "Promotion1Image" ||
+                                  Model.Key == "QuoteImage")
+                                {
+                                    <div class="col">
+                                        <label asp-for="ImageFile" class="mt-2">Enter ImageFile</label>
+                                        <input asp-for="Key" hidden />
+                                        <input class="form-control" asp-for="ImageFile" placeholder="ImageFile">
+                                        <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                        @if (Model.Value != null)
+                                        {
+                                            <div class="img-box mt-2" style="position:relative;display:inline-block">
+                                                <input type="hidden" name="Value" value="@Model.Value" />
+                                                <img width="250" src="~/uploads/settings/@Model.Value" />
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col">
+                                        <label asp-for="Value">Enter @Model.Key Value</label>
+                                        <input asp-for="Key" hidden />
+                                        <input class="form-control" asp-for="Value" placeholder="Name">
+                                        <span class="text-danger" asp-validation-for="Value"></span>
+                                    </div>
+                                }
+
+
+                            </div>
+                            <button type="submit" class="btn btn-light px-5 mt-4">EDIT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+
+    </div>
+
+</div>
+

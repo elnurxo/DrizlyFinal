@@ -40,15 +40,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var feature in Model)
+                                    @foreach (var setting in Model)
                                     {
                                         counter++;
                                         <tr>
                                             <th scope="row">@counter</th>
-                                            <td>@feature.Key</td>
-                                            <td>@feature.Value</td>
+                                            <td>@setting.Key</td>
+                                            <td>@setting.Value</td>
                                             <td>
-                                                <a asp-action="edit" asp-route-id="@feature.Id" class="btn btn-warning mx-3">Edit</a>
+                                                <a asp-action="edit" asp-route-id="@setting.Id" class="btn btn-warning mx-3">Edit</a>
                                             </td>
                                         </tr>
                                     }
