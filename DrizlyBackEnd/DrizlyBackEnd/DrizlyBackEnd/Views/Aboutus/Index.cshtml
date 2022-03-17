@@ -1,0 +1,120 @@
+﻿@model AboutUsViewModel
+@using DrizlyBackEnd.Services
+@inject LayoutService layoutService
+@{
+    ViewData["Title"] = "Drizly: About Us";
+    var settings = layoutService.GetSettings();
+}
+<main>
+    <!-- About Us Section -->
+    <section class="about-us-section">
+        <div class="container">
+            <div class="breadcumb-aboutus">
+                <div class="mobile-breadcumb">
+                    <img src="~/uploads/settings/@settings["AboutUsImageMobile"]" alt="mobile-about-us">
+                </div>
+                <div class="desktop-breadcumb">
+                    <img src="~/uploads/settings/@settings["AboutUsImage"]" alt="about-us">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="about-us-content">
+                        <h1>Our Story</h1>
+                        <p>HI, WE'RE DRIZLY.</p>
+                        <p>
+                            @settings["AbourUsContent"]
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-us-image">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <img src="~/uploads/settings/@settings["AboutUsPromotion"]" alt="promotion-about-us">
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="aboutus-rightside">
+                            <h2>Customers</h2>
+                            <p>@settings["AboutUsPromotionContent"]</p>
+                            <a href="@settings["AboutUsPromotionLink"]" class="shop-now">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="our-team">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Our Team</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 team-member">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/3fed89b6759621bd/685a9a114085/v/442ed49ad14a/cory-scrivito-copy.png" alt="team-member">
+                        <p>Cory Rellas</p>
+                        <span>Chief Executive Officer & Co-Founder</span>
+                    </div>
+                </div>
+            </div>
+            <div class="in-the-news">
+                <div class="row">
+                    <h1>In the News</h1>
+                </div>
+                <div class="row">
+                    <p>Featured In:</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/ca247dff0553dfcb/d49d6ec7a40c/v/515843460572/bloomberg.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/55ba04f19d961b1d/a0aedd7d1747/v/da61ac350373/CNBC.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/ac6885a78431fe52/ef2a7350df56/v/94dbc9e13c3c/USA.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/fa69e9363b6a6bfd/867dca4b6fc2/v/fae7d7f3c05c/WSJ.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src=" https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/5ee7beed3fff95ca/644881c28261/v/1cf46054bf60/WashPost.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/9f7546ae0a1f0011/e34ce367ec2b/v/c47a97afe224/CNN.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/6be78d494680e650/08704abcbecb/v/d90483e9e861/BosGlobe.jpg" alt="news">
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 news">
+                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/4ac44fbfc65c8d0d/86422b6492c7/v/f1c62b92b4ce/forbes.jpg" alt="news">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

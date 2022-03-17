@@ -28,7 +28,10 @@
                                   Model.Key == "LeftSideHero" ||
                                   Model.Key == "RightSideHero" ||
                                   Model.Key == "Promotion1Image" ||
-                                  Model.Key == "QuoteImage")
+                                  Model.Key == "QuoteImage" ||
+                                  Model.Key == "AboutUsImage" || 
+                                  Model.Key == "AboutUsImageMobile" ||
+                                  Model.Key == "AboutUsPromotion")
                                 {
                                     <div class="col">
                                         <label asp-for="ImageFile" class="mt-2">Enter ImageFile</label>
@@ -49,7 +52,7 @@
                                     <div class="col">
                                         <label asp-for="Value">Enter @Model.Key Value</label>
                                         <input asp-for="Key" hidden />
-                                        <input class="form-control" asp-for="Value" placeholder="Name">
+                                        <input class="form-control" asp-for="Value" placeholder="Value">
                                         <span class="text-danger" asp-validation-for="Value"></span>
                                     </div>
                                 }

@@ -280,7 +280,7 @@
                         <a href="#">Careers</i></a>
                     </li>
                     <li>
-                        <a href="#">About Us</i></a>
+                        <a asp-controller="aboutus" asp-action="index">About Us</i></a>
                     </li>
                     <li>
                         <a href="#">Drizly Cities</i></a>
@@ -370,31 +370,6 @@
             </div>
         </div>
     </footer>
-    <!-- Are You Older than 21 -->
-    @if (member == null)
-    {
-        <div class="age-gate-modal">
-            <div class="age-gate-overlay">
-            </div>
-            <div class="age-modal">
-                <img src="./assets/Media/drizlylogoheader.png">
-                <p class="welcome-to-drizly">Welcome to Drizly</p>
-                <p class="are-you-21">Are you 21 or older?</p>
-                <p class="age-desc-modal">You can’t spell “safe and responsible drinking culture” without “ID or else.”</p>
-                <div class="age-submit-wrapper">
-                    <div class="age-submit">
-                        <button class="age-no">NO</button>
-                        <button class="age-yes">YES</button>
-                    </div>
-                    <p class="age-no-clicked">
-                        Thank you for your honesty. Your reward is
-                        <a href="https://m.youtube.com/watch?v=sfwiwj78TWg">this video</a>
-                        of a SpongeBob episode.
-                    </p>
-                </div>
-            </div>
-        </div>
-    }
     <!-- End -->
 </body>
 <!-- Jquery Script -->

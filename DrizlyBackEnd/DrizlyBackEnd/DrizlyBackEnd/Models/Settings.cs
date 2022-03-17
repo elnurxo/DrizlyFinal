@@ -14,7 +14,7 @@ namespace DrizlyBackEnd.Models
         [StringLength(maximumLength: 300)]
         public string Key { get; set; }
         [Required]
-        [StringLength(maximumLength: 300)]
+        [StringLength(maximumLength: 1000)]
         public string Value { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }

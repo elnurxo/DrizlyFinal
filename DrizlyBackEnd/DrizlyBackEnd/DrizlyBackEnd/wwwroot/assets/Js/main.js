@@ -270,7 +270,8 @@ $(function () {
         $(".age-yes").css("background","#d27c7c");
     });
     $(".age-yes").click(function(){
-        $(".age-gate-modal").css("display","none");
+        $(".age-gate-modal").css("display", "none");
+        $(this).closest('.age-gate-modal').remove();
     });
     //MY ACCOUNT TAB
     $(".tab-naviagtion__item").click(function (event) {

@@ -1,8 +1,17 @@
 ﻿@model HomeViewModel
+@using DrizlyBackEnd.Services
+@using Microsoft.AspNetCore.Identity
+@inject LayoutService layoutService
+@inject UserManager<AppUser> usermanager
 @{
     ViewData["Title"] = "Drizly: Your Online Liquor Store - Buy Beer, Wine & Liquor";
+    var settings = layoutService.GetSettings();
+    AppUser member = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        member = usermanager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+    }
 }
-
 <main>
     <!-- Hero Section -->
     <section class="herosection">
@@ -66,15 +75,15 @@
             <ul class="steps-howitworks">
                 @foreach (var service in Model.Services)
                 {
-                        <div class="col-lg-4 col-md-6 col-sm-12">
-                     <li style="margin: 0 auto">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                    <li style="margin: 0 auto">
                         <div class="circle-text">
                             <img width="60" height="60" src="~/uploads/services/@service.Image" alt="service">
                             <h3 style="word-break: break-word">@service.Title</h3>
                             <p style="word-break: break-word">@service.Desc</p>
                         </div>
                     </li>
-                       </div>
+                    </div>
                 }
 
             </ul>
@@ -472,7 +481,7 @@
                 <p class="quote-paragraph">@Model.Settings.Find(c => c.Key == "QuoteContent")?.Value</p>
             </blackquote>
             <cite>- @Model.Settings.Find(c => c.Key == "QuoteOwner")?.Value<cite>
-</div>
+        </div>
     </section>
     <!-- Recent Comments Section -->
     <section class="recentcommentsection">
@@ -689,3 +698,28 @@
                 </div>
     </section>
 </main>
+<!-- Are You Older than 21 -->
+@if (member == null)
+{
+    <div class="age-gate-modal">
+        <div class="age-gate-overlay">
+        </div>
+        <div class="age-modal">
+            <img src="~/uploads/settings/@settings["HeaderLogo"]">
+            <p class="welcome-to-drizly">Welcome to Drizly</p>
+            <p class="are-you-21">Are you 21 or older?</p>
+            <p class="age-desc-modal">You can’t spell “safe and responsible drinking culture” without “ID or else.”</p>
+            <div class="age-submit-wrapper">
+                <div class="age-submit">
+                    <button class="age-no">NO</button>
+                    <button class="age-yes">YES</button>
+                </div>
+                <p class="age-no-clicked">
+                    Thank you for your honesty. Your reward is
+                    <a href="https://m.youtube.com/watch?v=sfwiwj78TWg">this video</a>
+                    of a SpongeBob episode.
+                </p>
+            </div>
+        </div>
+    </div>
+}
