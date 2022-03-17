@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1pQFAVA2FMuzOaPa9S9mJKAjNsMprTpwKyfywL3Dph7Ht8j5aolhkT7FXCJBp7KKGBimgM85LyTNszMKDpxhDQ==",
+  "dgSpecHash": "4UJy8gozMA8INdHNpIMV6aLySFqd4ScqjbpRGFdZG7Q1UASl/FgaFqdc9WXW+VxhvjGPA2ZVegfN8k+sm2PAfw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\LENOVO\\Desktop\\FinalProject Drizly\\DrizlyBackEnd\\DrizlyBackEnd\\DrizlyBackEnd\\DrizlyBackEnd.csproj",
+  "projectFilePath": "C:\\Users\\LENOVO\\Desktop\\DrizlyFinal\\DrizlyBackEnd\\DrizlyBackEnd\\DrizlyBackEnd\\DrizlyBackEnd.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.aspnet.mvc\\5.1.2\\microsoft.aspnet.mvc.5.1.2.nupkg.sha512",
     "C:\\Users\\LENOVO\\.nuget\\packages\\microsoft.aspnet.razor\\3.1.2\\microsoft.aspnet.razor.3.1.2.nupkg.sha512",
