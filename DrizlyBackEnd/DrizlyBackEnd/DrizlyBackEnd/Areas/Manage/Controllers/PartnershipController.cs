@@ -78,5 +78,100 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
+        //EDIT ACTION
+        public IActionResult Edit(int id)
+        {
+            Partnership partner = _context.Partnerships.FirstOrDefault(x => x.Id == id);
+
+            if (partner == null) return NotFound();
+
+            return View(partner);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(Partnership partner)
+        {
+            if (!ModelState.IsValid)
+                return View();
+
+            Partnership existPartner = _context.Partnerships.FirstOrDefault(x => x.Id == partner.Id);
+            if (existPartner == null) return NotFound();
+            if (partner.ImageFile != null)
+            {
+                if (partner.ImageFile.ContentType != "image/jpeg" && partner.ImageFile.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("ImageFile", "file type must be jpeg or png");
+                    return View(partner);
+                }
+
+                if (partner.ImageFile.Length > 2097152)
+                {
+                    ModelState.AddModelError("ImageFile", "file size must be less than 2mb");
+                    return View(partner);
+                }
+
+                string fileName = partner.ImageFile.FileName;
+
+                if (fileName.Length > 64)
+                {
+                    fileName = fileName.Substring(partner.ImageFile.FileName.Length - 64, 64);
+                }
+
+                partner.Image = (Guid.NewGuid().ToString() + (fileName));
+
+                string path = Path.Combine(_env.WebRootPath, "uploads/partnerships", partner.Image);
+
+                using (FileStream stream = new FileStream(path, FileMode.Create))
+                {
+                    partner.ImageFile.CopyTo(stream);
+                }
+
+                if (existPartner.Image != null)
+                {
+                    string existPath = Path.Combine(_env.WebRootPath, "uploads/partnerships", existPartner.Image);
+                    if (System.IO.File.Exists(existPath))
+                        System.IO.File.Delete(existPath);
+                }
+
+                existPartner.Image = partner.Image;
+            }
+            else
+            {
+                if (partner.Image == null && existPartner.Image != null)
+                {
+                    string existPath = Path.Combine(_env.WebRootPath, "uploads/partnerships", existPartner.Image);
+                    if (System.IO.File.Exists(existPath))
+                        System.IO.File.Delete(existPath);
+
+                    existPartner.Image = null;
+                }
+            }
+
+            if (existPartner == null) return NotFound();
+            existPartner.Image = partner.Image;
+
+            _context.SaveChanges();
+            return RedirectToAction("index");
+        }
+
+        //DELETE ACTION
+        public IActionResult Delete(int id)
+        {
+            Partnership existPartner = _context.Partnerships.FirstOrDefault(x => x.Id == id);
+
+            if (existPartner == null)
+                return NotFound();
+
+            _context.Partnerships.Remove(existPartner);
+
+            string existPath = Path.Combine(_env.WebRootPath, "uploads/partnerships", existPartner.Image);
+            if (System.IO.File.Exists(existPath))
+                System.IO.File.Delete(existPath);
+
+            _context.SaveChanges();
+
+            return RedirectToAction("index");
+        }
     }
 }
