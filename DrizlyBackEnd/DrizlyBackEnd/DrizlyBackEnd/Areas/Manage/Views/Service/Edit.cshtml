@@ -1,0 +1,61 @@
+﻿@model Service
+@{
+    ViewData["Title"] = "Edit Service";
+}
+
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Service Edit</h3>
+                    <a asp-action="index" class="btn btn-success">Go Back</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Edit Service</div>
+                        <hr>
+                        <form asp-action="edit" method="post" enctype="multipart/form-data">
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <label asp-for="Title">Enter Title</label>
+                                    <input class="form-control" asp-for="Title" placeholder="Title">
+                                    <span class="text-danger" asp-validation-for="Title"></span>
+                                </div>
+                                <div class="col">
+                                    <label asp-for="ImageFile">Enter ImageFile</label>
+                                    <input class="form-control" asp-for="ImageFile" placeholder="ImageFile">
+                                    <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                    @if (Model.Image != null)
+                                    {
+                                        <div class="img-box mt-2" style="position:relative;display:inline-block">
+                                            <input type="hidden" name="Icon" value="@Model.Image" />
+                                            <img width="120" src="~/uploads/services/@Model.Image" />
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group mt-2">
+                                <label for="exampleFormControlTextarea1" asp-for="Desc">Description</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" asp-for="Desc"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-light px-5">EDIT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+    </div>
+</div>
+
+
+
+
+

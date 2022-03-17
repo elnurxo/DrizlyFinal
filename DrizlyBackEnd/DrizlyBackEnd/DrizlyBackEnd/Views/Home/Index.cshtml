@@ -66,13 +66,15 @@
             <ul class="steps-howitworks">
                 @foreach (var service in Model.Services)
                 {
-                    <li>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                     <li style="margin: 0 auto">
                         <div class="circle-text">
-                            <img src="~/assets/Media/Services/@service.Image" alt="service">
-                            <h3>@service.Title</h3>
-                            <p>@service.Desc</p>
+                            <img width="60" height="60" src="~/uploads/services/@service.Image" alt="service">
+                            <h3 style="word-break: break-word">@service.Title</h3>
+                            <p style="word-break: break-word">@service.Desc</p>
                         </div>
                     </li>
+                       </div>
                 }
 
             </ul>

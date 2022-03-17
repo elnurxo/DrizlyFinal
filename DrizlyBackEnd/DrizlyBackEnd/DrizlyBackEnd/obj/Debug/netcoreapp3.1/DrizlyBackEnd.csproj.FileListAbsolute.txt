@@ -169,3 +169,6 @@ C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBa
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\_ViewStart.cshtml.g.cs
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Setting\Index.cshtml.g.cs
 C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Setting\Edit.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Service\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Service\Create.cshtml.g.cs
+C:\Users\LENOVO\Desktop\FinalProject Drizly\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Service\Edit.cshtml.g.cs

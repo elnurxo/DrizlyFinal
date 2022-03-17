@@ -1,0 +1,104 @@
+﻿@model PagenatedList<Service>
+
+@{
+    ViewData["Title"] = "Service Index";
+    int counter = (Model.PageIndex - 1) * Model.PageSize;
+    var temp = -1;
+    if (Model.PageIndex == 1)
+    {
+        temp = 0;
+    }
+    if (temp == Model.TotalPages)
+    {
+        temp = -2;
+    }
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+</head>
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Services</h3>
+                    <a asp-action="create" class="btn btn-success">Create</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Services Table</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Title</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Service Image</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var service in Model)
+                                    {
+                                        counter++;
+                                        <tr>
+                                            <th scope="row">@counter</th>
+                                            <td>@service.Title</td>
+                                            <td>@service.Desc</td>
+                                            <td>
+                                                <img width="60" src="~/uploads/services/@service.Image" alt="Alternate Text" />
+                                            </td>
+                                            <td>
+                                                <a asp-action="edit" asp-route-id="@service.Id" class="btn btn-warning mx-3">Edit</a>
+                                                <a asp-action="delete" asp-route-id="@service.Id" class="btn btn-danger delete-service">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @if (Model.HasPrev)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="1" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-double-left"></i></a></li>
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex-1)" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-left"></i></a></li>
+                                    }
+
+                                    @for (int i = 1; i <= 3; i++, temp++)
+                                    {
+                                        if ((Model.PageIndex + temp) != 0 && (Model.PageIndex + temp) != -1)
+                                        {
+                                            <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex+temp)" asp-route-isDeleted="@ViewBag.IsDeleted" style="display:@((Model.PageIndex+temp)>Model.TotalPages?"none":"block")">@(Model.PageIndex+temp)</a></li>
+                                        }
+
+                                    }
+
+                                    @if (Model.HasNext)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex+1)" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-right"></i></a></li>
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@Model.TotalPages" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-double-right"></i></a></li>
+                                    }
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+
+</div><!--End content-wrapper-->
+<!--Start Back To Top Button-->
+<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+
