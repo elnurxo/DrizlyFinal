@@ -37,6 +37,8 @@ namespace DrizlyBackEnd
 
             services.AddIdentity<AppUser, IdentityRole>(x =>
             {
+                x.User.RequireUniqueEmail = true;
+                x.SignIn.RequireConfirmedEmail = true;
                 x.Password.RequireNonAlphanumeric = false;
                 x.Password.RequireUppercase = true;
                 x.Password.RequireDigit = true;

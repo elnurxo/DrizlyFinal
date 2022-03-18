@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace DrizlyBackEnd.Controllers
@@ -110,12 +113,49 @@ namespace DrizlyBackEnd.Controllers
                 }
                 return View();
             }
+            //VERIFY EMAIL
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(member);
+            string link = Url.Action(nameof(VerfiyEmail), "Account", new { email = member.Email, token }, Request.Scheme, Request.Host.ToString());
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("drizlycode@gmail.com", "Drizly");
+            mail.To.Add(new MailAddress(member.Email));
+            mail.Subject = "VerifyEmail";
 
-            await _signInManager.SignInAsync(member, true);
+            string body = string.Empty;
+            using (StreamReader stream = new StreamReader("wwwroot/Template/Verify.html"))
+            {
+                body = stream.ReadToEnd();
+            }
 
+            string Info = $"welcome{member.FullName}";
+            body = body.Replace("{{link}}", link);
+            mail.Body = body.Replace("{{info}}", Info);
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
+            smtp.Send(mail);
+
+
+            TempData["Warning"] = "Verify Your Email";
+
+            //END VERIFY EMAIL
 
             return RedirectToAction("index", "home");
         }
+
+        public async Task<IActionResult> VerfiyEmail(string email, string token)
+        {
+            AppUser user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return BadRequest();
+            await _userManager.ConfirmEmailAsync(user, token);
+            TempData["Success"] = "Your Email Successfully Verified";
+            await _signInManager.SignInAsync(user, true);
+            return RedirectToAction("Index", "Home");
+        }
+
 
         //LOGIN ACTION
         public IActionResult Login()
