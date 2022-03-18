@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- My Css -->
     <link href="~/assets/Css/style.css" rel="stylesheet" />
+    <!-- Range Slide Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.css" integrity="sha512-4f6+KwNIOYFZQbwKMGj45wlzFWwuLfqDl5B8TCp4E2G9JlWzPHENy7LkdalNirz5AMHQtwQ4cyzBFA6mq+UJJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Slick Slider -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
@@ -68,22 +70,22 @@
                         </a>
                     </li>
                     <li class="navbar-left-li navbar-desktop-links">
-                        <a href="shop.html" class="navbar-category-links">
+                        <a asp-controller="shop" asp-action="index" class="navbar-category-links">
                             Beer
                         </a>
                     </li>
                     <li class="navbar-left-li navbar-desktop-links">
-                        <a href="shop.html" class="navbar-category-links">
+                        <a asp-controller="shop" asp-action="index" class="navbar-category-links">
                             Wine
                         </a>
                     </li>
                     <li class="navbar-left-li navbar-desktop-links">
-                        <a href="shop.html" class="navbar-category-links">
+                        <a asp-controller="shop" asp-action="index" class="navbar-category-links">
                             Liquor
                         </a>
                     </li>
                     <li class="navbar-left-li navbar-desktop-links">
-                        <a href="shop.html" class="navbar-category-links">
+                        <a asp-controller="shop" asp-action="index" class="navbar-category-links">
                             Extras
                         </a>
                     </li>
@@ -378,7 +380,11 @@
 </body>
 <!-- Jquery Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@*Sweet Alert Cdn*@
+<!-- Price Rnage Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.js" integrity="sha512-nNk6WlQNxdoGe0WKkh2lL6BssgsB6xa0NcP5tAjJiMFqRyxDZO7UuMXLlU2SqZ+mjG5fYomolQO1iir97pETnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!--Sweet Alert Cdn-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Slick Slider -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
@@ -387,7 +393,7 @@
 <!-- Sweet Alert Script -->
 <script src="~/assets/Js/sweetalert.js"></script>
 <!-- Progress Bar Script -->
-<script src="~/assets/Js/review-progress.js"></script>
+@*<script src="~/assets/Js/review-progress.js"></script>*@
 <!-- Font Awesome -->
 <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
 @*Toastr Script*@
