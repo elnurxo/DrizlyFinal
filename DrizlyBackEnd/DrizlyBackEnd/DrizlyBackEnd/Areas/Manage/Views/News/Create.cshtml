@@ -1,0 +1,40 @@
+﻿@model News
+@{
+    ViewData["Title"] = "Create News Partner";
+}
+
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Partner Create</h3>
+                    <a asp-action="index" class="btn btn-success">Go Back</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Create News Partner</div>
+                        <hr>
+                        <form asp-action="create" method="post" enctype="multipart/form-data">
+
+
+                            <label asp-for="ImageFile">Enter ImageFile</label>
+                            <input class="form-control" asp-for="ImageFile" placeholder="ImageFile">
+                            <span class="text-danger" asp-validation-for="ImageFile"></span>
+
+
+                            <button type="submit" class="btn btn-light px-5 mt-4">CREATE</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+    </div>
+</div>
+
+

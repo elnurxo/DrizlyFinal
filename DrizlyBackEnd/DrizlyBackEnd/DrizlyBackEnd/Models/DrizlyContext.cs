@@ -18,5 +18,6 @@ namespace DrizlyBackEnd.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<News> News { get; set; }
     }
 }

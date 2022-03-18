@@ -21,7 +21,8 @@ namespace DrizlyBackEnd.Controllers
             AboutUsViewModel aboutusVM = new AboutUsViewModel
             {
                 Settings = _context.Settings.ToList(),
-                Employees = _context.Employees.Include(x=>x.Position).Where(x => !x.IsDeleted).ToList()
+                Employees = _context.Employees.Include(x=>x.Position).Where(x => !x.IsDeleted).ToList(),
+                News = _context.News.Where(x=>!x.IsDeleted).ToList()
             };
             return View(aboutusVM);
         }

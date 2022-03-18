@@ -68,30 +68,12 @@
                     <p>Featured In:</p>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/ca247dff0553dfcb/d49d6ec7a40c/v/515843460572/bloomberg.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/55ba04f19d961b1d/a0aedd7d1747/v/da61ac350373/CNBC.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/ac6885a78431fe52/ef2a7350df56/v/94dbc9e13c3c/USA.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/fa69e9363b6a6bfd/867dca4b6fc2/v/fae7d7f3c05c/WSJ.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src=" https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/5ee7beed3fff95ca/644881c28261/v/1cf46054bf60/WashPost.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/9f7546ae0a1f0011/e34ce367ec2b/v/c47a97afe224/CNN.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/6be78d494680e650/08704abcbecb/v/d90483e9e861/BosGlobe.jpg" alt="news">
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 news">
-                        <img src="https://cdn0.scrvt.com/8e692ce327983776c63ffbd47040a3d8/4ac44fbfc65c8d0d/86422b6492c7/v/f1c62b92b4ce/forbes.jpg" alt="news">
-                    </div>
+                    @foreach (var news in Model.News)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12 news">
+                            <img src="~/uploads/news/@news.Image" alt="news">
+                        </div>
+                    }
                 </div>
             </div>
         </div>

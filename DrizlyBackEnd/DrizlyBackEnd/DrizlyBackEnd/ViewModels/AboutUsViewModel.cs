@@ -10,6 +10,7 @@ namespace DrizlyBackEnd.ViewModels
     {
             public List<Settings> Settings { get; set; }
             public List<Employee> Employees { get; set; }
+            public List<News> News { get; set; }
             
     }
 }
