@@ -21,7 +21,6 @@ namespace DrizlyBackEnd.Controllers
         private readonly DrizlyContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IWebHostEnvironment _env;
 
         public AccountController(DrizlyContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IWebHostEnvironment env)
@@ -73,6 +72,8 @@ namespace DrizlyBackEnd.Controllers
                 Age = registerVM.Age,
                 IsAdmin = false
             };
+
+           
 
             //IMAGE
             if (registerVM.ImageFile!=null)
@@ -127,7 +128,7 @@ namespace DrizlyBackEnd.Controllers
                 body = stream.ReadToEnd();
             }
 
-            string Info = $"welcome{member.FullName}";
+            string Info = $"welcome {member.FullName}";
             body = body.Replace("{{link}}", link);
             mail.Body = body.Replace("{{info}}", Info);
             mail.IsBodyHtml = true;
@@ -135,8 +136,10 @@ namespace DrizlyBackEnd.Controllers
             smtp.Host = "smtp.gmail.com";
             smtp.Port = 587;
             smtp.EnableSsl = true;
+            smtp.UseDefaultCredentials = false;
             smtp.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
             smtp.Send(mail);
+
 
 
             TempData["Warning"] = "Verify Your Email";
@@ -156,6 +159,32 @@ namespace DrizlyBackEnd.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        //TEST
+        //public async Task<IActionResult> test()
+        //{
+        //    AppUser appUser = new AppUser
+        //    {
+        //        FullName = "Super Admin",
+        //        UserName = "Elnuradmin",
+        //        Email = "superadmin@gmail.com"
+        //    };
+
+        //    var result = await _userManager.CreateAsync(appUser, "Admin123");
+
+        //    return Ok(result.Errors);
+        //}
+        //public async Task<IActionResult> Test()
+        //{
+        //    var result1 = await _roleManager.CreateAsync(new IdentityRole("Admin"));
+        //    var result2 = await _roleManager.CreateAsync(new IdentityRole("Member"));
+        //    var result3 = await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+
+        //    AppUser admin = await _userManager.FindByNameAsync("Elnuradmin");
+
+        //    var result = await _userManager.AddToRoleAsync(admin, "SuperAdmin");
+
+        //    return Ok();
+        //}
 
         //LOGIN ACTION
         public IActionResult Login()

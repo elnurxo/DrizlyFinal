@@ -72,7 +72,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             }
 
             news.CreatedAt = DateTime.UtcNow.AddHours(4);
-
+            news.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.News.Add(news);
             _context.SaveChanges();
 
@@ -151,6 +151,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existNews == null) return NotFound();
             existNews.Image = news.Image;
 
+            existNews.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
             return RedirectToAction("index");
         }
@@ -169,6 +170,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (System.IO.File.Exists(existPath))
                 System.IO.File.Delete(existPath);
 
+
+           
             _context.SaveChanges();
 
             return RedirectToAction("index");

@@ -1,0 +1,45 @@
+﻿@model LiquorColor
+@{
+    ViewData["Title"] = "Edit Liquor Color";
+}
+
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Liquor Color Edit</h3>
+                    <a asp-action="index" class="btn btn-success">Go Back</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Edit Color</div>
+                        <hr>
+                        <h6 class="my-2">Create Date:  <span class="text-info">@Model.CreatedAt.ToString("dd MMMM, yyyy - hh:mm")</span></h6>
+                        <h6 class="my-2">Update Date:  <span class="text-info">@Model.LastUpdateDate.ToString("dd MMMM, yyyy - hh:mm")</span></h6>
+                        <hr>
+                        <form asp-action="edit" method="post">
+                            <div class="form-row">
+                                <div class="col">
+                                    <label asp-for="Color">Enter Color Name</label>
+                                    <input class="form-control" asp-for="Color" placeholder="Name">
+                                    <span class="text-danger" asp-validation-for="Color"></span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-light px-5 mt-3">EDIT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+    </div>
+</div>
+
+
+

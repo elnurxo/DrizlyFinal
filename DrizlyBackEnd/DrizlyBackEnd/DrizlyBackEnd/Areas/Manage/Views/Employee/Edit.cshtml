@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between m-4">
-                    <h3>Employee Create</h3>
+                    <h3>Employee Edit</h3>
                     <a asp-action="index" class="btn btn-success">Go Back</a>
                 </div>
                 <div class="card">
@@ -33,6 +33,13 @@
                                     <label asp-for="ImageFile">Employee Image</label>
                                     <input class="form-control" asp-for="ImageFile" placeholder="Select image">
                                     <span class="text-danger" asp-validation-for="ImageFile"></span>
+                                    @if (Model.Image != null)
+                                    {
+                                        <div class="img-box mt-2" style="position:relative;display:inline-block">
+                                            <input type="hidden" name="Value" value="@Model.Image" />
+                                            <img width="250" src="~/uploads/employees/@Model.Image" />
+                                        </div>
+                                    }
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-success">Submit</button>

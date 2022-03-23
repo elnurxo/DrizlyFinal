@@ -72,7 +72,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             }
 
             partnership.CreatedAt = DateTime.UtcNow.AddHours(4);
-
+            partnership.LastUpdatedAt = DateTime.UtcNow.AddHours(4);
             _context.Partnerships.Add(partnership);
             _context.SaveChanges();
 
@@ -169,6 +169,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (System.IO.File.Exists(existPath))
                 System.IO.File.Delete(existPath);
 
+
+            existPartner.LastUpdatedAt = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
 
             return RedirectToAction("index");

@@ -40,7 +40,7 @@
         <!--Start sidebar-wrapper-->
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
-                <a href="index.html">
+                <a asp-controller="dashboard" asp-action="index">
                     <img src="~/uploads/settings/logo.png" class="logo-icon" alt="logo icon">
                     <h5 class="logo-text">Drizly Admin</h5>
                 </a>
@@ -86,6 +86,48 @@
                 <li>
                     <a asp-controller="news" asp-action="index">
                         <i class="bi bi-newspaper"></i> <span>News</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="product" asp-action="index">
+                        <i class="fas fa-cocktail"></i> <span>Products</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="category" asp-action="index">
+                        <i class="fa fa-list-alt" aria-hidden="true"></i> <span>Categories</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="typeproduct" asp-action="index">
+                        <i class="fas fa-filter"></i> <span>Product Types</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="brand" asp-action="index">
+                        <i class="fas fa-wine-glass"></i> <span>Brands</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="liquorcolor" asp-action="index">
+                        <i class="fas fa-palette"></i> <span>Liquor Colors</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="liquorflavor" asp-action="index">
+                        <i class="fas fa-wine-bottle"></i> <span>Liquor Flavors</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="winefoodpairing" asp-action="index">
+                        <i class="fas fa-utensils"></i> <span>Wine Food Pairings</span>
                     </a>
                 </li>
 
@@ -256,6 +298,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Sweet Alert Script -->
     <script src="~/assets/Js/sweetalert.js"></script>
+    @*Product Create Script*@
+    <script src="~/assets/Js/productcreate.js"></script>
     <!-- Bootstrap core JavaScript-->
     <script src="~/manage/assets/js/jquery.min.js"></script>
     <script src="~/manage/assets/js/popper.min.js"></script>
@@ -275,7 +319,6 @@
     <script src="~/manage/assets/plugins/Chart.js/Chart.min.js"></script>
     <!-- Index js -->
     <script src="~/manage/assets/js/index.js"></script>
-
 
 </body>
 </html>

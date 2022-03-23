@@ -19,5 +19,17 @@ namespace DrizlyBackEnd.Models
         public DbSet<Position> Positions { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<ProductSize> ProductSize { get; set; }
+        public DbSet<ProductCount> ProductCount { get; set; }
+        public DbSet<TypeProduct> TypeProducts { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SweetDryScale> sweetDryScales { get; set; }
+        public DbSet<LiquorFlavor> LiquorFlavors { get; set; }
+        public DbSet<LiquorColor> LiquorColors { get; set; }
+        public DbSet<WineFoodPairing> WineFoodPairings { get; set; }
+
     }
 }

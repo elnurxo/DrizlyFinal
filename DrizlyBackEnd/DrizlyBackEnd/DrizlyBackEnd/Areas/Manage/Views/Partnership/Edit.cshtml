@@ -19,7 +19,8 @@
                     <div class="card-body">
                         <div class="card-title">Edit Partner</div>
                         <hr>
-                        <h6>Create Date: <span class="text-info">@Model.CreatedAt</span></h6>
+                        <h6 class="my-2">Create Date:  <span class="text-info">@Model.CreatedAt.ToString("dd MMMM, yyyy - hh:mm")</span></h6>
+                        <h6 class="my-2">Update Date:  <span class="text-info">@Model.LastUpdatedAt.ToString("dd MMMM, yyyy - hh:mm")</span></h6>
                         <hr>
                         <form asp-action="edit" method="post" enctype="multipart/form-data">
                             <div class="form-row">

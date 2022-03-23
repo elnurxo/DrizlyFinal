@@ -19,6 +19,75 @@ namespace DrizlyBackEnd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DrizlyBackEnd.Models.Brand", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Brands");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Desc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("DrizlyBackEnd.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -46,6 +115,56 @@ namespace DrizlyBackEnd.Migrations
                     b.HasIndex("PositionId");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.LiquorColor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LiquorColors");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.LiquorFlavor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LiquorFlavors");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.News", b =>
@@ -87,6 +206,9 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<DateTime>("LastUpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Partnerships");
@@ -107,6 +229,145 @@ namespace DrizlyBackEnd.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Positions");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal?>("Abv")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CodeNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodePref")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("CostPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Desc")
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
+
+                    b.Property<decimal>("DiscountPercent")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsPacket")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("LiquorColorId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LiquorFlavorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.Property<int?>("ProductCountId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductSizeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("SalePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("SweetDryScaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TypeProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WineFoodPairingId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BrandId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("LiquorColorId");
+
+                    b.HasIndex("LiquorFlavorId");
+
+                    b.HasIndex("ProductCountId");
+
+                    b.HasIndex("ProductSizeId");
+
+                    b.HasIndex("SweetDryScaleId");
+
+                    b.HasIndex("TypeProductId");
+
+                    b.HasIndex("WineFoodPairingId");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.ProductCount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SizePack")
+                        .HasColumnType("int")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCount");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.ProductSize", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductSize");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.Service", b =>
@@ -163,6 +424,78 @@ namespace DrizlyBackEnd.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.SweetDryScale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("sweetDryScales");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.TypeProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("TypeProducts");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.WineFoodPairing", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastUpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(85)")
+                        .HasMaxLength(85);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WineFoodPairings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -404,6 +737,60 @@ namespace DrizlyBackEnd.Migrations
                     b.HasOne("DrizlyBackEnd.Models.Position", "Position")
                         .WithMany("Employees")
                         .HasForeignKey("PositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.Product", b =>
+                {
+                    b.HasOne("DrizlyBackEnd.Models.Brand", "Brand")
+                        .WithMany("Products")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DrizlyBackEnd.Models.Country", "Country")
+                        .WithMany("Products")
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DrizlyBackEnd.Models.LiquorColor", "LiquorColor")
+                        .WithMany()
+                        .HasForeignKey("LiquorColorId");
+
+                    b.HasOne("DrizlyBackEnd.Models.LiquorFlavor", "LiquorFlavor")
+                        .WithMany()
+                        .HasForeignKey("LiquorFlavorId");
+
+                    b.HasOne("DrizlyBackEnd.Models.ProductCount", "ProductCount")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductCountId");
+
+                    b.HasOne("DrizlyBackEnd.Models.ProductSize", "ProductSize")
+                        .WithMany("Products")
+                        .HasForeignKey("ProductSizeId");
+
+                    b.HasOne("DrizlyBackEnd.Models.SweetDryScale", "sweetDryScale")
+                        .WithMany()
+                        .HasForeignKey("SweetDryScaleId");
+
+                    b.HasOne("DrizlyBackEnd.Models.TypeProduct", "TypeProduct")
+                        .WithMany("Products")
+                        .HasForeignKey("TypeProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DrizlyBackEnd.Models.WineFoodPairing", "WineFoodPairing")
+                        .WithMany()
+                        .HasForeignKey("WineFoodPairingId");
+                });
+
+            modelBuilder.Entity("DrizlyBackEnd.Models.TypeProduct", b =>
+                {
+                    b.HasOne("DrizlyBackEnd.Models.Category", "Category")
+                        .WithMany("TypeProducts")
+                        .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
