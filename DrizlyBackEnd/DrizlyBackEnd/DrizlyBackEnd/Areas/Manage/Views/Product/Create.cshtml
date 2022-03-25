@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group col-lg-6">
-                                    <label asp-for="CountryId">Brands</label>
+                                    <label asp-for="CountryId">Countries</label>
                                     <select class="form-control" asp-for="CountryId" asp-items="@new SelectList(ViewBag.Countries, nameof(Country.Id), nameof(Country.Name))">
                                     </select>
                                 </div>
@@ -48,17 +48,17 @@
                             <div class="form-row">
                                 <div class="form-group col-lg-4">
                                     <label asp-for="CostPrice">CostPrice</label>
-                                    <input class="form-control" step="any" type="number" asp-for="CostPrice">
+                                    <input class="form-control" step="any" type="number" asp-for="CostPrice" required>
                                     <span class="text-danger" asp-validation-for="CostPrice"></span>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label asp-for="SalePrice">SalePrice</label>
-                                    <input class="form-control" step="any" type="number" asp-for="SalePrice">
+                                    <input class="form-control" step="any" type="number" asp-for="SalePrice" required>
                                     <span class="text-danger" asp-validation-for="SalePrice"></span>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label asp-for="DiscountPercent">DiscountPercent</label>
-                                    <input class="form-control" step="any" type="number" asp-for="DiscountPercent">
+                                    <input class="form-control" step="any" type="number" asp-for="DiscountPercent" required>
                                     <span class="text-danger" asp-validation-for="DiscountPercent"></span>
                                 </div>
                             </div>
@@ -91,16 +91,22 @@
 
 
                             <div class="form-row">
-                                <div class="form-check my-3 pl-4 mr-3">
+                                <div class="form-check my-3 pl-5 mr-3">
                                     <input class="form-check-input" type="checkbox" asp-for="IsAvailable">
                                     <label class="form-check-label" asp-for="IsAvailable">
                                         IsAvailable
                                     </label>
                                 </div>
-                                <div class="form-check my-3 pl-4">
+                                <div class="form-check my-3 pl-4 is-packet-wrapper">
                                     <input class="form-check-input" id="isPacketInput" type="checkbox" asp-for="IsPacket">
                                     <label class="form-check-label" asp-for="IsPacket">
                                         IsPacket
+                                    </label>
+                                </div>
+                                <div class="form-check my-3 pl-5 is-drink-wrapper" style="display:none">
+                                    <input class="form-check-input" id="isExtraDrinkInput" type="checkbox" for="IsExtraDrink">
+                                    <label class="form-check-label" for="IsExtraDrink">
+                                        IsDrink
                                     </label>
                                 </div>
                             </div>
@@ -120,9 +126,19 @@
                                     <select class="form-control" asp-for="SweetDryScaleId" asp-items="@new SelectList(ViewBag.Sweetdry, nameof(SweetDryScale.Id), nameof(SweetDryScale.Name))">
                                     </select>
                                 </div>
+                                <div class="col-lg-4" id="winefoorpairingwrapper" style="display:none">
+                                    <label asp-for="WineFoodPairingId">Wine Food Pairing</label>
+                                    <select class="form-control" asp-for="WineFoodPairingId" asp-items="@new SelectList(ViewBag.WineFoodPairing, nameof(WineFoodPairing.Id), nameof(WineFoodPairing.Name))">
+                                    </select>
+                                </div>
                                 <div class="col-lg-6 form-group" id="liquorflavorwrapper" style="display:none">
                                     <label asp-for="LiquorFlavorId">Liquor Flavor</label>
                                     <select class="form-control" asp-for="LiquorFlavorId" asp-items="@new SelectList(ViewBag.LiquorFlavor, nameof(LiquorFlavor.Id), nameof(LiquorFlavor.Name))">
+                                    </select>
+                                </div>
+                                <div class="col-lg-4" id="liquorcolorwrapper" style="display:none">
+                                    <label asp-for="LiquorColorId">Liquor Color</label>
+                                    <select class="form-control" asp-for="LiquorColorId" asp-items="@new SelectList(ViewBag.LiquorColor, nameof(LiquorColor.Id), nameof(LiquorColor.Color))">
                                     </select>
                                 </div>
                             </div>
@@ -131,16 +147,6 @@
                                     <label asp-for="Abv">Alcohol Percentage <span class="text-danger">(%)</span></label>
                                     <input class="form-control" type="number" step="any" min="0" max="100" asp-for="Abv">
                                     <span class="text-danger" asp-validation-for="Abv"></span>
-                                </div>
-                                <div class="col-lg-4" id="liquorcolorwrapper" style="display:none">
-                                    <label asp-for="LiquorColorId">Liquor Color</label>
-                                    <select class="form-control" asp-for="LiquorColorId" asp-items="@new SelectList(ViewBag.LiquorColor, nameof(LiquorColor.Id), nameof(LiquorColor.Color))">
-                                    </select>
-                                </div>
-                                <div class="col-lg-4" id="winefoorpairingwrapper" style="display:none">
-                                    <label asp-for="WineFoodPairingId">Wine Food Pairing</label>
-                                    <select class="form-control" asp-for="WineFoodPairingId" asp-items="@new SelectList(ViewBag.WineFoodPairing, nameof(WineFoodPairing.Id), nameof(WineFoodPairing.Name))">
-                                    </select>
                                 </div>
                             </div>
 

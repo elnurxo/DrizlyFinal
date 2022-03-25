@@ -117,6 +117,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existWineFoodPairing == null)
                 return NotFound();
 
+            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.WineFoodPairingId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = true;
+            }
 
             existWineFoodPairing.IsDeleted = true;
             _context.SaveChanges();
@@ -131,6 +137,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             if (existWineFoodPairing == null)
                 return NotFound();
+
+            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.WineFoodPairingId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = false;
+            }
 
             existWineFoodPairing.IsDeleted = false;
             _context.SaveChanges();

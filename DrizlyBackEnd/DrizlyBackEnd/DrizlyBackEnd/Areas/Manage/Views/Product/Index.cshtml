@@ -23,7 +23,7 @@
     <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    .comment-shoe:hover {
+    .comment-product:hover {
         color: red;
     }
 </style>
@@ -50,7 +50,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Shoes Table</h5>
+                        <h5 class="card-title">Products Table</h5>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
@@ -78,13 +78,13 @@
                                         <td>@product.Brand.Name</td>
                                         <td>@product.Name</td>
                                         <td>@product.CodePref@product.CodeNum</td>
-                                        @* <td><a class="comment-shoe px-5" asp-controller="comment" asp-action="index" asp-route-id="@shoe.Id">@shoe.ShoeComments.Count</a></td>*@
+                                        @* <td><a class="comment-product px-5" asp-controller="comment" asp-action="index" asp-route-id="@product.Id">@product.ProductComments.Count</a></td>*@
                                         <td>
                                             <img width="50" class="border rounded" src="~/uploads/products/@product.Image" alt="Img Not Found" />
                                         </td>
                                         <td>
                                             <a asp-action="edit" asp-route-id="@product.Id" class="btn btn-warning @(product.IsDeleted?"disabled":"")">Edit</a>
-                                            <a asp-action="@(product.IsDeleted?"restore":"delete")" asp-route-id="@product.Id" id="@product.Id" class="restoredelete btn btn-@(product.IsDeleted?"info":"danger delete-shoe")">@(product.IsDeleted?"Restore":"Delete")</a>
+                                            <a asp-action="@(product.IsDeleted?"restore":"delete")" asp-route-id="@product.Id" id="@product.Id" class="restoredelete btn btn-@(product.IsDeleted?"info":"danger delete-product")">@(product.IsDeleted?"Restore":"Delete")</a>
                                         </td>
                                     </tr>
                                     }

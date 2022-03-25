@@ -119,6 +119,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 return NotFound();
 
 
+            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).Where(x => x.LiquorColorId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = true;
+            }
+
             existLiquorColor.IsDeleted = true;
             _context.SaveChanges();
 
@@ -132,6 +139,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             if (existLiquorColor == null)
                 return NotFound();
+
+            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.LiquorColorId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = false;
+            }
 
             existLiquorColor.IsDeleted = false;
             _context.SaveChanges();

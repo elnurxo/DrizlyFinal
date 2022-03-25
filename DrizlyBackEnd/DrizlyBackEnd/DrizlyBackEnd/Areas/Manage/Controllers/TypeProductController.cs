@@ -115,6 +115,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existTypeProduct == null)
                 return NotFound();
 
+            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.TypeProductId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = true;
+            }
 
             existTypeProduct.IsDeleted = true;
             _context.SaveChanges();
@@ -129,6 +135,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             if (existTypeProduct == null)
                 return NotFound();
+
+            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.TypeProductId == id).ToList();
+
+            foreach (var product in ViewBag.Products)
+            {
+                product.IsDeleted = false;
+            }
 
             existTypeProduct.IsDeleted = false;
             _context.SaveChanges();

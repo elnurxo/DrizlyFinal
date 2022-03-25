@@ -2,12 +2,10 @@
     //ISPACKET  INPUT CLICK
     $('#isPacketInput').click(function () {
         if ($(this).is(":checked")) {
-            console.log("checked");
             let removesize = $(".productSizeContainer").hide();
             $(".productCountContainer").show();
 
         } else {
-            console.error("UnChecked!");
             $(".productSizeContainer").show();
             $(".productCountContainer").hide();
         }
@@ -36,6 +34,23 @@
             $("#winefoorpairingwrapper").remove();
         }
     });
+    //ISDRINK INPUT CLICK
+    $('#isExtraDrinkInput').click(function () {
+        if ($(this).is(":checked")) {
+            $(".is-packet-wrapper").show();
+            if ($("#isPacketInput").is(":checked")) {
+                $(".productSizeContainer").hide();
+            }
+            else {
+                $(".productSizeContainer").show();
+            }
+        }
+        else {
+            $(".is-packet-wrapper").hide();
+            $(".productSizeContainer").hide();
+            $(".productCountContainer").hide();
+        }
+    });
     $("#categoryId").change(function () {
         $("#typeProductId").val('0');
         let categoryId = $(this).val();
@@ -50,9 +65,15 @@
         }
         if (categoryId == 4) {
             $("#abvwrapper").hide();
+            $(".is-packet-wrapper").hide();
+            $(".productSizeContainer").hide();
+            $(".is-drink-wrapper").show();
         }
         else {
             $("#abvwrapper").show();
+            $(".is-drink-wrapper").hide();
+            $(".is-packet-wrapper").show();
+            $(".productSizeContainer").show();
         }
         if (categoryId == 3) {
             $("#liquorflavorwrapper").show();
