@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220325072125_IsFeaturedColumnAddedintoProducts")]
+    partial class IsFeaturedColumnAddedintoProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,8 +56,8 @@ namespace DrizlyBackEnd.Migrations
 
                     b.Property<string>("Desc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(2500)")
-                        .HasMaxLength(2500);
+                        .HasColumnType("nvarchar(800)")
+                        .HasMaxLength(800);
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(100)")

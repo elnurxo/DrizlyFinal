@@ -3805,14 +3805,17 @@ main .slick-prev:before, main .slick-next:before {
 .filter-container .filter-side .filters-ul li p {
   margin: 0 !important;
 }
-.filter-container .filter-side .filters-ul li .filter-name {
-  font-size: 16px;
-  font-family: "Open Sans";
-  text-align: left;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 1;
-          flex: 1 1;
-}
+    .filter-container .filter-side .filters-ul li .filter-name {
+        font-size: 16px;
+        font-family: "Open Sans";
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        -webkit-box-flex: 1;
+        -ms-flex: 1 1;
+        flex: 1 1;
+    }
 .filter-container .filter-side .show-more {
   border: none;
   background: none;
@@ -4541,17 +4544,17 @@ main .slick-prev:before, main .slick-next:before {
   margin-bottom: 10px;
   margin-top: 0;
 }
-.detail-main .left-side-detail .product-detail .product-details-content .comments-ul article {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  border-bottom: 1px solid #c5c8cb;
-  padding: 24px 0;
-}
+    .detail-main .left-side-detail .product-detail .product-details-content .comments-ul article {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        border-bottom: 1px solid #c5c8cb;
+        padding: 24px 0;
+    }
 .detail-main .left-side-detail .product-detail .product-details-content .comments-ul article .comment-rate {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4577,8 +4580,7 @@ main .slick-prev:before, main .slick-next:before {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-left: 24px;
-  margin-top: -2px;
+  margin-top: 10px;
 }
 .detail-main .left-side-detail .product-detail .product-details-content .comments-ul article .comment .customer-name-date {
   width: 100%;

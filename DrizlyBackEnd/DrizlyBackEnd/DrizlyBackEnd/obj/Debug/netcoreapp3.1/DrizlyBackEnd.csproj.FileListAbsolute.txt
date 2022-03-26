@@ -379,3 +379,4 @@ C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\ob
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\TypeProduct\Create.cshtml.g.cs
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\TypeProduct\Edit.cshtml.g.cs
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Product\Edit.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Detail.cshtml.g.cs

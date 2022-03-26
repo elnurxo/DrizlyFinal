@@ -22,6 +22,7 @@ namespace DrizlyBackEnd.Models
         [Column(TypeName = "decimal(18,2)")]
         public decimal DiscountPercent { get; set; }
         public bool IsAvailable { get; set; }
+        public bool IsFeatured { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
         public int CountryId { get; set; }

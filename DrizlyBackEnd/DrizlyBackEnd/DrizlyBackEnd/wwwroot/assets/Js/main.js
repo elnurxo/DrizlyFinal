@@ -45,7 +45,7 @@ $(function () {
     $(document).ready(function(){
         $(".filter-list-button").each(function(){
             let itemcount = $(this).next().find(".filter-link").length;
-            let dropdownheight = itemcount * 38;
+            let dropdownheight = itemcount * 40;
             if(itemcount<=4){
                 $(this).next().find(".show-more").css("display","none");
                     $(this).find(".filter-plus-minus").text("-");
