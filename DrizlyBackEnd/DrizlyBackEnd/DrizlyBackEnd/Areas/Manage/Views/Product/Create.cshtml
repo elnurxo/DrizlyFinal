@@ -132,9 +132,9 @@
                                     <select class="form-control" asp-for="SweetDryScaleId" asp-items="@new SelectList(ViewBag.Sweetdry, nameof(SweetDryScale.Id), nameof(SweetDryScale.Name))">
                                     </select>
                                 </div>
-                                <div class="col-lg-4" id="winefoorpairingwrapper" style="display:none">
-                                    <label asp-for="WineFoodPairingId">Wine Food Pairing</label>
-                                    <select class="form-control" asp-for="WineFoodPairingId" asp-items="@new SelectList(ViewBag.WineFoodPairing, nameof(WineFoodPairing.Id), nameof(WineFoodPairing.Name))">
+                                <div class="form-group col-lg-4" id="winefoorpairingwrapper" style="display:none">
+                                    <label asp-for="WineFoodPairingIds">Wine Food Pairings</label>
+                                    <select class="form-control colors-select"  name="winefoodpairingIds[]" multiple asp-items="@(new SelectList(ViewBag.WineFoodPairing,"Id","Name"))">
                                     </select>
                                 </div>
                                 <div class="col-lg-6 form-group" id="liquorflavorwrapper" style="display:none">

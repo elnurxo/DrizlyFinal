@@ -10,5 +10,6 @@ namespace DrizlyBackEnd.Models
     {
         [StringLength(maximumLength: 85)]
         public string Name { get; set; }
+        public List<ProductFoodPairing> ProductFoodPairings { get; set; }   
     }
 }

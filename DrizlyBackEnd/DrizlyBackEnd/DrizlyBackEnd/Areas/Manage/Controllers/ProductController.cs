@@ -252,6 +252,27 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 product.CodePref = CodePrefix;
             }
 
+            product.ProductFoodPairings = new List<ProductFoodPairing>();
+            if (product.WineFoodPairingIds != null)
+            {
+                foreach (var foodId in product.WineFoodPairingIds)
+                {
+                    if (_context.WineFoodPairings.Any(x => x.Id == foodId))
+                    {
+                        ProductFoodPairing wineFood = new ProductFoodPairing
+                        {
+                            WineFoodPairingId = foodId,
+                        };
+                        product.ProductFoodPairings.Add(wineFood);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("WineFoodPairingIds", "Food's not found");
+                        return View();
+                    }
+                }
+            }
+
             product.CreatedAt = DateTime.UtcNow.AddHours(4);
             product.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.Products.Add(product);
@@ -292,11 +313,16 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         //EDIT ACTION
         public IActionResult Edit(int id)
         {
-            Product product = _context.Products.Where(x=>!x.IsDeleted).Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductSize).Include(x => x.ProductCount).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor).Include(x => x.sweetDryScale).Include(x => x.WineFoodPairing).Include(x => x.TypeProduct).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == id);
+            Product product = _context.Products.Where(x => !x.IsDeleted)
+                .Include(x => x.Brand).Include(x => x.Country)
+                .Include(x => x.ProductSize).Include(x => x.ProductCount)
+                .Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
+                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings)
+                .Include(x => x.TypeProduct).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == id);
             if (product == null) return NotFound();
 
             ViewBag.Brands = _context.Brands.Where(x => !x.IsDeleted).ToList();
-            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).Where(x => x.Id == product.Id).Include(x => x.ProductCount).Include(x => x.ProductSize).Include(x => x.TypeProduct).ThenInclude(x => x.Category).ToList();
+            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).Where(x => x.Id == product.Id).Include(x=>x.ProductFoodPairings).Include(x => x.ProductCount).Include(x => x.ProductSize).Include(x => x.TypeProduct).ThenInclude(x => x.Category).ToList();
             ViewBag.Countries = _context.Countries.ToList();
             ViewBag.ProductSize = _context.ProductSize.ToList();
             ViewBag.ProductCountPack = _context.ProductCount.ToList();
@@ -314,7 +340,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         public IActionResult Edit(Product product)
         {
             ViewBag.Brands = _context.Brands.Where(x => !x.IsDeleted).ToList();
-            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).Where(x=>x.Id==product.Id).Include(x=>x.ProductCount).Include(x=>x.ProductSize).Include(x=>x.TypeProduct).ThenInclude(x=>x.Category).ToList();
+            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).Where(x => x.Id == product.Id).Include(x => x.ProductCount).Include(x => x.ProductSize).Include(x => x.TypeProduct).ThenInclude(x => x.Category).ToList();
             ViewBag.Countries = _context.Countries.ToList();
             ViewBag.ProductSize = _context.ProductSize.ToList();
             ViewBag.ProductCountPack = _context.ProductCount.ToList();
@@ -323,9 +349,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             ViewBag.Sweetdry = _context.sweetDryScales.ToList();
             ViewBag.LiquorFlavor = _context.LiquorFlavors.Where(x => !x.IsDeleted).ToList();
             ViewBag.LiquorColor = _context.LiquorColors.Where(x => !x.IsDeleted).ToList();
-            ViewBag.WineFoodPairing = _context.WineFoodPairings.Where(x => !x.IsDeleted).ToList();
 
-            Product existProduct = _context.Products.Where(x => !x.IsDeleted).Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductSize).Include(x => x.ProductCount).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor).Include(x => x.sweetDryScale).Include(x => x.WineFoodPairing).Include(x => x.TypeProduct).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == product.Id);
+            Product existProduct = _context.Products.Where(x => !x.IsDeleted).Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductSize).Include(x => x.ProductCount).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor).Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).Include(x => x.TypeProduct).ThenInclude(x => x.Category).FirstOrDefault(x => x.Id == product.Id);
             if (existProduct == null) return NotFound();
 
             if (!_context.Brands.Any(x => x.Id == product.BrandId && !x.IsDeleted))
@@ -470,20 +495,32 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existProduct.IsAvailable = product.IsAvailable;
             existProduct.BrandId = product.BrandId;
             existProduct.CountryId = product.CountryId;
-            if (existProduct.ProductCountId!=null)
+            if (existProduct.ProductCountId != null)
             {
                 existProduct.ProductCountId = product.ProductCountId;
             }
-            else if (existProduct.ProductSizeId!=null)
+            else if (existProduct.ProductSizeId != null)
             {
                 existProduct.ProductSizeId = product.ProductSizeId;
             }
-            if (existProduct.CategoryId==2)
+            if (existProduct.CategoryId == 2)
             {
                 existProduct.SweetDryScaleId = product.SweetDryScaleId;
-                existProduct.WineFoodPairingId = product.WineFoodPairingId;
+                if (product.WineFoodPairingIds != null)
+                {
+                    existProduct.ProductFoodPairings.RemoveAll(x => !product.WineFoodPairingIds.Contains(x.Id));
+                    foreach (var foods in product.WineFoodPairingIds)
+                    {
+                        ProductFoodPairing food = new ProductFoodPairing
+                        {
+                            ProductId= product.Id,
+                            WineFoodPairingId = foods
+                        };
+                        existProduct.ProductFoodPairings.Add(food);
+                    }
+                }
             }
-            if (existProduct.CategoryId==3)
+            if (existProduct.CategoryId == 3)
             {
                 existProduct.LiquorColorId = product.LiquorColorId;
                 existProduct.LiquorFlavorId = product.LiquorFlavorId;

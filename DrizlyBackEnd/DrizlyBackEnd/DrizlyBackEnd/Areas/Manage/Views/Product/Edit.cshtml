@@ -11,7 +11,6 @@
     var productupdatedate = "";
     var productcreatedate = "";
 
-
     foreach (var product in ViewBag.Products)
     {
         productimage = product.Image;
@@ -53,6 +52,18 @@
                         <h6 class="my-2">Update Date:  <span class="text-info">@productupdatedate</span></h6>
                         <h6>Category: <span class="text-info">@productcategory</span></h6>
                         <h6>Type: <span class="text-info">@producttpye</span></h6>
+                        @if (Model.CategoryId == 2)
+                        {
+                    <h6>
+                        Pairing Taste:
+                        @foreach (var item in Model.ProductFoodPairings)
+                        {
+                            <span class="text-info">
+                                @item.WineFoodPairing.Name
+                            </span>
+                         }
+                        </h6>
+                        }
                         <hr>
                         <form asp-action="edit" method="post" enctype="multipart/form-data">
                             <div class="form-row">
@@ -115,9 +126,9 @@
                                         <select class="form-control" asp-for="SweetDryScaleId" asp-items="@new SelectList(ViewBag.Sweetdry, nameof(SweetDryScale.Id), nameof(SweetDryScale.Name))">
                                         </select>
                                     </div>
-                                    <div class="col-lg-6 form-group">
-                                        <label asp-for="WineFoodPairingId">Wine Food Pairing</label>
-                                        <select class="form-control" asp-for="WineFoodPairingId" asp-items="@new SelectList(ViewBag.WineFoodPairing, nameof(WineFoodPairing.Id), nameof(WineFoodPairing.Name))">
+                                    <div class="form-group col-lg-6">
+                                        <label asp-for="WineFoodPairingIds">Wine Food Pairings</label>
+                                        <select class="form-control foods-select" asp-for="WineFoodPairingIds" asp-items="@(new SelectList(ViewBag.WineFoodPairing,"Id","Name"))">
                                         </select>
                                     </div>
                                 </div>

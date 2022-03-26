@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220326121524_WineFoodPairingMultipleAlter")]
+    partial class WineFoodPairingMultipleAlter
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,7 +372,7 @@ namespace DrizlyBackEnd.Migrations
 
                     b.HasIndex("WineFoodPairingId");
 
-                    b.ToTable("ProductFoodPairings");
+                    b.ToTable("ProductFoodPairing");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.ProductSize", b =>

@@ -90,9 +90,9 @@ namespace DrizlyBackEnd.Controllers
         {
             Product product = _context.Products
                 .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
-                .Include(x=>x.sweetDryScale).Include(x=>x.WineFoodPairing).Include(x=>x.LiquorColor).Include(x=>x.LiquorFlavor)
+                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x=>x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
-                .FirstOrDefault(x => x.Id == id && !x.IsDeleted);
+                .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
             if (product == null) return NotFound();
 
             ProductDetailViewModel productDetailVM = new ProductDetailViewModel

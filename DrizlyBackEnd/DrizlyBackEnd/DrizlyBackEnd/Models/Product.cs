@@ -51,7 +51,8 @@ namespace DrizlyBackEnd.Models
         public int CategoryId { get; set; }
         public LiquorColor LiquorColor { get; set; }
         public int? LiquorColorId { get; set; }
-        public WineFoodPairing WineFoodPairing { get; set; }
-        public int? WineFoodPairingId { get; set; }
+        [NotMapped]
+        public List<int> WineFoodPairingIds { get; set; }
+        public List<ProductFoodPairing> ProductFoodPairings { get; set; }
     }
 }

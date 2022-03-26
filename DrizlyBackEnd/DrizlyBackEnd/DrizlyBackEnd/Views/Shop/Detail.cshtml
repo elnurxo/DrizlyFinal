@@ -120,10 +120,18 @@
                                 <div class="row-name">Sweet-Dry Scale</div>
                                 <div class="row-data"><span>@Model.Product.sweetDryScale.Name </span></div>
                             </div>
-                            <div class="detail-row">
-                                <div class="row-name">Food Pairing</div>
-                                <div class="row-data"><span>@Model.Product.WineFoodPairing.Name </span></div>
-                            </div>
+                            @if (Model.Product.ProductFoodPairings.Count>0)
+                            {
+                                <div class="detail-row">
+                                    <div class="row-name">Food Pairing</div>
+                                    <div class="row-data">
+                                        @foreach (var item in Model.Product.ProductFoodPairings)
+                                        {
+                                            <span>@item.WineFoodPairing.Name</span>
+                                        }
+                                    </div>
+                                </div>
+                            }
                         }
                         @if (Model.Product.CategoryId == 3)
                         {

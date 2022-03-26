@@ -1,6 +1,7 @@
 ﻿using DrizlyBackEnd.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         //INDEX ACTION
         public IActionResult Index(string filter,int page = 1)
         {
-            ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).ToList();
+            ViewBag.Products = _context.ProductFoodPairings.ToList();
 
             ViewBag.Filter = filter;
 
@@ -117,12 +118,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existWineFoodPairing == null)
                 return NotFound();
 
-            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.WineFoodPairingId == id).ToList();
+            ViewBag.FoodPairing = _context.ProductFoodPairings.Where(x => x.WineFoodPairingId == id).Include(x=>x.Product).ToList();
 
-            foreach (var product in ViewBag.Products)
+            foreach (var product in ViewBag.FoodPairing)
             {
-                product.IsDeleted = true;
+                _context.ProductFoodPairings.Remove(product);
             }
+           
 
             existWineFoodPairing.IsDeleted = true;
             _context.SaveChanges();
@@ -138,11 +140,11 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existWineFoodPairing == null)
                 return NotFound();
 
-            ViewBag.Products = _context.Products.Where(x => x.IsDeleted).Where(x => x.WineFoodPairingId == id).ToList();
+            ViewBag.FoodPairing = _context.ProductFoodPairings.Where(x => x.WineFoodPairingId == id).Include(x => x.Product).ToList();
 
-            foreach (var product in ViewBag.Products)
+            foreach (var product in ViewBag.FoodPairing)
             {
-                product.IsDeleted = false;
+                _context.ProductFoodPairings.Add(product);
             }
 
             existWineFoodPairing.IsDeleted = false;
