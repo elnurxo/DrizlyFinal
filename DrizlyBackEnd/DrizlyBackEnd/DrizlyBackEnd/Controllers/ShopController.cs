@@ -28,6 +28,7 @@ namespace DrizlyBackEnd.Controllers
             .Where(x=>x.CategoryId==id)
             .Include(x => x.Brand)
             .Include(x=>x.Country)
+            .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
             .Include(x => x.TypeProduct)
             .ThenInclude(x=>x.Category)
             .Where(x => !x.IsDeleted).Where(x => x.IsAvailable);
@@ -78,11 +79,13 @@ namespace DrizlyBackEnd.Controllers
                 products = products.Where(x => x.Abv >= minAbv && x.Abv <= maxAbv);
 
             productVM.Settings = _context.Settings.ToList();
-            productVM.Products = _context.Products.Where(x=>!x.IsDeleted && x.CategoryId==id).Include(x=>x.Brand).Include(x=>x.Country).ToList();
+            productVM.Products = _context.Products.Where(x=>!x.IsDeleted && x.CategoryId==id).Include(x=>x.Brand).Include(x=>x.Country).Include(x=>x.ProductComments).ToList();
             productVM.Brands = _context.Brands.Where(x => !x.IsDeleted).Include(x => x.Products).ToList();
             productVM.Countries = _context.Countries.Include(x => x.Products).ToList();
             productVM.TypeProducts = _context.TypeProducts.Where(x => !x.IsDeleted).Where(x=>x.CategoryId==id).Include(x => x.Products).Include(x=>x.Category).ToList();
             productVM.Category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            productVM.Comment = _context.ProductComments.ToList();
+
 
             return View(productVM);
         }

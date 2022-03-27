@@ -6,21 +6,12 @@
         <div class="rating-stars">
             <div class="stars-wrapper">
                 <label>Rating</label>
-                <div class="stars">
-                    @*<input class="star star-5" value="5" asp-for="Rate" id="star-5" type="radio" name="star" />
-        <label class="star star-5" asp-for="Rate"></label>
-        <input class="star star-4" value="4" asp-for="Rate" id="star-4" type="radio" name="star" />
-        <label class="star star-4" asp-for="Rate"></label>
-        <input class="star star-3" value="3" asp-for="Rate" id="star-3" type="radio" name="star" />
-        <label class="star star-3" for="star-3"></label>
-        <input class="star star-2" value="2" id="star-2" type="radio" name="star" />
-        <label class="star star-2" for="star-2"></label>*@
-                    <input type="radio" value="1" asp-for="Rate" />
-                    <input type="radio" value="2" asp-for="Rate" />
-                    <input type="radio" value="3" asp-for="Rate" />
-                    <input type="radio" value="4" asp-for="Rate" />
-                    <input type="radio" value="5" asp-for="Rate" />
-                    @*<label class="star star-1"asp-for="Rate"></label>*@
+                <div class="stars" style=" align-self: center;">
+                    <input  type="radio" value="1" asp-for="Rate" />
+                    <input  type="radio" value="2" asp-for="Rate" />
+                    <input  type="radio" value="3" asp-for="Rate" />
+                    <input  type="radio" value="4" asp-for="Rate" />
+                    <input  type="radio" value="5" asp-for="Rate" />
                 </div>
             </div>
         </div>
@@ -56,4 +47,9 @@
                 top: 50%;
                 transform: translate(-50%, -50%);
             }
+        .stars input {
+            margin-right: 4px;
+            height: 15px;
+            width:15px;
+        }
     </style>

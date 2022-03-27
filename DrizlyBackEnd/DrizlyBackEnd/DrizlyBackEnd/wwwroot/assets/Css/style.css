@@ -575,8 +575,7 @@ body::-webkit-scrollbar-thumb {
 }
 .navbar-basket .basket-count {
   position: absolute;
-  color: #24282f;
-  right: 5px;
+  right: 2px;
   top: 16px;
   font-size: 10px;
 }

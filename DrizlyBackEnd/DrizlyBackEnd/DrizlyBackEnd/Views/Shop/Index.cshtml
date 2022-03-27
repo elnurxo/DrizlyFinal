@@ -1,7 +1,7 @@
 ﻿@model ShopViewModel
 
 @{
-    ViewData["Title"] = "Drizly: Shop "+Model.Category.Name;
+    ViewData["Title"] = "Drizly: Shop: "+Model.Category.Name;
     int countrycounter=0;
 }
 <main>
@@ -86,6 +86,16 @@
                                         {
                                             @if (category.Id == product.TypeProductId)
                                             {
+                                                var result = 0;
+                                                decimal end = 0;
+                                                foreach (var comment in product.ProductComments)
+                                                {
+                                                    result += @comment.Rate;
+                                                }
+                                                if (result != 0)
+                                                {
+                                                    end = decimal.Divide(result, product.ProductComments.Count);
+                                                }
                                                 <li class="drink-slides">
                                                     <div class="whole-product-slide">
                                                         <div class="drink-slide-info">
@@ -101,12 +111,24 @@
                                                                 <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
                                                             </div>
                                                             <div class="drink-rate">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                                <span class="review-count">214</span>
+                                                                @{ var tamhisse = Math.Truncate(end);
+                                                                    var yuvarlaq = Math.Ceiling(end);}
+                                                                @for (int i = 1; i <= 5; i++)
+                                                                {
+                                                                    if (end >= i)
+                                                                    {
+                                                                        <i class="fas fa-star"></i>
+                                                                    }
+                                                                    else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                                                    {
+                                                                        <i class="bi bi-star-half"></i>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <i class="fa fa-star-o"></i>
+                                                                    }
+                                                                }
+                                                                <span class="review-count">@product.ProductComments.Count</span>
                                                             </div>
                                                         </div>
                                                         <div class="add-to-basket">
@@ -312,3 +334,15 @@
     <script src="~/assets/Js/pricerange.js"></script>
     <script src="~/assets/Js/slickslider.js"></script>
 }
+<style>
+    .drink-rate i {
+        line-height: 0 !important;
+    }
+
+    .drink-rate i::before {
+        line-height: 0 !important;
+    }
+    .drink-rate .bi-star-half{
+        font-size: 16px;
+    }
+</style>

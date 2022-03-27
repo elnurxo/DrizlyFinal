@@ -10,6 +10,7 @@ namespace DrizlyBackEnd.ViewModels
     {
         public List<Settings> Settings { get; set; }
         public List<Product> Products { get; set; }
+        public List<ProductComment> Comment { get; set; }
         public List<Country> Countries { get; set; }
         public List<TypeProduct> TypeProducts { get; set; }
         public Category Category { get; set; }
