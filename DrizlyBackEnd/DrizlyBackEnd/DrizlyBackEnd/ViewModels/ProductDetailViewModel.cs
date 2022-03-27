@@ -9,5 +9,6 @@ namespace DrizlyBackEnd.ViewModels
     public class ProductDetailViewModel
     {
         public Product Product { get; set; }
+        public ProductComment Comment { get; set; }
     }
 }

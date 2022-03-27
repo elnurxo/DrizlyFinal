@@ -2,6 +2,16 @@
 
 @{
     ViewData["Title"] = "Drizly: Detail " + Model.Product.Name;
+    var result = 0;
+    decimal end = 0;
+    foreach (var comment in Model.Product.ProductComments)
+    {
+        result += @comment.Rate;
+    }
+        if (result != 0)
+        {
+            end = decimal.Divide(result, @Model.Product.ProductComments.Count);
+        }
 }
 
 <main class="detail-main">
@@ -45,17 +55,30 @@
                                 </li>
                             }
                         </ul>
-
                         <span class="product-rate">
                             <span class="rate-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fa fa-star-o"></i>
+                                @{ var tamhisse = Math.Truncate(end);
+                                    var yuvarlaq = Math.Ceiling(end);}
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (end >= i)
+                                    {
+                                        <i class="fas fa-star"></i>
+                                    }
+                                    else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                    {
+                                        <i class="bi bi-star-half"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star-o"></i>
+                                    }
+                                }
                             </span>
-                            <span class="rate-number">4.7</span>
-                            <span class="rate-count">(1567 Reviews)</span>
+                            <span class="rate-number">
+                                @end.ToString("0.0")
+                            </span>
+                            <span class="rate-count">(@Model.Product.ProductComments.Count Reviews)</span>
                         </span>
                         <ul class="product-rightside-detail">
                             <li class="drink-name">@Model.Product.TypeProduct.Name</li>
@@ -120,7 +143,7 @@
                                 <div class="row-name">Sweet-Dry Scale</div>
                                 <div class="row-data"><span>@Model.Product.sweetDryScale.Name </span></div>
                             </div>
-                            @if (Model.Product.ProductFoodPairings.Count>0)
+                            @if (Model.Product.ProductFoodPairings.Count > 0)
                             {
                                 <div class="detail-row">
                                     <div class="row-name">Food Pairing</div>
@@ -162,49 +185,149 @@
                     <h2 class="details-header">Community Reviews</h2>
                     <span class="product-rate">
                         <span class="rate-stars">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fa fa-star-o"></i>
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (end >= i)
+                                {
+                                    <i class="fas fa-star"></i>
+                                }
+                                else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                {
+                                    <i class="bi bi-star-half"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa fa-star-o"></i>
+                                }
+                            }
                         </span>
-                        <span class="rate-number">4.7</span>
-                        <span class="rate-count">(1567 Reviews)</span>
+                        <span class="rate-number">@end.ToString("0.0")</span>
+                        <span class="rate-count">(@Model.Product.ProductComments.Count  Reviews)</span>
                     </span>
                     <span class="progress-review-container">
                         <span class="rate-value">5</span>
-                        <div class="progress-bar-container star-five-container" data-percentage='31'>
+                        @{ var counter5 = 0;}
+                        @foreach (var comment in @Model.Product.ProductComments)
+                        {
+                            if (comment.Rate == 5)
+                            {
+                                counter5++;
+                            }
+                        }
+                        @{
+                            decimal progress5 = 0;
+                            if (result != 0)
+                            {
+                                progress5 = decimal.Divide(counter5, @Model.Product.ProductComments.Count) * 100;
+                            }
+
+                        }
+                        <div class="progress-bar-container star-five-container" data-percentage='@(progress5==0?0:progress5)'>
                             <div class="progress-bar-inner star-five"></div>
                         </div>
-                        <span class="rate-count">(<span>3361</span>)</span>
+                        <span class="rate-count">
+                            (<span> @counter5 </span>)
+                        </span>
                     </span>
                     <span class="progress-review-container">
                         <span class="rate-value">4</span>
-                        <div class="progress-bar-container star-four-container" data-percentage='5'>
+                        @{ var counter4 = 0;}
+                        @foreach (var comment in @Model.Product.ProductComments)
+                        {
+                            if (comment.Rate == 4)
+                            {
+                                counter4++;
+                            }
+                        }
+                        @{
+                            decimal progress4 = 0;
+                            if (result != 0)
+                            {
+                                progress4 = decimal.Divide(counter4, @Model.Product.ProductComments.Count) * 100;
+                            }
+                        }
+                        <div class="progress-bar-container star-four-container" data-percentage='@(progress4==0?0:progress4)'>
                             <div class="progress-bar-inner star-four"></div>
                         </div>
-                        <span class="rate-count">(<span>2011</span>)</span>
+                        <span class="rate-count">
+                            (
+                            <span> @counter4 </span>)
+                        </span>
                     </span>
                     <span class="progress-review-container">
                         <span class="rate-value">3</span>
-                        <div class="progress-bar-container star-three-container" data-percentage='69'>
+                        @{ var counter3 = 0;}
+                        @foreach (var comment in @Model.Product.ProductComments)
+                        {
+                            if (comment.Rate == 3)
+                            {
+                                counter3++;
+                            }
+                        }
+                        @{
+                            decimal progress3 = 0;
+                            if (result != 0)
+                            {
+                                progress3 = decimal.Divide(counter3, @Model.Product.ProductComments.Count) * 100;
+                            }
+                        }
+                        <div class="progress-bar-container star-three-container" data-percentage='@(progress3==0?0:progress3)'>
                             <div class="progress-bar-inner star-three"></div>
                         </div>
-                        <span class="rate-count">(<span>1292</span>)</span>
+                        <span class="rate-count">
+                            (
+                            <span> @counter3 </span>)
+                        </span>
                     </span>
                     <span class="progress-review-container">
                         <span class="rate-value">2</span>
-                        <div class="progress-bar-container star-two-container" data-percentage='2'>
+                        @{ var counter2 = 0;}
+                        @foreach (var comment in @Model.Product.ProductComments)
+                        {
+                            if (comment.Rate == 2)
+                            {
+                                counter2++;
+                            }
+                        }
+                        @{
+                            decimal progress2 = 0;
+                            if (result != 0)
+                            {
+                                progress2 = decimal.Divide(counter2, @Model.Product.ProductComments.Count) * 100;
+                            }
+                        }
+                        <div class="progress-bar-container star-two-container" data-percentage='@(progress2==0?0:progress2)'>
                             <div class="progress-bar-inner star-two"></div>
                         </div>
-                        <span class="rate-count">(<span>2011</span>)</span>
+                        <span class="rate-count">
+                            (
+                            <span> @counter2 </span>)
+                        </span>
                     </span>
                     <span class="progress-review-container">
                         <span class="rate-value">1</span>
-                        <div class="progress-bar-container star-one-container" data-percentage='10'>
+                        @{ var counter1 = 0;}
+                        @foreach (var comment in @Model.Product.ProductComments)
+                        {
+                            if (comment.Rate == 1)
+                            {
+                                counter1++;
+                            }
+                        }
+                        @{
+                            decimal progress1 = 0;
+                            if (result != 0)
+                            {
+                                progress1 = decimal.Divide(counter1, @Model.Product.ProductComments.Count) * 100;
+                            }
+                        }
+                        <div class="progress-bar-container star-one-container" data-percentage='@(progress1==0?0:progress1)'>
                             <div class="progress-bar-inner star-one"></div>
                         </div>
-                        <span class="rate-count">(<span>482</span>)</span>
+                        <span class="rate-count">
+                            (
+                            <span> @counter1 </span>)
+                        </span>
                     </span>
                 </div>
                 <!-- Write Review -->
@@ -212,124 +335,46 @@
                     <div class="write-review-container">
                         <button class="write-review-btn"><span>Write review</span></button>
                     </div>
-                    <form class="review-form" action="#">
-                        <h2>Write a review</h2>
-                        <div class="rating-stars">
-                            <div class="stars-wrapper">
-                                <label>Rating</label>
-                                <div class="stars">
-                                    <input class="star star-5" value="5" id="star-5" type="radio" name="star" />
-                                    <label class="star star-5" for="star-5"></label>
-                                    <input class="star star-4" value="4" id="star-4" type="radio" name="star" />
-                                    <label class="star star-4" for="star-4"></label>
-                                    <input class="star star-3" value="3" id="star-3" type="radio" name="star" />
-                                    <label class="star star-3" for="star-3"></label>
-                                    <input class="star star-2" value="2" id="star-2" type="radio" name="star" />
-                                    <label class="star star-2" for="star-2"></label>
-                                    <input class="star star-1" value="1" id="star-1" type="radio" name="star" />
-                                    <label class="star star-1" for="star-1"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="your-review-wrapper">
-                            <div class="form__group">
-                                <label for="message" class="form__label">Your Review</label>
-                                <textarea id="message" class="form__field" placeholder="Your Message" rows="4"></textarea>
-                            </div>
-                        </div>
-                        <span class="submit-cancel-wrapper">
-                            <button class="submit-review-btn" type="submit">
-                                <span>Submit</span>
-                            </button>
-                            <button class="cancel-review-btn">
-                                <span>Cancel</span>
-                            </button>
-                        </span>
-                    </form>
+                    @Html.Partial("_ProductCommentPartialView", Model.Comment)
                     <ul class="comments-ul">
-                        <li>
-                            <article>
-                                <span class="comment-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span>
-                                <span class="comment">
-                                    <img src="https://i.pinimg.com/474x/a0/4d/84/a04d849cf591c2f980548b982f461401.jpg" width="31" style="border-radius:50%" alt="Avatar Username" />
-                                    <span class="customer-name-date">
-                                        <span class="customer-name">Carlos Reynoso</span>
-                                        <span class="comment-date">Mar 7 2022</span>
+                        @foreach (var comment in Model.Product.ProductComments)
+                        {
+                            <li>
+                                <article>
+                                    <span class="comment-rate">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <i class="@(comment.Rate>=i?"fas fa-star":"fa fa-star-o")"></i>
+                                        }
                                     </span>
-                                    <p class="comment-content">Can’t ever go wrong with fireball</p>
-                                </span>
-                            </article>
-                        </li>
-                        <li>
-                            <article>
-                                <span class="comment-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span>
-                                <span class="comment">
-                                    <span class="customer-name-date">
-                                        <span class="customer-name">Carlos Reynoso</span>
-                                        <span class="comment-date">Mar 7 2022</span>
+                                    <span class="comment">
+                                        <img src="~/uploads/users/@(comment.AppUser.Image==null?"avatar.png":comment.AppUser.Image)" width="31" style="border-radius:50%" alt="User Name Username" />
+                                        <span class="customer-name-date">
+                                            <span class="customer-name">@comment.AppUser.FullName</span>
+                                            <span class="comment-date">@comment.CreatedAt.ToString("MMMM dd, yyyy")</span>
+                                        </span>
+                                        <p class="comment-content">@comment.Text</p>
                                     </span>
-                                    <p class="comment-content">Can’t ever go wrong with fireball</p>
-                                </span>
-                            </article>
-                        </li>
-                        <li>
-                            <article>
-                                <span class="comment-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span>
-                                <span class="comment">
-                                    <span class="customer-name-date">
-                                        <span class="customer-name">Carlos Reynoso</span>
-                                        <span class="comment-date">Mar 7 2022</span>
-                                    </span>
-                                    <p class="comment-content">Can’t ever go wrong with fireball</p>
-                                </span>
-                            </article>
-                        </li>
-                        <li>
-                            <article>
-                                <span class="comment-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span>
-                                <span class="comment">
-                                    <span class="customer-name-date">
-                                        <span class="customer-name">Carlos Reynoso</span>
-                                        <span class="comment-date">Mar 7 2022</span>
-                                    </span>
-                                    <p class="comment-content">Can’t ever go wrong with fireball</p>
-                                </span>
-                            </article>
-                        </li>
+                                </article>
+                            </li>
+                        }
+                        @if (Model.Product.ProductComments.Count == 0)
+                        {
+                            <h4 class="font-weight-bold text-muted" style=" margin: 20px;">No Comment About this product, be the first one to leave!</h4>
+                        }
                     </ul>
-                    <div class="comments-pagination">
-                        <ul class="pagination-box">
-                            <li><a class="Previous" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                            <li><a class="active-pagination" href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a class="Next" href="#"><i class="fas fa-chevron-right"></i></a></li>
-                        </ul>
-                    </div>
+                    @if (Model.Product.ProductComments.Count > 0)
+                    {
+                        <div class="comments-pagination">
+                            <ul class="pagination-box">
+                                <li><a class="Previous" href="#"><i class="fas fa-chevron-left"></i></a></li>
+                                <li><a class="active-pagination" href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a class="Next" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
@@ -337,5 +382,15 @@
     </div>
 </main>
 @section Scripts{
-    <script src="assets/Js/review-progress.js"></script>
+    <script src="~/assets/Js/review-progress.js"></script>
 }
+<style>
+    .rate-stars i {
+        line-height: 0 !important;
+    }
+
+    .rate-stars .bi-star-half::before {
+        line-height: 0 !important;
+        font-size: 20px;
+    }
+</style>

@@ -26,6 +26,8 @@ namespace DrizlyBackEnd.Models
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
         public int CountryId { get; set; }
+        [Range(1, 5)]
+        public int Rate { get; set; }
         public Country Country { get; set; }
         [StringLength(maximumLength: 100)]
         public string Image { get; set; }
@@ -54,5 +56,6 @@ namespace DrizlyBackEnd.Models
         [NotMapped]
         public List<int> WineFoodPairingIds { get; set; }
         public List<ProductFoodPairing> ProductFoodPairings { get; set; }
+        public List<ProductComment> ProductComments { get; set; }
     }
 }

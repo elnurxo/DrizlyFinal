@@ -87,8 +87,8 @@
                 }
 
             </ul>
-            <a href="register.html" class="lets-do-this" role="button">Let's get start</a>
-        </span>
+            <a asp-controller="@(member==null?"account":"shop")" asp-action="@(member==null?"register":"index")"asp-route-id="@(member!=null?"1":"")" class="lets-do-this" role="button">Let's get start</a>
+            </span>
     </section>
     <!-- Brands Slider Section -->
     <section class="brand-area section-padding">

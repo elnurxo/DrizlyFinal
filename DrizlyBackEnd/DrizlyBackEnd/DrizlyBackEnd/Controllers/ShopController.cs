@@ -1,5 +1,6 @@
 ﻿using DrizlyBackEnd.Models;
 using DrizlyBackEnd.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -92,15 +93,75 @@ namespace DrizlyBackEnd.Controllers
                 .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
                 .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x=>x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
+                .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
             if (product == null) return NotFound();
 
             ProductDetailViewModel productDetailVM = new ProductDetailViewModel
             {
                 Product = product,
+                Comment = new ProductComment { ProductId = id },
             };
 
             return View(productDetailVM);
+        }
+
+        //COMMENT ACTION
+        [HttpPost]
+        [Authorize(Roles = "Member")]
+        public IActionResult Comment(ProductComment comment)
+        {
+
+            AppUser member = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                member = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+            }
+            if (member == null)
+                return RedirectToAction("login", "account");
+
+            Product product = _context.Products
+               .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
+               .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x => x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
+                .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
+               .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
+               .FirstOrDefault(x => x.Id == comment.ProductId && !x.IsDeleted);
+
+            if (product == null) return NotFound();
+
+            if (!ModelState.IsValid)
+            {
+
+                ProductDetailViewModel productDetailVM = new ProductDetailViewModel
+                {
+                    Product = product,
+                    Comment = comment,
+                };
+
+                return View("Detail", productDetailVM);
+            }
+
+            comment.AppUserId = member.Id;
+
+            comment.CreatedAt = DateTime.UtcNow.AddHours(4);
+            product.ProductComments.Add(comment);
+            product.Rate = (int)Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count);
+
+
+            List<ProductComment> existComments = _context.ProductComments.Include(x=>x.AppUser).Include(x=>x.Product).ToList();
+            foreach (var existcomment in existComments)
+            {
+                if (existcomment.ProductId==comment.ProductId && existcomment.AppUserId==comment.AppUserId)
+                {
+                    ModelState.AddModelError("", "One comment for one product");
+                    TempData["Warning"] = "You can only share comments once for a product!";
+                    return RedirectToAction("detail",new { id=product.Id});
+                }
+            }
+
+            _context.SaveChanges();
+            TempData["Success"] = "Comment posted successfully!";
+            return RedirectToAction("detail", new { id = comment.ProductId });
         }
     }
 }

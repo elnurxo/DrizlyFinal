@@ -31,5 +31,6 @@ namespace DrizlyBackEnd.Models
         public DbSet<LiquorColor> LiquorColors { get; set; }
         public DbSet<WineFoodPairing> WineFoodPairings { get; set; }
         public DbSet<ProductFoodPairing> ProductFoodPairings { get; set; }
+        public DbSet<ProductComment> ProductComments { get; set; }
     }
 }

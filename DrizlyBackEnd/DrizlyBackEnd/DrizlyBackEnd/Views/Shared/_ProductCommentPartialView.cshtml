@@ -1,0 +1,59 @@
+﻿@model ProductComment
+
+    <hr />
+    <form class="review-form" asp-action="comment" asp-controller="shop" method="post">
+        <h2>Write a review</h2>
+        <div class="rating-stars">
+            <div class="stars-wrapper">
+                <label>Rating</label>
+                <div class="stars">
+                    @*<input class="star star-5" value="5" asp-for="Rate" id="star-5" type="radio" name="star" />
+        <label class="star star-5" asp-for="Rate"></label>
+        <input class="star star-4" value="4" asp-for="Rate" id="star-4" type="radio" name="star" />
+        <label class="star star-4" asp-for="Rate"></label>
+        <input class="star star-3" value="3" asp-for="Rate" id="star-3" type="radio" name="star" />
+        <label class="star star-3" for="star-3"></label>
+        <input class="star star-2" value="2" id="star-2" type="radio" name="star" />
+        <label class="star star-2" for="star-2"></label>*@
+                    <input type="radio" value="1" asp-for="Rate" />
+                    <input type="radio" value="2" asp-for="Rate" />
+                    <input type="radio" value="3" asp-for="Rate" />
+                    <input type="radio" value="4" asp-for="Rate" />
+                    <input type="radio" value="5" asp-for="Rate" />
+                    @*<label class="star star-1"asp-for="Rate"></label>*@
+                </div>
+            </div>
+        </div>
+        <div class="your-review-wrapper">
+            <div class="form__group">
+                <label asp-for="Text" class="form__label">Your Review</label>
+                <textarea asp-for="Text" class="form__field" placeholder="Your Review" rows="4"></textarea>
+                <span class="text-danger" asp-validation-for="Text"></span>
+            </div>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+        <input type="hidden" value="@Model.ProductId" name="productId" />
+        <span class="submit-cancel-wrapper">
+            <button class="submit-review-btn" type="submit">
+                <span>Submit</span>
+            </button>
+            <a class="cancel-review-btn">
+                <span>Cancel</span>
+            </a>
+        </span>
+    </form>
+    <style>
+        .cancel-review-btn {
+            background-color: #e12c2c;
+            border-radius: 5px;
+            position: relative;
+        }
+
+            .cancel-review-btn span {
+                position: absolute;
+                color: white !important;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+    </style>
