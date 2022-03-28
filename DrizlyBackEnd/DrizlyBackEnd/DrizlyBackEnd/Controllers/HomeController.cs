@@ -28,5 +28,19 @@ namespace DrizlyBackEnd.Controllers
             return View(homeVM);
         }
 
+        //SEARCH ACTION
+         public IActionResult SearchProduct(string searchString)
+        {
+            var products = _context.Products.AsQueryable();
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(x => x.Name.ToLower().Trim().Contains(searchString.ToLower().Trim()));
+            }
+            else
+            {
+                products = null;
+            }
+            return PartialView("_SearchProductPartialView",products.ToList());
+        }
     }
 }

@@ -1,4 +1,45 @@
-$(function () {  
+$(function () {
+    //SEARCH INPUT DESKTOP
+    $("#search-desktop").on("keyup", function () {
+        var searchform = document.getElementById("search-form");
+        var url = searchform.action;
+        var searchinput = $("#search-desktop").val().toLowerCase();
+
+        if (searchinput.length < 3) {
+            $(".navbar-search-dropdown").children().remove();
+            $(".navbar-search-dropdown").css("display", "none");
+            return;
+        }
+        if (searchinput==undefined || searchinput==null || searchinput=="") {
+            $(".navbar-search-dropdown").children().remove();
+            $(".navbar-search-dropdown").css("display", "none");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("searchString", searchinput);
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw response
+                }
+                return response.text();
+            })
+            .then(data => {
+                $(".navbar-search-dropdown").html(data);
+                $(".navbar-search-dropdown").css("display", "block")
+            })
+    });
+
+
+
     //NAVBAR SCROLL
     $(document).scroll(function () {
         if ($(window).width() > 992) 

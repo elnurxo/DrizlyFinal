@@ -92,42 +92,19 @@
                         </a>
                     </li>
                     <li class="navbar-left-li navbar-desktop-links">
-                        <div class="navbar-search">
-                            <div class="navbar-search-icon">
-                                <div class="search-container">
-                                    <i class="fas fa-search"></i>
-                                    <input type="search" class="nav-search-input" placeholder="Search beer, wine, liquor and extras">
+                        <form asp-controller="home" asp-action="searchproduct" id="search-form" method="get" enctype="multipart/form-data">
+                            <div class="navbar-search">
+                                <div class="navbar-search-icon">
+                                    <div class="search-container">
+                                        <i class="fas fa-search"></i>
+                                        <input autocomplete="off" class="nav-search-input" id="search-desktop" name="searchString" placeholder="Search beer, wine, liquor and extras">
+                                    </div>
+                                </div>
+                                <div class="navbar-search-dropdown">
+                                    @*SEARCH DROP DOWN*@
                                 </div>
                             </div>
-                            <div class="navbar-search-dropdown" style="display: none;">
-                                <ul>
-                                    <li>
-                                        <a href="#">
-                                            <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                            <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                            <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                            <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                            <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                        </form>
                     </li>
                 </ul>
             </nav>
