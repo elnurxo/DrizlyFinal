@@ -90,7 +90,7 @@ namespace DrizlyBackEnd.Controllers
             return View(productVM);
         }
         //DETAIL ACTION
-        public IActionResult Detail(int id)
+        public IActionResult Detail(int id, int page = 1)
         {
             Product product = _context.Products
                 .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
@@ -100,10 +100,16 @@ namespace DrizlyBackEnd.Controllers
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
             if (product == null) return NotFound();
 
+            string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
+            int pageSize = string.IsNullOrWhiteSpace(pageSizeStr) ? 3 : int.Parse(pageSizeStr);
+
+            var productcomments = _context.ProductComments.Where(x=>x.ProductId==id).AsQueryable();
+
             ProductDetailViewModel productDetailVM = new ProductDetailViewModel
             {
                 Product = product,
                 Comment = new ProductComment { ProductId = id },
+                Comments = PagenatedList<ProductComment>.Create(productcomments, page, pageSize)
             };
 
             return View(productDetailVM);
@@ -154,11 +160,11 @@ namespace DrizlyBackEnd.Controllers
             List<ProductComment> existComments = _context.ProductComments.Include(x=>x.AppUser).Include(x=>x.Product).ToList();
             foreach (var existcomment in existComments)
             {
-                if (existcomment.ProductId==comment.ProductId && existcomment.AppUserId==comment.AppUserId)
+                if (existcomment.ProductId == comment.ProductId && existcomment.AppUserId == comment.AppUserId)
                 {
                     ModelState.AddModelError("", "One comment for one product");
                     TempData["Warning"] = "You can only share comments once for a product!";
-                    return RedirectToAction("detail",new { id=product.Id});
+                    return RedirectToAction("detail", new { id = product.Id });
                 }
             }
 

@@ -8,10 +8,21 @@
     {
         result += @comment.Rate;
     }
-        if (result != 0)
-        {
-            end = decimal.Divide(result, @Model.Product.ProductComments.Count);
-        }
+    if (result != 0)
+    {
+        end = decimal.Divide(result, @Model.Product.ProductComments.Count);
+    }
+
+    int counter = (Model.Comments.PageIndex - 1) * Model.Comments.PageSize;
+    var temp = -1;
+    if (Model.Comments.PageIndex == 1)
+    {
+        temp = 0;
+    }
+    if (temp == Model.Comments.TotalPages)
+    {
+        temp = -2;
+    }
 }
 
 <main class="detail-main">
@@ -337,7 +348,7 @@
                     </div>
                     @Html.Partial("_ProductCommentPartialView", Model.Comment)
                     <ul class="comments-ul">
-                        @foreach (var comment in Model.Product.ProductComments)
+                        @foreach (var comment in Model.Comments)
                         {
                             <li>
                                 <article>
@@ -367,11 +378,21 @@
                     {
                         <div class="comments-pagination">
                             <ul class="pagination-box">
-                                <li><a class="Previous" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                                <li><a class="active-pagination" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a class="Next" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                                @if (Model.Comments.HasPrev)
+                                {
+                                    <li><a class="Previous" asp-action="detail" asp-route-page="1" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-chevron-left"></i></a></li>
+                                }
+                                @for (int i = 1; i <= 3; i++, temp++)
+                                {
+                                    if ((Model.Comments.PageIndex + temp) != 0 && (Model.Comments.PageIndex + temp) != -1)
+                                    {
+                                        <li><a class="@(Model.Comments.PageIndex==i?"active-pagination":"")"  asp-action="detail" asp-route-page="@(Model.Comments.PageIndex+temp)" asp-route-isDeleted="@ViewBag.IsDeleted" style="display:@((Model.Comments.PageIndex+temp)>Model.Comments.TotalPages?"none":"block")">@(Model.Comments.PageIndex + temp)</a></li>
+                                    }
+                                }
+                                @if (Model.Comments.HasNext)
+                                {
+                                    <li><a class="Next" asp-action="detail" asp-route-page="@Model.Comments.TotalPages" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-chevron-right"></i></a></li>
+                                }
                             </ul>
                         </div>
                     }

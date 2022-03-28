@@ -10,5 +10,7 @@ namespace DrizlyBackEnd.ViewModels
     {
         public Product Product { get; set; }
         public ProductComment Comment { get; set; }
+        public PagenatedList<ProductComment> Comments { get; set; }
+       
     }
 }
