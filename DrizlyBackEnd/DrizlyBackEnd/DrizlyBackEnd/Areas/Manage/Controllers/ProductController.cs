@@ -29,7 +29,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         {
             ViewBag.Filter = filter;
 
-            var products = _context.Products.Include(x => x.Brand).Include(x=>x.Country).Include(x=>x.ProductCount).Include(x => x.ProductSize).Include(x=>x.TypeProduct).ThenInclude(x=>x.Category).AsQueryable();
+            var products = _context.Products.Include(x => x.Brand).Include(x=>x.Country).Include(x=>x.ProductComments).ThenInclude(x=>x.AppUser).Include(x=>x.ProductCount).Include(x => x.ProductSize).Include(x=>x.TypeProduct).ThenInclude(x=>x.Category).AsQueryable();
 
             if (filter != null)
                 products = products.Where(x => x.IsDeleted == (filter == "true" ? true : false));

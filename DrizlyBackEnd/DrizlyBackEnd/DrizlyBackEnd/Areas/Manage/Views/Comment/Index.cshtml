@@ -1,7 +1,7 @@
-﻿@model PagenatedList<Product>
+﻿@model PagenatedList<ProductComment>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Product Reviews";
     int counter = (Model.PageIndex - 1) * Model.PageSize;
     var temp = -1;
     if (Model.PageIndex == 1)
@@ -23,7 +23,7 @@
     <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
 </head>
 <style>
-    .comment-product:hover {
+    .comment-shoe:hover {
         color: red;
     }
 </style>
@@ -33,60 +33,44 @@
 
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between m-4">
-                    <h3>Products</h3>
-                    <form asp-action="index" method="get" class="d-flex">
-                        <div class="form-group" style="display:inherit">
-                            <label for="isDeleted" class="mx-1">Delete status</label>
-                            <select id="isDeleted" class="form-control" name="filter">
-                                <!option class="option-filter" @(ViewBag.Filter == null ? "selected" : "") value=@(null)>All</!option>
-                                <!option class="option-filter" @(ViewBag.Filter == "true" ? "selected" : "") value="true">True</!option>
-                                <!option class="option-filter" @(ViewBag.Filter == "false" ? "selected" : "") value="false">False</!option>
-                            </select>
-                            <button type="submit" class="btn btn-primary filterbtn mx-2" style="height:39px">Filter</button>
-                        </div>
-                    </form>
-                    <a asp-action="create" class="btn btn-success" style="height:39px">Create</a>
+                    <h3>Reviews</h3>
+                    <a asp-action="index" asp-controller="product" class="btn btn-success">Go Back</a>
                 </div>
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Products Table</h5>
+                        <h5 class="card-title">Reviews Table</h5>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Category Name</th>
-                                        <th scope="col">Type Name</th>
-                                        <th scope="col">Brand Name</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">User Image</th>
                                         <th scope="col">Product Name</th>
+                                        <th scope="col">Review</th>
+                                        <th scope="col">Rate</th>
                                         <th scope="col">Product Code</th>
-                                        <th scope="col">Comment Count</th>
-                                        <th scope="col">Image</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Delete Review</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var product in Model)
+                                    @foreach (var review in Model)
                                     {
                                         counter++;
                                     <tr>
                                         <th scope="row">@counter</th>
-                                        <td>@product.TypeProduct.Category.Name</td>
-                                        <td>@product.TypeProduct.Name</td>
-                                        <td>@product.Brand.Name</td>
-                                        <td>@product.Name</td>
-                                        <td>@product.CodePref@product.CodeNum</td>
-                                         <td><a class="comment-product px-5" asp-controller="comment" asp-action="productreview" asp-route-id="@product.Id">@product.ProductComments.Count</a></td>
+                                        <td>@review.AppUser.UserName</td>
+                                        <td><img width="60" style="border-radius:50%;" src="~/uploads/users/@(review.AppUser.Image==null?"avatar.png":@review.AppUser.Image)" alt="User Image" /></td>
+                                        <td>@review.Product.Name</td>
+                                        <td>@review.Text</td>
+                                        <td>@review.Rate</td>
                                         <td>
-                                            <a asp-controller="comment" asp-action="productreview" asp-route-id="@product.Id">
-                                                <img width="50" class="border rounded" src="~/uploads/products/@product.Image" alt="Img Not Found" />
-                                            </a>                     
+                                            @(review.Product.CodePref+review.Product.CodeNum)
                                         </td>
                                         <td>
-                                            <a asp-action="edit" asp-route-id="@product.Id" class="btn btn-warning @(product.IsDeleted?"disabled":"")">Edit</a>
-                                            <a asp-action="@(product.IsDeleted?"restore":"delete")" asp-route-id="@product.Id" id="@product.Id" class="restoredelete btn btn-@(product.IsDeleted?"info":"danger delete-product")">@(product.IsDeleted?"Restore":"Delete")</a>
+                                            <a asp-action="delete" asp-route-id="@review.Id" id="@review.Id" class="btn btn-danger delete-review">Delete</a>
                                         </td>
                                     </tr>
                                     }
@@ -134,3 +118,5 @@
 <!--End content-wrapper-->
 <!--Start Back To Top Button-->
 <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+
+

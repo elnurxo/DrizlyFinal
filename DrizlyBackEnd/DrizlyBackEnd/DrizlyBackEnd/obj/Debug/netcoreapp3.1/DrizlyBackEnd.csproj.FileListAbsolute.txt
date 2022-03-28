@@ -382,3 +382,5 @@ C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\ob
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shop\Detail.cshtml.g.cs
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\DrizlyBackEnd.csproj.AssemblyReference.cache
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ProductCommentPartialView.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Comment\Index.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Areas\Manage\Views\Comment\ProductReview.cshtml.g.cs
