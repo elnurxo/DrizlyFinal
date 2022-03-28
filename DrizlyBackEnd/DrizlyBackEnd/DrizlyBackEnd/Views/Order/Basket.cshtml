@@ -1,0 +1,81 @@
+﻿<!-- MY BASKET -->
+<main>
+    <section id="card-products-section" style="padding-top:50px;">
+        <div class="table-wrapper container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-bordered table-responsive-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="image-th">Images</th>
+                                <th scope="col" class="product-name-th">Product</th>
+                                <th scope="col" class="product-price-th">Unit Price</th>
+                                <th scope="col" class="button-th">Quantity</th>
+                                <th scope="col" class="total-price-th">Total</th>
+                                <th scope="col" class="remove-th">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="image-td">
+                                    <img src="https://products2.imgix.drizly.com/ci-corona-premier-fde2d8d1562060cf.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20https://products2.imgix.drizly.com/ci-corona-premier-fde2d8d1562060cf.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20" alt="" />
+                                </td>
+                                <td class="product-name-td">Light Jacket</td>
+                                <td class="product-price-td">$130.00</td>
+                                <td class="counter-td">
+                                    <div class="number">
+                                        <span class="minus">-</span>
+                                        <input type="text" value="1" />
+                                        <span class="plus">+</span>
+                                    </div>
+                                </td>
+                                <td class="total-price-td">$130.00</td>
+                                <td class="remove-td"><a href="#"><i class="fas fa-solid fa-trash"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td class="image-td">
+                                    <img src="https://products1.imgix.drizly.com/ci-blue-moon-belgian-white-d6c2c5a09c25d4ee.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20" alt="" />
+                                </td>
+                                <td class="product-name-td">Light Jacket</td>
+                                <td class="product-price-td">$130.00</td>
+                                <td class="counter-td">
+                                    <div class="number">
+                                        <span class="minus">-</span>
+                                        <input type="text" value="1" />
+                                        <span class="plus">+</span>
+                                    </div>
+                                </td>
+                                <td class="total-price-td">$130.00</td>
+                                <td class="remove-td"><a href="#"><i class="fas fa-solid fa-trash"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="coupon-enter">
+                        <input type="text" class="coupon-input" placeholder="Coupon code">
+                        <button class="apply-coupon">Apply Coupon</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="card-total-div">
+                        <div class="card-total-header">
+                            Cart Total
+                        </div>
+                        <div class="card-total-item">
+                            <p class="card-total-text">Total</p>
+                            <p class="card-total-price">$250.00</p>
+                        </div>
+                        <button type="submit">Proceed To Checkout</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+@section Scripts{
+    <script src="~/assets/Js/basket-quantity.js"></script>
+}
+<!-- END OF MY BASKET -->

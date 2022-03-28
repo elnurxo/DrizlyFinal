@@ -1,4 +1,17 @@
 $(function () {
+    //SET SESSION STORAGE ON AGE 21 YES CLICK
+    $(".age-yes").click(function () {
+        sessionStorage.setItem('agemodal', 'confirmed');
+         if (sessionStorage.getItem('agemodal') !== null) {
+        $(".age-gate-modal").css("display", "none");
+        $(".age-yes").closest('.age-gate-modal').remove();
+    }
+    });
+    if (sessionStorage.getItem('agemodal') !== null) {
+        $(".age-gate-modal").css("display", "none");
+        $(".age-yes").closest('.age-gate-modal').remove();
+    }
+
     //SEARCH INPUT DESKTOP
     $("#search-desktop").on("keyup", function () {
         var searchform = document.getElementById("search-form");
@@ -37,8 +50,6 @@ $(function () {
                 $(".navbar-search-dropdown").css("display", "block")
             })
     });
-
-
 
     //NAVBAR SCROLL
     $(document).scroll(function () {
@@ -248,7 +259,7 @@ $(function () {
     $(".age-no").click(function(){
         $(".age-no-clicked").css("display","block");
         $(".age-yes").attr("disabled", true);
-        $(".age-yes").css("background","#d27c7c");
+        $(".age-yes").css("background", "#d27c7c");
     });
     $(".age-yes").click(function(){
         $(".age-gate-modal").css("display", "none");

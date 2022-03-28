@@ -5255,4 +5255,207 @@ main .slick-prev:before, main .slick-next:before {
   -webkit-box-shadow: 6px 6px 0 #a42121;
           box-shadow: 6px 6px 0 #a42121;
 }
+/*//BASKET STYLE*/
+main #card-products-section .table-wrapper {
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+
+    main #card-products-section .table-wrapper .table th {
+        text-align: center;
+    }
+
+    main #card-products-section .table-wrapper .table td {
+        height: 130px;
+        line-height: 130px;
+        text-align: center;
+    }
+
+        main #card-products-section .table-wrapper .table td .fa-trash {
+            color: #e12c2c;
+            font-size: 30px;
+            -webkit-transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out;
+        }
+
+            main #card-products-section .table-wrapper .table td .fa-trash:hover {
+                color: #be2323;
+                font-size: 27px;
+            }
+
+        main #card-products-section .table-wrapper .table td .number span {
+            cursor: pointer;
+        }
+
+        main #card-products-section .table-wrapper .table td .number .minus,
+        main #card-products-section .table-wrapper .table td .number .plus {
+            width: 20px;
+            height: 20px;
+            background: #f2f2f2;
+            border-radius: 4px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        main #card-products-section .table-wrapper .table td .number input {
+            height: 50px;
+            width: 100px;
+            text-align: center;
+            font-size: 26px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        main #card-products-section .table-wrapper .table td img {
+            width: 130px;
+        }
+
+        main #card-products-section .table-wrapper .table td i {
+            cursor: pointer;
+            -webkit-transition: 0.3s linear;
+            transition: 0.3s linear;
+        }
+
+            main #card-products-section .table-wrapper .table td i:hover {
+                color: #e12c2c;
+            }
+
+    main #card-products-section .table-wrapper .coupon-enter {
+        margin-bottom: 20px;
+    }
+
+        main #card-products-section .table-wrapper .coupon-enter .coupon-input {
+            border: 2px solid #e4e4e4;
+            padding: 0 15px;
+            height: 50px;
+            margin-right: 15px;
+        }
+
+        main #card-products-section .table-wrapper .coupon-enter .apply-coupon {
+            border: none;
+            background-color: #e12c2c;
+            color: white;
+            height: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            padding-right: 20px;
+            padding-left: 20px;
+            -webkit-transition: 0.3s linear;
+            transition: 0.3s linear;
+        }
+
+            main #card-products-section .table-wrapper .coupon-enter .apply-coupon:hover {
+                color: black;
+                background-color: white;
+                border: 1px solid #e12c2c;
+            }
+
+    main #card-products-section .table-wrapper .update-card-button-div .update-card {
+        float: right;
+        border: none;
+        background-color: #e12c2c;
+        color: white;
+        height: 50px;
+        font-weight: 600;
+        font-size: 16px;
+        text-align: center;
+        padding-right: 20px;
+        padding-left: 20px;
+        -webkit-transition: 0.3s linear;
+        transition: 0.3s linear;
+    }
+
+        main #card-products-section .table-wrapper .update-card-button-div .update-card:hover {
+            color: black;
+            background-color: white;
+            border: 1px solid #e12c2c;
+        }
+
+    main #card-products-section .table-wrapper .card-total-div {
+        padding: 20px;
+    }
+
+        main #card-products-section .table-wrapper .card-total-div .card-total-header {
+            font-size: 25px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #1F2024;
+        }
+
+        main #card-products-section .table-wrapper .card-total-div .card-total-item {
+            height: 50px;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: #999;
+            margin-bottom: 5px;
+            line-height: 50px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            border: 1px solid #e4e4e4;
+            -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+            justify-content: space-between;
+        }
+
+        main #card-products-section .table-wrapper .card-total-div button {
+            margin-top: 20px;
+            margin-bottom: 100px;
+            float: left;
+            border: none;
+            background-color: #e12c2c;
+            color: white;
+            height: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            text-align: center;
+            padding-right: 20px;
+            padding-left: 20px;
+            -webkit-transition: 0.3s linear;
+            transition: 0.3s linear;
+        }
+
+            main #card-products-section .table-wrapper .card-total-div button:hover {
+                color: black;
+                background-color: white;
+                border: 1px solid #e12c2c;
+            }
+
+@media only screen and (max-width: 992px) {
+    .table-wrapper {
+        max-width: 100% !important;
+    }
+
+    .number input {
+        width: 50px !important;
+        height: 45px !important;
+    }
+
+    .number span {
+        padding: 5px !important;
+    }
+
+    .table td {
+        line-height: 40px !important;
+    }
+
+        .table td img {
+            width: 90px !important;
+        }
+}
+
+@media only screen and (max-width: 410px) {
+    .apply-coupon {
+        margin-top: 10px;
+    }
+}
 /*# sourceMappingURL=style.css.map */
