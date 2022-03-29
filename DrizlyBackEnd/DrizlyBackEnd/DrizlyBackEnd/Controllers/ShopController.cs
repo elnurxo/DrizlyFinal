@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -171,6 +172,119 @@ namespace DrizlyBackEnd.Controllers
             _context.SaveChanges();
             TempData["Success"] = "Comment posted successfully!";
             return RedirectToAction("detail", new { id = comment.ProductId });
+        }
+
+        // ADD BASKET
+        public IActionResult AddBasket(int id)
+        {
+            if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
+                return NotFound();
+
+            AppUser member = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                member = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (member == null)
+            {
+                string basketItemsStr = HttpContext.Request.Cookies["basket"];
+                List<BasketItemViewModel> items = new List<BasketItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(basketItemsStr))
+                    items = JsonConvert.DeserializeObject<List<BasketItemViewModel>>(basketItemsStr);
+
+                BasketItemViewModel item = items.FirstOrDefault(x => x.ProductId == id);
+
+                if (item == null)
+                {
+                    item = new BasketItemViewModel { ProductId = id, Count = 1 };
+                    items.Add(item);
+                }
+                else
+                    item.Count++;
+
+                basketItemsStr = JsonConvert.SerializeObject(items);
+                HttpContext.Response.Cookies.Append("basket", basketItemsStr);
+
+                return PartialView("_BasketPartialView", _getBasket(items));
+            }
+            else
+            {
+                BasketItem item = _context.BasketItems.FirstOrDefault(x => x.AppUserId == member.Id && x.ProductId == id);
+
+                if (item == null)
+                {
+                    item = new BasketItem
+                    {
+                        AppUserId = member.Id,
+                        ProductId = id,
+                        CreatedAt = DateTime.UtcNow.AddHours(4),
+                        Count = 1
+                    };
+                    _context.BasketItems.Add(item);
+                }
+                else
+                {
+                    item.Count++;
+                }
+
+                _context.SaveChanges();
+
+                var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
+                return PartialView("_BasketPartialView", _getBasket(items));
+            }
+        }
+
+        // GET BASKET PRIVATE 
+        private BasketViewModel _getBasket(List<BasketItemViewModel> basketItems)
+        {
+            BasketViewModel basketVM = new BasketViewModel
+            {
+                BasketItems = new List<ProductBasketItemViewModel>(),
+                TotalPrice = 0
+            };
+
+            foreach (var item in basketItems)
+            {
+                Product product = _context.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                ProductBasketItemViewModel productBasketItem = new ProductBasketItemViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                basketVM.BasketItems.Add(productBasketItem);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                basketVM.TotalPrice += totalPrice * item.Count;
+            }
+
+            return basketVM;
+        }
+
+        private BasketViewModel _getBasket(List<BasketItem> basketItems)
+        {
+            BasketViewModel basketVM = new BasketViewModel
+            {
+                BasketItems = new List<ProductBasketItemViewModel>(),
+                TotalPrice = 0
+            };
+
+            foreach (var item in basketItems)
+            {
+                Product product = _context.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                ProductBasketItemViewModel productBasketItem = new ProductBasketItemViewModel
+                {
+                    Product = product,
+                    Count = item.Count
+                };
+
+                basketVM.BasketItems.Add(productBasketItem);
+                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                basketVM.TotalPrice += totalPrice * item.Count;
+            }
+
+            return basketVM;
         }
     }
 }

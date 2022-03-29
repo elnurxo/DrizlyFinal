@@ -3,9 +3,19 @@
     @foreach (var item in Model)
     {
         <li>
-            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id">
+            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="d-flex justify-content-between">
                 <img src="~/uploads/products/@item.Image">
-                <span>@item.Name</span>
+                <span class="font-weight-bolder">@item.Name</span>
+                <span>
+                    @if (item.DiscountPercent > 0)
+                    {
+                         <span class="regular-price font-weight-bold text-danger">@((item.SalePrice * (1 - item.DiscountPercent / 100)).ToString("0.00")) $</span>
+                    }
+                    else
+                    {
+                        <span class="regular-price font-weight-bolder text-danger">@item.SalePrice $</span>
+                    }
+                </span>
             </a>
         </li>
     }

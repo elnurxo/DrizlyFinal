@@ -1,4 +1,11 @@
-﻿<!-- MY BASKET -->
+﻿@using DrizlyBackEnd.Services
+@inject LayoutService layoutService
+@{
+    var basket = layoutService.GetBasket();
+    ViewData["Title"] = "Drizly: My Basket";
+}
+
+<!-- MY BASKET -->
 <main>
     <section id="card-products-section" style="padding-top:50px;">
         <div class="table-wrapper container">
@@ -16,38 +23,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="image-td">
-                                    <img src="https://products2.imgix.drizly.com/ci-corona-premier-fde2d8d1562060cf.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20https://products2.imgix.drizly.com/ci-corona-premier-fde2d8d1562060cf.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20" alt="" />
-                                </td>
-                                <td class="product-name-td">Light Jacket</td>
-                                <td class="product-price-td">$130.00</td>
-                                <td class="counter-td">
-                                    <div class="number">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1" />
-                                        <span class="plus">+</span>
-                                    </div>
-                                </td>
-                                <td class="total-price-td">$130.00</td>
-                                <td class="remove-td"><a href="#"><i class="fas fa-solid fa-trash"></i></a></td>
-                            </tr>
-                            <tr>
-                                <td class="image-td">
-                                    <img src="https://products1.imgix.drizly.com/ci-blue-moon-belgian-white-d6c2c5a09c25d4ee.jpeg?auto=format%2Ccompress&ch=Width%2CDPR&fm=jpg&q=20" alt="" />
-                                </td>
-                                <td class="product-name-td">Light Jacket</td>
-                                <td class="product-price-td">$130.00</td>
-                                <td class="counter-td">
-                                    <div class="number">
-                                        <span class="minus">-</span>
-                                        <input type="text" value="1" />
-                                        <span class="plus">+</span>
-                                    </div>
-                                </td>
-                                <td class="total-price-td">$130.00</td>
-                                <td class="remove-td"><a href="#"><i class="fas fa-solid fa-trash"></i></a></td>
-                            </tr>
+                            @foreach (var item in basket.BasketItems)
+                            {
+                                <tr>
+                                    <td class="image-td">
+                                        <img src="~/uploads/products/@item.Product.Image" alt="" />
+                                    </td>
+                                    <td class="product-name-td">@item.Product.Name</td>
+                                    <td class="product-price-td">$@( (item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))</td>
+                                    <td class="counter-td">
+                                        <div class="number">
+                                            <span class="minus">-</span>
+                                            <input type="text" class="basket-quantity" value="@item.Count" />
+                                            <a class="basket-add" role="button" asp-controller="shop" asp-action="AddBasket" asp-route-id="@item.Product.Id"><span class="plus">+</span></a>
+                                        </div>
+                                    </td>
+                                    <td class="total-price-td">$@(((item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice)*item.Count).ToString("0.00"))</td>
+                                    <td class="remove-td"><a href="#"><i class="fas fa-solid fa-trash"></i></a></td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -75,7 +69,4 @@
         </div>
     </section>
 </main>
-@section Scripts{
-    <script src="~/assets/Js/basket-quantity.js"></script>
-}
 <!-- END OF MY BASKET -->

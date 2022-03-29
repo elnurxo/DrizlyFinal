@@ -5452,6 +5452,82 @@ main #card-products-section .table-wrapper {
             width: 90px !important;
         }
 }
+.navbar-basket:hover + .basket-hover {
+    opacity: 1;
+    visibility: visible;
+}
+.basket-hover {
+    opacity: 0;
+    visibility: hidden;
+    height: auto;
+    -webkit-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    position: absolute;
+    width: 319px;
+    top: 56px;
+    right: 5px;
+    border-radius: 6px;
+    background: white;
+    -webkit-box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    overflow-y: auto;
+}
+
+    .basket-hover:hover {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .basket-hover hr {
+        margin: 0;
+    }
+
+        .basket-hover hr:last-child {
+            display: none;
+        }
+
+    .basket-hover li {
+        padding: 10px 0;
+        width: 100%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        position: relative;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+        .basket-hover li a {
+            text-decoration: none;
+        }
+
+            .basket-hover li a img {
+                border-radius: 6px;
+                width: 67px;
+                height: 85px;
+            }
+
+        .basket-hover li .basket-hover-totalprice {
+            font-weight: bolder;
+            font-size: 15px;
+        }
+
+            .basket-hover li .basket-hover-totalprice span {
+                color: #e12c2c;
+            }
+
+        .basket-hover li .product-name-basket {
+            font-weight: bold;
+            cursor: pointer;
+            color: black;
+        }
+
+        .basket-hover li ul li a {
+            color: black;
+        }
 
 @media only screen and (max-width: 410px) {
     .apply-coupon {

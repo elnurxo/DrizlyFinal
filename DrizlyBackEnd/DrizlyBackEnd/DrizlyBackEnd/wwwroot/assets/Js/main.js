@@ -1,4 +1,9 @@
 $(function () {
+    //CURRENT BASKET COUNT
+    let productcounter = $(".basket-counter").val();
+    $(".basket-count").text(productcounter);
+    //CURRENT BASKET COUNT ON BASKET VIEW
+
     //SET SESSION STORAGE ON AGE 21 YES CLICK
     $(".age-yes").click(function () {
         sessionStorage.setItem('agemodal', 'confirmed');
@@ -283,6 +288,33 @@ $(function () {
         $(".profile-pic-wrapper").remove();
         $(this).css("display", "none");
     });
+    //ADD BASKET
+    $(document).on("click", ".basket-add", function (e) {
+        e.preventDefault();
+        let url = $(this).attr("href");
+        console.log(url);
+        fetch(url)
+            .then(function (response) { 
+                if (!response.ok) {
+                    alert("Error!")
+                }
+                return response.text();
+            }).then(data => {
+                $(".basket-hover").html(data)
+                let productcounter = $(".basket-counter").val();
+                $(".basket-count").text(productcounter);
+            });
+    })
+    //BASKET NAVBAR HEIGHT
+    $(".navbar-basket").hover(
+        function () {
+            if ($(".basket-hover").css("height") > "435px") {
+                console.log("dawn fm");
+                $(".basket-hover").css("height", "435px");
+                $(".basket-hover").css("overflow-y", "auto");
+            }
+        }
+    );
 });
 // LOADER
 window.addEventListener("DOMContentLoaded", () => {

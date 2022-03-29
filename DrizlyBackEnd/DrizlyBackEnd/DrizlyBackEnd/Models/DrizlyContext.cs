@@ -32,5 +32,6 @@ namespace DrizlyBackEnd.Models
         public DbSet<WineFoodPairing> WineFoodPairings { get; set; }
         public DbSet<ProductFoodPairing> ProductFoodPairings { get; set; }
         public DbSet<ProductComment> ProductComments { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
     }
 }

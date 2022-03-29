@@ -3,408 +3,432 @@
 @inject LayoutService layoutService
 @inject UserManager<AppUser> usermanager
 @{
+    var counter = 0;
+    var basket = layoutService.GetBasket();
+    
     var settings = layoutService.GetSettings();
     AppUser member = null;
     if (User.Identity.IsAuthenticated)
     {
         member = usermanager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
     }
-}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
-    <!-- Bootstrap Link -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <!-- Toastr Css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- My Css -->
-    <link href="~/assets/Css/style.css" rel="stylesheet" />
-    <!-- Range Slide Css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.css" integrity="sha512-4f6+KwNIOYFZQbwKMGj45wlzFWwuLfqDl5B8TCp4E2G9JlWzPHENy7LkdalNirz5AMHQtwQ4cyzBFA6mq+UJJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Slick Slider -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
-    <!-- Fav Ico -->
-    <link rel="icon" type="image/x-icon" href="~/assets/Media/drizlyfavico.ico">
-    @*Bootstrap Fonts*@
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Libre+Baskerville:wght@700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Roboto+Slab:wght@500;600&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
-</head>
-<body>
-    @if (TempData["Success"] != null)
-    {
-        <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
     }
-    @if (TempData["Warning"] != null)
-    {
-        <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
-    }
-    <!-- Loading Start -->
-    <div id="loadingwrapper">
-    </div>
-    <!-- Top Bar Start -->
-    <section id="topbar">
-        <a class="howitworks" href="#howitwork">How Drizly works</a>
-        <p>Beer, wine and liquor delivered to your doorstep.</p>
-        <a class="becomeretrailer" href="#">Become a Drizly retrailer</a>
-    </section>
-    <!-- Top Bar End -->
-    <!-- Header Start -->
-    <header id="navbar">
-        <div class="navbar-sections">
-            <nav class="navbar-links navbar-mobile-menu">
-                <a class="hamburger-mobile" href="#">
-                    <i class="fas fa-bars"></i>
-                </a>
-            </nav>
-            <nav class="navbar-links navbar-leftside">
-                <ul class="navbar-left-ul">
-                    <li class="navbar-left-li">
-                        <a asp-controller="home" asp-action="index" class="drizlybearlink">
-                            <img src="~/uploads/settings/@settings["HeaderLogo"]">
-                        </a>
-                    </li>
-                    <li class="navbar-left-li navbar-desktop-links">
-                        <a asp-controller="shop" asp-action="index" asp-route-id="1" class="navbar-category-links">
-                            Beer
-                        </a>
-                    </li>
-                    <li class="navbar-left-li navbar-desktop-links">
-                        <a asp-controller="shop" asp-action="index" asp-route-id="2" class="navbar-category-links">
-                            Wine
-                        </a>
-                    </li>
-                    <li class="navbar-left-li navbar-desktop-links">
-                        <a asp-controller="shop" asp-action="index" asp-route-id="3" class="navbar-category-links">
-                            Liquor
-                        </a>
-                    </li>
-                    <li class="navbar-left-li navbar-desktop-links">
-                        <a asp-controller="shop" asp-action="index" asp-route-id="4" class="navbar-category-links">
-                            Extras
-                        </a>
-                    </li>
-                    <li class="navbar-left-li navbar-desktop-links">
-                        <form asp-controller="home" asp-action="searchproduct" id="search-form" method="get" enctype="multipart/form-data">
-                            <div class="navbar-search">
-                                <div class="navbar-search-icon">
-                                    <div class="search-container">
-                                        <i class="fas fa-search"></i>
-                                        <input autocomplete="off" class="nav-search-input" id="search-desktop" name="searchString" placeholder="Search beer, wine, liquor and extras">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewData["Title"]</title>
+        <!-- Bootstrap Link -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!-- Toastr Css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- My Css -->
+        <link href="~/assets/Css/style.css" rel="stylesheet" />
+        <!-- Range Slide Css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.css" integrity="sha512-4f6+KwNIOYFZQbwKMGj45wlzFWwuLfqDl5B8TCp4E2G9JlWzPHENy7LkdalNirz5AMHQtwQ4cyzBFA6mq+UJJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Slick Slider -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+        <!-- Fav Ico -->
+        <link rel="icon" type="image/x-icon" href="~/assets/Media/drizlyfavico.ico">
+        @*Bootstrap Fonts*@
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Libre+Baskerville:wght@700&family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;1,100;1,200;1,300;1,400&family=Roboto+Slab:wght@500;600&family=Ubuntu:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        @if (TempData["Success"] != null)
+        {
+            <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+        }
+        @if (TempData["Warning"] != null)
+        {
+            <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
+        }
+        <!-- Loading Start -->
+        <div id="loadingwrapper">
+        </div>
+        <!-- Top Bar Start -->
+        <section id="topbar">
+            <a class="howitworks" href="#howitwork">How Drizly works</a>
+            <p>Beer, wine and liquor delivered to your doorstep.</p>
+            <a class="becomeretrailer" href="#">Become a Drizly retrailer</a>
+        </section>
+        <!-- Top Bar End -->
+        <!-- Header Start -->
+        <header id="navbar">
+            <div class="navbar-sections">
+                <nav class="navbar-links navbar-mobile-menu">
+                    <a class="hamburger-mobile" href="#">
+                        <i class="fas fa-bars"></i>
+                    </a>
+                </nav>
+                <nav class="navbar-links navbar-leftside">
+                    <ul class="navbar-left-ul">
+                        <li class="navbar-left-li">
+                            <a asp-controller="home" asp-action="index" class="drizlybearlink">
+                                <img src="~/uploads/settings/@settings["HeaderLogo"]">
+                            </a>
+                        </li>
+                        <li class="navbar-left-li navbar-desktop-links">
+                            <a asp-controller="shop" asp-action="index" asp-route-id="1" class="navbar-category-links">
+                                Beer
+                            </a>
+                        </li>
+                        <li class="navbar-left-li navbar-desktop-links">
+                            <a asp-controller="shop" asp-action="index" asp-route-id="2" class="navbar-category-links">
+                                Wine
+                            </a>
+                        </li>
+                        <li class="navbar-left-li navbar-desktop-links">
+                            <a asp-controller="shop" asp-action="index" asp-route-id="3" class="navbar-category-links">
+                                Liquor
+                            </a>
+                        </li>
+                        <li class="navbar-left-li navbar-desktop-links">
+                            <a asp-controller="shop" asp-action="index" asp-route-id="4" class="navbar-category-links">
+                                Extras
+                            </a>
+                        </li>
+                        <li class="navbar-left-li navbar-desktop-links">
+                            <form asp-controller="home" asp-action="searchproduct" id="search-form" method="get" enctype="multipart/form-data">
+                                <div class="navbar-search">
+                                    <div class="navbar-search-icon">
+                                        <div class="search-container">
+                                            <i class="fas fa-search"></i>
+                                            <input autocomplete="off" class="nav-search-input" id="search-desktop" name="searchString" placeholder="Search beer, wine, liquor and extras">
+                                        </div>
+                                    </div>
+                                    <div class="navbar-search-dropdown">
+                                        @*SEARCH DROP DOWN*@
                                     </div>
                                 </div>
-                                <div class="navbar-search-dropdown">
-                                    @*SEARCH DROP DOWN*@
-                                </div>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-            <nav class="navbar-links navbar-rightside">
-                <a class="search-mobile">
-                    <i class="fas fa-search"></i>
-                </a>
-                <div class="navbar-signin">
-                    @if (member != null)
-                    {
-                        <a asp-controller="account" asp-action="profile">@member.FullName</a>
-                        <img style="border-radius:50%;margin-left: 5px;" width="20" height="20" src="~/uploads/users/@(member.Image==null?"avatar.png":member.Image)" />
-                        if (member.Image != null)
-                        {
-                        }
-                        <span> | </span>
-                        <a class="logout-user" asp-controller="account" asp-action="logout" class="logout-user">Log Out</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="account" asp-action="login">Sign in</a>
-                        <span> | </span>
-                        <a asp-controller="account" asp-action="register">Create account</a>
-                    }
-                </div>
-                <a href="#" class="navbar-basket font-weight-bolder" style="right:2px">
-                    <i class="bi bi-bag-check"></i>
-                    <sub class="basket-count">2</sub>
-                </a>
-            </nav>
-        </div>
-        <!-- Navbar Mobile DropDown -->
-        <div class="navbar-mobile-dropdown">
-            <ul>
-                <a href="#">
-                <li>
-                    <span>Beer  <i class="fas fa-chevron-right"></i></span>
-                </li>
-                </a>
-                <a href="#">
-                <li>
-                    <span>Wine <i class="fas fa-chevron-right"></i></span>
-                </li>
-                </a>
-                <a href="#">
-                <li>
-                    <span>Liquor <i class="fas fa-chevron-right"></i></span>
-                </li>
-                </a>
-                <a href="#">
-                <li>
-                    <span>Extras <i class="fas fa-chevron-right"></i></span>
-                </li>
-                </a>
-                <a asp-controller="account" asp-action="login">
-                <li>
-                    <span>Sign In</span>
-                </li>
-                </a>
-                <a asp-controller="account" asp-action="register">
-                <li>
-                    <span>Create Account</span>
-                </li>
-                </a>
-            </ul>
-        </div>
-        <!-- Navbar Mobile Search -->
-        <div class="navbar-mobile-search-wrapper">
-            <div class="mobile-search-container">
-                <div class="mobile-search">
-                    <div class="mobile-search-icon">
+                            </form>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="navbar-links navbar-rightside">
+                    <a class="search-mobile">
                         <i class="fas fa-search"></i>
+                    </a>
+                    <div class="navbar-signin">
+                        @if (member != null)
+                        {
+                            <a asp-controller="account" asp-action="profile">@member.FullName</a>
+                            <img style="border-radius:50%;margin-left: 5px;" width="20" height="20" src="~/uploads/users/@(member.Image==null?"avatar.png":member.Image)" />
+                            if (member.Image != null)
+                            {
+                            }
+                            <span> | </span>
+                            <a class="logout-user" asp-controller="account" asp-action="logout" class="logout-user">Log Out</a>
+                        }
+                        else
+                        {
+                            <a asp-controller="account" asp-action="login">Sign in</a>
+                            <span> | </span>
+                            <a asp-controller="account" asp-action="register">Create account</a>
+                        }
                     </div>
-                    <input type="text" placeholder="Search beer, wine & liquor">
+                    <a asp-controller="order" asp-action="basket" class="navbar-basket font-weight-bolder" style="right:2px">
+                        <i class="bi bi-bag-check"></i>     
+                        <sub class="basket-count"></sub>
+                    </a>
+                    <ul class="basket-hover">
+                        @foreach (var item in basket.BasketItems)
+                        {
+                            counter += item.Count;
+                            <li>
+                                <a href="#">
+                                    <img src="~/uploads/products/@item.Product.Image" alt="product image">
+                                </a>
+                                <ul>
+                                    <li><a href="#"><span class="product-name-basket">@item.Product.Name</span></a></li>
+                                    <li><span class="basket-hover-totalprice">@item.Count x <span>@((item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))$</span></span></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#"><i class="bi bi-dash-circle"></i></a></li>
+                                    <li><a asp-controller="shop" asp-action="AddBasket" asp-route-id="@item.Product.Id" class="basket-add"><i class="bi bi-plus-circle"></i></a></li>
+                                </ul>
+                            </li>
+                            <hr>
+                        }
+                       <input type="hidden" value="@counter" class="basket-counter" />
+                    </ul>
+                </nav>
+            </div>
+            <!-- Navbar Mobile DropDown -->
+            <div class="navbar-mobile-dropdown">
+                <ul>
+                    <a href="#">
+                    <li>
+                        <span>Beer  <i class="fas fa-chevron-right"></i></span>
+                    </li>
+                    </a>
+                    <a href="#">
+                    <li>
+                        <span>Wine <i class="fas fa-chevron-right"></i></span>
+                    </li>
+                    </a>
+                    <a href="#">
+                    <li>
+                        <span>Liquor <i class="fas fa-chevron-right"></i></span>
+                    </li>
+                    </a>
+                    <a href="#">
+                    <li>
+                        <span>Extras <i class="fas fa-chevron-right"></i></span>
+                    </li>
+                    </a>
+                    <a asp-controller="account" asp-action="login">
+                    <li>
+                        <span>Sign In</span>
+                    </li>
+                    </a>
+                    <a asp-controller="account" asp-action="register">
+                    <li>
+                        <span>Create Account</span>
+                    </li>
+                    </a>
+                </ul>
+            </div>
+            <!-- Navbar Mobile Search -->
+            <div class="navbar-mobile-search-wrapper">
+                <div class="mobile-search-container">
+                    <div class="mobile-search">
+                        <div class="mobile-search-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <input type="text" placeholder="Search beer, wine & liquor">
+                    </div>
+                    <div class="mobile-navbar-search-dropdown" style="display: none;">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
+                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="mobile-navbar-search-dropdown" style="display: none;">
-                    <ul>
+            </div>
+        </header>
+        <!-- Header End -->
+        @RenderBody()
+        <!-- Footer Start -->
+        <footer class="container-fluid">
+            <div class="row">
+                <div class="footer-cols follow">
+                    <h6>Follow Us</h6>
+                    <ul class="footer-links">
+
                         <li>
-                            <a href="#">
-                                <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                            </a>
+                            <a target="_blank" href="@settings["FooterFacebook"]"><i class="fa fa-facebook" aria-hidden="true"></i></i></atarget="_blank">
                         </li>
                         <li>
-                            <a href="#">
-                                <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                            </a>
+                            <a target="_blank" href="@settings["FooterTwitter"]"><i class="fa fa-twitter" aria-hidden="true"></i></i></a>
                         </li>
                         <li>
-                            <a href="#">
-                                <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                            </a>
+                            <a target="_blank" href="@settings["FooterInstagram"]"><i class="fa fa-instagram" aria-hidden="true"></i></i></a>
                         </li>
                         <li>
-                            <a href="#">
-                                <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                            </a>
+                            <a target="_blank" href="@settings["FooterPinterest"]"><i class="fa fa-pinterest" aria-hidden="true"></i></i></a>
+                        </li>
+                    </ul>
+                    <h6>Get the App</h6>
+                    <ul class="footer-links">
+                        <li>
+                            <a target="_blank" href="@settings["FooterIosApp"]"><i class="fa fa-apple" aria-hidden="true"></i></i></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="@settings["FooterAndroidApp"]"><i class="fa fa-android" aria-hidden="true"></i></i></a>
+                        </li>
+                    </ul>
+                    <h6>Payment Options</h6>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fa fa-cc-visa" aria-hidden="true"></i></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-cc-amex"></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-cc-mastercard"></i>
+                        </li>
+                        <li>
+                            <i class="fab fa-cc-discover"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-cols about">
+                    <h6>About</h6>
+                    <ul class="footer-uls">
+                        <li>
+                            <a href="#">Careers</i></a>
+                        </li>
+                        <li>
+                            <a asp-controller="aboutus" asp-action="index">About Us</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Drizly Cities</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Gifts</i></a>
+                        </li>
+                        <li>
+                            <a href="#">FAQ</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Press</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Store Finder</i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-cols get-in-touch">
+                    <h6>Get in touch</h6>
+                    <ul class="footer-uls">
+                        <li>
+                            <a href="#">Support</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Alcohol support resources</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Accessibility</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Returns</i></a>
+                        </li>
+                        <li>
+                            <a href="#">General</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Media</i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-cols partner">
+                    <h6>Partner with us</h6>
+                    <ul class="footer-uls">
+                        <li>
+                            <a href="#">For Business</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Retailers</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Brands</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Data</i></a>
+                        </li>
+                        <li>
+                            <a href="#">Become a affiliate</i></a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </div>
-    </header>
-    <!-- Header End -->
-    @RenderBody()
-    <!-- Footer Start -->
-    <footer class="container-fluid">
-        <div class="row">
-            <div class="footer-cols follow">
-                <h6>Follow Us</h6>
-                <ul class="footer-links">
-
-                    <li>
-                        <a target="_blank" href="@settings["FooterFacebook"]"><i class="fa fa-facebook" aria-hidden="true"></i></i></atarget="_blank">
-                    </li>
-                    <li>
-                        <a target="_blank" href="@settings["FooterTwitter"]"><i class="fa fa-twitter" aria-hidden="true"></i></i></a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="@settings["FooterInstagram"]"><i class="fa fa-instagram" aria-hidden="true"></i></i></a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="@settings["FooterPinterest"]"><i class="fa fa-pinterest" aria-hidden="true"></i></i></a>
-                    </li>
-                </ul>
-                <h6>Get the App</h6>
-                <ul class="footer-links">
-                    <li>
-                        <a target="_blank" href="@settings["FooterIosApp"]"><i class="fa fa-apple" aria-hidden="true"></i></i></a>
-                    </li>
-                    <li>
-                        <a target="_blank" href="@settings["FooterAndroidApp"]"><i class="fa fa-android" aria-hidden="true"></i></i></a>
-                    </li>
-                </ul>
-                <h6>Payment Options</h6>
-                <ul class="footer-links">
-                    <li>
-                        <i class="fa fa-cc-visa" aria-hidden="true"></i></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-cc-amex"></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-cc-mastercard"></i>
-                    </li>
-                    <li>
-                        <i class="fab fa-cc-discover"></i>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-cols about">
-                <h6>About</h6>
-                <ul class="footer-uls">
-                    <li>
-                        <a href="#">Careers</i></a>
-                    </li>
-                    <li>
-                        <a asp-controller="aboutus" asp-action="index">About Us</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Drizly Cities</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Gifts</i></a>
-                    </li>
-                    <li>
-                        <a href="#">FAQ</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Press</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Store Finder</i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-cols get-in-touch">
-                <h6>Get in touch</h6>
-                <ul class="footer-uls">
-                    <li>
-                        <a href="#">Support</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Alcohol support resources</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Accessibility</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Returns</i></a>
-                    </li>
-                    <li>
-                        <a href="#">General</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Media</i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer-cols partner">
-                <h6>Partner with us</h6>
-                <ul class="footer-uls">
-                    <li>
-                        <a href="#">For Business</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Retailers</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Brands</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Data</i></a>
-                    </li>
-                    <li>
-                        <a href="#">Become a affiliate</i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="row">
-            <div class="footer-cols politics">
-                <div class="policy-links">
-                    <a href="#" class="footer-link" target="_blank">
-                        Privacy Notice
-                    </a>
-                    <span class="divider">|</span>
-                    <a href="#" class="footer-link" target="_blank">
-                        Terms of Service
-                    </a>
-                    <span class="divider">|</span>
-                    <a href="#" class="footer-link" target="_blank">
-                        Interest Based Ads
-                    </a>
-                    <span class="divider">|</span>
-                    <a href="#" class="footer-link" target="_blank">
-                        CA Privacy Rights
-                    </a>
-                    <span class="divider">|</span>
-                    <a href="#" class="footer-link" target="_blank">
-                        Do Not Sell My Personal Information
-                    </a>
+            <div class="row">
+                <div class="footer-cols politics">
+                    <div class="policy-links">
+                        <a href="#" class="footer-link" target="_blank">
+                            Privacy Notice
+                        </a>
+                        <span class="divider">|</span>
+                        <a href="#" class="footer-link" target="_blank">
+                            Terms of Service
+                        </a>
+                        <span class="divider">|</span>
+                        <a href="#" class="footer-link" target="_blank">
+                            Interest Based Ads
+                        </a>
+                        <span class="divider">|</span>
+                        <a href="#" class="footer-link" target="_blank">
+                            CA Privacy Rights
+                        </a>
+                        <span class="divider">|</span>
+                        <a href="#" class="footer-link" target="_blank">
+                            Do Not Sell My Personal Information
+                        </a>
+                    </div>
+                    <p class="drizlyrights">© Drizly All Rights Reserved</p>
                 </div>
-                <p class="drizlyrights">© Drizly All Rights Reserved</p>
             </div>
-        </div>
-    </footer>
-    <!-- End -->
-</body>
-<!-- Jquery Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<!-- Price Rnage Script -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.js" integrity="sha512-nNk6WlQNxdoGe0WKkh2lL6BssgsB6xa0NcP5tAjJiMFqRyxDZO7UuMXLlU2SqZ+mjG5fYomolQO1iir97pETnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!--Sweet Alert Cdn-->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<!-- Slick Slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
-<!-- My Script -->
-<script src="~/assets/Js/main.js"></script>
-<!-- Sweet Alert Script -->
-<script src="~/assets/Js/sweetalert.js"></script>
-<!-- Progress Bar Script -->
-@*<script src="~/assets/Js/review-progress.js"></script>*@
-<!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
-@*Toastr Script*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-    toastr.options = {
-        "closeButton": false,
-        "debug": false,
-        "newestOnTop": false,
-        "progressBar": false,
-        "positionClass": "toast-top-right",
-        "preventDuplicates": false,
-        "onclick": null,
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    }
-    $(document).ready(function () {
-        if ($("#success-toaster").length) {
-            toastr["success"]($("#success-toaster").val());
+        </footer>
+        <!-- End -->
+    </body>
+    <!-- Jquery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Price Rnage Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rangeslider.js/2.0.0/rangeslider.js" integrity="sha512-nNk6WlQNxdoGe0WKkh2lL6BssgsB6xa0NcP5tAjJiMFqRyxDZO7UuMXLlU2SqZ+mjG5fYomolQO1iir97pETnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!--Sweet Alert Cdn-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Slick Slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <!-- My Script -->
+    <script src="~/assets/Js/main.js"></script>
+    <!-- Sweet Alert Script -->
+    <script src="~/assets/Js/sweetalert.js"></script>
+    <!-- Progress Bar Script -->
+    @*<script src="~/assets/Js/review-progress.js"></script>*@
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+    @*Toastr Script*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         }
-    });
-    $(document).ready(function () {
-        if ($("#warning-toaster").length) {
-            toastr["warning"]($("#warning-toaster").val());
-        }
-    });
-</script>
-@RenderSection("Scripts", required: false)
+        $(document).ready(function () {
+            if ($("#success-toaster").length) {
+                toastr["success"]($("#success-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#warning-toaster").length) {
+                toastr["warning"]($("#warning-toaster").val());
+            }
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
 </html>
