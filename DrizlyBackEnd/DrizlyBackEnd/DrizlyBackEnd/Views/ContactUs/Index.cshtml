@@ -78,22 +78,22 @@
                     <div class="contact-info pt-0">
                         <h2 class="contact-title">contact us</h2>
                         <p>
-                            @*@settings["ContactUsDesc"]*@ Contact Us Description
+                            @settings["DrizlyAbout"]
                         </p>
                         <ul>
-                            <li><i class="fa fa-fax"></i> Address : FooterAddress</li>
-                            <li><i class="fa fa-phone"></i> Phone Number</li>
-                            <li><i class="fa fa-envelope-o"></i> Our MAIL</li>
+                            <li><i class="fa fa-fax"></i> Address : @settings["Address"]</li>
+                            <li><i class="fa fa-phone"></i>  @settings["Phone"]</li>
+                            <li><i class="fa fa-envelope-o"></i> @settings["Email"]</li>
                         </ul>
                         <div class="working-time">
                             <h3>Working Hours</h3>
-                            <p class="pb-0">Monday-Friday: 3:00-6:00</p>
+                            <p class="pb-0">@settings["WorkingHours"]</p>
                         </div>
                         <ul style=" display:inline-flex">
-                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-facebook-square"></i></a></li>
-                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-twitter-square"></i></a></li>
-                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-linkedin"></i></a></li>
-                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-instagram-square"></i></a></li>
+                            <li class="p-2"><a href="@settings["FooterFacebook"]"><i style="color: #3b5998" class="fab fa-facebook-square"></i></a></li>
+                            <li class="p-2"><a href="@settings["FooterTwitter"]"><i style="color:#00acee" class="fab fa-twitter-square"></i></a></li>
+                            <li class="p-2"><a href="@settings["FooterPinterest"]"><i style="color: #c8232c" class="fab fa-pinterest"></i></a></li>
+                            <li class="p-2"><a href="@settings["FooterInstagram"]"><i style="color: #833AB4" class="fab fa-instagram-square"></i></a></li>
                         </ul>
                     </div>
                 </div>

@@ -23,5 +23,6 @@ namespace DrizlyBackEnd.Models
         public string Subject { get; set; }
         [StringLength(maximumLength: 400)]
         public string YourMessage { get; set; }
+        public bool IsRead { get; set; }
     }
 }
