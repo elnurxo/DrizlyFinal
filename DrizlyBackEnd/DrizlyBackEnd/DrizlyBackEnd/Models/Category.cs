@@ -15,6 +15,9 @@ namespace DrizlyBackEnd.Models
         [StringLength(maximumLength: 85)]
         public string Name { get; set; }
         [Required]
+        [StringLength(maximumLength: 150)]
+        public string DescTitle { get; set; }
+        [Required]
         [StringLength(maximumLength: 2500)]
         public string Desc { get; set; }
         [StringLength(maximumLength: 100)]

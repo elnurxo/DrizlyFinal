@@ -25,13 +25,22 @@
 
                             <div class="form-row">
                                 @if (Model.Key == "HeaderLogo" ||
-                                  Model.Key == "LeftSideHero" ||
-                                  Model.Key == "RightSideHero" ||
-                                  Model.Key == "Promotion1Image" ||
-                                  Model.Key == "QuoteImage" ||
-                                  Model.Key == "AboutUsImage" || 
-                                  Model.Key == "AboutUsImageMobile" ||
-                                  Model.Key == "AboutUsPromotion")
+                                Model.Key == "LeftSideHero" ||
+                                Model.Key == "RightSideHero" ||
+                                Model.Key == "Promotion1Image" ||
+                                Model.Key == "QuoteImage" ||
+                                Model.Key == "AboutUsImage" ||
+                                Model.Key == "AboutUsImageMobile" ||
+                                Model.Key == "AboutUsPromotion" ||
+                                Model.Key == "BeerPromoTopImage" ||
+                                Model.Key == "BeerPromoBottomImage" ||
+                                Model.Key == "WinePromoTopImage" ||
+                                Model.Key == "WinePromoBottomImage" ||
+                                Model.Key == "LiquorPromoTopImage" ||
+                                Model.Key == "LiquorPromoBottomImage" ||
+                                Model.Key == "ExtraPromoTopImage" ||
+                                Model.Key == "ExtraPromoBottomImage"
+                                )
                                 {
                                     <div class="col">
                                         <label asp-for="ImageFile" class="mt-2">Enter ImageFile</label>

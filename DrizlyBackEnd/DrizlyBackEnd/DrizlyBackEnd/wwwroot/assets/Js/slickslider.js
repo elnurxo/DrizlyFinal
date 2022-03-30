@@ -21,18 +21,13 @@
 		]
 	});
 	//ADD SLICK SLIDER IF COUNT GREATER THAN 6
-	//for (var i = 0; i < $(".category-slide").length; i++) {
-	//	console.log($(this).find(".drink-slides").length);
-	//	console.log($(".category-slide")[1].find(".drink-slides").length);
-	//}
 	$(".category-slide").each(function (index) {
-		if ($(this).find(".drink-slides").length>6) {
 			$(this).find(".drink-slider").slick({
 				arrows: true,
 				infinite: true,
 				slidesToShow: 6,
 				slidesToScroll: 1,
-				autoplay: true,
+				autoplay: false,
 				autoplaySpeed: 1200,
 				responsive: [
 					{
@@ -65,9 +60,8 @@
 					}
 				]
 			});
-        }
 	});
-	//console.log($(".drink-slider li").length);
+
 	//PRODUCTS-SHOP-SLIDER
 	//$('.drink-slider').slick({
 	//	arrows: true,

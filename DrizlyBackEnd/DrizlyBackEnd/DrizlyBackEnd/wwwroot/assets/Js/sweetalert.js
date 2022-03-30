@@ -443,6 +443,58 @@
         })
     })
 
+    //DELETE ALL-SAMETYPE-PRODUCT FROM BASKET
+    $(document).on("click", ".basket-remove-all", function (e) {
+        e.preventDefault();
+        let path = $(this).attr("href")
+
+        Swal.fire({
+            title: 'Are You Sure?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(path)
+                    .then(function (response) {
+                        if (!response.ok) {
+                            alert("Error!")
+                        }
+                        return response.text();
+                    }).then(data => {
+                        $(".basket-container").html(data);
+                        let productcounter = $(".basket-counter-view").val();
+                        $(".basket-count").text(productcounter);
+                    });
+                fetch(path).then(Response => {
+                    if (Response.ok) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Selected File Deleted Successfully',
+                            'success'
+                        ).then(function () {
+                            console.log("deleted");
+                        }).then(data => {
+                $(".basket-container").html(data);
+                let productcounter = $(".basket-counter-view").val();
+                $(".basket-count").text(productcounter);
+            });
+                    }
+                    else {
+                        Swal.fire(
+                            'Failed!',
+                            'Selected File Deleted Successfully',
+                            'success'
+                        )
+                        location.reload();
+                    }
+                })
+            }
+        })
+      
+    })
     //LOG-OUT USER
     $(document).on("click", ".logout-user", function (e) {
         e.preventDefault();

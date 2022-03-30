@@ -142,15 +142,15 @@
                         {
                             counter += item.Count;
                             <li>
-                                <a href="#">
+                                <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id">
                                     <img src="~/uploads/products/@item.Product.Image" alt="product image">
                                 </a>
                                 <ul>
-                                    <li><a href="#"><span class="product-name-basket">@item.Product.Name</span></a></li>
+                                    <li><a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id"><span class="product-name-basket">@item.Product.Name</span></a></li>
                                     <li><span class="basket-hover-totalprice">@item.Count x <span>@((item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))$</span></span></li>
                                 </ul>
                                 <ul>
-                                    <li><a href="#"><i class="bi bi-dash-circle"></i></a></li>
+                                    <li><a class="basket-remove" asp-controller="shop" asp-action="RemoveBasket" asp-route-id="@item.Product.Id"><i class="bi bi-dash-circle"></i></a></li>
                                     <li><a asp-controller="shop" asp-action="AddBasket" asp-route-id="@item.Product.Id" class="basket-add"><i class="bi bi-plus-circle"></i></a></li>
                                 </ul>
                             </li>
@@ -197,42 +197,19 @@
             </div>
             <!-- Navbar Mobile Search -->
             <div class="navbar-mobile-search-wrapper">
-                <div class="mobile-search-container">
-                    <div class="mobile-search">
-                        <div class="mobile-search-icon">
-                            <i class="fas fa-search"></i>
+                <form asp-controller="home" asp-action="searchproduct" id="search-form-mobile" method="get" enctype="multipart/form-data">
+                    <div class="mobile-search-container">
+                        <div class="mobile-search">
+                            <div class="mobile-search-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <input autocomplete="off" type="text" id="search-mobile" name="searchString" placeholder="Search beer, wine & liquor">
                         </div>
-                        <input type="text" placeholder="Search beer, wine & liquor">
+                        <div class="mobile-navbar-search-dropdown">
+                            @*SEARCH DROP DOWN MOBILE*@
+                        </div>
                     </div>
-                    <div class="mobile-navbar-search-dropdown" style="display: none;">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                    <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                </form>
             </div>
         </header>
         <!-- Header End -->

@@ -1,0 +1,59 @@
+﻿@model BasketViewModel
+@{ 
+    decimal cardtotal = 0;
+    var counter = 0;
+}
+<div class="table-wrapper container">
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-bordered table-responsive-sm">
+                <thead>
+                    <tr>
+                        <th scope="col" class="image-th">Images</th>
+                        <th scope="col" class="product-name-th">Product</th>
+                        <th scope="col" class="product-price-th">Unit Price</th>
+                        <th scope="col" class="total-price-th">Total</th>
+                        <th scope="col" class="remove-th">Remove</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.BasketItems)
+                    {
+                        counter += item.Count;
+                        <tr>
+                            <td class="image-td">
+                                <img src="~/uploads/products/@item.Product.Image" alt="" />
+                            </td>
+                            <td class="product-name-td">@item.Product.Name</td>
+                            <td class="product-price-td">$@( (item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))</td>
+                            <td class="total-price-td">$@( ( (item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice)*item.Count).ToString("0.00") )</td>
+                            <td class="remove-td"><a class="basket-remove-all" asp-controller="shop" asp-action="removeallbasket" asp-route-id="@item.Product.Id"><i class="fas fa-solid fa-trash"></i></a></td>
+                        </tr>
+                        cardtotal += ((item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice) * item.Count);
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-12">
+            <div class="coupon-enter">
+                <input type="text" class="coupon-input" placeholder="Coupon code">
+                <button class="apply-coupon">Apply Coupon</button>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-12">
+            <div class="card-total-div">
+                <div class="card-total-header">
+                    Cart Total
+                </div>
+                <div class="card-total-item">
+                    <p class="card-total-text">Total</p>
+                    <p class="card-total-price">$@cardtotal.ToString("0.00")</p>
+                </div>
+                <button type="submit">Proceed To Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+<input type="hidden" value="@counter" class="basket-counter-view" />

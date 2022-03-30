@@ -23,7 +23,12 @@
                                 <input class="form-control" asp-for="Desc">
                                 <span class="text-danger" asp-validation-for="Desc"></span>
                             </div>
-                            <div class="form-row">           
+                            <div class="form-group col-lg-6">
+                                <label asp-for="DescTitle">Description Title of Category</label>
+                                <input class="form-control" asp-for="DescTitle">
+                                <span class="text-danger" asp-validation-for="DescTitle"></span>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-lg-6">
                                     <label asp-for="ImageFile">Employee Image</label>
                                     <input class="form-control" asp-for="ImageFile" placeholder="Select image">

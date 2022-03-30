@@ -1,8 +1,10 @@
 ﻿@model ShopViewModel
-
+@using DrizlyBackEnd.Services
+@inject LayoutService layoutService
 @{
-    ViewData["Title"] = "Drizly: Shop: "+Model.Category.Name;
-    int countrycounter=0;
+    ViewData["Title"] = "Drizly: Shop: " + Model.Category.Name;
+    var settings = layoutService.GetSettings();
+    int countrycounter = 0;
 }
 <main>
     <!-- Shop Hero Section -->
@@ -66,14 +68,35 @@
             <div class="products-shop">
                 <!-- Promotion Here -->
                 <div class="promotion-wrapper">
-                    <a href="#">
-                        <img src="https://drizly.flavedo.io./citrus/O-V0_BMPYy_oTcZkDVGzxQZgqoEPi6e-VtBy7CRsl_I=" alt="promotion">
+                    @if (Model.Category.Id == 1)
+                    {
+                    <a href="@Model.Settings.Find(c => c.Key == "BeerPromoTopLink")?.Value">
+                        <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "BeerPromoTopImage")?.Value" />
+                    </a>                
+                    }
+                    else if (Model.Category.Id == 2)
+                    {
+                    <a href="@Model.Settings.Find(c => c.Key == "WinePromoTopLink")?.Value">
+                        <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "WinePromoTopImage")?.Value" />
                     </a>
+                    }
+                    else if (Model.Category.Id == 3)
+                    {
+                    <a href="@Model.Settings.Find(c => c.Key == "LiquorPromoTopLink")?.Value">
+                        <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "LiquorPromoTopImage")?.Value" />
+                    </a>   
+                    }
+                    else if (Model.Category.Id == 4)
+                    {
+                    <a href="@Model.Settings.Find(c => c.Key == "ExtraPromoTopLink")?.Value">
+                        <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "ExtraPromoTopImage")?.Value" />
+                    </a>
+                    }
                 </div>
                 <ul class="products-slider">
                     @foreach (var category in Model.TypeProducts)
                     {
-                        if (category.Products.Count != 0)
+                        if (category.Products.Count > 6)
                         {
                             <li class="category-slide">
                                 <div class="category-name">
@@ -99,7 +122,7 @@
                                                 <li class="drink-slides">
                                                     <div class="whole-product-slide">
                                                         <div class="drink-slide-info">
-                                                            <a  asp-controller="shop" asp-action="detail" asp-route-id="@product.Id" style="text-align: center">
+                                                            <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id" style="text-align: center">
                                                                 <div class="drink-on-sale">On Sale</div>
                                                                 <img src="~/uploads/products/@product.Image">
                                                             </a>
@@ -145,15 +168,36 @@
                     }
                 </ul>
                 <div class="promotion-wrapper">
-                    <a href="#">
-                        <img src="https://drizly.flavedo.io./citrus/RwWybt_mQl9XT2LMkzsqxVOfzwDX7-uylKmMIlX-fi4=" alt="promotion">
-                    </a>
+                    @if (Model.Category.Id == 1)
+                    {
+                        <a href="@Model.Settings.Find(c => c.Key == "BeerPromoBottomLink")?.Value">
+                            <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "BeerPromoBottomImage")?.Value" />
+                        </a>
+                    }
+                    else if (Model.Category.Id == 2)
+                    {
+                        <a href="@Model.Settings.Find(c => c.Key == "WinePromoBottomLink")?.Value">
+                            <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "WinePromoBottomImage")?.Value" />
+                        </a>
+                    }
+                    else if (Model.Category.Id == 3)
+                    {
+                        <a href="@Model.Settings.Find(c => c.Key == "LiquorPromoBottomLink")?.Value">
+                            <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "LiquorPromoBottomImage")?.Value" />
+                        </a>
+                    }
+                    else if (Model.Category.Id == 4)
+                    {
+                        <a href="@Model.Settings.Find(c => c.Key == "ExtraPromoBottomLink")?.Value">
+                            <img src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "ExtraPromoBottomImage")?.Value" />
+                        </a>
+                    }
                 </div>
             </div>
             <div class="products-about">
                 <div class="category-about-content">
                     <h2>All About @Model.Category.Name</h2>
-                    <h3>Types of beers you should try at least once in your life</h3>
+                    <h3>@Model.Category.DescTitle</h3>
                     <p class="show-more-less-category category-content">
                         @Model.Category.Desc
                     </p>
@@ -199,8 +243,8 @@
                                 </div>
                             </li>
                             </a>
-                            }
-                        </ul>
+                        }
+                    </ul>
                     <button class="show-more">More</button>
                 </div>
             </div>
@@ -214,32 +258,32 @@
                 <div class="filter-side-dropdown">
                     <ul class="filters-ul">
                         @*@foreach (var country in Model.Countries)
-                        {
-                            @if (country.Products.Count > 0)
                             {
-                                <a class="filter-link">
-                                <li>
-                                    <div class="form-check">
-                                        <input form="filterForm" type="checkbox">
-                                        <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@country.Name</p>
-                                        <p class="filter-count">(<span>@country.Products.Count</span>)</p>
-                                    </div>
-                                </li>
-                                </a>
-                            }
-                        }*@
+                                @if (country.Products.Count > 0)
+                                {
+                                    <a class="filter-link">
+                                    <li>
+                                        <div class="form-check">
+                                            <input form="filterForm" type="checkbox">
+                                            <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@country.Name</p>
+                                            <p class="filter-count">(<span>@country.Products.Count</span>)</p>
+                                        </div>
+                                    </li>
+                                    </a>
+                                }
+                            }*@
                         @foreach (var country in Model.Countries)
                         {
-                           @foreach (var products in Model.Products)
-                           {
-                               if (country.Id==products.CountryId)
-                               {
-                                   countrycounter++;
-                               }
-                           }
-                            if (country.Products.Count>0)
+                            @foreach (var products in Model.Products)
                             {
-                                 <a class="filter-link">
+                                if (country.Id == products.CountryId)
+                                {
+                                    countrycounter++;
+                                }
+                            }
+                            if (country.Products.Count > 0)
+                            {
+                                <a class="filter-link">
                                 <li>
                                     <div class="form-check">
                                         <input form="filterForm" type="checkbox">
@@ -339,10 +383,11 @@
         line-height: 0 !important;
     }
 
-    .drink-rate i::before {
-        line-height: 0 !important;
-    }
-    .drink-rate .bi-star-half{
+        .drink-rate i::before {
+            line-height: 0 !important;
+        }
+
+    .drink-rate .bi-star-half {
         font-size: 16px;
     }
 </style>

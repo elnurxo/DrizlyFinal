@@ -236,6 +236,111 @@ namespace DrizlyBackEnd.Controllers
             }
         }
 
+        //REMOVE BASKET
+        public IActionResult RemoveBasket(int id)
+        {
+            if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
+                return NotFound();
+
+            AppUser member = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                member = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (member == null)
+            {
+                string basketItemsStr = HttpContext.Request.Cookies["basket"];
+                List<BasketItemViewModel> items = new List<BasketItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(basketItemsStr))
+                    items = JsonConvert.DeserializeObject<List<BasketItemViewModel>>(basketItemsStr);
+
+                BasketItemViewModel item = items.FirstOrDefault(x => x.ProductId == id);
+
+                if (item.Count > 0)
+                {
+                    item.Count--;
+                    if (item.Count == 0)
+                    {
+                        items.Remove(item);
+                    }
+                }
+                else
+                    items.Remove(item);
+
+                basketItemsStr = JsonConvert.SerializeObject(items);
+
+                HttpContext.Response.Cookies.Append("basket", basketItemsStr);
+
+                return PartialView("_BasketPartialView", _getBasket(items));
+            }
+            else
+            {
+                BasketItem item = _context.BasketItems.FirstOrDefault(x => x.AppUserId == member.Id && x.ProductId == id);
+
+                if (item.Count > 0)
+                {
+                    item.Count--;
+                    if (item.Count == 0)
+                    {
+                        _context.BasketItems.Remove(item);
+                    }
+                }
+                else
+                    _context.BasketItems.Remove(item);
+
+                _context.SaveChanges();
+
+                var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
+                return PartialView("_BasketPartialView", _getBasket(items));
+            }
+        }
+
+        //REMOVE ALL ONE KINDA PRODUCT
+        public IActionResult RemoveAllBasket(int id)
+        {
+            if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
+                return NotFound();
+
+            AppUser member = null;
+            if (User.Identity.IsAuthenticated)
+            {
+                member = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+            }
+
+            if (member == null)
+            {
+                string basketItemsStr = HttpContext.Request.Cookies["basket"];
+                List<BasketItemViewModel> items = new List<BasketItemViewModel>();
+
+                if (!string.IsNullOrWhiteSpace(basketItemsStr))
+                    items = JsonConvert.DeserializeObject<List<BasketItemViewModel>>(basketItemsStr);
+
+                BasketItemViewModel item = items.FirstOrDefault(x => x.ProductId == id);
+
+                items.Remove(item);
+
+                basketItemsStr = JsonConvert.SerializeObject(items);
+
+                HttpContext.Response.Cookies.Append("basket", basketItemsStr);
+
+                return PartialView("_BasketViewPartialView", _getBasket(items));
+            }
+            else
+            {
+                BasketItem item = _context.BasketItems.FirstOrDefault(x => x.AppUserId == member.Id && x.ProductId == id);
+
+
+                _context.BasketItems.Remove(item);
+
+                _context.SaveChanges();
+
+                var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
+                return PartialView("_BasketViewPartialView", _getBasket(items));
+            }
+        }
+
         // GET BASKET PRIVATE 
         private BasketViewModel _getBasket(List<BasketItemViewModel> basketItems)
         {

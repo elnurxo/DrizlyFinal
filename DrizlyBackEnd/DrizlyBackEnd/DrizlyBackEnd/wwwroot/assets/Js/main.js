@@ -55,7 +55,44 @@ $(function () {
                 $(".navbar-search-dropdown").css("display", "block")
             })
     });
+    //SEARCH INPUT MOBILE
+    $("#search-mobile").on("keyup", function () {
+        var searchform = document.getElementById("search-form-mobile");
+        var url = searchform.action;
+        var searchinput = $("#search-mobile").val().toLowerCase();
 
+        if (searchinput.length < 3) {
+            $(".mobile-navbar-search-dropdown").children().remove();
+            $(".mobile-navbar-search-dropdown").css("display", "none");
+            return;
+        }
+        if (searchinput == undefined || searchinput == null || searchinput == "") {
+            $(".mobile-navbar-search-dropdown").children().remove();
+            $(".mobile-navbar-search-dropdown").css("display", "none");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("searchString", searchinput);
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw response
+                }
+                return response.text();
+            })
+            .then(data => {
+                $(".mobile-navbar-search-dropdown").html(data);
+                $(".mobile-navbar-search-dropdown").css("display", "block")
+            })
+    });
     //NAVBAR SCROLL
     $(document).scroll(function () {
         if ($(window).width() > 992) 
@@ -292,9 +329,30 @@ $(function () {
     $(document).on("click", ".basket-add", function (e) {
         e.preventDefault();
         let url = $(this).attr("href");
-        console.log(url);
+
         fetch(url)
             .then(function (response) { 
+                if (!response.ok) {
+                    alert("Error!")
+                }
+                return response.text();
+            }).then(data => {
+                console.log(data);
+                $(".basket-hover").html(data)
+                let productcounter = $(".basket-counter").val();
+                $(".basket-count").text(productcounter);
+            });
+        let basketview = "https://localhost:44321/order/basket";
+        if (window.location.href == basketview) {
+            window.setTimeout(function () { location.reload() }, 1000)
+        }
+    })
+    //REMOVE BASKET
+    $(document).on("click", ".basket-remove", function (e) {
+        e.preventDefault();
+        let url = $(this).attr("href");
+        fetch(url)
+            .then(function (response) {
                 if (!response.ok) {
                     alert("Error!")
                 }
@@ -304,12 +362,31 @@ $(function () {
                 let productcounter = $(".basket-counter").val();
                 $(".basket-count").text(productcounter);
             });
+          let basketview = "https://localhost:44321/order/basket";
+        if (window.location.href == basketview) {
+            window.setTimeout(function () { location.reload() }, 1000)
+        }
     })
+    //REMOVE ALL FROM BASKET (ONLY 1 KINDA PRODUCT)
+    //$(document).on("click", ".basket-remove-all", function (e) {
+    //    e.preventDefault();
+    //    let url = $(this).attr("href");
+    //    fetch(url)
+    //        .then(function (response) {
+    //            if (!response.ok) {
+    //                alert("Error!")
+    //            }
+    //            return response.text();
+    //        }).then(data => {
+    //            $(".basket-container").html(data);
+    //            let productcounter = $(".basket-counter-view").val();
+    //            $(".basket-count").text(productcounter);
+    //        });
+    //})
     //BASKET NAVBAR HEIGHT
     $(".navbar-basket").hover(
         function () {
             if ($(".basket-hover").css("height") > "435px") {
-                console.log("dawn fm");
                 $(".basket-hover").css("height", "435px");
                 $(".basket-hover").css("overflow-y", "auto");
             }
@@ -354,5 +431,14 @@ window.addEventListener("DOMContentLoaded", () => {
  $(':radio').change(function() {
     console.log('New star rating: ' + this.value);
   });
- window.addEventListener("resize", onresize);
+window.addEventListener("resize", onresize);
+//CURRENT WINDOW LOCATION URL
+let windowurl = window.location.href;
+if (windowurl == "https://localhost:44321/order/basket") {
+    console.log("burdayamm");
+    console.log(document.getElementById("card-products-section"));
+    document.getElementById("card-products-section").style.display = "block";
+    //document.getElementsByClassName("basket-view").style.display = "block";
+}
+console.log(windowurl);
 

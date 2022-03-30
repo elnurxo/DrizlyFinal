@@ -94,8 +94,18 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             if (existCategory == null) return NotFound();
 
+            if (category.DescTitle==null)
+            {
+                ModelState.AddModelError("DescTitle", "Description Title cannot be null");
+                return View(existCategory);
+            }
+            if (category.Desc==null)
+            {
+                ModelState.AddModelError("Desc", "Description cannot be null");
+                return View(existCategory);
+            }
 
-
+            existCategory.DescTitle = category.DescTitle;    
             existCategory.Desc = category.Desc;
             _context.SaveChanges();
 
