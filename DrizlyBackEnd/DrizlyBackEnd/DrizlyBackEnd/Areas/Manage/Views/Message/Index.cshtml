@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Index";
+    var messagecounter = 0;
     int counter = (Model.PageIndex - 1) * Model.PageSize;
     var temp = -1;
     if (Model.PageIndex == 1)
@@ -80,6 +81,7 @@
                                                 <a asp-action="delete" asp-route-id="@message.Id" id="@message.Id" class="btn btn-danger delete-message">Delete</a>
                                                 @if (message.IsRead==false)
                                                 {
+                                                   messagecounter++;
                                                 <a asp-action="markasread" asp-route-id="@message.Id" id="@message.Id" class="btn btn-light markasread-message">Mark as read</a>
                                                 }
                                                 else
@@ -89,6 +91,7 @@
                                             </td>
                                         </tr>
                                     }
+                                    <input type="hidden" class="messagecounter" value="@messagecounter"/> 
                                 </tbody>
                             </table>
                             <nav aria-label="Page navigation example">

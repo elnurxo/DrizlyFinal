@@ -20,6 +20,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
         public IActionResult Index()
         {
+
             DashboardViewModel dashboardVM = new DashboardViewModel
             {
                 AppUsers = _context.AppUsers.ToList()

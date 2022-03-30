@@ -72,5 +72,12 @@ namespace DrizlyBackEnd.Services
 
             return basketVM;
         }
+
+        public int GetUnreadMessages()
+        {
+            int messages = _context.ContactUs.Where(x => x.IsRead == false).Count();
+
+            return (messages);
+        }
     }
 }
