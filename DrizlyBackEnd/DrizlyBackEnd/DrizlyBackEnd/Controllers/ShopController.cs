@@ -205,8 +205,8 @@ namespace DrizlyBackEnd.Controllers
                     item.Count++;
 
                 basketItemsStr = JsonConvert.SerializeObject(items);
+                TempData["Success"] = "Added to basket successfully!";
                 HttpContext.Response.Cookies.Append("basket", basketItemsStr);
-
                 return PartialView("_BasketPartialView", _getBasket(items));
             }
             else
@@ -229,6 +229,7 @@ namespace DrizlyBackEnd.Controllers
                     item.Count++;
                 }
 
+                TempData["Success"] = "Added to basket successfully!";
                 _context.SaveChanges();
 
                 var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
@@ -272,7 +273,7 @@ namespace DrizlyBackEnd.Controllers
                 basketItemsStr = JsonConvert.SerializeObject(items);
 
                 HttpContext.Response.Cookies.Append("basket", basketItemsStr);
-
+                TempData["Warning"] = "Removed from basket successfully!";
                 return PartialView("_BasketPartialView", _getBasket(items));
             }
             else
@@ -293,6 +294,7 @@ namespace DrizlyBackEnd.Controllers
                 _context.SaveChanges();
 
                 var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
+                TempData["Warning"] = "Removed from basket successfully!";
                 return PartialView("_BasketPartialView", _getBasket(items));
             }
         }
@@ -324,7 +326,7 @@ namespace DrizlyBackEnd.Controllers
                 basketItemsStr = JsonConvert.SerializeObject(items);
 
                 HttpContext.Response.Cookies.Append("basket", basketItemsStr);
-
+                TempData["Warning"] = "Removed from basket successfully!";
                 return PartialView("_BasketViewPartialView", _getBasket(items));
             }
             else
@@ -337,6 +339,7 @@ namespace DrizlyBackEnd.Controllers
                 _context.SaveChanges();
 
                 var items = _context.BasketItems.Where(x => x.AppUserId == member.Id).ToList();
+                TempData["Warning"] = "Removed from basket successfully!";
                 return PartialView("_BasketViewPartialView", _getBasket(items));
             }
         }

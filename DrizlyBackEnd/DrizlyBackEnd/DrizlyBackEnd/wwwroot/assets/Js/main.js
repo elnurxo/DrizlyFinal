@@ -367,22 +367,6 @@ $(function () {
             window.setTimeout(function () { location.reload() }, 1000)
         }
     })
-    //REMOVE ALL FROM BASKET (ONLY 1 KINDA PRODUCT)
-    //$(document).on("click", ".basket-remove-all", function (e) {
-    //    e.preventDefault();
-    //    let url = $(this).attr("href");
-    //    fetch(url)
-    //        .then(function (response) {
-    //            if (!response.ok) {
-    //                alert("Error!")
-    //            }
-    //            return response.text();
-    //        }).then(data => {
-    //            $(".basket-container").html(data);
-    //            let productcounter = $(".basket-counter-view").val();
-    //            $(".basket-count").text(productcounter);
-    //        });
-    //})
     //BASKET NAVBAR HEIGHT
     $(".navbar-basket").hover(
         function () {
@@ -440,5 +424,4 @@ if (windowurl == "https://localhost:44321/order/basket") {
     document.getElementById("card-products-section").style.display = "block";
     //document.getElementsByClassName("basket-view").style.display = "block";
 }
-console.log(windowurl);
 

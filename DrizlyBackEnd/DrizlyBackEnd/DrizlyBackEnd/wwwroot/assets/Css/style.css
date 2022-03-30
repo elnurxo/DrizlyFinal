@@ -5534,4 +5534,143 @@ main #card-products-section .table-wrapper {
         margin-top: 10px;
     }
 }
+
+/*//CONTACT-US*/
+/*------ contact form area start -------*/
+.contact-title {
+    color: #333333;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 600;
+    margin-top: -4px;
+    text-transform: capitalize;
+    padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 575.98px) {
+    .contact-title {
+        font-size: 18px;
+        padding-bottom: 15px;
+    }
+}
+
+.contact-message form input, .contact-message form textarea {
+    width: 100%;
+    border: none;
+    padding: 10px 10px;
+    border-bottom: 3px solid transparent;
+    background-color: #f3f6f5;
+    margin-bottom: 30px;
+}
+
+.contact-message form textarea {
+    height: 150px;
+}
+
+/*------ contact form area start -------*/
+/*------ contact info area start -------*/
+.contact-info {
+    height: 100%;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+    .contact-info {
+        margin-top: 80px;
+    }
+}
+
+@media only screen and (max-width: 767.98px) {
+    .contact-info {
+        margin-top: 62px;
+        margin-bottom: -7px;
+    }
+}
+
+.contact-info p {
+    color: #666666;
+    padding-bottom: 30px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991.98px) {
+    .contact-info p {
+        padding-bottom: 10px;
+    }
+}
+
+.contact-info ul li {
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+    .contact-info ul li:last-child {
+        border-bottom: none;
+    }
+
+    .contact-info ul li i {
+        font-size: 18px;
+        padding-right: 10px;
+    }
+
+.contact-info .working-time h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding-bottom: 5px;
+}
+
+.contact-info .working-time p span {
+    color: #333333;
+    padding-right: 10px;
+}
+.contact-btn .btn {
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    display: inline-block;
+    padding: 14px 25px;
+    background-color: #e12c2c;
+    text-transform: uppercase;
+    transition: .2s ease-in-out;
+}
+    .contact-btn .btn:hover {
+        background: #b32a2a;
+        transform: scale(0.9);
+    }
+.start-shopping {
+    border-radius: 5px;
+    background-color: #e12c2c;
+    color: white;
+    height: 50px;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    padding: 20px;
+    transition: .2s ease-in-out;
+}
+
+    .start-shopping:hover {
+        text-decoration: none;
+        background-color: #c33333;
+        color: white;
+    }
+
+    .start-shopping span {
+        line-height: 50px;
+    }
+@media only screen and (max-width: 991.98px) {
+    .start-shopping-wrapper {
+        margin-top:50px;
+    }
+    .no-item-header{
+        font-size:20px;
+    }
+}
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,106 @@
+﻿@model ContactUs
+@using DrizlyBackEnd.Services
+@inject LayoutService layoutService
+@{
+    var settings = layoutService.GetSettings();
+}
+@{
+    ViewData["Title"] = "Drizy: Contact Us";
+}
+
+<main>
+    <!-- breadcrumb area start -->
+    <div class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-wrap text-center">
+                        <nav aria-label="breadcrumb">
+                            <h1 class="breadcrumb-title">Contact Us</h1>
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- breadcrumb area end -->
+    <!-- contact wrapper area start -->
+    <div class="contact-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-message">
+                        <h2 class="contact-title">talk to a human</h2>
+                        <form asp-action="sendmessage" asp-controller="contactus" method="post" class="contact-form">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label asp-for="Name" class="required">Full Name</label>
+                                    <input asp-for="Name" placeholder="Name" type="text" required>
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label asp-for="Phone" class="required">Phone</label>
+                                    <input asp-for="Phone" placeholder="Phone" type="text" required>
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label asp-for="Email" class="required">E-Mail</label>
+                                    <input asp-for="Email" placeholder="Email" type="text" required>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <label asp-for="Subject" class="required">Subject</label>
+                                    <input asp-for="Subject" placeholder="Subject" type="text" required>
+                                    <span asp-validation-for="Subject" class="text-danger"></span>
+                                </div>
+                                <div class="col-12">
+                                    <div class="contact2-textarea text-center">
+                                        <label asp-for="YourMessage" class="required float-left">Message</label>
+                                        <textarea placeholder="Message" asp-for="YourMessage" class="form-control2" required=""></textarea>
+                                        <span asp-validation-for="YourMessage" class="text-danger"></span>
+                                    </div>
+                                    <div class="contact-btn mb-3">
+                                        <button class="btn" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                                <div class="col-12 d-flex justify-content-center">
+                                    <p class="form-messege"></p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info pt-0">
+                        <h2 class="contact-title">contact us</h2>
+                        <p>
+                            @*@settings["ContactUsDesc"]*@ Contact Us Description
+                        </p>
+                        <ul>
+                            <li><i class="fa fa-fax"></i> Address : FooterAddress</li>
+                            <li><i class="fa fa-phone"></i> Phone Number</li>
+                            <li><i class="fa fa-envelope-o"></i> Our MAIL</li>
+                        </ul>
+                        <div class="working-time">
+                            <h3>Working Hours</h3>
+                            <p class="pb-0">Monday-Friday: 3:00-6:00</p>
+                        </div>
+                        <ul style=" display:inline-flex">
+                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-facebook-square"></i></a></li>
+                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-twitter-square"></i></a></li>
+                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-linkedin"></i></a></li>
+                            <li class="p-2"><a href="#"><i style="color:black" class="fab fa-instagram-square"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact wrapper area end -->
+</main>
+<script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+<!-- main wrapper end -->

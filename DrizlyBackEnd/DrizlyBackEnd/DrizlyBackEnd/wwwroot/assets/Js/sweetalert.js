@@ -469,27 +469,17 @@
                         $(".basket-count").text(productcounter);
                     });
                 fetch(path).then(Response => {
-                    if (Response.ok) {
                         Swal.fire(
                             'Deleted!',
                             'Selected File Deleted Successfully',
                             'success'
                         ).then(function () {
-                            console.log("deleted");
+                            location.reload();
                         }).then(data => {
                 $(".basket-container").html(data);
                 let productcounter = $(".basket-counter-view").val();
                 $(".basket-count").text(productcounter);
-            });
-                    }
-                    else {
-                        Swal.fire(
-                            'Failed!',
-                            'Selected File Deleted Successfully',
-                            'success'
-                        )
-                        location.reload();
-                    }
+                });
                 })
             }
         })

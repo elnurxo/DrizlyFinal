@@ -1,7 +1,10 @@
 ﻿using DrizlyBackEnd.Models;
 using DrizlyBackEnd.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,12 +16,44 @@ namespace DrizlyBackEnd.Controllers
     public class HomeController : Controller
     {
         private readonly DrizlyContext _context;
-        public HomeController(DrizlyContext context)
+        private readonly UserManager<AppUser> _usermanager;
+        public HomeController(DrizlyContext context, UserManager<AppUser> usermanager)
         {
             _context = context;
+            _usermanager = usermanager;
         }
-        public IActionResult Index()
+        public async  Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                List<BasketItemViewModel> basketProducts = new List<BasketItemViewModel>();
+                AppUser user = User.Identity.IsAuthenticated ? await _usermanager.FindByNameAsync(User.Identity.Name) : null;
+
+                if (HttpContext.Request.Cookies["basket"] != null)
+                {
+                    basketProducts = JsonConvert.DeserializeObject<List<BasketItemViewModel>>(HttpContext.Request.Cookies["basket"]);
+                    BasketItem memberBasketItem = await _context.BasketItems.FirstOrDefaultAsync(x => x.AppUserId == user.Id);
+
+                    foreach (var item in basketProducts)
+                    {
+                        memberBasketItem = new BasketItem
+                        {
+                            AppUserId = user.Id,
+                            Count = item.Count,
+                            ProductId = item.ProductId,
+                            CreatedAt = DateTime.Now,
+                        };
+                        await _context.BasketItems.AddAsync(memberBasketItem);
+
+                        await _context.SaveChangesAsync();
+
+                    }
+
+                    Response.Cookies.Delete("basket");
+                }
+            }
+
+
             HomeViewModel homeVM = new HomeViewModel
             {
                 Settings = _context.Settings.ToList(),

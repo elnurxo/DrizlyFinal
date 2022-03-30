@@ -2,7 +2,18 @@
 @{
     var counter = 0;
 }
-
+<head>
+    <!-- Toastr Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+@if (TempData["Success"] != null)
+{
+    <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+}
+@if (TempData["Warning"] != null)
+{
+    <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
+}
 @foreach (var item in Model.BasketItems)
 {
     counter += item.Count;
@@ -11,7 +22,7 @@
             <img src="~/uploads/products/@item.Product.Image" alt="product image">
         </a>
         <ul>
-            <li><a  asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id"><span class="product-name-basket">@item.Product.Name</span></a></li>
+            <li><a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id"><span class="product-name-basket">@item.Product.Name</span></a></li>
             <li><span class="basket-hover-totalprice">@item.Count x <span>@((item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))$</span></span></li>
         </ul>
         <ul>
@@ -22,5 +33,36 @@
     <hr>
 }
 <input type="hidden" value="@counter" class="basket-counter" />
+ @*Toastr Script*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "200",
+            "hideDuration": "350",
+            "timeOut": "1000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        $(document).ready(function () {
+            if ($("#success-toaster").length) {
+                toastr["success"]($("#success-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#warning-toaster").length) {
+                toastr["warning"]($("#warning-toaster").val());
+            }
+        });
+    </script>
 
 
