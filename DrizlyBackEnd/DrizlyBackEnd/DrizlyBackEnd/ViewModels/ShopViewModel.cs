@@ -18,6 +18,6 @@ namespace DrizlyBackEnd.ViewModels
         public decimal MaxPrice { get; set; }
         public decimal MinPrice { get; set; }
         public decimal? MaxAbv { get; set; }
-        public decimal? MinPAbv { get; set; }
+        public decimal? MinAbv { get; set; }
     }
 }

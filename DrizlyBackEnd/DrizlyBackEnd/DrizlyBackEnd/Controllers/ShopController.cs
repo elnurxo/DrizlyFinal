@@ -25,6 +25,11 @@ namespace DrizlyBackEnd.Controllers
         //INDEX ACTION
         public IActionResult Index(int id,int? brandId,int? typeId,int? countryId, decimal? minPrice, decimal? maxPrice, decimal? minAbv, decimal? maxAbv)
         {
+            if (id == 0 || id>4)
+            {
+                return NotFound();
+            }
+
             var products = _context.Products
             .Where(x=>x.CategoryId==id)
             .Include(x => x.Brand)
@@ -65,13 +70,13 @@ namespace DrizlyBackEnd.Controllers
             {
                 productVM.MinPrice = products.Min(x => x.SalePrice);
                 productVM.MaxPrice = products.Max(x => x.SalePrice);
-                productVM.MinPAbv = products.Min(x => x.Abv);
+                productVM.MinAbv = products.Min(x => x.Abv);
                 productVM.MaxAbv = products.Max(x => x.Abv);
             }
 
             ViewBag.FilterMinPrice = minPrice ?? productVM.MinPrice;
             ViewBag.FilterMaxPrice = maxPrice ?? productVM.MaxPrice;
-            ViewBag.FilterMinAbv = minAbv ?? productVM.MinPAbv;
+            ViewBag.FilterMinAbv = minAbv ?? productVM.MinAbv;
             ViewBag.FilterMaxAbv = maxAbv ?? productVM.MaxAbv;
 
             if (minPrice != null && maxPrice != null)
@@ -80,8 +85,11 @@ namespace DrizlyBackEnd.Controllers
                 products = products.Where(x => x.Abv >= minAbv && x.Abv <= maxAbv);
 
             productVM.Settings = _context.Settings.ToList();
+            //PRODUCTS
             productVM.Products = _context.Products.Where(x=>!x.IsDeleted && x.CategoryId==id).Include(x=>x.Brand).Include(x=>x.Country).Include(x=>x.ProductComments).ToList();
+            //BRANDS
             productVM.Brands = _context.Brands.Where(x => !x.IsDeleted).Include(x => x.Products).ToList();
+            //COUNTRIES
             productVM.Countries = _context.Countries.Include(x => x.Products).ToList();
             productVM.TypeProducts = _context.TypeProducts.Where(x => !x.IsDeleted).Where(x=>x.CategoryId==id).Include(x => x.Products).Include(x=>x.Category).ToList();
             productVM.Category = _context.Categories.FirstOrDefault(x => x.Id == id);
@@ -90,6 +98,85 @@ namespace DrizlyBackEnd.Controllers
 
             return View(productVM);
         }
+
+        //SHOP ACTION
+        public IActionResult Shop(int id, int? brandId, int? typeId, int? countryId, decimal? minPrice, decimal? maxPrice, decimal? minAbv, decimal? maxAbv,int page=1)
+        {
+            if (id == 0 || id > 4)
+            {
+                return NotFound();
+            }
+
+            var products = _context.Products
+            .Where(x => x.CategoryId == id)
+            .Include(x => x.Brand)
+            .Include(x => x.Country)
+            .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
+            .Include(x => x.TypeProduct)
+            .ThenInclude(x => x.Category)
+            .Where(x => !x.IsDeleted);
+
+            ViewBag.CategoryId = id;
+            ViewBag.BrandId = brandId;
+            ViewBag.TypeId = typeId;
+            ViewBag.CountryId = countryId;
+            ViewBag.TotalProducts = products.Count();
+
+            ShopViewModel productVM = new ShopViewModel();
+
+            products = products.Where(x => x.CategoryId == id);
+
+            if (id > 4 || id < 0)
+            {
+                return BadRequest();
+            }
+
+            if (brandId != null)
+            {
+                products = products.Where(x => x.BrandId == brandId);
+            }
+            if (countryId != null)
+            {
+                products = products.Where(x => x.CountryId == id);
+            }
+            if (typeId != null)
+            {
+                products = products.Where(x => x.TypeProductId == typeId);
+            }
+            if (products.Any())
+            {
+                productVM.MinPrice = products.Min(x => x.SalePrice);
+                productVM.MaxPrice = products.Max(x => x.SalePrice);
+                productVM.MinAbv = products.Min(x => x.Abv);
+                productVM.MaxAbv = products.Max(x => x.Abv);
+            }
+
+            ViewBag.FilterMinPrice = minPrice ?? productVM.MinPrice;
+            ViewBag.FilterMaxPrice = maxPrice ?? productVM.MaxPrice;
+            ViewBag.FilterMinAbv = minAbv ?? productVM.MinAbv;
+            ViewBag.FilterMaxAbv = maxAbv ?? productVM.MaxAbv;
+
+            if (minPrice != null && maxPrice != null)
+                products = products.Where(x => x.SalePrice >= minPrice && x.SalePrice <= maxPrice);
+            if (minAbv != null && maxAbv != null)
+                products = products.Where(x => x.Abv >= minAbv && x.Abv <= maxAbv);
+
+            productVM.Settings = _context.Settings.ToList();
+            //PRODUCTS
+            productVM.Products = products.Skip((page - 1) * 6).Take(6).ToList();
+
+            //BRANDS
+            productVM.Brands = _context.Brands.Where(x => !x.IsDeleted).Include(x => x.Products).ToList();
+            //COUNTRIES
+            productVM.Countries = _context.Countries.Include(x => x.Products).ToList();
+            productVM.TypeProducts = _context.TypeProducts.Where(x => !x.IsDeleted).Where(x => x.CategoryId == id).Include(x => x.Products).Include(x => x.Category).ToList();
+            productVM.Category = _context.Categories.FirstOrDefault(x => x.Id == id);
+            productVM.Comment = _context.ProductComments.ToList();
+
+
+            return View(productVM);
+        }
+
         //DETAIL ACTION
         public IActionResult Detail(int id, int page = 1)
         {
@@ -115,22 +202,6 @@ namespace DrizlyBackEnd.Controllers
 
             return View(productDetailVM);
         }
-
-        //SHOP ACTION
-        public IActionResult Shop(int id)
-        {
-            var products = _context.Products
-          .Where(x => x.CategoryId == id)
-          .Include(x => x.Brand)
-          .Include(x => x.Country)
-          .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
-          .Include(x => x.TypeProduct)
-          .ThenInclude(x => x.Category)
-          .Where(x => !x.IsDeleted);
-
-            return View(products);
-        }
-
 
         //COMMENT ACTION
         [HttpPost]

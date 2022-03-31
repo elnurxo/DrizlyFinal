@@ -1,4 +1,8 @@
 $(function () {
+    //TOPE-PRODUCT FILTER
+    $(document).on("change", ".typeproductfilter", function (e) {
+        $("#filterForm").submit();
+    })
     //CURRENT BASKET COUNT
     let productcounter = $(".basket-counter").val();
     $(".basket-count").text(productcounter);
