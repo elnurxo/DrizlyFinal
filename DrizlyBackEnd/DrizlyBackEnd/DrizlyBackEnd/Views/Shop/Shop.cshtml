@@ -5,7 +5,16 @@
 
     ViewData["Title"] = "Drizly: Shop: " + Model.Category.Name;
     var settings = layoutService.GetSettings();
-    int countrycounter = 0;
+    int counter = (ViewBag.PageIndex - 1) * 6;
+    var temp = -1;
+    if (ViewBag.PageIndex == 1)
+    {
+        temp = 0;
+    }
+    if (temp == ViewBag.TotalPages)
+    {
+        temp = -2;
+    }
 }
 <!--Main Start-->
 <main>
@@ -30,7 +39,7 @@
             <div class="sorting-name-container">
                 <div class="category-name-sorting">
                     <h2>@Model.Category.Name</h2>
-                    <p>(<span>@Model.Products.Count()</span> results)</p>
+                    <p>(<span>@ViewBag.TotalProducts</span> results)</p>
                     <div class="sorting-product-wrapper">
                         <div class="sorting-product">
                             <!-- <label><span>Sort by:</span></label>
@@ -159,11 +168,22 @@
 
                 <div class="products-pagination">
                     <ul class="pagination-box">
-                        <li><a class="Previous" href="#"><i class="fas fa-chevron-left"></i></a></li>
-                        <li><a class="active-pagination" href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a class="Next" href="#"><i class="fas fa-chevron-right"></i></a></li>
+                        @if (ViewBag.PageIndex > 1)
+                        {
+                            <li><a class="Previous" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=1,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-left"></i></a></li>
+                        }
+
+                        @for (int i = 1; i <= 3; i++, temp++)
+                        {
+                            if ((ViewBag.PageIndex + temp) != 0 && (ViewBag.PageIndex + temp) != -1)
+                            {
+                                <li class="@(ViewBag.PageIndex+temp==ViewBag.PageIndex?"active":"")"><a class="@(ViewBag.PageIndex==i?"active-pagination":"")"  href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.PageIndex+temp,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})" style="display:@((ViewBag.PageIndex+temp)>ViewBag.TotalPages?"none":"block")">@(ViewBag.PageIndex+temp)</a></li>
+                            }
+                        }
+                        @if (ViewBag.PageIndex < ViewBag.TotalPages)
+                        {
+                             <li><a class="Next" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.TotalPages,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-right"></i></a></li>
+                        }
                     </ul>
                 </div>
 
@@ -208,7 +228,7 @@
                 </div>
             </div>
         </div>
-        <div class="filter-container">
+        <div class="filter-container" style="margin-bottom:130px;">
             <div class="filter-wrapper">
                 <div class="single-block">
                     <form id="filterForm" method="get">

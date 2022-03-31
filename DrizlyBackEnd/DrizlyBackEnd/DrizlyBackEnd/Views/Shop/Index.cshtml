@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Drizly: Shop: " + Model.Category.Name;
     var settings = layoutService.GetSettings();
-    int countrycounter = 0;
+
 }
 <main>
     <!-- Shop Hero Section -->
@@ -42,18 +42,18 @@
                         {
                             @foreach (var item in Model.TypeProducts)
                             {
-                                <li>
-                                    <a asp-controller="shoppaginated" asp-action="index" asp-route-id="@item.Id"><button><span>@item.Name</span></button></a>
-                                </li>
+                            <li>
+                                <button class="subcategory-btn"><span>@item.Name <input style="opacity:0;" form="filterForm" class="typeproductfilter" @(ViewBag.CategoryId == item.Id ? "checked" : "") name="typeId" value="@item.Id" id="type-@item.Id" type="radio"></span></button>
+                            </li>
                             }
                         }
                         else
                         {
                             @for (int i = 0; i < 6; i++)
                             {
-                                <li>
-                                    <a asp-controller="shoppaginated" asp-action="index" asp-route-id="@Model.TypeProducts[i].Id"><button><span>@Model.TypeProducts[i].Name</span></button></a>
-                                </li>
+                            <li>
+                                <button class="subcategory-btn"><span>@Model.TypeProducts[i].Name <input style="opacity:0;" form="filterForm" class="typeproductfilter" @(ViewBag.CategoryId == Model.TypeProducts[i].Id ? "checked" : "") name="typeId" value="@Model.TypeProducts[i].Id" id="type-@Model.TypeProducts[i].Id" type="radio"></span></button>
+                            </li>
                             }
                         }
                     </ul>
@@ -123,15 +123,26 @@
                                                     <div class="whole-product-slide">
                                                         <div class="drink-slide-info">
                                                             <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id" style="text-align: center">
-                                                                <div class="drink-on-sale">On Sale</div>
+                                                                @if (product.DiscountPercent > 0)
+                                                                {
+                                                                    <div class="drink-on-sale">On Sale</div>
+                                                                }
+
                                                                 <img src="~/uploads/products/@product.Image">
                                                             </a>
                                                             <div class="drink-name">
                                                                 <p class="@(product.IsAvailable==false?"text-danger":"")">@product.Name</p>
                                                             </div>
                                                             <div class="drink-price">
-                                                                <p class="old-price-wrapper">$<span class="price-old">@product.SalePrice</span></p>
-                                                                <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
+                                                                @if (product.DiscountPercent > 0)
+                                                                {
+                                                                    <p class="old-price-wrapper">$<span class="price-old">@product.SalePrice</span></p>
+                                                                    <p class="regular-price-wrapper">$<span class="price-regular">@((product.SalePrice * (1 - product.DiscountPercent / 100)).ToString("0.00"))</span></p>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <p class="regular-price-wrapper">$<span class="price-regular">@product.SalePrice</span></p>
+                                                                }
                                                             </div>
                                                             <div class="drink-rate">
                                                                 @{ var tamhisse = Math.Truncate(end);

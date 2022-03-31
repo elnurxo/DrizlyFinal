@@ -1,8 +1,23 @@
 $(function () {
-    //TOPE-PRODUCT FILTER
+    //TYPE-PRODUCT FILTER
     $(document).on("change", ".typeproductfilter", function (e) {
         $("#filterForm").submit();
     })
+    //BRAND FILTER
+    $(document).on("change", ".brandfilter", function (e) {
+        $("#filterForm").submit();
+    })
+    //COUNTRY FILTER
+    $(document).on("change", ".countryfilter", function (e) {
+        $("#filterForm").submit();
+    })
+    //TYPE PRODUCTS CLICK MAKE INSIDE INPUT CHECKED 
+    $(".subcategory-btn").click(function () {
+        console.log($(this).children().find(".typeproductfilter"));
+        $(this).children().find(".typeproductfilter").attr('checked', 'checked');
+        $("#filterForm").submit();
+        
+    });
     //CURRENT BASKET COUNT
     let productcounter = $(".basket-counter").val();
     $(".basket-count").text(productcounter);

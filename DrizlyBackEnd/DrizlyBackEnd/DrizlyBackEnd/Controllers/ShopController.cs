@@ -43,7 +43,6 @@ namespace DrizlyBackEnd.Controllers
             ViewBag.BrandId = brandId;
             ViewBag.TypeId = typeId;
             ViewBag.CountryId = countryId;
-            ViewBag.TotalProducts = products.Count();
 
             ShopViewModel productVM = new ShopViewModel();
 
@@ -84,6 +83,8 @@ namespace DrizlyBackEnd.Controllers
             if (minAbv != null && maxAbv != null)
                 products = products.Where(x => x.Abv >= minAbv && x.Abv <= maxAbv);
 
+
+            ViewBag.TotalProducts = products.Count();
             productVM.Settings = _context.Settings.ToList();
             //PRODUCTS
             productVM.Products = _context.Products.Where(x=>!x.IsDeleted && x.CategoryId==id).Include(x=>x.Brand).Include(x=>x.Country).Include(x=>x.ProductComments).ToList();
@@ -120,7 +121,7 @@ namespace DrizlyBackEnd.Controllers
             ViewBag.BrandId = brandId;
             ViewBag.TypeId = typeId;
             ViewBag.CountryId = countryId;
-            ViewBag.TotalProducts = products.Count();
+            ViewBag.PageIndex = page;
 
             ShopViewModel productVM = new ShopViewModel();
 
@@ -161,6 +162,8 @@ namespace DrizlyBackEnd.Controllers
             if (minAbv != null && maxAbv != null)
                 products = products.Where(x => x.Abv >= minAbv && x.Abv <= maxAbv);
 
+            ViewBag.TotalPages = (int)Math.Ceiling(products.Count() / 6d);
+            ViewBag.TotalProducts = products.Count();
             productVM.Settings = _context.Settings.ToList();
             //PRODUCTS
             productVM.Products = products.Skip((page - 1) * 6).Take(6).ToList();
