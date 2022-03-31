@@ -32,7 +32,7 @@ namespace DrizlyBackEnd.Controllers
             .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
             .Include(x => x.TypeProduct)
             .ThenInclude(x=>x.Category)
-            .Where(x => !x.IsDeleted).Where(x => x.IsAvailable);
+            .Where(x => !x.IsDeleted);
 
             ViewBag.CategoryId = id;
             ViewBag.BrandId = brandId;
@@ -116,6 +116,22 @@ namespace DrizlyBackEnd.Controllers
             return View(productDetailVM);
         }
 
+        //SHOP ACTION
+        public IActionResult Shop(int id)
+        {
+            var products = _context.Products
+          .Where(x => x.CategoryId == id)
+          .Include(x => x.Brand)
+          .Include(x => x.Country)
+          .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
+          .Include(x => x.TypeProduct)
+          .ThenInclude(x => x.Category)
+          .Where(x => !x.IsDeleted);
+
+            return View(products);
+        }
+
+
         //COMMENT ACTION
         [HttpPost]
         [Authorize(Roles = "Member")]
@@ -175,10 +191,25 @@ namespace DrizlyBackEnd.Controllers
         }
 
         // ADD BASKET
-        public IActionResult AddBasket(int id)
+        public IActionResult AddBasket(int id, int page = 1)
         {
             if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
                 return NotFound();
+
+
+            Product product = _context.Products
+                .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
+                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x => x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
+                .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
+                .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
+                .FirstOrDefault(x => x.Id == id && !x.IsDeleted);
+            if (product == null) return NotFound();
+
+            if (product.IsAvailable==false)
+            {
+                TempData["Warning"] = "This product not available right now";           
+                return RedirectToAction("detail","shop", new { id = product.Id });
+            }
 
             AppUser member = null;
             if (User.Identity.IsAuthenticated)

@@ -125,7 +125,7 @@
                         <hr>
                         <p class="drink-size">Product Code: <span class="font-weight-bold">@Model.Product.CodePref@Model.Product.CodeNum</span></p>
                         <hr>
-                        <a class="add-to-basket-btn basket-add" role="button" asp-controller="shop" asp-action="AddBasket" asp-route-id="@Model.Product.Id">Add to Cart</a>
+                        <a class="add-to-basket-btn @(Model.Product.IsAvailable==true?"basket-add":"")" role="button" asp-controller="shop" asp-action="addbasket" asp-route-id="@Model.Product.Id" style="background-color:@(Model.Product.IsAvailable==false?"#ca7777":"");">@(Model.Product.IsAvailable==true? "Add to Cart":"Out of Stock")</a>
                     </div>
                 </div>
                 <hr class="detail-hr">

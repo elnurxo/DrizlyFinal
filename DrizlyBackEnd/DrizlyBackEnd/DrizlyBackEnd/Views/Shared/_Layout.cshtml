@@ -151,7 +151,7 @@
                                 </ul>
                                 <ul>
                                     <li><a class="basket-remove" asp-controller="shop" asp-action="RemoveBasket" asp-route-id="@item.Product.Id"><i class="bi bi-dash-circle"></i></a></li>
-                                    <li><a asp-controller="shop" asp-action="AddBasket" asp-route-id="@item.Product.Id" class="basket-add"><i class="bi bi-plus-circle"></i></a></li>
+                                    <li><a asp-controller="@(item.Product.IsAvailable==true?"shop":"")" asp-action="@(item.Product.IsAvailable==true?"AddBasket":"")" asp-route-id="@item.Product.Id" class="@(item.Product.IsAvailable==true?"basket-add":"")"><i class="bi bi-plus-circle"></i></a></li>
                                 </ul>
                             </li>
                             <hr>

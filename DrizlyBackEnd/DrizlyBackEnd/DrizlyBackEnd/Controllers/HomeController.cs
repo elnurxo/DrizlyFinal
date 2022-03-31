@@ -48,7 +48,7 @@ namespace DrizlyBackEnd.Controllers
                         await _context.SaveChangesAsync();
 
                     }
-
+                    TempData["Success"] = "New items in your basket!";
                     Response.Cookies.Delete("basket");
                 }
             }

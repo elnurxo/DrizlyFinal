@@ -127,7 +127,7 @@
                                                                 <img src="~/uploads/products/@product.Image">
                                                             </a>
                                                             <div class="drink-name">
-                                                                <p>@product.Name</p>
+                                                                <p class="@(product.IsAvailable==false?"text-danger":"")">@product.Name</p>
                                                             </div>
                                                             <div class="drink-price">
                                                                 <p class="old-price-wrapper">$<span class="price-old">@product.SalePrice</span></p>
@@ -154,9 +154,12 @@
                                                                 <span class="review-count">@product.ProductComments.Count</span>
                                                             </div>
                                                         </div>
-                                                        <div class="add-to-basket">
-                                                            <a class="basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@product.Id"><i class="fas fa-shopping-cart"></i></a>
-                                                        </div>
+                                                        @if (product.IsAvailable == true)
+                                                        {
+                                                            <div class="add-to-basket">
+                                                                <a class="basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@product.Id"><i class="fas fa-shopping-cart"></i></a>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </li>
                                             }

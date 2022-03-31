@@ -22,12 +22,12 @@
             <img src="~/uploads/products/@item.Product.Image" alt="product image">
         </a>
         <ul>
-            <li><a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id"><span class="product-name-basket">@item.Product.Name</span></a></li>
+            <li><a asp-controller="shop" asp-action="detail" asp-route-id="@item.Product.Id"><span class="product-name-basket" style="color:@(item.Product.IsAvailable==false?"#e12c2c":"");">@item.Product.Name</span></a></li>
             <li><span class="basket-hover-totalprice">@item.Count x <span>@((item.Product.DiscountPercent>0?(item.Product.SalePrice*(1-item.Product.DiscountPercent/100)):item.Product.SalePrice).ToString("0.00"))$</span></span></li>
         </ul>
         <ul>
             <li><a class="basket-remove" asp-controller="shop" asp-action="RemoveBasket" asp-route-id="@item.Product.Id"><i class="bi bi-dash-circle"></i></a></li>
-            <li><a asp-controller="shop" asp-action="AddBasket" asp-route-id="@item.Product.Id" class="basket-add"><i class="bi bi-plus-circle"></i></a></li>
+            <li><a asp-controller="@(item.Product.IsAvailable==true?"shop":"")" asp-action="@(item.Product.IsAvailable==true?"AddBasket":"")" asp-route-id="@item.Product.Id" class="@(item.Product.IsAvailable==true?"basket-add":"")"><i class="bi bi-plus-circle"></i></a></li>
         </ul>
     </li>
     <hr>
