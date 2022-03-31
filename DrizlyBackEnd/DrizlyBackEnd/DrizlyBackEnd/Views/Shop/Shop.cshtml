@@ -97,95 +97,105 @@
                     }
                 </div>
                 <ul class="products-ul">
-                    @foreach (var product in Model.Products)
+                    @if (Model.Products.Count > 0)
                     {
-                        var result = 0;
-                        decimal end = 0;
-                        foreach (var comment in product.ProductComments)
+                        @foreach (var product in Model.Products)
                         {
-                            result += @comment.Rate;
-                        }
-                        if (result != 0)
-                        {
-                            end = decimal.Divide(result, product.ProductComments.Count);
-                        }
-                        <li class="product-list-item">
-                            <div class="whole-product-wrapper">
-                                <div class="drink-info">
-                                    @if (product.DiscountPercent > 0)
-                                    {
-                                        <div class="drink-on-sale">On Sale</div>
-                                    }
-                                    <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id">
-                                        <img src="~/uploads/products/@product.Image">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p class="@(product.IsAvailable==false?"text-danger":"")">@product.Name</p>
-                                    </div>
-                                    <div class="drink-price">
+                            var result = 0;
+                            decimal end = 0;
+                            foreach (var comment in product.ProductComments)
+                            {
+                                result += @comment.Rate;
+                            }
+                            if (result != 0)
+                            {
+                                end = decimal.Divide(result, product.ProductComments.Count);
+                            }
+                            <li class="product-list-item">
+                                <div class="whole-product-wrapper">
+                                    <div class="drink-info">
                                         @if (product.DiscountPercent > 0)
                                         {
-                                            <p class="old-price-wrapper">$<span class="price-old">@product.SalePrice$</span></p>
-                                            <p class="regular-price-wrapper">$<span class="price-regular">@((product.SalePrice * (1 - product.DiscountPercent / 100)).ToString("0.00"))$</span></p>
+                                            <div class="drink-on-sale">On Sale</div>
                                         }
-                                        else
-                                        {
-                                            <p class="regular-price-wrapper">$<span class="price-regular">@product.SalePrice$</span></p>
-                                        }
-                                    </div>
-                                    <div class="drink-rate-paginated">
-                                        @{ var tamhisse = Math.Truncate(end);
-                                            var yuvarlaq = Math.Ceiling(end);}
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            if (end >= i)
+                                        <a asp-controller="shop" asp-action="detail" asp-route-id="@product.Id">
+                                            <img src="~/uploads/products/@product.Image">
+                                        </a>
+                                        <div class="drink-name">
+                                            <p class="@(product.IsAvailable==false?"text-danger":"")">@product.Name</p>
+                                        </div>
+                                        <div class="drink-price">
+                                            @if (product.DiscountPercent > 0)
                                             {
-                                                <i class="fas fa-star"></i>
-                                            }
-                                            else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
-                                            {
-                                                <i class="bi bi-star-half"></i>
+                                                <p class="old-price-wrapper">$<span class="price-old">@product.SalePrice$</span></p>
+                                                <p class="regular-price-wrapper">$<span class="price-regular">@((product.SalePrice * (1 - product.DiscountPercent / 100)).ToString("0.00"))$</span></p>
                                             }
                                             else
                                             {
-                                                <i class="fa fa-star-o"></i>
+                                                <p class="regular-price-wrapper">$<span class="price-regular">@product.SalePrice$</span></p>
                                             }
-                                        }
-                                        <span class="review-count">@product.ProductComments.Count</span>
+                                        </div>
+                                        <div class="drink-rate-paginated">
+                                            @{ var tamhisse = Math.Truncate(end);
+                                                var yuvarlaq = Math.Ceiling(end);}
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (end >= i)
+                                                {
+                                                    <i class="fas fa-star"></i>
+                                                }
+                                                else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                                {
+                                                    <i class="bi bi-star-half"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            }
+                                            <span class="review-count">@product.ProductComments.Count</span>
+                                        </div>
                                     </div>
-                                </div>
-                                @if (product.IsAvailable == true)
-                                {
-                                    <div class="add-to-basket">
-                                        <a class="basket-icon basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@product.Id"><i class="fas fa-shopping-cart"></i></a>
-                                    </div>
-                                }
+                                    @if (product.IsAvailable == true)
+                                    {
+                                        <div class="add-to-basket">
+                                            <a class="basket-icon basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@product.Id"><i class="fas fa-shopping-cart"></i></a>
+                                        </div>
+                                    }
 
-                            </div>
-                        </li>
+                                </div>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <h1 class="font-weight-bolder my-3">No Product Found by Your Search :{</h1>
                     }
                 </ul>
 
-                <div class="products-pagination">
-                    <ul class="pagination-box">
-                        @if (ViewBag.PageIndex > 1)
-                        {
-                            <li><a class="Previous" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=1,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-left"></i></a></li>
-                        }
-
-                        @for (int i = 1; i <= 3; i++, temp++)
-                        {
-                            if ((ViewBag.PageIndex + temp) != 0 && (ViewBag.PageIndex + temp) != -1)
+                @if (Model.Products.Count > 0)
+                {
+                    <div class="products-pagination">
+                        <ul class="pagination-box">
+                            @if (ViewBag.PageIndex > 1)
                             {
-                                <li class="@(ViewBag.PageIndex+temp==ViewBag.PageIndex?"active":"")"><a class="@(ViewBag.PageIndex==i?"active-pagination":"")"  href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.PageIndex+temp,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})" style="display:@((ViewBag.PageIndex+temp)>ViewBag.TotalPages?"none":"block")">@(ViewBag.PageIndex+temp)</a></li>
+                                <li><a class="Previous" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=1,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-left"></i></a></li>
                             }
-                        }
-                        @if (ViewBag.PageIndex < ViewBag.TotalPages)
-                        {
-                             <li><a class="Next" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.TotalPages,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-right"></i></a></li>
-                        }
-                    </ul>
-                </div>
+
+                            @for (int i = 1; i <= 3; i++, temp++)
+                            {
+                                if ((ViewBag.PageIndex + temp) != 0 && (ViewBag.PageIndex + temp) != -1)
+                                {
+                                    <li class="@(ViewBag.PageIndex+temp==ViewBag.PageIndex?"active":"")"><a class="@(ViewBag.PageIndex==i?"active-pagination":"")" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.PageIndex+temp,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})" style="display:@((ViewBag.PageIndex+temp)>ViewBag.TotalPages?"none":"block")">@(ViewBag.PageIndex+temp)</a></li>
+                                }
+                            }
+                            @if (ViewBag.PageIndex < ViewBag.TotalPages)
+                            {
+                                <li><a class="Next" href="@Url.Action("shop","shop",new {id= Model.Category.Id, brandId = ViewBag.BrandId, page=ViewBag.TotalPages,typeId = ViewBag.TypeId,countryId = ViewBag.CountryId,minPrice=ViewBag.FilterMinPrice, maxPrice=ViewBag.FilterMaxPrice, minAbv=ViewBag.FilterMinAbv,maxAbv=ViewBag.FilterMaxAbv})"><i class="fas fa-chevron-right"></i></a></li>
+                            }
+                        </ul>
+                    </div>
+                }
 
                 <div class="promotion-wrapper">
                     @if (Model.Category.Id == 1)
@@ -230,9 +240,8 @@
         </div>
         <div class="filter-container" style="margin-bottom:130px;">
             <div class="filter-wrapper">
-                <div class="single-block">
-                    <form id="filterForm" method="get">
-                    </form>
+                <div class="filter-side" style="text-align:center;">
+                    <a asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id" style=" background-color: #e12c2c; padding: 12px 30px; border-radius: 5px; color: white; font-weight: bold;">All @Model.Category.Name</a>
                 </div>
                 <div class="filter-side">
                     <button class="filter-list-button">
@@ -243,60 +252,18 @@
                     </button>
                     <div class="filter-side-dropdown">
                         <ul class="filters-ul">
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">Ale</p>
-                                    <p class="filter-count">(<span>99</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">IPA</p>
-                                    <p class="filter-count">(<span>12</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">Lager</p>
-                                    <p class="filter-count">(<span>3</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">Sour / Wilde Ale</p>
-                                    <p class="filter-count">(<span>26</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">Bla / Wilde Ale</p>
-                                    <p class="filter-count">(<span>26</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="radio">
-                                    <p class="filter-name">Blabla / Wilde Ale</p>
-                                    <p class="filter-count">(<span>26</span>)</p>
-                                </div>
-                            </li>
-                            </a>
+                            @foreach (var types in Model.TypeProducts)
+                            {
+                                <a class="filter-link">
+                                <li>
+                                    <div class="form-check">
+                                        <input form="filterForm" class="typeproductfilter" @(ViewBag.TypeId == types.Id ? "checked" : "") name="typeId" value="@types.Id" id="type-@types.Id" type="radio">
+                                        <p class="filter-name" for="type-@types.Id" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@types.Name</p>
+                                        <p class="filter-count">(<span>@types.Products.Count</span>)</p>
+                                    </div>
+                                </li>
+                                </a>
+                            }
                         </ul>
                         <button class="show-more">More</button>
                     </div>
@@ -304,97 +271,28 @@
                 <div class="filter-side">
                     <button class="filter-list-button">
                         <div class="filter-list">
-                            <p>Type</p>
+                            <p>Country of Origin</p>
                             <h5 class="filter-plus-minus">-</h5>
                         </div>
                     </button>
                     <div class="filter-side-dropdown">
                         <ul class="filters-ul">
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Craft</p>
-                                    <p class="filter-count">(<span>102</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Seasonal</p>
-                                    <p class="filter-count">(<span>8</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Non-Alcoholic</p>
-                                    <p class="filter-count">(<span>23</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                        </ul>
-                        <button class="show-more">More</button>
-                    </div>
-                </div>
-                <div class="filter-side">
-                    <button class="filter-list-button">
-                        <div class="filter-list">
-                            <p>Country Of Origin</p>
-                            <h5 class="filter-plus-minus">-</h5>
-                        </div>
-                    </button>
-                    <div class="filter-side-dropdown">
-                        <ul class="filters-ul">
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">United States</p>
-                                    <p class="filter-count">(<span>102</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Azerbaijan</p>
-                                    <p class="filter-count">(<span>8</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Italy</p>
-                                    <p class="filter-count">(<span>23</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Georgia </p>
-                                    <p class="filter-count">(<span>23</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Spain</p>
-                                    <p class="filter-count">(<span>23</span>)</p>
-                                </div>
-                            </li>
-                            </a>
+                            @foreach (var country in Model.Countries)
+                            {
+                                var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                                if (listCountries.Count > 0)
+                                {
+                                    <a class="filter-link">
+                                    <li>
+                                        <div class="form-check">
+                                            <input form="filterForm" class="countryfilter" @(ViewBag.CountryId == country.Id ? "checked" : "") name="countryId" value="@country.Id" id="country-@country.Id" type="radio">
+                                            <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@country.Name</p>
+                                            <p class="filter-count">(<span>@listCountries.Count()</span>)</p>
+                                        </div>
+                                    </li>
+                                    </a>
+                                }
+                            }
                         </ul>
                         <button class="show-more">More</button>
                     </div>
@@ -408,59 +306,57 @@
                     </button>
                     <div class="filter-side-dropdown">
                         <ul class="filters-ul">
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Xirdalan</p>
-                                    <p class="filter-count">(<span>102</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">NZS</p>
-                                    <p class="filter-count">(<span>8</span>)</p>
-                                </div>
-                            </li>
-                            </a>
-                            <a class="filter-link" href="#">
-                            <li>
-                                <div class="form-check">
-                                    <input form="filterForm" type="checkbox">
-                                    <p class="filter-name">Korona</p>
-                                    <p class="filter-count">(<span>23</span>)</p>
-                                </div>
-                            </li>
-                            </a>
+                            @foreach (var brand in Model.Brands)
+                            {
+                                var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                                if (listBrands.Count > 0)
+                                {
+                                    <a class="filter-link">
+                                    <li>
+                                        <div class="form-check">
+                                            <input form="filterForm" class="brandfilter" @(ViewBag.BrandId == brand.Id ? "checked" : "") name="brandId" value="@brand.Id" id="brand-@brand.Id" type="radio">
+                                            <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@brand.Name</p>
+                                            <p class="filter-count">(<span>@listBrands.Count()</span>)</p>
+                                        </div>
+                                    </li>
+                                    </a>
+                                }
+                            }
                         </ul>
                         <button class="show-more">More</button>
                     </div>
                 </div>
-                <div class="filter-side" style="height: 137px;">
-                    <button class="filter-list-button">
-                        <div class="filter-list mb-3">
-                            <p>Filter by ABV</p>
-                        </div>
-                    </button>
-                    <div class="sidebar-body">
-                        <div class="abv-range-wrap">
-                            <div class="abv-range" data-min="0" data-max="100"></div>
-                            <div class="range-slider-abv">
-                                <form action="#">
-                                    <div class="abv-input">
-                                        <label for="amountabv">ABV: </label>
-                                        <input type="text" id="amountabv">
-                                    </div>
-                                </form>
+                @*FILTER BY ABV*@
+                @if (Model.Category.Id != 4)
+                {
+                    <div class="filter-side" style="height: 137px;">
+                        <button class="filter-list-button">
+                            <input type="hidden" form="filterForm" name="minAbv" id="minAbvInput" />
+                            <input type="hidden" form="filterForm" name="maxAbv" id="maxAbvInput" />
+                            <div class="filter-list mb-3">
+                                <p>Filter by ABV</p>
+                            </div>
+                        </button>
+                        <div class="sidebar-body">
+                            <div class="abv-range-wrap">
+                                <div class="abv-range" data-min="0" data-max="100"></div>
+                                <div class="range-slider-abv">
+                                    <form action="#">
+                                        <div class="abv-input">
+                                            <label for="amountabvmobile">ABV: </label>
+                                            <input form="filterForm" type="text" id="amountabvmobile">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+                @*FILTER BY PRICE*@
                 <div class="filter-side">
                     <button class="filter-list-button">
+                        <input type="hidden" form="filterForm" name="minPrice" id="minPriceInput" />
+                        <input type="hidden" form="filterForm" name="maxPrice" id="maxPriceInput" />
                         <div class="filter-list mb-3">
                             <p>Filter by Price</p>
                         </div>
@@ -469,17 +365,18 @@
                         <div class="price-range-wrap">
                             <div class="price-range" data-min="20" data-max="400"></div>
                             <div class="range-slider">
-                                <form action="#">
+                                <form id="filterForm" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id">
                                     <div class="price-input">
                                         <label for="amount">Price: </label>
                                         <input type="text" id="amount">
                                     </div>
-                                    <button class="filter-btn">filter</button>
+                                    <button type="submit" class="filter-btn mb-2">filter</button>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
+                @*END FILTER BY PRICE*@
             </div>
         </div>
     </section>
@@ -494,10 +391,6 @@
                 <button class="exit-filter-sidebar"><i class="fas fa-times"></i></button>
                 Filter
             </h3>
-            <div class="single-block">
-                <form id="filterForm" method="get">
-                </form>
-            </div>
             <div class="filter-side">
                 <button class="filter-list-button">
                     <div class="filter-list">
@@ -507,100 +400,18 @@
                 </button>
                 <div class="filter-side-dropdown">
                     <ul class="filters-ul">
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">Ale</p>
-                                <p class="filter-count">(<span>99</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">IPA</p>
-                                <p class="filter-count">(<span>12</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">Lager</p>
-                                <p class="filter-count">(<span>3</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">Sour / Wilde Ale</p>
-                                <p class="filter-count">(<span>26</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">Bla / Wilde Ale</p>
-                                <p class="filter-count">(<span>26</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="radio">
-                                <p class="filter-name">Blabla / Wilde Ale</p>
-                                <p class="filter-count">(<span>26</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                    </ul>
-                    <button class="show-more">More</button>
-                </div>
-            </div>
-            <div class="filter-side">
-                <button class="filter-list-button">
-                    <div class="filter-list">
-                        <p>Type</p>
-                        <h5 class="filter-plus-minus">-</h5>
-                    </div>
-                </button>
-                <div class="filter-side-dropdown">
-                    <ul class="filters-ul">
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Craft</p>
-                                <p class="filter-count">(<span>102</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Seasonal</p>
-                                <p class="filter-count">(<span>8</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Non-Alcoholic</p>
-                                <p class="filter-count">(<span>23</span>)</p>
-                            </div>
-                        </li>
-                        </a>
+                        @foreach (var types in Model.TypeProducts)
+                        {
+                            <a class="filter-link">
+                            <li>
+                                <div class="form-check">
+                                    <input form="filterForm1" class="typeproductfilter1" @(ViewBag.TypeId == types.Id ? "checked" : "") name="typeId" value="@types.Id" id="type-@types.Id" type="radio">
+                                    <p class="filter-name" for="type-@types.Id" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@types.Name</p>
+                                    <p class="filter-count">(<span>@types.Products.Count</span>)</p>
+                                </div>
+                            </li>
+                            </a>
+                        }
                     </ul>
                     <button class="show-more">More</button>
                 </div>
@@ -614,51 +425,22 @@
                 </button>
                 <div class="filter-side-dropdown">
                     <ul class="filters-ul">
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">United States</p>
-                                <p class="filter-count">(<span>102</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Azerbaijan</p>
-                                <p class="filter-count">(<span>8</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Italy</p>
-                                <p class="filter-count">(<span>23</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Georgia </p>
-                                <p class="filter-count">(<span>23</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Spain</p>
-                                <p class="filter-count">(<span>23</span>)</p>
-                            </div>
-                        </li>
-                        </a>
+                        @foreach (var country in Model.Countries)
+                        {
+                            var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                            if (listCountries.Count > 0)
+                            {
+                                <a class="filter-link">
+                                <li>
+                                    <div class="form-check">
+                                        <input form="filterForm1" class="countryfilter1" @(ViewBag.CountryId == country.Id ? "checked" : "") name="countryId" value="@country.Id" id="country-@country.Id" type="radio">
+                                        <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@country.Name</p>
+                                        <p class="filter-count">(<span>@listCountries.Count()</span>)</p>
+                                    </div>
+                                </li>
+                                </a>
+                            }
+                        }
                     </ul>
                     <button class="show-more">More</button>
                 </div>
@@ -672,59 +454,55 @@
                 </button>
                 <div class="filter-side-dropdown">
                     <ul class="filters-ul">
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Xirdalan</p>
-                                <p class="filter-count">(<span>102</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">NZS</p>
-                                <p class="filter-count">(<span>8</span>)</p>
-                            </div>
-                        </li>
-                        </a>
-                        <a class="filter-link" href="#">
-                        <li>
-                            <div class="form-check">
-                                <input form="filterForm" type="checkbox">
-                                <p class="filter-name">Korona</p>
-                                <p class="filter-count">(<span>23</span>)</p>
-                            </div>
-                        </li>
-                        </a>
+                        @foreach (var brand in Model.Brands)
+                        {
+                            var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                            if (listBrands.Count > 0)
+                            {
+                                <a class="filter-link">
+                                <li>
+                                    <div class="form-check">
+                                        <input form="filterForm1" class="brandfilter1" @(ViewBag.BrandId == brand.Id ? "checked" : "") name="brandId" value="@brand.Id" id="brand-@brand.Id" type="radio">
+                                        <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@brand.Name</p>
+                                        <p class="filter-count">(<span>@listBrands.Count()</span>)</p>
+                                    </div>
+                                </li>
+                                </a>
+                            }
+                        }
                     </ul>
                     <button class="show-more">More</button>
                 </div>
             </div>
-            <div class="filter-side" style="height: 137px;">
-                <button class="filter-list-button">
-                    <div class="filter-list mb-3">
-                        <p>Filter by ABV</p>
-                    </div>
-                </button>
-                <div class="sidebar-body">
-                    <div class="abv-range-wrap">
-                        <div class="abv-range" data-min="0" data-max="100"></div>
-                        <div class="range-slider-abv">
-                            <form action="#">
-                                <div class="abv-input">
-                                    <label for="amountabvmobile">ABV: </label>
-                                    <input type="text" id="amountabvmobile">
-                                </div>
-                            </form>
+            @if (Model.Category.Id != 4)
+            {
+                <div class="filter-side" style="height: 137px;">
+                    <button class="filter-list-button">
+                        <input type="hidden" form="filterForm1" name="minAbv" id="minAbvInput" />
+                        <input type="hidden" form="filterForm1" name="maxAbv" id="maxAbvInput" />
+                        <div class="filter-list mb-3">
+                            <p>Filter by ABV</p>
+                        </div>
+                    </button>
+                    <div class="sidebar-body">
+                        <div class="abv-range-wrap">
+                            <div class="abv-range" data-min="0" data-max="100"></div>
+                            <div class="range-slider-abv">
+                                <form action="#">
+                                    <div class="abv-input">
+                                        <label for="amountabvmobile">ABV: </label>
+                                        <input form="filterForm1" type="text" id="amountabvmobile">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
             <div class="filter-side">
                 <button class="filter-list-button">
+                    <input type="hidden" form="filterForm1" name="minPrice" id="minPriceInput" />
+                    <input type="hidden" form="filterForm1" name="maxPrice" id="maxPriceInput" />
                     <div class="filter-list mb-3">
                         <p>Filter by Price</p>
                     </div>
@@ -733,12 +511,12 @@
                     <div class="price-range-wrap">
                         <div class="price-range" data-min="20" data-max="400"></div>
                         <div class="range-slider">
-                            <form action="#">
+                            <form id="filterForm1" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id">
                                 <div class="price-input">
-                                    <label for="amountmobile">Price: </label>
-                                    <input type="text" id="amountmobile">
+                                    <label for="amount">Price: </label>
+                                    <input type="text" id="amount">
                                 </div>
-                                <button class="filter-btn mb-2">filter</button>
+                                <button type="submit" class="filter-btn mb-2">filter</button>
                             </form>
                         </div>
                     </div>
@@ -747,3 +525,36 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/assets/Js/pricerange.js"></script>
+
+    <script>
+    $(document).ready(function () {
+
+        var rangeSlider = $(".price-range"),
+            amount = $("#amount"),
+            minPrice = @Model.MinPrice,
+            maxPrice = @Model.MaxPrice;
+        rangeSlider.slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            values: [@ViewBag.FilterMinPrice, @ViewBag.FilterMaxPrice],
+            slide: function (event, ui) {
+                amount.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                console.log(ui.values[0] + "-" + ui.values[1])
+            },
+            change: function (event, ui) {
+                $("#minPriceInput").val(ui.values[0]);
+                $("#maxPriceInput").val(ui.values[1]);
+            }
+        });
+        amount.val(" $" + rangeSlider.slider("values", 0) +
+            " - $" + rangeSlider.slider("values", 1));
+
+
+
+    })
+    </script>
+}

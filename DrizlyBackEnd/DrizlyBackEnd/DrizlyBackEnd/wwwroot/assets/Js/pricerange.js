@@ -7,7 +7,7 @@
         amountabv = $("#amountabvmobile"),
         minPriceabv = rangeSliderabv.data('min'),
         maxPriceabv = rangeSliderabv.data('max');
-        amountabv.val("%" + minPriceabv + " - %" + maxPriceabv);
+    amountabv.val("%" + minPriceabv + " - %" + maxPriceabv);
     rangeSliderabv.slider({
         range: true,
         min: minPriceabv,
@@ -23,7 +23,6 @@
             $("#maxAbvInput").val(ui.values[1]);
         }
     });
-     
 });
 
 

@@ -138,7 +138,7 @@ namespace DrizlyBackEnd.Controllers
             }
             if (countryId != null)
             {
-                products = products.Where(x => x.CountryId == id);
+                products = products.Where(x => x.CountryId == countryId);
             }
             if (typeId != null)
             {

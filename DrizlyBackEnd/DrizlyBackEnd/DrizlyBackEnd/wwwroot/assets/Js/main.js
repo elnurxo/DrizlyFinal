@@ -11,13 +11,19 @@ $(function () {
     $(document).on("change", ".countryfilter", function (e) {
         $("#filterForm").submit();
     })
-    //TYPE PRODUCTS CLICK MAKE INSIDE INPUT CHECKED 
-    $(".subcategory-btn").click(function () {
-        console.log($(this).children().find(".typeproductfilter"));
-        $(this).children().find(".typeproductfilter").attr('checked', 'checked');
-        $("#filterForm").submit();
-        
-    });
+
+    //TYPE-PRODUCT FILTER
+    $(document).on("change", ".typeproductfilter1", function (e) {
+        $("#filterForm1").submit();
+    })
+    //BRAND FILTER
+    $(document).on("change", ".brandfilter1", function (e) {
+        $("#filterForm1").submit();
+    })
+    //COUNTRY FILTER
+    $(document).on("change", ".countryfilter1", function (e) {
+        $("#filterForm1").submit();
+    })
     //CURRENT BASKET COUNT
     let productcounter = $(".basket-counter").val();
     $(".basket-count").text(productcounter);

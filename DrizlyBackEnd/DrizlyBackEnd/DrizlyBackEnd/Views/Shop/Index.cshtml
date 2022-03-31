@@ -101,7 +101,7 @@
                             <li class="category-slide">
                                 <div class="category-name">
                                     <p>@category.Name</p>
-                                    <a href="#">View All</a>
+                                    <a asp-controller="shop" asp-action="shop" asp-route-id="@category.CategoryId" asp-route-typeId="@category.Id">View All</a>
                                 </div>
                                 <div class="drinks-slider-wrapper">
                                     <ul class="drink-slider">
