@@ -363,7 +363,7 @@
                     </button>
                     <div class="sidebar-body">
                         <div class="price-range-wrap">
-                            <div class="price-range" data-min="20" data-max="400"></div>
+                            <div class="price-range price-range-desktop" data-min="20" data-max="400"></div>
                             <div class="range-slider">
                                 <form id="filterForm" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id">
                                     <div class="price-input">
@@ -478,20 +478,20 @@
             {
                 <div class="filter-side" style="height: 137px;">
                     <button class="filter-list-button">
-                        <input type="hidden" form="filterForm1" name="minAbv" id="minAbvInput" />
-                        <input type="hidden" form="filterForm1" name="maxAbv" id="maxAbvInput" />
+                        <input type="hidden" form="filterForm1" name="minAbv" id="minAbvInputmobile" />
+                        <input type="hidden" form="filterForm1" name="maxAbv" id="maxAbvInputmobile" />
                         <div class="filter-list mb-3">
                             <p>Filter by ABV</p>
                         </div>
                     </button>
                     <div class="sidebar-body">
                         <div class="abv-range-wrap">
-                            <div class="abv-range" data-min="0" data-max="100"></div>
+                            <div class="abv-range abv-range-mobile" data-min="0" data-max="100"></div>
                             <div class="range-slider-abv">
                                 <form action="#">
                                     <div class="abv-input">
                                         <label for="amountabvmobile">ABV: </label>
-                                        <input form="filterForm1" type="text" id="amountabvmobile">
+                                        <input form="filterForm1" type="text" id="amountabvmob">
                                     </div>
                                 </form>
                             </div>
@@ -501,20 +501,20 @@
             }
             <div class="filter-side">
                 <button class="filter-list-button">
-                    <input type="hidden" form="filterForm1" name="minPrice" id="minPriceInput" />
-                    <input type="hidden" form="filterForm1" name="maxPrice" id="maxPriceInput" />
+                    <input type="hidden" form="filterForm1" name="minPrice" id="minPriceInputMob" />
+                    <input type="hidden" form="filterForm1" name="maxPrice" id="maxPriceInputMob" />
                     <div class="filter-list mb-3">
                         <p>Filter by Price</p>
                     </div>
                 </button>
                 <div class="sidebar-body">
                     <div class="price-range-wrap">
-                        <div class="price-range" data-min="20" data-max="400"></div>
+                        <div class="price-range price-range-mobile" data-min="20" data-max="400"></div>
                         <div class="range-slider">
                             <form id="filterForm1" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id">
                                 <div class="price-input">
-                                    <label for="amount">Price: </label>
-                                    <input type="text" id="amount">
+                                    <label for="amountmob">Price: </label>
+                                    <input type="text" id="amountmob">
                                 </div>
                                 <button type="submit" class="filter-btn mb-2">filter</button>
                             </form>
@@ -532,7 +532,30 @@
     <script>
     $(document).ready(function () {
 
-        var rangeSlider = $(".price-range"),
+        //PRICE RANGE SLIDER MOBILE
+        var rangeSliderMob = $(".price-range-mobile"),
+            amountmob = $("#amountmob"),
+            minPricemob = @Model.MinPrice,
+            maxPricemob = @Model.MaxPrice;
+        rangeSliderMob.slider({
+            range: true,
+            min: minPricemob,
+            max: maxPricemob,
+            values: [@ViewBag.FilterMinPrice, @ViewBag.FilterMaxPrice],
+            slide: function (event, ui) {
+                amountmob.val("$" + ui.values[0] + " - $" + ui.values[1]);
+                console.log(ui.values[0] + "-" + ui.values[1])
+            },
+            change: function (event, ui) {
+                $("#minPriceInputMob").val(ui.values[0]);
+                $("#maxPriceInputMob").val(ui.values[1]);
+            }
+        });
+        amountmob.val(" $" + rangeSliderMob.slider("values", 0) +
+            " - $" + rangeSliderMob.slider("values", 1));
+
+        //PRICE RANGE SLIDER
+        var rangeSlider = $(".price-range-desktop"),
             amount = $("#amount"),
             minPrice = @Model.MinPrice,
             maxPrice = @Model.MaxPrice;
@@ -543,7 +566,7 @@
             values: [@ViewBag.FilterMinPrice, @ViewBag.FilterMaxPrice],
             slide: function (event, ui) {
                 amount.val("$" + ui.values[0] + " - $" + ui.values[1]);
-                console.log(ui.values[0] + "-" + ui.values[1])
+             
             },
             change: function (event, ui) {
                 $("#minPriceInput").val(ui.values[0]);
@@ -552,9 +575,6 @@
         });
         amount.val(" $" + rangeSlider.slider("values", 0) +
             " - $" + rangeSlider.slider("values", 1));
-
-
-
     })
     </script>
 }
