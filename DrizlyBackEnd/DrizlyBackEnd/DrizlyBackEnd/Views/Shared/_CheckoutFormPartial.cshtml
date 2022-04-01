@@ -1,0 +1,50 @@
+﻿@model Order
+<form asp-action="create" asp-controller="order" method="post" id="order-form">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="single-input-item">
+                <label asp-for="FullName" class="required">FullName</label>
+                <input type="text" asp-for="FullName" placeholder="FullName" required />
+                <span asp-validation-for="FullName" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="single-input-item">
+        <label asp-for="Email" class="required">Email Address</label>
+        <input type="email" asp-for="Email" placeholder="Email Address" required />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Country" class="required">Country*</label>
+        <input asp-for="Country" type="text" placeholder="Country">
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+
+    <div class="single-input-item">
+        <label asp-for="Address" class="required mt-20">Street address</label>
+        <input type="text" asp-for="Address" placeholder="Street address Line 1" required />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="City" class="required">Town / City</label>
+        <input type="text" asp-for="City" placeholder="Town / City" required />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="PhoneNumber">Phone</label>
+        <input type="text" asp-for="PhoneNumber" placeholder="Phone" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="PostZip">Post ZIP</label>
+        <input type="text" asp-for="PostZip" placeholder="Post ZIP" />
+        <span asp-validation-for="PostZip" class="text-danger"></span>
+    </div>
+    <div class="single-input-item">
+        <label asp-for="Note">Order Note</label>
+        <textarea asp-for="Note" class="order-note" cols="30" rows="3" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+</form>

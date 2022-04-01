@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Area("manage")]
+    [Area("manage")]
     //[Authorize(Roles = "SuperAdmin,Admin")]
     public class CategoryController : Controller
     { 

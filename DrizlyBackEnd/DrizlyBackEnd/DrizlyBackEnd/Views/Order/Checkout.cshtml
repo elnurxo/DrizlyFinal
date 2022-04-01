@@ -1,0 +1,84 @@
+﻿@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Drizly: Checkout";
+}
+<!-- breadcrumb area start -->
+<div class="breadcrumb-area bg-img">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb-wrap text-center">
+                    <nav aria-label="breadcrumb">
+                        <h1 class="breadcrumb-title">Checkout</h1>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a asp-action="index" asp-controller="home">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcrumb area end -->
+<!-- checkout main wrapper start -->
+<div class="checkout-page-wrapper section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Checkout Billing Details -->
+            <div class="col-lg-6">
+                <div class="checkout-billing-details-wrap">
+                    <h4 class="checkout-title">Billing Details</h4>
+                    <div class="billing-form-wrap">
+                        @Html.Partial("_CheckoutFormPartial", Model.Order)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary Details -->
+            <div class="col-lg-6">
+                <div class="order-summary-details">
+                    <h4 class="checkout-title">Your Order Summary</h4>
+                    <div class="order-summary-content">
+                        <!-- Order Summary Table -->
+                        <div class="order-summary-table table-responsive text-center">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Products</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Basket.BasketItems)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a asp-controller="shoe" asp-action="detail" asp-route-id="@item.Product.Id">@item.Product.Name <strong>@item.Count</strong></a>
+                                            </td>
+                                            <td>$@((item.Product.DiscountPercent>0? (item.Product.SalePrice*(1-item.Product.DiscountPercent/100))*item.Count :item.Product.SalePrice*item.Count).ToString("0.00"))</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>Total Amount</td>
+                                        <td><strong>$@Model.Basket.TotalPrice.ToString("0.00")</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                        <div class="summary-footer-area">
+
+                            <button type="submit" form="order-form" class="btn btn-sqr mt-2">Place Order</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

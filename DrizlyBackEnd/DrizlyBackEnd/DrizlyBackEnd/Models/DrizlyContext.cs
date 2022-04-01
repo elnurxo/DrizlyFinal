@@ -34,5 +34,7 @@ namespace DrizlyBackEnd.Models
         public DbSet<ProductComment> ProductComments { get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }
         public DbSet<ContactUs> ContactUs { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
     }
 }
