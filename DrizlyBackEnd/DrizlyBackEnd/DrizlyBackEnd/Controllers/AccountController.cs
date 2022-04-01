@@ -148,7 +148,7 @@ namespace DrizlyBackEnd.Controllers
 
             return RedirectToAction("index", "home");
         }
-
+        //VERIFY EMAIL
         public async Task<IActionResult> VerfiyEmail(string email, string token)
         {
             AppUser user = await _userManager.FindByEmailAsync(email);

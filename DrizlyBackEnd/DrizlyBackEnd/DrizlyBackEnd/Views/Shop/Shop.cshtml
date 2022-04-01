@@ -3,7 +3,8 @@
 @inject LayoutService layoutService
 @{
 
-    ViewData["Title"] = "Drizly: Shop: " + Model.Category.Name;
+    ViewData["Title"] = "Drizly: " + Model.Category.Name;
+
     var settings = layoutService.GetSettings();
     int counter = (ViewBag.PageIndex - 1) * 6;
     var temp = -1;
@@ -259,7 +260,7 @@
                                     <div class="form-check">
                                         <input form="filterForm" class="typeproductfilter" @(ViewBag.TypeId == types.Id ? "checked" : "") name="typeId" value="@types.Id" id="type-@types.Id" type="radio">
                                         <p class="filter-name" for="type-@types.Id" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@types.Name</p>
-                                        <p class="filter-count">(<span>@types.Products.Count</span>)</p>
+                                        <p class="filter-count">(<span>@types.Products.Where(x=>x.IsDeleted==false).Count()</span>)</p>
                                     </div>
                                 </li>
                                 </a>
@@ -279,7 +280,7 @@
                         <ul class="filters-ul">
                             @foreach (var country in Model.Countries)
                             {
-                                var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                                var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).Where(x => x.IsDeleted == false).ToList();
                                 if (listCountries.Count > 0)
                                 {
                                     <a class="filter-link">
@@ -308,7 +309,7 @@
                         <ul class="filters-ul">
                             @foreach (var brand in Model.Brands)
                             {
-                                var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                                var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).Where(x => x.IsDeleted == false).ToList();
                                 if (listBrands.Count > 0)
                                 {
                                     <a class="filter-link">
@@ -339,12 +340,12 @@
                         </button>
                         <div class="sidebar-body">
                             <div class="abv-range-wrap">
-                                <div class="abv-range" data-min="0" data-max="100"></div>
+                                <div class="abv-range abv-range-shop" data-min="0" data-max="100"></div>
                                 <div class="range-slider-abv">
                                     <form action="#">
                                         <div class="abv-input">
-                                            <label for="amountabvmobile">ABV: </label>
-                                            <input form="filterForm" type="text" id="amountabvmobile">
+                                            <label for="amountmobileabv">ABV: </label>
+                                            <input form="filterForm" type="text" id="amountmobileabv">
                                         </div>
                                     </form>
                                 </div>
@@ -474,24 +475,25 @@
                     <button class="show-more">More</button>
                 </div>
             </div>
+            @*FILTER BY ABV*@
             @if (Model.Category.Id != 4)
             {
                 <div class="filter-side" style="height: 137px;">
                     <button class="filter-list-button">
-                        <input type="hidden" form="filterForm1" name="minAbv" id="minAbvInputmobile" />
-                        <input type="hidden" form="filterForm1" name="maxAbv" id="maxAbvInputmobile" />
+                        <input type="hidden" form="filterForm1" name="minAbv" id="minAbvindexInput" />
+                        <input type="hidden" form="filterForm1" name="maxAbv" id="maxAbvindexInput" />
                         <div class="filter-list mb-3">
                             <p>Filter by ABV</p>
                         </div>
                     </button>
                     <div class="sidebar-body">
                         <div class="abv-range-wrap">
-                            <div class="abv-range abv-range-mobile" data-min="0" data-max="100"></div>
+                            <div class="abv-range abv-range-index" data-min="0" data-max="100"></div>
                             <div class="range-slider-abv">
                                 <form action="#">
                                     <div class="abv-input">
-                                        <label for="amountabvmobile">ABV: </label>
-                                        <input form="filterForm1" type="text" id="amountabvmob">
+                                        <label for="amountabvmobileindex">ABV: </label>
+                                        <input form="filterForm1" type="text" id="amountabvmobileindex">
                                     </div>
                                 </form>
                             </div>

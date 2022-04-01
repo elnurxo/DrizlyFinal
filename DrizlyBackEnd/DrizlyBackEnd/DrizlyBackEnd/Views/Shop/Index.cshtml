@@ -96,7 +96,8 @@
                 <ul class="products-slider">
                     @foreach (var category in Model.TypeProducts)
                     {
-                        if (category.Products.Count > 6)
+                        int procount = (category.Products.Where(x => x.IsDeleted == false)).Count();
+                        if ( procount > 6)
                         {
                             <li class="category-slide">
                                 <div class="category-name">
@@ -249,7 +250,7 @@
                                 <div class="form-check">
                                     <input form="filterForm" class="typeproductfilter" @(ViewBag.CategoryId == types.Id ? "checked" : "") name="typeId" value="@types.Id" id="type-@types.Id" type="radio">
                                     <p class="filter-name" for="type-@types.Id" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@types.Name</p>
-                                    <p class="filter-count">(<span>@types.Products.Count</span>)</p>
+                                    <p class="filter-count">(<span>@types.Products.Where(x => x.IsDeleted == false).Count()</span>)</p>
                                 </div>
                             </li>
                             </a>
@@ -269,13 +270,13 @@
                     <ul class="filters-ul">
                         @foreach (var country in Model.Countries)
                         {
-                            var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                            var listCountries = country.Products.Where(x => x.CategoryId == Model.Category.Id).Where(x => x.IsDeleted == false).ToList();
                             if (listCountries.Count > 0)
                             {
                                 <a class="filter-link">
                                 <li>
                                     <div class="form-check">
-                                        <input form="filterForm" class="countryfilter"  @(ViewBag.CountryId == country.Id ? "checked" : "")  name="countryId" value="@country.Id" id="country-@country.Id" type="checkbox">
+                                        <input form="filterForm" class="countryfilter" @(ViewBag.CountryId == country.Id ? "checked" : "") name="countryId" value="@country.Id" id="country-@country.Id" type="checkbox">
                                         <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@country.Name</p>
                                         <p class="filter-count">(<span>@listCountries.Count()</span>)</p>
                                     </div>
@@ -298,13 +299,13 @@
                     <ul class="filters-ul">
                         @foreach (var brand in Model.Brands)
                         {
-                            var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).ToList();
+                            var listBrands = brand.Products.Where(x => x.CategoryId == Model.Category.Id).Where(x => x.IsDeleted == false).ToList();
                             if (listBrands.Count > 0)
                             {
                                 <a class="filter-link">
                                 <li>
                                     <div class="form-check">
-                                        <input form="filterForm" class="brandfilter" @(ViewBag.BrandId == brand.Id ? "checked" : "")  name="brandId" value="@brand.Id" id="brand-@brand.Id" type="checkbox">
+                                        <input form="filterForm" class="brandfilter" @(ViewBag.BrandId == brand.Id ? "checked" : "") name="brandId" value="@brand.Id" id="brand-@brand.Id" type="checkbox">
                                         <p class="filter-name" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">@brand.Name</p>
                                         <p class="filter-count">(<span>@listBrands.Count()</span>)</p>
                                     </div>
@@ -321,20 +322,20 @@
             {
                 <div class="filter-side" style="height: 137px;">
                     <button class="filter-list-button">
-                        <input type="hidden" form="filterForm" name="minAbv" id="minAbvInput" />
-                        <input type="hidden" form="filterForm" name="maxAbv" id="maxAbvInput" />
+                        <input type="hidden" form="filterForm" name="minAbv" id="minAbvindexInput" />
+                        <input type="hidden" form="filterForm" name="maxAbv" id="maxAbvindexInput" />
                         <div class="filter-list mb-3">
                             <p>Filter by ABV</p>
                         </div>
                     </button>
                     <div class="sidebar-body">
                         <div class="abv-range-wrap">
-                            <div class="abv-range" data-min="0" data-max="100"></div>
+                            <div class="abv-range abv-range-index" data-min="0" data-max="100"></div>
                             <div class="range-slider-abv">
                                 <form action="#">
                                     <div class="abv-input">
-                                        <label for="amountabvmobile">ABV: </label>
-                                        <input form="filterForm" type="text" id="amountabvmobile">
+                                        <label for="amountabvmobileindex">ABV: </label>
+                                        <input form="filterForm" type="text" id="amountabvmobileindex">
                                     </div>
                                 </form>
                             </div>
@@ -356,7 +357,7 @@
                     <div class="price-range-wrap">
                         <div class="price-range" data-min="20" data-max="400"></div>
                         <div class="range-slider">
-                            <form id="filterForm" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id" >
+                            <form id="filterForm" method="get" asp-controller="shop" asp-action="shop" asp-route-id="@Model.Category.Id">
                                 <div class="price-input">
                                     <label for="amount">Price: </label>
                                     <input type="text" id="amount">

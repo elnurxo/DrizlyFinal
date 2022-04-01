@@ -58,16 +58,23 @@ namespace DrizlyBackEnd.Services
 
             foreach (var item in basketItems)
             {
-                Product product = _context.Products.FirstOrDefault(x => x.Id == item.ProductId);
-                ProductBasketItemViewModel bookBasketItem = new ProductBasketItemViewModel
+                Product product = _context.Products.Where(x => x.IsAvailable == true && !x.IsDeleted).FirstOrDefault(x => x.Id == item.ProductId);
+                if (product!=null)
                 {
-                    Product = product,
-                    Count = item.Count
-                };
+                    ProductBasketItemViewModel bookBasketItem = new ProductBasketItemViewModel
+                    {
+                        Product = product,
+                        Count = item.Count
+                    };
 
-                basketVM.BasketItems.Add(bookBasketItem);
-                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
-                basketVM.TotalPrice += totalPrice * item.Count;
+                    basketVM.BasketItems.Add(bookBasketItem);
+                    if (item.Count > 0)
+                    {
+                        decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                        basketVM.TotalPrice += totalPrice * item.Count;
+                    }
+                }
+         
             }
 
             return basketVM;
