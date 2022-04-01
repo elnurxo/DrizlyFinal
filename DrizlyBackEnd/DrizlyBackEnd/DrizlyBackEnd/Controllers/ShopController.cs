@@ -467,9 +467,12 @@ namespace DrizlyBackEnd.Controllers
                         Count = item.Count
                     };
 
+                if (product!=null)
+                {
                     basketVM.BasketItems.Add(productBasketItem);
                     decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
                     basketVM.TotalPrice += totalPrice * item.Count;
+                }
             }
 
             return basketVM;
@@ -492,9 +495,12 @@ namespace DrizlyBackEnd.Controllers
                     Count = item.Count
                 };
 
-                basketVM.BasketItems.Add(productBasketItem);
-                decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
-                basketVM.TotalPrice += totalPrice * item.Count;
+                if (product!=null)
+                {
+                    basketVM.BasketItems.Add(productBasketItem);
+                    decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
+                    basketVM.TotalPrice += totalPrice * item.Count;
+                }
             }
 
             return basketVM;

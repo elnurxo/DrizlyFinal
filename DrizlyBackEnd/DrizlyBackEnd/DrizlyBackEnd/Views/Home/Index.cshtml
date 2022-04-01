@@ -114,108 +114,32 @@
             <article>
                 <h2>@Model.Settings.Find(c => c.Key == "Promotion1Title")?.Value</h2>
                 <p>@Model.Settings.Find(c => c.Key == "Promotion1Desc")?.Value</p>
-                <a href="#" role="button">Check ‘Em Out</a>
+                <a asp-controller="shop" asp-action="shop" asp-route-id="2" role="button">Check ‘Em Out</a>
             </article>
         </div>
     </section>
     <!-- Categories Section -->
     <section class="categoriessection">
-        <article class="categoriescol col-lg-3 ">
-            <header>Beer <i class="fas fa-chevron-down"></i></header>
-            <input class="categoriesmobile" type="checkbox">
-            <ul>
-                <li>
-                    <a href="#">Lager</a>
-                </li>
-                <li>
-                    <a href="#">IPA</a>
-                </li>
-                <li>
-                    <a href="#">Belgian Ale</a>
-                </li>
-                <li>
-                    <a href="#">Cider</a>
-                </li>
-                <li>
-                    <a href="#">Kegs</a>
-                </li>
-                <li>
-                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
-                </li>
-            </ul>
-        </article>
-        <article class="categoriescol col-lg-3 ">
-            <header>Wine <i class="fas fa-chevron-down"></i></header>
-            <input class="categoriesmobile" type="checkbox">
-            <ul>
-                <li>
-                    <a href="#">White Wine</a>
-                </li>
-                <li>
-                    <a href="#">Red Wine</a>
-                </li>
-                <li>
-                    <a href="#">Champagne</a>
-                </li>
-                <li>
-                    <a href="#">Rose Wine</a>
-                </li>
-                <li>
-                    <a href="#">Sake</a>
-                </li>
-                <li>
-                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
-                </li>
-            </ul>
-        </article>
-        <article class="categoriescol col-lg-3 ">
-            <header>Liquor <i class="fas fa-chevron-down"></i></header>
-            <input class="categoriesmobile" type="checkbox">
-            <ul>
-                <li>
-                    <a href="#">Vodka</a>
-                </li>
-                <li>
-                    <a href="#">Buorbon Whiskey</a>
-                </li>
-                <li>
-                    <a href="#">Tequila</a>
-                </li>
-                <li>
-                    <a href="#">Gin</a>
-                </li>
-                <li>
-                    <a href="#">Rum</a>
-                </li>
-                <li>
-                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
-                </li>
-            </ul>
-        </article>
-        <article class="categoriescol col-lg-3 ">
-            <header>Extras <i class="fas fa-chevron-down"></i></header>
-            <input class="categoriesmobile" type="checkbox">
-            <ul>
-                <li>
-                    <a href="#">Mixers</a>
-                </li>
-                <li>
-                    <a href="#">Energy Drinks<i class="fab fa-star-of-david"></i></a>
-                </li>
-                <li>
-                    <a href="#">Mineral Water</a>
-                </li>
-                <li>
-                    <a href="#">Fruit Juices</a>
-                </li>
-                <li>
-                    <a href="#">Soft Drinks</a>
-                </li>
-                <li>
-                    <a class="showmore-category" href="#">Show More <i class="fas fa-arrow-right"></i></a>
-                </li>
-            </ul>
-        </article>
+        @foreach (var category in Model.Categories)
+        {
+            <article class="categoriescol col-lg-3 ">
+                <header>@category.Name <i class="fas fa-chevron-down"></i></header>
+                <input class="categoriesmobile" type="checkbox">
+                <ul>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        <li>
+                            <a asp-controller="shop" asp-action="shop" asp-route-id="@category.Id" asp-route-typeId="@category.TypeProducts[i].Id">@category.TypeProducts[i].Name</a>
+                        </li>
+
+                    }
+                    <li>
+                        <a class="showmore-category" asp-controller="shop" asp-action="index" asp-route-id="@category.Id">Show More <i class="fas fa-arrow-right"></i></a>
+                    </li>
+                </ul>
+            </article>
+        }
+
     </section>
     <!-- Bestseller Drinks Section -->
     <section class="bestsellersection">
@@ -226,225 +150,64 @@
                 </div>
                 <div class="drinks-slider-wrapper">
                     <ul class="drink-slider">
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <div class="drink-on-sale">On Sale</div>
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
+                        @foreach (var onsaleproduct in Model.OnSaleProducts)
+                        {
+                            var result = 0;
+                            decimal end = 0;
+                            foreach (var comment in onsaleproduct.ProductComments)
+                            {
+                                result += @comment.Rate;
+                            }
+                            if (result != 0)
+                            {
+                                end = decimal.Divide(result, onsaleproduct.ProductComments.Count);
+                            }
+                            <li class="drink-slides">
+                                <div class="whole-product-slide">
+                                    <div class="drink-slide-info">
+                                        <a asp-controller="shop" asp-action="detail" asp-route-id="@onsaleproduct.Id">
+                                            <div class="drink-on-sale">On Sale</div>
+                                            <img src="~/uploads/products/@onsaleproduct.Image">
+                                        </a>
+                                        <div class="drink-name">
+                                            <p class="@(onsaleproduct.IsAvailable==false?"text-danger":"")">@onsaleproduct.Name</p>
+                                        </div>
+                                        <div class="drink-price">
+                                            <p class="old-price-wrapper">$<span class="price-old">@onsaleproduct.SalePrice</span></p>
+                                            <p class="regular-price-wrapper">$<span class="price-regular">@((onsaleproduct.SalePrice * (1 - onsaleproduct.DiscountPercent / 100)).ToString("0.00"))</span></p>
+                                        </div>
+                                        <div class="drink-rate">
+                                            @{ var tamhisse = Math.Truncate(end);
+                                                var yuvarlaq = Math.Ceiling(end);}
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (end >= i)
+                                                {
+                                                    <i class="fas fa-star"></i>
+                                                }
+                                                else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                                {
+                                                    <i class="bi bi-star-half"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            }
+                                        <span class="review-count">@onsaleproduct.ProductComments.Count</span>
+                                        </div>
                                     </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
+                                    @if (onsaleproduct.IsAvailable == true)
+                                    {
+                                        <div class="add-to-basket">
+                                            <a class="basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@onsaleproduct.Id"><i class="fas fa-shopping-cart"></i></a>
+                                        </div>
+                                    }
+
                                 </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <div class="drink-on-sale">Best Seller</div>
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <div class="drink-on-sale">Featured</div>
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="drink-slides">
-                            <div class="whole-product-slide">
-                                <div class="drink-slide-info">
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                    </a>
-                                    <div class="drink-name">
-                                        <p>Vdoodoo Ranger Juice Force IPA</p>
-                                    </div>
-                                    <div class="drink-price">
-                                        <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                        <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                    </div>
-                                    <div class="drink-rate">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fa fa-star-o" aria-hidden="true"></i>
-                                        <span class="review-count">214</span>
-                                    </div>
-                                </div>
-                                <div class="add-to-basket">
-                                    <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+
+                        }
                     </ul>
                 </div>
             </li>
@@ -492,78 +255,31 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card comment-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Elnur Khalilov</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <ul class="customer-rate-ul">
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                </ul>
-                            </h6>
-                            <p class="card-text">Its OK but its lack of save features makes it not the best.</p>
-                            <p class="comment-date text-muted font-weight-light font-italic">22.02.2022 16:28pm</p>
+                @foreach (var comment in Model.RecentComments)
+                {
+                    if (comment.Product.IsDeleted == false)
+                    {
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <div class="card comment-card">
+                                <div class="card-body">
+                                    <h5 class="card-title">@comment.AppUser.FullName  <img width="40" style="border-radius:50%;margin-left:20px;" src="~/uploads/users/@comment.AppUser.Image" /></h5>
+                                    <p>posted to <a class="font-weight-bolder" style="color:black;" asp-controller="shop" asp-action="detail" asp-route-id="@comment.Product.Id">@comment.Product.Name</a></p>
+                                    <h6 class="card-subtitle mb-2 text-muted">
+                                        <ul class="customer-rate-ul">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <li><i class="@(comment.Rate>=i?"fas fa-star":"fa fa-star-o")" aria-hidden="true"></i></li>
+                                            }
+                                        </ul>
+                                    </h6>
+                                    <p class="card-text">@comment.Text</p>
+                                    <p class="comment-date text-muted font-weight-light font-italic">@comment.CreatedAt.ToString("MMMM dd, yyyy")</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card comment-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Rashad Mammadov</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <ul class="customer-rate-ul">
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </h6>
-                            <p class="card-text">It wouldn't let me create and organize lists. No titles, no deleting..</p>
-                            <p class="comment-date text-muted font-weight-light font-italic">12.18.2021 19:10pm</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card comment-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Polad Agayev</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <ul class="customer-rate-ul">
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                </ul>
-                            </h6>
-                            <p class="card-text">La aplicación es buena, aunque he tenido mejores en itunes.</p>
-                            <p class="comment-date text-muted font-weight-light font-italic">09.11.2022 10:16am</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="card comment-card">
-                        <div class="card-body">
-                            <h5 class="card-title">Tabriz Sapharov</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">
-                                <ul class="customer-rate-ul">
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
-                                </ul>
-                            </h6>
-                            <p class="card-text">I wanted a list that I could add to if I have another thing to add, sadly no.</p>
-                            <p class="comment-date text-muted font-weight-light font-italic">31.05.2022 22:49pm</p>
-                        </div>
-                    </div>
-                </div>
+                    }
+                }
+
             </div>
         </div>
     </section>

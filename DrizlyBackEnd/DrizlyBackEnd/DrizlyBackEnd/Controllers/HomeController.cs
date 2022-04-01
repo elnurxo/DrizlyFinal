@@ -58,7 +58,10 @@ namespace DrizlyBackEnd.Controllers
             {
                 Settings = _context.Settings.ToList(),
                 Partnerships = _context.Partnerships.ToList(),
-                Services = _context.Services.ToList()
+                Services = _context.Services.ToList(),
+                Categories = _context.Categories.Include(x => x.TypeProducts).ToList(),
+                OnSaleProducts = _context.Products.Where(x=>x.IsDeleted==false).Where(x => x.DiscountPercent > 0).OrderByDescending(x => x.DiscountPercent).Take(15).Include(x => x.ProductComments).ToList(),
+                RecentComments = _context.ProductComments.Include(x => x.AppUser).Include(x => x.Product).OrderByDescending(x=>x.CreatedAt).Take(4).ToList()
             };
             return View(homeVM);
         }

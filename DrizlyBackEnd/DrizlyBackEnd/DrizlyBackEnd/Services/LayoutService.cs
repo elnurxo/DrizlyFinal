@@ -68,7 +68,7 @@ namespace DrizlyBackEnd.Services
                     };
 
                     basketVM.BasketItems.Add(bookBasketItem);
-                    if (item.Count > 0)
+                    if (product!=null)
                     {
                         decimal totalPrice = product.DiscountPercent > 0 ? (product.SalePrice * (1 - product.DiscountPercent / 100)) : product.SalePrice;
                         basketVM.TotalPrice += totalPrice * item.Count;
