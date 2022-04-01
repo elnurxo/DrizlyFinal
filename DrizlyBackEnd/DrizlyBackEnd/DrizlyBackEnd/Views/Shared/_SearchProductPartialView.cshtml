@@ -1,9 +1,11 @@
 ﻿@model List<Product>
+@{ int count = 0;}
 <ul>
     @foreach (var item in Model)
     {
+        count++;
         <li>
-            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="d-flex justify-content-between">
+            <a asp-controller="shop" asp-action="detail" asp-route-id="@item.Id" class="d-flex justify-content-between" id="search-list-item-@count">
                 <img src="~/uploads/products/@item.Image">
                 <span class="font-weight-bolder">@item.Name</span>
                 <span>

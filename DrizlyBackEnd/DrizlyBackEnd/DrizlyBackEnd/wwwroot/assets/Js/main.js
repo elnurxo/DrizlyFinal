@@ -47,8 +47,8 @@ $(function () {
         $(".age-yes").closest('.age-gate-modal').remove();
     }
 
-    //SEARCH INPUT DESKTOP
     $("#search-desktop").on("keyup", function () {
+
         var searchform = document.getElementById("search-form");
         var url = searchform.action;
         var searchinput = $("#search-desktop").val().toLowerCase();
@@ -85,6 +85,12 @@ $(function () {
                 $(".navbar-search-dropdown").css("display", "block")
             })
     });
+
+    //SEARCH INPUT ENTER CLICK
+    $("#search-form").on("submit", function (e) {   
+        e.preventDefault();
+    });
+
     //SEARCH INPUT MOBILE
     $("#search-mobile").on("keyup", function () {
         var searchform = document.getElementById("search-form-mobile");

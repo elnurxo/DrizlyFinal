@@ -76,7 +76,7 @@ namespace DrizlyBackEnd.Controllers
             }
             else
             {
-                products = null;
+                products = null;    
             }
             return PartialView("_SearchProductPartialView",products.ToList());
         }
