@@ -248,7 +248,7 @@ namespace DrizlyBackEnd.Controllers
                     Age = member.Age,
                     Image = member.Image
                 },
-                //Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Shoe).Where(x => x.AppUserId == member.Id).ToList()
+                Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).Where(x => x.AppUserId == member.Id).ToList()
             };
             return View(profileVM);
         }

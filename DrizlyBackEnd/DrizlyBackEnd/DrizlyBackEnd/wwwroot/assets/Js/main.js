@@ -89,6 +89,33 @@ $(function () {
     //SEARCH INPUT ENTER CLICK
     $("#search-form").on("submit", function (e) {   
         e.preventDefault();
+        $("#search-list-item-1")[0].click();
+    });
+    $("#entercoupon").on("keyup", function () {
+        console.log($(this).val().length);
+        if ($(this).val().length==36) {
+            $(".apply-coupon-btn").removeAttr("disabled");
+        }
+        else {
+            $(".apply-coupon-btn").attr("disabled", "disabled");
+        }
+       
+    });
+    $(".apply-coupon-btn").click(function () {
+        $("#couponcheckbox").prop("checked", true);
+        $(this).css("background-color", "#22BB33");
+        $(".apply-coupon-text").text("Coupon Applied!");
+        $("#couponaccordion").remove();
+        $(".couponapplytext").css("display", "inline");
+    });
+    //HAVE A COUPON? CLICK
+    $("#couponaccordion").click(function () {
+        $("#couponaccordionbody").slideToggle();
+    });
+
+    //VIEW ORDER BUTTON CLICK TOGGLE
+    $(".vieworderbtn").click(function () {
+        $(this).parent().parent().next().slideToggle();
     });
 
     //SEARCH INPUT MOBILE

@@ -101,7 +101,7 @@ namespace DrizlyBackEnd.Controllers
         }
 
         //SHOP ACTION
-        public IActionResult Shop(int id, int? brandId, int? typeId, int? countryId, decimal? minPrice, decimal? maxPrice, decimal? minAbv, decimal? maxAbv,int page=1)
+        public IActionResult Shop(int id, string sort,int? brandId, int? typeId, int? countryId, decimal? minPrice, decimal? maxPrice, decimal? minAbv, decimal? maxAbv,int page=1)
         {
             if (id == 0 || id > 4)
             {
@@ -166,7 +166,7 @@ namespace DrizlyBackEnd.Controllers
             ViewBag.TotalProducts = products.Count();
             productVM.Settings = _context.Settings.ToList();
             //PRODUCTS
-            productVM.Products = products.Skip((page - 1) * 6).Take(6).ToList();
+            products.Skip((page - 1) * 6).Take(6).AsQueryable();
 
             //BRANDS
             productVM.Brands = _context.Brands.Where(x => !x.IsDeleted).Include(x => x.Products).ToList();
@@ -176,6 +176,28 @@ namespace DrizlyBackEnd.Controllers
             productVM.Category = _context.Categories.FirstOrDefault(x => x.Id == id);
             productVM.Comment = _context.ProductComments.ToList();
 
+            ViewBag.Sort = sort;
+
+            switch (sort)
+            {
+                case "price_high":
+                   
+                    products = products.OrderBy(x=>x.SalePrice);
+                    break;
+                case "price_low":
+                    products = products.OrderByDescending(x => x.SalePrice);
+                    break;
+                case "name_asc":
+                    products = products.OrderBy(x => x.Name);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(x => x.Name);
+                    break;
+                default:
+                    break;
+            }
+
+            productVM.Products = products.ToList();
 
             return View(productVM);
         }

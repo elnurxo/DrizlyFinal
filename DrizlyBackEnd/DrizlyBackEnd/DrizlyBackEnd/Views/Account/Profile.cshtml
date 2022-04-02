@@ -1,6 +1,8 @@
 ﻿@model MemberProfileViewModel
 @{
     ViewData["Title"] = "Welcome "+Model.Member.FullName;
+    int orderCounter = 0;
+    int orderItemCounter = 0;
 }
 <main>
     <!-- breadcrumb area start -->
@@ -71,27 +73,52 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Aug 22, 2018</td>
-                                                            <td>Pending</td>
-                                                            <td>$3000</td>
-                                                            <td><a href="cart.html" class="btn ">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>July 22, 2018</td>
-                                                            <td>Approved</td>
-                                                            <td>$200</td>
-                                                            <td><a href="cart.html" class="btn ">View</a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>June 12, 2017</td>
-                                                            <td>On Hold</td>
-                                                            <td>$990</td>
-                                                            <td><a href="cart.html" class="btn ">View</a></td>
-                                                        </tr>
+                                                        @foreach (var order in Model.Orders)
+                                                        {
+                                                            orderItemCounter = 0;
+                                                            orderCounter++;
+                                                            <tr>
+                                                                <td>@orderCounter</td>
+                                                                <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                                                                <td>@order.Status</td>
+                                                                <td>$@order.TotalPrice</td>
+                                                                <td><a role="button" class="btn vieworderbtn "><span class="text-white">View</span></a></td>
+                                                            </tr>
+
+                                                            <tr class="orderdetailbody" style="display:none;">
+                                                                <td colspan="12">
+                                                                    <div>
+                                                                        <table class="table table-striped">
+                                                                            <thead>
+                                                                                <tr class="info">
+                                                                                    <th>#</th>
+                                                                                    <th>Product Image</th>
+                                                                                    <th>Product Name</th>
+                                                                                    <th>Count</th>
+                                                                                    <th>Unit price</th>
+                                                                                </tr>
+                                                                            </thead>
+
+                                                                            <tbody>
+
+                                                                                @foreach (var orderItem in order.OrderItems)
+                                                                                {
+                                                                                    orderItemCounter++;
+                                                                                    <tr>
+                                                                                        <td>@orderItemCounter</td>
+                                                                                        <td><img  width="40" style="border-radius:0;" src="~/uploads/products/@orderItem.Product.Image"/></td>
+                                                                                        <td>@orderItem.Product.Name</td>
+                                                                                        <td>@orderItem.Count </td>
+                                                                                        <td>@orderItem.DiscountedPrice</td>
+                                                                                    </tr>
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
                                             </div>

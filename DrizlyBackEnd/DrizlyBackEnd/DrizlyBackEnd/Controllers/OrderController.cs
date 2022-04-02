@@ -1,12 +1,16 @@
 ﻿using DrizlyBackEnd.Models;
 using DrizlyBackEnd.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace DrizlyBackEnd.Controllers
@@ -15,11 +19,13 @@ namespace DrizlyBackEnd.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly DrizlyContext _context;
+        private readonly IWebHostEnvironment _env;
 
-        public OrderController(UserManager<AppUser> userManager, DrizlyContext context)
+        public OrderController(UserManager<AppUser> userManager, DrizlyContext context,IWebHostEnvironment env)
         {
             _userManager = userManager;
             _context = context;
+            _env = env;
         }
 
         //BASKET VIEW  CART ACTION
@@ -104,6 +110,37 @@ namespace DrizlyBackEnd.Controllers
                     Count = item.Count
                 };
 
+
+                //email
+                string body = String.Empty;
+                var path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Template" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "Order.html";
+                using (StreamReader streamReader = System.IO.File.OpenText(path))
+                {
+                    body = streamReader.ReadToEnd();
+                }
+
+                body = body.Replace("{fullname}", order.FullName);
+                body = body.Replace("{date}", order.CreatedAt.ToString());
+                body = body.Replace("{status}", order.Status.ToString());
+                body = body.Replace("{total}", order.TotalPrice.ToString());
+                body = body.Replace("{orderId}", order.Id.ToString());
+
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.To.Add(order.Email);
+                mailMessage.From = new MailAddress("drizlycode@gmail.com");
+                mailMessage.Subject = "Salam hörmətli müştəri";
+                mailMessage.Body = body;
+                mailMessage.IsBodyHtml = true;
+
+                SmtpClient smtp = new SmtpClient();
+
+                smtp.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
+                smtp.Port = 587;
+                smtp.Host = "smtp.gmail.com";
+                smtp.EnableSsl = true;
+                smtp.Send(mailMessage);
+
                 order.OrderItems.Add(orderItem);
                 order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
             }
@@ -114,6 +151,10 @@ namespace DrizlyBackEnd.Controllers
             _context.BasketItems.RemoveRange(_context.BasketItems.Where(x => x.AppUserId == member.Id));
 
             _context.SaveChanges();
+
+            
+
+
 
             TempData["Success"] = "Product(s) Ordered Successfully";
             return RedirectToAction("profile", "account");

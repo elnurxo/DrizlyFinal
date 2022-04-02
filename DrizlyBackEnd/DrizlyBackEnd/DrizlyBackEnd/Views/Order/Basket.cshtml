@@ -51,10 +51,6 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-8 col-md-12">
-                        <div class="coupon-enter">
-                            <input type="text" class="coupon-input" placeholder="Coupon code">
-                            <button class="apply-coupon">Apply Coupon</button>
-                        </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <div class="card-total-div">
@@ -65,7 +61,9 @@
                                 <p class="card-total-text">Total</p>
                                 <p class="card-total-price">$@cardtotal.ToString("0.00")</p>
                             </div>
-                            <button type="submit">Proceed To Checkout</button>
+                            <form asp-controller="order" asp-action="checkout">
+                                <button type="submit">Proceed To Checkout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

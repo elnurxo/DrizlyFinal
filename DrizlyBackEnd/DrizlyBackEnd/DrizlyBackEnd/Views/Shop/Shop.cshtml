@@ -40,17 +40,19 @@
             <div class="sorting-name-container">
                 <div class="category-name-sorting">
                     <h2>@Model.Category.Name</h2>
+                   
                     <p>(<span>@ViewBag.TotalProducts</span> results)</p>
                     <div class="sorting-product-wrapper">
                         <div class="sorting-product">
                             <!-- <label><span>Sort by:</span></label>
                             <button class="sorting-button"><span>Name: A-Z</span></button>
                             <i class="fas fa-chevron-down"></i> -->
-                            <select class="sorting-product">
-                                <option class="sorting-list-item"><span>Name: A-Z</span></option>
-                                <option class="sorting-list-item"><span>Name: Z-A</span></option>
-                                <option class="sorting-list-item"><span>Price: High to Low</span></option>
-                                <option class="sorting-list-item"><span>Price: Low to High</span></option>
+                            <select name="sort" form="filterForm" class="sorting-product">
+                                <option value="default">Default</option>
+                                <!option value="name_asc"   @(ViewBag.Sort == "name_asc" ? "selected" : "") class="sorting-list-item"><span>Name: A-Z</span></!option>
+                                <!option value="name_desc"  @(ViewBag.Sort == "name_desc" ? "selected" : "") class="sorting-list-item"><span>Name: Z-A</span></!option>
+                                <!option value="price_low"  @(ViewBag.Sort == "price_low" ? "selected" : "") class="sorting-list-item"><span>Price: High to Low</span></!option>
+                                <!option value="price_high" @(ViewBag.Sort == "price_high" ? "selected" : "") class="sorting-list-item"><span>Price: Low to High</span></!option>
                             </select>
                         </div>
 

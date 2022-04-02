@@ -394,3 +394,5 @@ C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\ob
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shop\shop.cshtml.g.cs
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Order\Checkout.cshtml.g.cs
 C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CheckoutFormPartial.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_UseCouponPartialView.cshtml.g.cs
+C:\Users\LENOVO\Desktop\DrizlyFinal\DrizlyBackEnd\DrizlyBackEnd\DrizlyBackEnd\obj\Debug\netcoreapp3.1\Razor\Views\Order\TestSendOrder.cshtml.g.cs
