@@ -96,6 +96,8 @@ namespace DrizlyBackEnd.Controllers
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             order.Status = Enums.OrderStatus.Pending;
+           
+
 
             order.OrderItems = new List<OrderItem>();
 
@@ -109,52 +111,42 @@ namespace DrizlyBackEnd.Controllers
                     DiscountedPrice = item.Product.DiscountPercent > 0 ? (item.Product.SalePrice * (1 - item.Product.DiscountPercent / 100)) : item.Product.SalePrice,
                     Count = item.Count
                 };
-
-
-                //email
-                string body = String.Empty;
-                var path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Template" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "Order.html";
-                using (StreamReader streamReader = System.IO.File.OpenText(path))
-                {
-                    body = streamReader.ReadToEnd();
-                }
-
-                body = body.Replace("{fullname}", order.FullName);
-                body = body.Replace("{date}", order.CreatedAt.ToString());
-                body = body.Replace("{status}", order.Status.ToString());
-                body = body.Replace("{total}", order.TotalPrice.ToString());
-                body = body.Replace("{orderId}", order.Id.ToString());
-
-
-                MailMessage mailMessage = new MailMessage();
-                mailMessage.To.Add(order.Email);
-                mailMessage.From = new MailAddress("drizlycode@gmail.com");
-                mailMessage.Subject = "Salam hörmətli müştəri";
-                mailMessage.Body = body;
-                mailMessage.IsBodyHtml = true;
-
-                SmtpClient smtp = new SmtpClient();
-
-                smtp.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
-                smtp.Port = 587;
-                smtp.Host = "smtp.gmail.com";
-                smtp.EnableSsl = true;
-                smtp.Send(mailMessage);
-
                 order.OrderItems.Add(orderItem);
-                order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+                order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;         
             }
 
             _context.Orders.Add(order);
-
-
             _context.BasketItems.RemoveRange(_context.BasketItems.Where(x => x.AppUserId == member.Id));
-
             _context.SaveChanges();
+            //email
+            string body = String.Empty;
+            var path = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Template" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "Order.html";
+            using (StreamReader streamReader = System.IO.File.OpenText(path))
+            {
+                body = streamReader.ReadToEnd();
+            }
 
-            
+            body = body.Replace("{fullname}", order.FullName);
+            body = body.Replace("{date}", order.CreatedAt.ToString("MMMM dd, yyyy"));
+            body = body.Replace("{status}", order.Status.ToString());
+            body = body.Replace("{total}", order.TotalPrice.ToString("0.00"));
+            body = body.Replace("{orderId}", order.Id.ToString());
+            body = body.Replace("{orderitemCount}", order.OrderItems.Count().ToString());
 
+            MailMessage mailMessage = new MailMessage();
+            mailMessage.To.Add(order.Email);
+            mailMessage.From = new MailAddress("drizlycode@gmail.com");
+            mailMessage.Subject = "Welcome to the Drizly Side " + order.FullName+"!";
+            mailMessage.Body = body;
+            mailMessage.IsBodyHtml = true;
 
+            SmtpClient smtp = new SmtpClient();
+
+            smtp.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
+            smtp.Port = 587;
+            smtp.Host = "smtp.gmail.com";
+            smtp.EnableSsl = true;
+            smtp.Send(mailMessage);
 
             TempData["Success"] = "Product(s) Ordered Successfully";
             return RedirectToAction("profile", "account");

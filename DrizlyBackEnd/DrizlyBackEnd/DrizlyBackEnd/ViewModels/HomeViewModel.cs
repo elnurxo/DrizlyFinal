@@ -14,5 +14,6 @@ namespace DrizlyBackEnd.ViewModels
         public List<Category> Categories { get; set; }
         public List<Product> OnSaleProducts { get; set; }
         public List<ProductComment> RecentComments { get; set; }
+        public List<Order> RecentlyBought { get; set; }
     }
 }

@@ -1,0 +1,127 @@
+﻿@model PagenatedList<Order>
+
+@{
+    ViewData["Title"] = "Index";
+    int counter = (Model.PageIndex - 1) * Model.PageSize;
+    var temp = -1;
+    if (Model.PageIndex == 1)
+    {
+        temp = 0;
+    }
+    if (Model.PageIndex == 0)
+    {
+        temp = 1;
+    }
+    if (temp == Model.TotalPages)
+    {
+        temp = -2;
+    }
+
+}
+
+<head>
+    <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
+</head>
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Orders</h3>
+                    <form asp-action="index" method="get" class="d-flex">
+                        <div class="form-group" style="display:inherit">
+                            <label for="isDeleted" class="mx-1">Order status</label>
+                            <select id="orderStatus" class="form-control" name="filter">
+                                <!option class="option-filter" value="0" @(ViewBag.Filter == 0 ? "selected" : "")>All</!option>
+                                <!option class="option-filter" value="1" @(ViewBag.Filter == 1 ? "selected" : "") >Pending</!option>
+                                <!option class="option-filter" value="2" @(ViewBag.Filter == 2 ? "selected" : "") >Accepted</!option>
+                                <!option class="option-filter" value="3" @(ViewBag.Filter == 3 ? "selected" : "") >Rejected</!option>
+                                <!option class="option-filter" value="4" @(ViewBag.Filter == 4 ? "selected" : "") >Canceled</!option>
+                                <!option class="option-filter" value="5" @(ViewBag.Filter == 5 ? "selected" : "") >On Courrier</!option>
+                                <!option class="option-filter" value="6" @(ViewBag.Filter == 6 ? "selected" : "") >Delivered</!option>
+                            </select>
+                            <button type="submit" class="btn btn-primary filterbtn mx-2" style="height:39px">Filter</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Orders Table</h5>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Item count</th>
+                                        <th scope="col">FulName</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var order in Model)
+                                    {
+                                        counter++;
+                                        <tr>
+                                            <th scope="row">@counter</th>
+                                            <td>@order.OrderItems.Count</td>
+                                            <td>@order.FullName</td>
+                                            <td>@order.PhoneNumber</td>
+                                            <td>@order.TotalPrice</td>
+                                            <td>@order.Address</td>
+                                            <td>@order.CreatedAt.ToString("dd.MM.yyyy HH:mm")</td>
+                                            <td>@order.Status</td>
+                                            <td>
+                                                <a asp-action="detail" asp-route-id="@order.Id" class="btn btn-light">Detail</a>
+                                                <a asp-action="edit" asp-route-id="@order.Id" class="btn btn-warning">Edit</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                    @if (Model.HasPrev)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="1" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-double-left"></i></a></li>
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex-1)" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-left"></i></a></li>
+                                    }
+
+                                    @for (int i = 1; i <= 3; i++, temp++)
+                                    {
+                                        if ((Model.PageIndex + temp) != 0 && (Model.PageIndex + temp) != -1)
+                                        {
+                                            <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex+temp)" asp-route-isDeleted="@ViewBag.IsDeleted" style="display:@((Model.PageIndex+temp)>Model.TotalPages?"none":"block")">@(Model.PageIndex+temp)</a></li>
+                                        }
+
+                                    }
+
+                                    @if (Model.HasNext)
+                                    {
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@(Model.PageIndex+1)" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-right"></i></a></li>
+                                        <li class="page-item"><a class="page-link" asp-action="index" asp-route-page="@Model.TotalPages" asp-route-isDeleted="@ViewBag.IsDeleted"><i class="fas fa-angle-double-right"></i></a></li>
+                                    }
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+
+</div><!--End content-wrapper-->
+<!--Start Back To Top Button-->
+<a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>

@@ -65,7 +65,8 @@
                                                 <table class="table table-bordered">
                                                     <thead class="thead-light">
                                                         <tr>
-                                                            <th>Order</th>
+                                                            <th>#</th>
+                                                            <th>Order Id</th>
                                                             <th>Date</th>
                                                             <th>Status</th>
                                                             <th>Total</th>
@@ -79,6 +80,7 @@
                                                             orderCounter++;
                                                             <tr>
                                                                 <td>@orderCounter</td>
+                                                                <td>@order.Id</td>
                                                                 <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
                                                                 <td>@order.Status</td>
                                                                 <td>$@order.TotalPrice</td>

@@ -19,41 +19,18 @@
             <h1>Let the drinks come to you.</h1>
             <h2>Beer, wine and liquor delivered in under 60 minutes.</h2>
             <div class="search-hero-wrapper">
-                <div class="search-hero">
-                    <div class="search-input-hero">
-                        <input type="search" placeholder="Search the drink that you are looking for...">
-                        <div class="hero-search-dropdown" style="display: none;">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <img src="https://products0.imgix.drizly.com/ci-gentleman-jack-fbcb12928d7db1ba.jpeg?w=64">
-                                        <span>Jack Daniel's Gentleman Jack Tennessee Whiskey</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <button class="search-submit-button"><i class="fas fa-arrow-right"></i></button>
-                </div>
+                <form asp-controller="home" asp-action="searchproducthome" id="search-form-home" method="get" enctype="multipart/form-data">
+                    <div class="search-hero">
 
+                        <div class="search-input-hero">
+                            <input autocomplete="off" id="search-home-hero" name="searchStringhome" placeholder="Search the drink that you are looking for...">
+                            <div class="hero-search-dropdown">
+                                @*Home Hero Search Drop Down*@
+                            </div>
+                        </div>
+                        <button type="submit" class="search-submit-button"><i class="fas fa-arrow-right"></i></button>
+                    </div>
+                </form>
             </div>
         </div>
         <img class="left-hero float-left" src="~/uploads/settings/@Model.Settings.Find(c => c.Key == "LeftSideHero")?.Value">
@@ -292,126 +269,89 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product">
-                        <div class="whole-product-slide">
-                            <div class="drink-slide-info">
-                                <a href="#">
-                                    <div class="drink-on-sale">On Sale</div>
-                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                </a>
-                                <div class="drink-name">
-                                    <p>Vdoodoo Ranger Juice Force IPA</p>
+                @{var ordercounter = 0; List<int> orderIds = new List<int>();}
+                @foreach (var order in Model.RecentlyBought)
+                {
+                    @foreach (var orderitem in order.OrderItems)
+                    {
+                        var result = 0;
+                        decimal end = 0;
+                        foreach (var comment in orderitem.Product.ProductComments)
+                        {
+                            result += @comment.Rate;
+                        }
+                        if (result != 0)
+                        {
+                            end = decimal.Divide(result, orderitem.Product.ProductComments.Count);
+                        }
+                        ordercounter++;
+                        if (ordercounter < 5)
+                        {
+                            if (!orderIds.Contains(orderitem.Product.Id))
+                            {
+                                <div class="col-lg-3 col-md-6 col-sm-12">
+                                    <div class="product">
+                                        <div class="whole-product-slide">
+                                            <div class="drink-slide-info">
+                                                <a asp-controller="shop" asp-action="detail" asp-route-id="@orderitem.Product.Id">
+                                                    @if (orderitem.Product.DiscountPercent > 0)
+                                                    {
+                                                        <div class="drink-on-sale">On Sale</div>
+                                                    }
+                                                    <img src="~/uploads/products/@orderitem.Product.Image">
+                                                </a>
+                                                <div class="drink-name">
+                                                    <p class="@(orderitem.Product.IsAvailable==false?"text-danger":"")">@orderitem.Product.Name</p>
+                                                </div>
+                                                <div class="drink-price">
+                                                    @if (orderitem.Product.DiscountPercent > 0)
+                                                    {
+                                                        <p class="old-price-wrapper">$<span class="price-old">@orderitem.Product.SalePrice</span></p>
+                                                        <p class="regular-price-wrapper">$<span class="price-regular">@((orderitem.Product.SalePrice * (1 - orderitem.Product.DiscountPercent / 100)).ToString("0.00"))</span></p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="regular-price-wrapper">$<span class="price-regular">@orderitem.Product.SalePrice</span></p>
+                                                    }
+                                                </div>
+                                                <div class="drink-rate">
+                                                    @{ var tamhisse = Math.Truncate(end);
+                                                        var yuvarlaq = Math.Ceiling(end);}
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (end >= i)
+                                                        {
+                                                            <i class="fas fa-star"></i>
+                                                        }
+                                                        else if (tamhisse < end && (yuvarlaq == tamhisse || yuvarlaq == i))
+                                                        {
+                                                            <i class="bi bi-star-half"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fa fa-star-o"></i>
+                                                        }
+                                                    }
+                                                    <span class="review-count">@orderitem.Product.ProductComments.Count</span>
+                                                </div>
+                                            </div>
+                                            @if (orderitem.Product.IsAvailable == true)
+                                            {
+                                                <div class="add-to-basket">
+                                                    <a class="basket-icon basket-add" asp-controller="shop" asp-action="AddBasket" asp-route-id="@orderitem.Product.Id"><i class="fas fa-shopping-cart"></i></a>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="drink-price">
-                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                </div>
-                                <div class="drink-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <span class="review-count">214</span>
-                                </div>
-                            </div>
-                            <div class="add-to-basket">
-                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product">
-                        <div class="whole-product-slide">
-                            <div class="drink-slide-info">
-                                <a href="#">
-                                    <div class="drink-on-sale">On Sale</div>
-                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                </a>
-                                <div class="drink-name">
-                                    <p>Vdoodoo Ranger Juice Force IPA</p>
-                                </div>
-                                <div class="drink-price">
-                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                </div>
-                                <div class="drink-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <span class="review-count">214</span>
-                                </div>
-                            </div>
-                            <div class="add-to-basket">
-                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product">
-                        <div class="whole-product-slide">
-                            <div class="drink-slide-info">
-                                <a href="#">
-                                    <div class="drink-on-sale">On Sale</div>
-                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                </a>
-                                <div class="drink-name">
-                                    <p>Vdoodoo Ranger Juice Force IPA</p>
-                                </div>
-                                <div class="drink-price">
-                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                </div>
-                                <div class="drink-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <span class="review-count">214</span>
-                                </div>
-                            </div>
-                            <div class="add-to-basket">
-                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-12">
-                    <div class="product">
-                        <div class="whole-product-slide">
-                            <div class="drink-slide-info">
-                                <a href="#">
-                                    <div class="drink-on-sale">On Sale</div>
-                                    <img src="https://products0.imgix.drizly.com/ci-voodoo-ranger-juice-force-ipa-49cefbd02170c191.png?auto=format%2Ccompress&ch=Width%2CDPR&dpr=2&fm=jpg&h=240&q=20">
-                                </a>
-                                <div class="drink-name">
-                                    <p>Vdoodoo Ranger Juice Force IPA</p>
-                                </div>
-                                <div class="drink-price">
-                                    <p class="old-price-wrapper">$<span class="price-old">9.91</span></p>
-                                    <p class="regular-price-wrapper">$<span class="price-regular">6.99</span></p>
-                                </div>
-                                <div class="drink-rate">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true"></i>
-                                    <span class="review-count">214</span>
-                                </div>
-                            </div>
-                            <div class="add-to-basket">
-                                <a class="basket-icon" href="https://google.com"><i class="fas fa-shopping-cart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            }
+
+                        }
+                        orderIds.Add(orderitem.Product.Id);
+                    }
+                }
+
+            </div>
     </section>
 </main>
 <!-- Are You Older than 21 -->

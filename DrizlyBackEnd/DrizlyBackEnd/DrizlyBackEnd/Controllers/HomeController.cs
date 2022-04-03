@@ -61,7 +61,8 @@ namespace DrizlyBackEnd.Controllers
                 Services = _context.Services.ToList(),
                 Categories = _context.Categories.Include(x => x.TypeProducts).ToList(),
                 OnSaleProducts = _context.Products.Where(x=>x.IsDeleted==false).Where(x => x.DiscountPercent > 0).OrderByDescending(x => x.DiscountPercent).Take(15).Include(x => x.ProductComments).ToList(),
-                RecentComments = _context.ProductComments.Include(x => x.AppUser).Include(x => x.Product).OrderByDescending(x=>x.CreatedAt).Take(4).ToList()
+                RecentComments = _context.ProductComments.Include(x => x.AppUser).Include(x => x.Product).OrderByDescending(x=>x.CreatedAt).Take(4).ToList(),
+                RecentlyBought = _context.Orders.Include(x=>x.OrderItems).ThenInclude(x=>x.Product).ThenInclude(x=>x.ProductComments).OrderByDescending(x=>x.CreatedAt).Take(4).ToList()
             };
             return View(homeVM);
         }
@@ -79,6 +80,21 @@ namespace DrizlyBackEnd.Controllers
                 products = null;    
             }
             return PartialView("_SearchProductPartialView",products.ToList());
+        }
+
+        //SEARCH ACTION
+        public IActionResult SearchProductHome(string searchStringhome)
+        {
+            var products = _context.Products.AsQueryable();
+            if (!String.IsNullOrEmpty(searchStringhome))
+            {
+                products = products.Where(x => x.Name.ToLower().Trim().Contains(searchStringhome.ToLower().Trim()));
+            }
+            else
+            {
+                products = null;
+            }
+            return PartialView("_SearchHeroSectionPartialView", products.ToList());
         }
     }
 }

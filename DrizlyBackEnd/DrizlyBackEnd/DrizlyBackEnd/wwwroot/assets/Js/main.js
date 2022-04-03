@@ -86,11 +86,62 @@ $(function () {
             })
     });
 
+    //Hero Section Search
+    $("#search-home-hero").on("keyup", function () {
+
+        var searchform = document.getElementById("search-form-home");
+        var url = searchform.action;
+        var searchinput = $("#search-home-hero").val().toLowerCase();
+
+        if (searchinput.length < 3) {
+            $(".hero-search-dropdown").children().remove();
+            $(".hero-search-dropdown").css("display", "none");
+            return;
+        }
+        if (searchinput == undefined || searchinput == null || searchinput == "") {
+            $(".hero-search-dropdown").children().remove();
+            $(".hero-search-dropdown").css("display", "none");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("searchStringhome", searchinput);
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw response
+                }
+                return response.text();
+            })
+            .then(data => {
+                $(".hero-search-dropdown").html(data);
+                $(".hero-search-dropdown").css("display", "block")
+            })
+    });
+    //HERO SECTION SEARCH ENTER
+    $("#search-form-home").on("submit", function (e) {
+        e.preventDefault();
+        $("#search-home-item-1")[0].click();
+    });
+
     //SEARCH INPUT ENTER CLICK
     $("#search-form").on("submit", function (e) {   
         e.preventDefault();
         $("#search-list-item-1")[0].click();
     });
+    $("#search-form-mobile").on("submit", function (e) {
+        e.preventDefault();
+        $("#search-list-item-1")[0].click();
+    });
+
+    //Coupon Keyup
     $("#entercoupon").on("keyup", function () {
         console.log($(this).val().length);
         if ($(this).val().length==36) {
@@ -117,7 +168,10 @@ $(function () {
     $(".vieworderbtn").click(function () {
         $(this).parent().parent().next().slideToggle();
     });
-
+    //SORTING ON CHANGE SUBMIT FORM
+    $(document).on("change", ".sorting-product", function (e) {
+        $("#filterForm").submit();
+    });
     //SEARCH INPUT MOBILE
     $("#search-mobile").on("keyup", function () {
         var searchform = document.getElementById("search-form-mobile");

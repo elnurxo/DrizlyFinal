@@ -1,0 +1,56 @@
+﻿@model Order
+@{
+    ViewData["Title"] = "Detail";
+    int counter = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 mx-auto">
+            <h1>Details of Order (@Model.Status)</h1>
+            <h1><a asp-action="index" class="btn btn-success">Go Back</a></h1>
+            <a asp-action="edit" asp-route-id="@Model.Id" class="btn btn-warning my-2">Edit</a>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">FullName: @Model.FullName</h5>
+                    <h5 class="card-title">Phone: @Model.PhoneNumber</h5>
+                    <h5 class="card-title">Email: @Model.Email</h5>
+                    <h5 class="card-title">Country: @Model.Country</h5>
+                    <h5 class="card-title">City: @Model.City</h5>
+                    <h5 class="card-title">Address: @Model.Address</h5>
+                    <h5 class="card-title">Post ZIP Code: @Model.PostZip</h5>
+                    <h5 class="card-title">TotalPrice: @Model.TotalPrice</h5>
+                    <h5 class="card-title">Date: <span style="color:darkred">@Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")</span></h5>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Product Image</th>
+                                <th scope="col">Count</th>
+                                <th scope="col">Unit Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderItems)
+                            {
+                                counter++;
+                                <tr>
+                                    <th scope="row">@counter</th>
+                                    <td>@item.Product.Name</td>
+                                    <td><img width="100" src="~/uploads/products/@item.Product.Image" /></td>
+                                    <td>@item.Count</td>
+                                    <td>@item.DiscountedPrice</td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
