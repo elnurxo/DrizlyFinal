@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Welcome "+Model.Member.FullName;
     int orderCounter = 0;
+    int couponcounter = 0;
     int orderItemCounter = 0;
 }
 <main>
@@ -37,6 +38,7 @@
                                 <div class="myaccount-tab-menu nav" role="tablist">
                                     <a href="#dashboad" id="dashboard" class="active tab-naviagtion__item" data-toggle="tab"><i class="fa fa-dashboard"></i>Dashboard</a>
                                     <a href="#orders" id="orders" class="tab-naviagtion__item" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                    <a href="#coupons" id="coupons" class="tab-naviagtion__item" data-toggle="tab"><i style="padding: 10px 5px;" class="bi bi-currency-exchange"></i> Coupons</a>
                                     <a href="#address-edit" id="address-edit" class="tab-naviagtion__item" data-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
                                     <a href="#account-info" id="account-info" class="tab-naviagtion__item" data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
                                     <a class="logout-user" asp-controller="account" asp-action="logout"><i class="fa fa-sign-out"></i> Logout</a>
@@ -82,7 +84,7 @@
                                                                 <td>@orderCounter</td>
                                                                 <td>@order.Id</td>
                                                                 <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
-                                                                <td>@order.Status</td>
+                                                                <td>@order.Status</td>                              
                                                                 <td>$@order.TotalPrice</td>
                                                                 <td><a role="button" class="btn vieworderbtn "><span class="text-white">View</span></a></td>
                                                             </tr>
@@ -108,7 +110,7 @@
                                                                                     orderItemCounter++;
                                                                                     <tr>
                                                                                         <td>@orderItemCounter</td>
-                                                                                        <td><img  width="40" style="border-radius:0;" src="~/uploads/products/@orderItem.Product.Image"/></td>
+                                                                                        <td><img width="40" style="border-radius:0;" src="~/uploads/products/@orderItem.Product.Image" /></td>
                                                                                         <td>@orderItem.Product.Name</td>
                                                                                         <td>@orderItem.Count </td>
                                                                                         <td>@orderItem.DiscountedPrice</td>
@@ -127,6 +129,61 @@
                                         </div>
                                     </div>
                                     <!-- Single Tab Content End -->
+                                    @*COUPONS BODY*@
+                                    <div class="tab-pane fade coupons-content" role="tabpanel">
+                                        <div class="myaccount-content">
+                                            <h3>Coupons</h3>
+                                            <p>Copy coupon and use it when you order!</p>
+                                            @if (Model.AppUserCoupons.Count > 0)
+                                            {
+                                                <div class="myaccount-table table-responsive text-center">
+                                                    <table class="table table-bordered">
+                                                        <thead class="thead-light">
+                                                            <tr>
+                                                                <th>#</th>
+                                                                <th>Coupon</th>
+                                                                <th>Date</th>
+                                                                <th>Coupon Type</th>
+                                                                <th>Is Used?</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach (var coupon in Model.AppUserCoupons)
+                                                            {
+                                                                couponcounter++;
+                                                                <tr>
+                                                                    <td>@couponcounter</td>
+                                                                    <td style="user-select: @(coupon.IsUsed==true?"none":"all")" class="@(coupon.IsUsed==true?"text-danger":"")">@coupon.Coupon</td>
+                                                                    <td>@coupon.CreatedAt.ToString("MMMM dd, yyyy - hh:mm")</td>
+                                                                    <th>@coupon.CouponCategory.Name</th>
+                                                                    <td><a role="button" class="btn vieworderbtn"><span class="text-white">@(coupon.IsUsed==true?"YES":"NO")</span></a></td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <p>Hey, <strong class="text-danger">@Model.Member.FullName</strong></p>
+                                                <p>Looks like you don't have any coupon right now, to get a coupon read below!</p>
+                                            }
+                                            <h3>More About Coupons</h3>
+                                            <p class="font-weight-bold">
+                                                Currently we have @Model.CouponCategories.Count kinda coupons: @foreach (var item in Model.CouponCategories)
+                                                {
+                                                    @(item.Name+" ")
+                                                }
+                                            </p>
+                                            @if (Model.CouponCategories != null)
+                                            {
+                                                @foreach (var item in Model.CouponCategories)
+                                                {
+                                                    <p>@item.Name coupon gives you @item.DiscountPercent% discount for your next order, to get this coupon you have to shop over @item.SaleValue$</p>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
                                     <!-- Single Tab Content Start -->
                                     <div class="tab-pane fade address-edit-content" role="tabpanel">
                                         <div class="myaccount-content">
@@ -134,7 +191,7 @@
                                             <address>
                                                 <p><strong>@Model.Member.FullName</strong></p>
                                                 <p>
-                                                   @(Model.Member.Address == null ? "address empty" : Model.Member.Address) <br>
+                                                    @(Model.Member.Address == null ? "address empty" : Model.Member.Address) <br>
                                                     @(Model.Member.City == null ? "city empty" : Model.Member.City), @(Model.Member.Country == null ? "country empty" : Model.Member.Country)
                                                 </p>
                                                 <p>Mobile: @(Model.Member.Phone == null ? "xxx-xx-xx" : Model.Member.Phone)</p>
@@ -154,7 +211,7 @@
                                                     <input type="hidden" name="Image" value="@Model.Member.Image" />
                                                 }
                                             </div>
-                                           
+
                                             <h2>@Model.Member.UserName a.k.a @Model.Member.FullName, @Model.Member.Age years old @(Model.Member.Country==null || Model.Member.City==null ?"":"from "+Model.Member.City+", "+Model.Member.Country)</h2>
                                             <div class="account-details-form">
                                                 @Html.Partial("_MemberAccountUpdatePartialView", Model.Member)

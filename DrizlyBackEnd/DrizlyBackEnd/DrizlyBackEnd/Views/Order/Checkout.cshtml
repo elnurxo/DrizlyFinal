@@ -45,7 +45,9 @@
                                 <div class="card-body">
                                     <div class="cart-update-option">
                                         <div class="apply-coupon-wrapper">
-                                            @Html.Partial("_UseCouponPartialView")
+                                                <input name="coupon" form="order-form" max="36" id="entercoupon" type="text" placeholder="Enter Your Coupon Code" />
+                                                <button disabled class="btn btn-sqr apply-coupon-btn"><span class="font-weight-bolder apply-coupon-text">Apply Coupon</span></button>
+                                                <input style="opacity:0;" type="checkbox" id="couponcheckbox" />
                                         </div>
                                     </div>
                                 </div>

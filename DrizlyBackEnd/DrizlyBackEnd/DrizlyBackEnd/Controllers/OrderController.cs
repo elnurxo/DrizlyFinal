@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -56,6 +57,7 @@ namespace DrizlyBackEnd.Controllers
                     City = member?.City,
                     Country = member?.Country
                 }
+
             };
             return View(checkoutVM);
         }
@@ -63,9 +65,9 @@ namespace DrizlyBackEnd.Controllers
         //ORDER ACTION
         //[Authorize(Roles = "Member")]
         [HttpPost]
-        public IActionResult Create(Order order)
+        public IActionResult Create(Order order,string? coupon)
         {
-
+            
             AppUser member = null;
             if (User.Identity.IsAuthenticated)
             {
@@ -96,8 +98,6 @@ namespace DrizlyBackEnd.Controllers
             order.CreatedAt = DateTime.UtcNow.AddHours(4);
             order.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             order.Status = Enums.OrderStatus.Pending;
-           
-
 
             order.OrderItems = new List<OrderItem>();
 
@@ -112,7 +112,84 @@ namespace DrizlyBackEnd.Controllers
                     Count = item.Count
                 };
                 order.OrderItems.Add(orderItem);
-                order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;         
+                order.TotalPrice += orderItem.DiscountedPrice * orderItem.Count;
+                
+            }
+            if (coupon!=null)
+            {
+                bool IsCouponValid = false;
+                var existCoupons = _context.AppUserCoupons.Include(x => x.CouponCategory).ToList();
+                foreach (var existCoupon in existCoupons)
+                {
+                    if (existCoupon.Coupon == coupon && existCoupon.IsUsed==false)
+                    {
+                        order.TotalPrice = order.TotalPrice - ((order.TotalPrice * existCoupon.CouponCategory.DiscountPercent) / 100);
+                        existCoupon.IsUsed = true;
+                        IsCouponValid = true;
+                        TempData["Warning"] = $"You just used your {existCoupon.CouponCategory.Name} coupon";
+                        break;
+                    }
+                }
+                if (IsCouponValid==false)
+                {
+                    TempData["Error"] = "Invalid Coupon";
+                }
+            }
+            //CREATE COUPON IF TOTAL_PRICE IS BIGGER THAN SELECTED PRICE $$$
+            var couponcategory = _context.CouponCategories.OrderByDescending(x=>x.SaleValue).ToList();
+            AppUserCoupon newcoupon = new AppUserCoupon();
+            if (couponcategory.Count>0)
+            {
+                foreach (var couponCategory in couponcategory)
+                {
+                    if (order.TotalPrice > couponCategory.SaleValue)
+                    {
+                        newcoupon.AppUserId = order.AppUserId;
+                        newcoupon.Coupon = Guid.NewGuid().ToString();
+                        newcoupon.IsUsed = false;
+                        newcoupon.CreatedAt = DateTime.UtcNow.AddHours(4);
+                        newcoupon.CouponCategoryId = couponCategory.Id;
+                        string couponCategoryName = couponCategory.Name;
+                        int couponDiscount = couponCategory.DiscountPercent;
+                        int couponSaleValue = couponCategory.SaleValue;
+
+                        //YOU FOT NEW COUPON E-MAIL
+                        //email
+                        string couponbody = String.Empty;
+                        var pathcoupon = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Template" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "Coupon.html";
+                        using (StreamReader streamReader = System.IO.File.OpenText(pathcoupon))
+                        {
+                            couponbody = streamReader.ReadToEnd();
+                        }
+
+                        couponbody = couponbody.Replace("{fullname}", order.FullName);
+                        couponbody = couponbody.Replace("{date}", newcoupon.CreatedAt.ToString("MMMM dd, yyyy"));
+                        couponbody = couponbody.Replace("{coupon}", newcoupon.Coupon);
+                        couponbody = couponbody.Replace("{coupontype}", couponCategoryName);
+                        couponbody = couponbody.Replace("{discountpercent}", couponDiscount.ToString());
+                        couponbody = couponbody.Replace("{salevalue}", couponSaleValue.ToString());
+
+                        MailMessage mailMessagecoupon = new MailMessage();
+                        mailMessagecoupon.To.Add(order.Email);
+                        mailMessagecoupon.From = new MailAddress("drizlycode@gmail.com");
+                        mailMessagecoupon.Subject = "Congrats " + order.FullName + ",you got " + couponCategoryName + " coupon!";
+                        mailMessagecoupon.Body = couponbody;
+                        mailMessagecoupon.IsBodyHtml = true;
+
+                        SmtpClient smtpcoupon = new SmtpClient();
+
+                        smtpcoupon.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
+                        smtpcoupon.Port = 587;
+                        smtpcoupon.Host = "smtp.gmail.com";
+                        smtpcoupon.EnableSsl = true;
+                        smtpcoupon.Send(mailMessagecoupon);
+
+
+                        _context.AppUserCoupons.Add(newcoupon);
+                        TempData["Info"] = $"Congrats, now you have {couponCategoryName} coupon!";
+                        break;
+                    }
+                }
             }
 
             _context.Orders.Add(order);

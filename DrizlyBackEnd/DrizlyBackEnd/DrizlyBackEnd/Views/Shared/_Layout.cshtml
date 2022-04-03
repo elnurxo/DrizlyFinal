@@ -49,6 +49,14 @@
         {
             <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
         }
+        @if (TempData["Info"] != null)
+        {
+            <input type="hidden" id="info-toaster" value="@TempData["Info"]" />
+        }
+        @if (TempData["Error"] != null)
+        {
+            <input type="hidden" id="error-toaster" value="@TempData["Error"]" />
+        }
         <!-- Loading Start -->
         <div id="loadingwrapper">
         </div>
@@ -134,7 +142,7 @@
                         }
                     </div>
                     <a asp-controller="order" asp-action="basket" class="navbar-basket font-weight-bolder" style="right:2px">
-                        <i class="bi bi-bag-check"></i>     
+                        <i class="bi bi-bag-check"></i>
                         <sub class="basket-count"></sub>
                     </a>
                     <ul class="basket-hover">
@@ -156,7 +164,7 @@
                             </li>
                             <hr>
                         }
-                       <input type="hidden" value="@counter" class="basket-counter" />
+                        <input type="hidden" value="@counter" class="basket-counter" />
                     </ul>
                 </nav>
             </div>
@@ -404,6 +412,16 @@
         $(document).ready(function () {
             if ($("#warning-toaster").length) {
                 toastr["warning"]($("#warning-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#info-toaster").length) {
+                toastr["info"]($("#info-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#error-toaster").length) {
+                toastr["error"]($("#error-toaster").val());
             }
         });
     </script>

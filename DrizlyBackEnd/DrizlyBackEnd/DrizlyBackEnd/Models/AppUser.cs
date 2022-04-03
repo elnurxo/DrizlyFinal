@@ -25,6 +25,7 @@ namespace DrizlyBackEnd.Models
         public string City { get; set; }
         [StringLength(maximumLength: 350)]
         public string Address { get; set; }
+        public List<AppUserCoupon> appUserCoupons { get; set; }
 
     }
 }

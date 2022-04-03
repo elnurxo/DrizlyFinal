@@ -248,7 +248,9 @@ namespace DrizlyBackEnd.Controllers
                     Age = member.Age,
                     Image = member.Image
                 },
-                Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).Where(x => x.AppUserId == member.Id).ToList()
+                Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).Where(x => x.AppUserId == member.Id).ToList(),
+                AppUserCoupons = _context.AppUserCoupons.Include(x=>x.AppUser).Include(x=>x.CouponCategory).Where(x=>x.AppUserId==member.Id).ToList(),
+                CouponCategories = _context.CouponCategories.ToList()
             };
             return View(profileVM);
         }

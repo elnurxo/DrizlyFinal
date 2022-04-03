@@ -10,5 +10,7 @@ namespace DrizlyBackEnd.ViewModels
     {
         public MemberUpdateViewModel Member { get; set; }
         public List<Order> Orders { get; set; }
+        public List<AppUserCoupon> AppUserCoupons { get; set; }
+        public List<CouponCategory> CouponCategories { get; set; }
     }
 }
