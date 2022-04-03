@@ -193,6 +193,12 @@ namespace DrizlyBackEnd.Controllers
                 case "name_desc":
                     products = products.OrderByDescending(x => x.Name);
                     break;
+                case "rate_desc":
+                    products = products.OrderByDescending(x => x.Rate);
+                    break;
+                case "rate_asc":
+                    products = products.OrderBy(x => x.Rate);
+                    break;
                 default:
                     break;
             }

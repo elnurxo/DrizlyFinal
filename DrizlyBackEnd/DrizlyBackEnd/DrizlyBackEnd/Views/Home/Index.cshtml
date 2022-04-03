@@ -239,7 +239,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <div class="card comment-card">
                                 <div class="card-body">
-                                    <h5 class="card-title">@comment.AppUser.FullName  <img width="40" style="border-radius:50%;margin-left:20px;" src="~/uploads/users/@comment.AppUser.Image" /></h5>
+                                    <h5 class="card-title">@comment.AppUser.FullName  <img width="40" style="border-radius:50%;margin-left:20px;" src="~/uploads/users/@(comment.AppUser.Image==null?"avatar.png":comment.AppUser.Image)" /></h5>
                                     <p>posted to <a class="font-weight-bolder" style="color:black;" asp-controller="shop" asp-action="detail" asp-route-id="@comment.Product.Id">@comment.Product.Name</a></p>
                                     <h6 class="card-subtitle mb-2 text-muted">
                                         <ul class="customer-rate-ul">

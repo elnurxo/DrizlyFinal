@@ -49,10 +49,12 @@
                             <i class="fas fa-chevron-down"></i> -->
                             <select name="sort" form="filterForm" class="sorting-product">
                                 <option value="default">Default</option>
-                                <!option value="name_asc"   @(ViewBag.Sort == "name_asc" ? "selected" : "") class="sorting-list-item"><span>Name: A-Z</span></!option>
-                                <!option value="name_desc"  @(ViewBag.Sort == "name_desc" ? "selected" : "") class="sorting-list-item"><span>Name: Z-A</span></!option>
-                                <!option value="price_low"  @(ViewBag.Sort == "price_low" ? "selected" : "") class="sorting-list-item"><span>Price: High to Low</span></!option>
+                                <!option value="name_asc" @(ViewBag.Sort == "name_asc" ? "selected" : "") class="sorting-list-item"><span>Name: A-Z</span></!option>
+                                <!option value="name_desc" @(ViewBag.Sort == "name_desc" ? "selected" : "") class="sorting-list-item"><span>Name: Z-A</span></!option>
+                                <!option value="price_low" @(ViewBag.Sort == "price_low" ? "selected" : "") class="sorting-list-item"><span>Price: High to Low</span></!option>
                                 <!option value="price_high" @(ViewBag.Sort == "price_high" ? "selected" : "") class="sorting-list-item"><span>Price: Low to High</span></!option>
+                                <!option value="rate_desc" @(ViewBag.Sort == "rate_desc" ? "selected" : "") class="sorting-list-item"><span>Rate: High to Low</span></!option>
+                                <!option value="rate_asc" @(ViewBag.Sort == "rate_asc" ? "selected" : "") class="sorting-list-item"><span>Rate: Low to High</span></!option>
                             </select>
                         </div>
 
