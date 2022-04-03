@@ -265,9 +265,13 @@ namespace DrizlyBackEnd.Controllers
                 return NotFound();
             }
 
+            AppUser member = await _userManager.FindByNameAsync(User.Identity.Name);
             MemberProfileViewModel profileVM = new MemberProfileViewModel
             {
-                Member = memberVM
+                Member = memberVM,
+                Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).Where(x => x.AppUserId == member.Id).ToList(),
+                AppUserCoupons = _context.AppUserCoupons.Include(x => x.AppUser).Include(x => x.CouponCategory).Where(x => x.AppUserId == member.Id).ToList(),
+                CouponCategories = _context.CouponCategories.Where(x => x.IsDeleted == false).ToList()
             };
 
             TempData["ProfileTab"] = "Account";
@@ -275,7 +279,6 @@ namespace DrizlyBackEnd.Controllers
             if (!ModelState.IsValid)
                 return View("Profile", profileVM);
 
-            AppUser member = await _userManager.FindByNameAsync(User.Identity.Name);
 
             if (member.UserName != memberVM.UserName && _userManager.Users.Any(x => x.NormalizedUserName == memberVM.UserName.ToUpper()))
             {

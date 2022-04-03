@@ -76,52 +76,55 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach (var order in Model.Orders)
+                                                        @if (Model.Orders != null)
                                                         {
-                                                            orderItemCounter = 0;
-                                                            orderCounter++;
-                                                            <tr>
-                                                                <td>@orderCounter</td>
-                                                                <td>@order.Id</td>
-                                                                <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
-                                                                <td>@order.Status</td>                              
-                                                                <td>$@order.TotalPrice</td>
-                                                                <td><a role="button" class="btn vieworderbtn "><span class="text-white">View</span></a></td>
-                                                            </tr>
+                                                            @foreach (var order in Model.Orders)
+                                                            {
+                                                                orderItemCounter = 0;
+                                                                orderCounter++;
+                                                                <tr>
+                                                                    <td>@orderCounter</td>
+                                                                    <td>@order.Id</td>
+                                                                    <td>@order.CreatedAt.ToString("MMMM dd, yyyy")</td>
+                                                                    <td>@order.Status</td>
+                                                                    <td>$@order.TotalPrice</td>
+                                                                    <td><a role="button" class="btn vieworderbtn "><span class="text-white">View</span></a></td>
+                                                                </tr>
 
-                                                            <tr class="orderdetailbody" style="display:none;">
-                                                                <td colspan="12">
-                                                                    <div>
-                                                                        <table class="table table-striped">
-                                                                            <thead>
-                                                                                <tr class="info">
-                                                                                    <th>#</th>
-                                                                                    <th>Product Image</th>
-                                                                                    <th>Product Name</th>
-                                                                                    <th>Count</th>
-                                                                                    <th>Unit price</th>
-                                                                                </tr>
-                                                                            </thead>
-
-                                                                            <tbody>
-
-                                                                                @foreach (var orderItem in order.OrderItems)
-                                                                                {
-                                                                                    orderItemCounter++;
-                                                                                    <tr>
-                                                                                        <td>@orderItemCounter</td>
-                                                                                        <td><img width="40" style="border-radius:0;" src="~/uploads/products/@orderItem.Product.Image" /></td>
-                                                                                        <td>@orderItem.Product.Name</td>
-                                                                                        <td>@orderItem.Count </td>
-                                                                                        <td>@orderItem.DiscountedPrice</td>
+                                                                <tr class="orderdetailbody" style="display:none;">
+                                                                    <td colspan="12">
+                                                                        <div>
+                                                                            <table class="table table-striped">
+                                                                                <thead>
+                                                                                    <tr class="info">
+                                                                                        <th>#</th>
+                                                                                        <th>Product Image</th>
+                                                                                        <th>Product Name</th>
+                                                                                        <th>Count</th>
+                                                                                        <th>Unit price</th>
                                                                                     </tr>
-                                                                                }
-                                                                            </tbody>
-                                                                        </table>
+                                                                                </thead>
 
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
+                                                                                <tbody>
+
+                                                                                    @foreach (var orderItem in order.OrderItems)
+                                                                                    {
+                                                                                        orderItemCounter++;
+                                                                                        <tr>
+                                                                                            <td>@orderItemCounter</td>
+                                                                                            <td><img width="40" style="border-radius:0;" src="~/uploads/products/@orderItem.Product.Image" /></td>
+                                                                                            <td>@orderItem.Product.Name</td>
+                                                                                            <td>@orderItem.Count </td>
+                                                                                            <td>@orderItem.DiscountedPrice</td>
+                                                                                        </tr>
+                                                                                    }
+                                                                                </tbody>
+                                                                            </table>
+
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            }
                                                         }
                                                     </tbody>
                                                 </table>
@@ -134,39 +137,42 @@
                                         <div class="myaccount-content">
                                             <h3>Coupons</h3>
                                             <p>Copy coupon and use it when you order!</p>
-                                            @if (Model.AppUserCoupons.Count > 0)
+                                            @if (Model.AppUserCoupons!=null)
                                             {
-                                                <div class="myaccount-table table-responsive text-center">
-                                                    <table class="table table-bordered">
-                                                        <thead class="thead-light">
-                                                            <tr>
-                                                                <th>#</th>
-                                                                <th>Coupon</th>
-                                                                <th>Date</th>
-                                                                <th>Coupon Type</th>
-                                                                <th>Is Used?</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach (var coupon in Model.AppUserCoupons)
-                                                            {
-                                                                couponcounter++;
+                                                @if (Model.AppUserCoupons.Count > 0)
+                                                {
+                                                    <div class="myaccount-table table-responsive text-center">
+                                                        <table class="table table-bordered">
+                                                            <thead class="thead-light">
                                                                 <tr>
-                                                                    <td>@couponcounter</td>
-                                                                    <td style="user-select: @(coupon.IsUsed==true?"none":"all")" class="@(coupon.IsUsed==true?"text-danger":"")">@coupon.Coupon</td>
-                                                                    <td>@coupon.CreatedAt.ToString("MMMM dd, yyyy - hh:mm")</td>
-                                                                    <th>@coupon.CouponCategory.Name</th>
-                                                                    <td><a role="button" class="btn vieworderbtn"><span class="text-white">@(coupon.IsUsed==true?"YES":"NO")</span></a></td>
+                                                                    <th>#</th>
+                                                                    <th>Coupon</th>
+                                                                    <th>Date</th>
+                                                                    <th>Coupon Type</th>
+                                                                    <th>Is Used?</th>
                                                                 </tr>
-                                                            }
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <p>Hey, <strong class="text-danger">@Model.Member.FullName</strong></p>
-                                                <p>Looks like you don't have any coupon right now, to get a coupon read below!</p>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var coupon in Model.AppUserCoupons)
+                                                                {
+                                                                    couponcounter++;
+                                                                    <tr>
+                                                                        <td>@couponcounter</td>
+                                                                        <td style="user-select: @(coupon.IsUsed==true?"none":"all")" class="@(coupon.IsUsed==true?"text-danger":"")">@coupon.Coupon</td>
+                                                                        <td>@coupon.CreatedAt.ToString("MMMM dd, yyyy - hh:mm")</td>
+                                                                        <th>@coupon.CouponCategory.Name</th>
+                                                                        <td><a role="button" class="btn vieworderbtn"><span class="text-white">@(coupon.IsUsed==true?"YES":"NO")</span></a></td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <p>Hey, <strong class="text-danger">@Model.Member.FullName</strong></p>
+                                                    <p>Looks like you don't have any coupon right now, to get a coupon read below!</p>
+                                                }
                                             }
                                             <h3>More About Coupons</h3>
                                             <p class="font-weight-bold">
