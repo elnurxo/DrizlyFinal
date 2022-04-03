@@ -136,7 +136,7 @@ namespace DrizlyBackEnd.Controllers
                 }
             }
             //CREATE COUPON IF TOTAL_PRICE IS BIGGER THAN SELECTED PRICE $$$
-            var couponcategory = _context.CouponCategories.OrderByDescending(x=>x.SaleValue).ToList();
+            var couponcategory = _context.CouponCategories.Where(x=>x.IsDeleted==false).OrderByDescending(x=>x.SaleValue).ToList();
             AppUserCoupon newcoupon = new AppUserCoupon();
             if (couponcategory.Count>0)
             {

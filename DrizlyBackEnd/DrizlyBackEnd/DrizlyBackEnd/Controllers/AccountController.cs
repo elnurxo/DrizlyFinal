@@ -250,7 +250,7 @@ namespace DrizlyBackEnd.Controllers
                 },
                 Orders = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).Where(x => x.AppUserId == member.Id).ToList(),
                 AppUserCoupons = _context.AppUserCoupons.Include(x=>x.AppUser).Include(x=>x.CouponCategory).Where(x=>x.AppUserId==member.Id).ToList(),
-                CouponCategories = _context.CouponCategories.ToList()
+                CouponCategories = _context.CouponCategories.Where(x=>x.IsDeleted==false).ToList()
             };
             return View(profileVM);
         }

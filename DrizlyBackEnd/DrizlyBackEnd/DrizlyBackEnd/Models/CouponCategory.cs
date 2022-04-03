@@ -16,5 +16,6 @@ namespace DrizlyBackEnd.Models
         public int DiscountPercent { get; set; }
         [Required]
         public int SaleValue { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -74,8 +74,6 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         {
             TypeProduct typeProduct = _context.TypeProducts.Include(x=>x.Category).FirstOrDefault(x => x.Id == id);
 
-            //ViewBag.Categories = _context.Categories.Where(x=>x.Id==id).ToList();
-
             if (typeProduct == null) return NotFound();
 
             return View(typeProduct);

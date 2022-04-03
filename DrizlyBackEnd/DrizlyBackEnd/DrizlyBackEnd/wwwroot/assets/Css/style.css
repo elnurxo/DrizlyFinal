@@ -6033,6 +6033,24 @@ main #card-products-section .table-wrapper {
     text-transform: uppercase;
     cursor: pointer;
 }
+.viewcouponbtn {
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    color: white;
+    outline: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: 0.4s;
+    -o-transition: 0.4s;
+    transition: 0.4s;
+    display: inline-block;
+    padding: 14px 25px;
+    background-color: #e12c2c;
+    text-transform: uppercase;
+    cursor: pointer;
+}
 
 /*------- input box style css end -------*/
 /*# sourceMappingURL=style.css.map */
