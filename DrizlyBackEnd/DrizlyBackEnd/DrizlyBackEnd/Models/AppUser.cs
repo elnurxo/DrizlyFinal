@@ -18,13 +18,24 @@ namespace DrizlyBackEnd.Models
         public bool IsAdmin { get; set; }
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+        [StringLength(maximumLength: 100)]
         public string Image { get; set;  }
+        [NotMapped]
+        public IFormFile BackGroundFile { get; set; }
+        [StringLength(maximumLength: 100)]
+        public string BackgroundImage { get; set; }
         [StringLength(maximumLength: 50)]
         public string Country { get; set; }
         [StringLength(maximumLength: 50)]
         public string City { get; set; }
         [StringLength(maximumLength: 350)]
         public string Address { get; set; }
+        [StringLength(maximumLength: 120)]
+        public string FacebookUrl { get; set; }
+        [StringLength(maximumLength: 120)]
+        public string TwitterUrl { get; set; }
+        [StringLength(maximumLength: 120)]
+        public string InstagramUrl { get; set; }
         public List<AppUserCoupon> appUserCoupons { get; set; }
 
     }

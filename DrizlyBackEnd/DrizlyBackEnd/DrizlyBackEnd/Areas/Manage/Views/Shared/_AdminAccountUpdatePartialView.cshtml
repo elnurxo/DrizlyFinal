@@ -1,0 +1,120 @@
+﻿@model AdminUpdateViewModel
+<form asp-action="edit" method="post" enctype="multipart/form-data">
+    <div class="profile-pic-wrapper-admin">
+        <input type="hidden" name="Image" asp-for="Image" />
+    </div>
+    <div class="bg-pic-wrapper">
+        <input type="hidden" name="BackgroundImage" asp-for="BackgroundImage" />
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-6">
+            <label asp-for="FullName" class="col-lg-3 col-form-label form-control-label" placeholder="Full Name">Full name</label>
+            <input asp-for="FullName" class="form-control" type="text">
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+        <div class="col-lg-6">
+            <label asp-for="UserName" class="col-lg-3 col-form-label form-control-label" placeholder="User Name">User name</label>
+            <input asp-for="UserName" class="form-control" type="text">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Email" class="col-lg-3 col-form-label form-control-label">Email</label>
+        <div class="col-lg-9">
+            <input asp-for="Email" class="form-control" type="email" placeholder="E-Mail">
+        </div>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ImageFile" class="col-lg-3 col-form-label form-control-label">Change profile</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="ImageFile" type="file">
+        </div>
+        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="BackGroundFile" class="col-lg-3 col-form-label form-control-label">Change Background</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="BackGroundFile" type="file">
+        </div>
+        <span asp-validation-for="BackGroundFile" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label">Address</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="Country" type="text" placeholder="Country">
+        </div>
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label class="col-lg-3 col-form-label form-control-label"></label>
+        <div class="col-lg-6">
+            <input class="form-control" asp-for="City" type="text" placeholder="City">
+        </div>
+        <span asp-validation-for="City" class="text-danger"></span>
+        <div class="col-lg-3">
+            <input class="form-control" asp-for="Address" type="text" placeholder="Address">
+        </div>
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group row">
+        <label asp-for="Phone" class="col-lg-3 col-form-label form-control-label">Phone Number</label>
+        <div class="col-lg-9">
+            <input asp-for="Phone" class="form-control" type="text">
+        </div>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="FacebookUrl" class="col-lg-3 col-form-label form-control-label">Facebook URL</label>
+        <div class="col-lg-9">
+            <input asp-for="FacebookUrl" class="form-control" type="text">
+        </div>
+        <span asp-validation-for="FacebookUrl" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="TwitterUrl" class="col-lg-3 col-form-label form-control-label">Twitter URL</label>
+        <div class="col-lg-9">
+            <input asp-for="TwitterUrl" class="form-control" type="text">
+        </div>
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="InstagramUrl" class="col-lg-3 col-form-label form-control-label">Instagram URL</label>
+        <div class="col-lg-9">
+            <input asp-for="InstagramUrl" class="form-control" type="text">
+        </div>
+        <span asp-validation-for="InstagramUrl" class="text-danger"></span>
+    </div>
+    <hr />
+    <h5 class="my-5">Password Change</h5>
+    <div class="form-group row">
+        <label asp-for="CurrentPassword" class="col-lg-3 col-form-label form-control-label">Current Password</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="CurrentPassword" placeholder="Current Password" type="password">
+        </div>
+        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="Password" class="col-lg-3 col-form-label form-control-label">New Password</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="Password" placeholder="New Password" type="password">
+        </div>
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <label asp-for="ConfirmPassword" class="col-lg-3 col-form-label form-control-label">Confirm Password</label>
+        <div class="col-lg-9">
+            <input class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" type="password">
+        </div>
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="col-lg-12">
+        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+    </div>
+    <div class="form-group row">
+        <div class="col-lg-9">
+            <input type="submit" class="btn btn-primary" value="Save Changes">
+        </div>
+    </div>
+</form>

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
+    [Authorize(Roles = "SuperAdmin,Reader,Creator,Editor")]
     public class DashboardController : Controller
     {
         private readonly DrizlyContext _context;

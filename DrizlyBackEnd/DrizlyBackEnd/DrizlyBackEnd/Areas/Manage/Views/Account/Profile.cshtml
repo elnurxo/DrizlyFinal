@@ -1,0 +1,199 @@
+﻿@model AdminProfileViewModel
+<div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col-lg-4">
+            <div class="card profile-card-2">
+                <div class="card-img-block">
+                    <img class="img-fluid" src="~/uploads/adminbackgrounds/@(Model.Admin.BackgroundImage==null?"adminbackgroundavatar.png":Model.Admin.BackgroundImage)" alt="Card image cap">
+                </div>
+                <div class="card-body pt-5">
+                    <img src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" alt="profile-image" class="profile">
+                    <h5 class="card-title">@Model.Admin.FullName</h5>
+                    <p class="card-text">Age: @Model.Admin.Age</p>
+                    <p class="card-text">Email: @Model.Admin.Email</p>
+                    <p class="card-text">Role: @Model.Admin.Role </p>
+
+                    <div class="icon-block">
+                        @if (Model.Admin.FacebookUrl != null)
+                        {
+            <a href="@Model.Admin.FacebookUrl"><i class="fa fa-facebook bg-facebook text-white"></i></a>}
+                        @if (Model.Admin.TwitterUrl != null)
+                        {
+            <a href="@Model.Admin.TwitterUrl"> <i class="fa fa-twitter bg-twitter text-white"></i></a>}
+                        @if (Model.Admin.InstagramUrl != null)
+                        {
+            <a href="@Model.Admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                        <li class="nav-item">
+                            <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:void();" data-target="#messages" data-toggle="pill" class="nav-link"><i class="icon-envelope-open"></i> <span class="hidden-xs">Messages</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3">
+                        <div class="tab-pane active" id="profile">
+                            <h5 class="mb-3">Admin Profile</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>About</h6>
+                                    <p>
+                                        Full Name : @Model.Admin.FullName
+                                    </p>
+                                    <h6>Email : @Model.Admin.Email</h6>
+                                    <p>
+                                        Personal Information : @Model.Admin.Age years old
+                                    </p>
+                                    @if (Model.Admin.Phone != null)
+                                    {
+                        <p>
+                            Phone Number : @Model.Admin.Phone
+                        </p>}
+                                </div>
+                                <div class="col-md-6">
+                                    <img width="250" src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" style="border-radius:50%;" alt="profile-image" class="profile">
+                                </div>
+                                <div class="col-md-12">
+                                    <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Latest Messages</h5>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                        </div>
+                        <div class="tab-pane" id="messages">
+                            <div class="alert alert-info alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <div class="alert-icon">
+                                    <i class="icon-info"></i>
+                                </div>
+                                <div class="alert-message">
+                                    <span><strong>Info!</strong> Lorem Ipsum is simply dummy text.</span>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                        <div class="tab-pane" id="edit">
+                            <div class="col-lg-6">
+                                <h5>Profile Picture</h5>
+                                <div class="user-image-container" style="position:relative">
+                                    <img class="profile-picture" width="150" height="150" style="border-radius:50%;" src="/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" alt="profile-picture">
+                                    @if (Model.Admin.Image != null)
+                                    {
+                        <i class="fas fa-times remove-img-box-admin" style="position: absolute;left: 0px;top: 5px; color: red; font-size:17px;cursor: pointer;"></i>
+                                        <input type="hidden" name="Image" value="@Model.Admin.Image" />}
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <h5>Background Image</h5>
+                                <div class="user-image-container" style="position:relative">
+                                    <img class="profile-picture" width="100" height="80" src="/uploads/adminbackgrounds/@(Model.Admin.BackgroundImage==null?"adminbackgroundavatar.png":Model.Admin.BackgroundImage)" alt="background-picture">
+                                    @if (Model.Admin.BackgroundImage != null)
+                                    {
+                        <i class="fas fa-times remove-img-box-admin-bg" style="position: absolute;left: 0px;top: 5px; color: red; font-size:17px;cursor: pointer;"></i>
+                                        <input type="hidden" name="BackgroundImage" value="@Model.Admin.BackgroundImage" />}
+                                </div>
+                            </div>
+                            @Html.Partial("_AdminAccountUpdatePartialView", Model.Admin)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!--start overlay-->
+    <div class="overlay toggle-menu"></div>
+    <!--end overlay-->
+
+</div>
+<!-- Jquery Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    //PROFILE PICTURE DELETE ADMIN
+    $(".remove-img-box-admin").click(function () {
+        $(this).parent().remove();
+        $(".profile-pic-wrapper-admin").remove();
+    });
+
+    //PROFILE PICTURE DELETE ADMIN BACKGROUND
+    $(".remove-img-box-admin-bg").click(function () {
+        $(this).parent().remove();
+        $(".bg-pic-wrapper").remove();
+    });
+</script>
+
+

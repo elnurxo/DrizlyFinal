@@ -8,6 +8,7 @@
     <Folder Include="Migrations\" />
     <Folder Include="wwwroot\assets\Media\Products\" />
     <Folder Include="wwwroot\uploads\categories\" />
+    <Folder Include="wwwroot\uploads\adminbackgrounds\" />
     <Folder Include="wwwroot\uploads\news\" />
     <Folder Include="wwwroot\uploads\products\" />
     <Folder Include="wwwroot\uploads\settings\" />

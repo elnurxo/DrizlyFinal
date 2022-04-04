@@ -1,8 +1,16 @@
-﻿@using DrizlyBackEnd.Services   
+﻿@using DrizlyBackEnd.Services
+@using Microsoft.AspNetCore.Identity
 @inject LayoutService layoutService
-
-@{ 
+@inject UserManager<AppUser> usermanager
+@{
     var message = layoutService.GetUnreadMessages();
+    var settings = layoutService.GetSettings();
+
+    AppUser admin = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        admin = usermanager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && x.IsAdmin);
+    }
 }
 
 <!DOCTYPE html>
@@ -31,6 +39,8 @@
     <link href="~/manage/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <!-- Sidebar CSS-->
     <link href="~/manage/assets/css/sidebar-menu.css" rel="stylesheet" />
+    <!-- Toastr Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom Style-->
     <link href="~/manage/assets/css/app-style.css" rel="stylesheet" />
     <!-- Fav Ico -->
@@ -41,6 +51,22 @@
 </head>
 
 <body class="bg-theme bg-theme2">
+    @if (TempData["Success"] != null)
+    {
+        <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+    }
+    @if (TempData["Warning"] != null)
+    {
+        <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
+    }
+    @if (TempData["Info"] != null)
+    {
+        <input type="hidden" id="info-toaster" value="@TempData["Info"]" />
+    }
+    @if (TempData["Error"] != null)
+    {
+        <input type="hidden" id="error-toaster" value="@TempData["Error"]" />
+    }
     <!-- Start wrapper-->
     <div id="wrapper">
 
@@ -48,7 +74,7 @@
         <div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
             <div class="brand-logo">
                 <a asp-controller="dashboard" asp-action="index">
-                    <img src="~/uploads/settings/logo.png" class="logo-icon" alt="logo icon">
+                    <img src="~/uploads/settings/@settings["HeaderLogo"]" class="logo-icon" alt="logo icon">
                     <h5 class="logo-text">Drizly Admin</h5>
                 </a>
             </div>
@@ -222,16 +248,16 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                            <span class="user-profile"><img src="https://via.placeholder.com/110x110" class="img-circle" alt="user avatar"></span>
+                            <span class="user-profile"><img src="~/uploads/admins/@(admin.Image==null?"avatar.png":admin.Image)" class="img-circle" alt="user avatar"></span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item user-details">
                                 <a href="javaScript:void();">
                                     <div class="media">
-                                        <div class="avatar"><img class="align-self-start mr-3" src="https://via.placeholder.com/110x110" alt="user avatar"></div>
+                                        <div class="avatar"><img class="align-self-start mr-3" src="~/uploads/admins/@(admin.Image==null?"avatar.png":admin.Image)" alt="admin avatar"></div>
                                         <div class="media-body">
-                                            <h6 class="mt-2 user-title">Sarajhon Mccoy</h6>
-                                            <p class="user-subtitle">mccoy@example.com</p>
+                                            <h6 class="mt-2 user-title">@admin.FullName</h6>
+                                            <p class="user-subtitle">@admin.Email</p>
                                         </div>
                                     </div>
                                 </a>
@@ -239,11 +265,9 @@
                             <li class="dropdown-divider"></li>
                             <li class="dropdown-item"><i class="icon-envelope mr-2"></i> Inbox</li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> Account</li>
+                            <li class="dropdown-item"><i class="icon-wallet mr-2"></i> <a asp-action="profile" asp-controller="account">Profile</a></li>
                             <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-settings mr-2"></i> Setting</li>
-                            <li class="dropdown-divider"></li>
-                            <li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li>
+                            <li class="dropdown-item"><i class="icon-power mr-2"></i> <a class="log-out-admin" asp-action="logout" asp-controller="account">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -336,7 +360,48 @@
     <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
     <script src="~/manage/assets/plugins/Chart.js/Chart.min.js"></script>
     <!-- Index js -->
-    <script src="~/manage/assets/js/index.js"></script>
+    @*<script src="~/manage/assets/js/index.js"></script>*@
+    @*Toastr Script*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        $(document).ready(function () {
+            if ($("#success-toaster").length) {
+                toastr["success"]($("#success-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#warning-toaster").length) {
+                toastr["warning"]($("#warning-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#info-toaster").length) {
+                toastr["info"]($("#info-toaster").val());
+            }
+        });
+        $(document).ready(function () {
+            if ($("#error-toaster").length) {
+                toastr["error"]($("#error-toaster").val());
+            }
+        });
+    </script>
 </body>
 
 </html>

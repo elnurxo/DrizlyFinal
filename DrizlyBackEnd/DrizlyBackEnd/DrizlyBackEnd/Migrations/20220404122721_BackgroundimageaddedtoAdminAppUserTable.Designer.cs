@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220404122721_BackgroundimageaddedtoAdminAppUserTable")]
+    partial class BackgroundimageaddedtoAdminAppUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1014,10 +1016,6 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<string>("FacebookUrl")
-                        .HasColumnType("nvarchar(120)")
-                        .HasMaxLength(120);
-
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(150)")
                         .HasMaxLength(150);
@@ -1026,16 +1024,8 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
-                    b.Property<string>("InstagramUrl")
-                        .HasColumnType("nvarchar(120)")
-                        .HasMaxLength(120);
-
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
-
-                    b.Property<string>("TwitterUrl")
-                        .HasColumnType("nvarchar(120)")
-                        .HasMaxLength(120);
 
                     b.HasDiscriminator().HasValue("AppUser");
                 });

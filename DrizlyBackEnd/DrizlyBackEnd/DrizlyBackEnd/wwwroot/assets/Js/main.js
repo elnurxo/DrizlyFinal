@@ -437,7 +437,6 @@ $(function () {
     });
     //PROFILE PICTURE DELETE
     $(".remove-img-box").click(function () {
-        console.log("sdjhfsjkdimage");
         $(".profile-picture").attr("src", "/uploads/users/avatar.png");
         $(".profile-pic-wrapper").remove();
         $(this).css("display", "none");
