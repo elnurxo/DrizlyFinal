@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
+    //[Authorize(Roles = "SuperAdmin")]
     public class AccountController : Controller
     {
         private readonly DrizlyContext _context;

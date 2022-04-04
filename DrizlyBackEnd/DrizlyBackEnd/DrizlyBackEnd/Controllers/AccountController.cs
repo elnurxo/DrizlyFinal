@@ -162,36 +162,40 @@ namespace DrizlyBackEnd.Controllers
         }
 
         //TEST
-        //public async Task<IActionResult> test()
-        //{
-        //    AppUser appUser = new AppUser
-        //    {
-        //        FullName = "Elnur Khalil",
-        //        UserName = "Elnuradmin",
-        //        Email = "fcemilov@mail.ru"
-        //    };
+        public async Task<IActionResult> test()
+        {
+            AppUser appUser = new AppUser
+            {
+                FullName = "Polad Mammadli",
+                UserName = "PoladAdmin",
+                Email = "polad123@mail.ru"
+            };
 
-        //    var result = await _userManager.CreateAsync(appUser, "Admin123");
+        var result = await _userManager.CreateAsync(appUser, "Polad123");
 
-        //    return Ok(result.Errors);
-        //}
-        //public async Task<IActionResult> Test()
-        //{
-        //    var result1 = await _roleManager.CreateAsync(new IdentityRole("Member"));
-        //    var result2 = await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-        //    var result3 = await _roleManager.CreateAsync(new IdentityRole("Creator"));
-        //    var result4 = await _roleManager.CreateAsync(new IdentityRole("Editor"));
-        //    var result5 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
+        AppUser admin = await _userManager.FindByNameAsync("PoladAdmin");
 
-        //    AppUser admin = await _userManager.FindByNameAsync("Elnuradmin");
+        var result1 = await _userManager.AddToRoleAsync(admin, "Reader");
 
-        //    var result = await _userManager.AddToRoleAsync(admin, "SuperAdmin");
+            return Ok(result.Errors);
+    }
+    //public async Task<IActionResult> Test()
+    //{
+    //    var result1 = await _roleManager.CreateAsync(new IdentityRole("Member"));
+    //    var result2 = await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+    //    var result3 = await _roleManager.CreateAsync(new IdentityRole("Creator"));
+    //    var result4 = await _roleManager.CreateAsync(new IdentityRole("Editor"));
+    //    var result5 = await _roleManager.CreateAsync(new IdentityRole("Reader"));
 
-        //    return Ok();
-        //}
+    //    AppUser admin = await _userManager.FindByNameAsync("Elnuradmin");
 
-        //LOGIN ACTION
-        public IActionResult Login()
+    //    var result = await _userManager.AddToRoleAsync(admin, "SuperAdmin");
+
+    //    return Ok();
+    //}
+
+    //LOGIN ACTION
+    public IActionResult Login()
         {
             return View();
         }

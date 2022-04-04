@@ -1,0 +1,35 @@
+﻿@model List<AppUser>
+
+<div class="row">
+    @foreach (var admin in Model)
+    {
+        <div class="col-lg-4">
+            <div class="card profile-card-2">
+                <div class="card-img-block">
+                    <img class="img-fluid" src="~/uploads/adminbackgrounds/@(admin.BackgroundImage==null?"adminbackgroundavatar.png":admin.BackgroundImage)" alt="Card image cap">
+                </div>
+                <div class="card-body pt-5">
+                    <img src="~/uploads/admins/@(admin.Image==null?"avatar.png":admin.Image)" style=" height: 75px; object-fit: cover;" alt="profile-image" class="profile">
+                    <h5 class="card-title">@admin.FullName</h5>
+                    <p class="card-text">Age: @admin.Age</p>
+                    <p class="card-text">Email: @admin.Email</p>
+                    <p class="card-text">Role: Role </p>
+
+                    <div class="icon-block">
+                        @if (admin.FacebookUrl != null)
+                        {
+                            <a href="@admin.FacebookUrl"><i class="fa fa-facebook bg-facebook text-white"></i></a>}
+                        @if (admin.TwitterUrl != null)
+                        {
+                            <a href="@admin.TwitterUrl"> <i class="fa fa-twitter bg-twitter text-white"></i></a>}
+                        @if (admin.InstagramUrl != null)
+                        {
+                            <a href="@admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>

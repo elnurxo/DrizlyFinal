@@ -37,6 +37,5 @@ namespace DrizlyBackEnd.Models
         [StringLength(maximumLength: 120)]
         public string InstagramUrl { get; set; }
         public List<AppUserCoupon> appUserCoupons { get; set; }
-
     }
 }

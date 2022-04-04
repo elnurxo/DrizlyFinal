@@ -8,7 +8,7 @@
                     <img class="img-fluid" src="~/uploads/adminbackgrounds/@(Model.Admin.BackgroundImage==null?"adminbackgroundavatar.png":Model.Admin.BackgroundImage)" alt="Card image cap">
                 </div>
                 <div class="card-body pt-5">
-                    <img src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" alt="profile-image" class="profile">
+                    <img src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" style=" height: 75px; object-fit: cover;" alt="profile-image" class="profile">
                     <h5 class="card-title">@Model.Admin.FullName</h5>
                     <p class="card-text">Age: @Model.Admin.Age</p>
                     <p class="card-text">Email: @Model.Admin.Email</p>
@@ -17,13 +17,13 @@
                     <div class="icon-block">
                         @if (Model.Admin.FacebookUrl != null)
                         {
-            <a href="@Model.Admin.FacebookUrl"><i class="fa fa-facebook bg-facebook text-white"></i></a>}
+                          <a href="@Model.Admin.FacebookUrl"><i class="fa fa-facebook bg-facebook text-white"></i></a>}
                         @if (Model.Admin.TwitterUrl != null)
                         {
-            <a href="@Model.Admin.TwitterUrl"> <i class="fa fa-twitter bg-twitter text-white"></i></a>}
+                           <a href="@Model.Admin.TwitterUrl"> <i class="fa fa-twitter bg-twitter text-white"></i></a>}
                         @if (Model.Admin.InstagramUrl != null)
                         {
-            <a href="@Model.Admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
+                            <a href="@Model.Admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
                     </div>
                 </div>
             </div>
@@ -65,7 +65,7 @@
                                     }
                                 </div>
                                 <div class="col-md-6">
-                                    <img width="250" src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" style="border-radius:50%;" alt="profile-image" class="profile">
+                                    <img width="230" height="210" src="~/uploads/admins/@(Model.Admin.Image==null?"avatar.png":Model.Admin.Image)" style="border-radius:50%;" alt="profile-image" class="profile">
                                 </div>
                                 <div class="col-md-12">
                                     <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Latest Messages</h5>
