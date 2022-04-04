@@ -454,7 +454,7 @@ namespace DrizlyBackEnd.Controllers
         }
         #endregion
 
-        #region
+        #region Reset Password
         public async  Task<IActionResult> ResetPassword(string id,string forgotpasswordtoken)
         {
             if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(forgotpasswordtoken))

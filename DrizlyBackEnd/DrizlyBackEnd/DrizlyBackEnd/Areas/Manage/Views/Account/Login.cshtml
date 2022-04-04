@@ -14,6 +14,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Drizly Admin: Login</title>
+    <!-- Jquery Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
     <!-- loader-->
     <link href="~/manage/assets/css/pace.min.css" rel="stylesheet" />
     <script src="~/manage/assets/js/pace.min.js"></script>
@@ -27,18 +29,22 @@
     <link href="~/manage/assets/css/icons.css" rel="stylesheet" type="text/css" />
     <!-- Custom Style-->
     <link href="~/manage/assets/css/app-style.css" rel="stylesheet" />
-
+    <!-- Toastr Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="bg-theme bg-theme2">
-
+    @if (TempData["Success"] != null)
+    {
+        <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
+    }
     <!-- start loader -->
     <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner"><div class="loader"></div></div></div></div>
     <!-- end loader -->
     <!-- Start wrapper-->
     <div id="wrapper">
 
-        <div class="loader-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+        <div class="loader-wrapper"><div class="lds-ring"></div>
         <div class="card card-authentication1 mx-auto my-5">
             <div class="card-body">
                 <div class="card-content p-2">
@@ -75,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-6 text-right">
-                                <a asp-controller="account" asp-action="resetpassword">Reset Password</a>
+                                <a asp-controller="account" asp-action="forgotpassword">Reset Password</a>
                             </div>
                         </div>
                         <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -137,7 +143,34 @@
 
     <!-- Custom scripts -->
     <script src="~/manage/assets/js/app-script.js"></script>
-
+    <!-- Jquery Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @*Toastr Script*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        $(document).ready(function () {
+            if ($("#success-toaster").length) {
+                toastr["success"]($("#success-toaster").val());
+            }
+        });
+    </script>
 </body>
 </html>
 

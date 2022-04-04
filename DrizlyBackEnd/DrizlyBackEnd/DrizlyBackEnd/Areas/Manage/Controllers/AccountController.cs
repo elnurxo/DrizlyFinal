@@ -8,7 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace DrizlyBackEnd.Areas.Manage.Controllers
@@ -108,7 +111,6 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION ADMIN ACCOUNT ITSELF
-        //EDIT ACTION
         [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         [HttpPost]
         public async Task<IActionResult> Edit(AdminUpdateViewModel adminVM)
@@ -262,6 +264,121 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             await _signInManager.SignInAsync(admin, false);
             TempData["Success"] = "Profile updated successfully";
             return RedirectToAction("profile");
+        }
+
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                ModelState.AddModelError("Email", "Email is empty!");
+                return View();
+            }
+
+            AppUser dbUser = await _userManager.FindByEmailAsync(email);
+            if (dbUser is null)
+            {
+                ModelState.AddModelError("Email", "Email is not found!");
+                return View();
+            }
+            //send email
+            string forgotpasswordtoken = await _userManager.GeneratePasswordResetTokenAsync(dbUser);
+
+            string link = Url.Action("ResetPassword", "Account", new { dbUser.Id, forgotpasswordtoken }, Request.Scheme);
+
+            //send EMAIL to reset password
+            string resetbody = String.Empty;
+            var pathreset = _env.WebRootPath + Path.DirectorySeparatorChar.ToString() + "Template" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates" + Path.DirectorySeparatorChar.ToString() + "ResetPassword.html";
+            using (StreamReader streamReader = System.IO.File.OpenText(pathreset))
+            {
+                resetbody = streamReader.ReadToEnd();
+            }
+
+            resetbody = resetbody.Replace("{fullname}", dbUser.FullName);
+            resetbody = resetbody.Replace("{link}", link);
+
+            MailMessage mailMessagecoupon = new MailMessage();
+            mailMessagecoupon.To.Add(dbUser.Email);
+            mailMessagecoupon.From = new MailAddress("drizlycode@gmail.com");
+            mailMessagecoupon.Subject = "Hi " + dbUser.FullName + ",looks like you forgot your password!";
+            mailMessagecoupon.Body = resetbody;
+            mailMessagecoupon.IsBodyHtml = true;
+
+            SmtpClient smtpcoupon = new SmtpClient();
+
+            smtpcoupon.Credentials = new NetworkCredential("drizlycode@gmail.com", "Drizly21");
+            smtpcoupon.Port = 587;
+            smtpcoupon.Host = "smtp.gmail.com";
+            smtpcoupon.EnableSsl = true;
+            smtpcoupon.Send(mailMessagecoupon);
+
+
+            TempData["Success"] = "Email sent to reset password!";
+            return RedirectToAction("Login");
+        }
+
+        //RESET PASSWORD
+        public async Task<IActionResult> ResetPassword(string id, string forgotpasswordtoken)
+        {
+            if (string.IsNullOrEmpty(id) || string.IsNullOrEmpty(forgotpasswordtoken))
+            {
+                return BadRequest();
+            }
+            var dbUser = await _userManager.FindByIdAsync(id);
+            if (dbUser is null)
+            {
+                return NotFound();
+            }
+
+            ResetPasswordAdminViewModel resetPasswordVM = new ResetPasswordAdminViewModel
+            {
+                Id = id,
+                Token = forgotpasswordtoken
+            };
+
+            return View(resetPasswordVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordAdminViewModel resetpasswordVM)
+        {
+            if (string.IsNullOrEmpty(resetpasswordVM.Id) || string.IsNullOrEmpty(resetpasswordVM.Token))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+            var dbUser = await _userManager.FindByIdAsync(resetpasswordVM.Id);
+            if (dbUser is null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userManager.ResetPasswordAsync(dbUser, resetpasswordVM.Token, resetpasswordVM.NewPassword);
+            if (result.Errors.Count() != 0)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View();
+            }
+
+
+
+
+            TempData["Success"] = "Password reset successfully";
+            return RedirectToAction("Login");
         }
     }
 }
