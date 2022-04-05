@@ -162,23 +162,23 @@ namespace DrizlyBackEnd.Controllers
         }
 
         //TEST
-        public async Task<IActionResult> test()
-        {
-            AppUser appUser = new AppUser
-            {
-                FullName = "Polad Mammadli",
-                UserName = "PoladAdmin",
-                Email = "polad123@mail.ru"
-            };
+    //    public async Task<IActionResult> test()
+    //    {
+    //        AppUser appUser = new AppUser
+    //        {
+    //            FullName = "Polad Mammadli",
+    //            UserName = "PoladAdmin",
+    //            Email = "polad123@mail.ru"
+    //        };
 
-        var result = await _userManager.CreateAsync(appUser, "Polad123");
+    //    var result = await _userManager.CreateAsync(appUser, "Polad123");
 
-        AppUser admin = await _userManager.FindByNameAsync("PoladAdmin");
+    //    AppUser admin = await _userManager.FindByNameAsync("PoladAdmin");
 
-        var result1 = await _userManager.AddToRoleAsync(admin, "Reader");
+    //    var result1 = await _userManager.AddToRoleAsync(admin, "Reader");
 
-            return Ok(result.Errors);
-    }
+    //        return Ok(result.Errors);
+    //}
     //public async Task<IActionResult> Test()
     //{
     //    var result1 = await _roleManager.CreateAsync(new IdentityRole("Member"));

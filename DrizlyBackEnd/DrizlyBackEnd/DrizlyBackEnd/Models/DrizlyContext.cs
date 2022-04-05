@@ -38,5 +38,6 @@ namespace DrizlyBackEnd.Models
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<AppUserCoupon> AppUserCoupons { get; set; }
         public DbSet<CouponCategory> CouponCategories { get; set; }
+
     }
 }

@@ -1,6 +1,11 @@
 ﻿@model List<AppUser>
 
 <div class="row">
+    <div class="col-lg-3  my-4 mx-3">
+        <a class="btn btn-success" asp-controller="admin" asp-action="create">Create</a>
+    </div>
+</div>
+<div class="row">
     @foreach (var admin in Model)
     {
         <div class="col-lg-4">
@@ -25,6 +30,11 @@
                         @if (admin.InstagramUrl != null)
                         {
                             <a href="@admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
+                    </div>
+                    <div class="my-2">
+                        <a href="#" class="btn btn-info my-2 mx-1">Details</a>
+                        <a href="#" class="btn btn-warning my-2 mx-1">Edit</a>
+                        <a href="#" class="btn btn-danger my-2 mx-1">Delete</a>
                     </div>
                 </div>
             </div>
