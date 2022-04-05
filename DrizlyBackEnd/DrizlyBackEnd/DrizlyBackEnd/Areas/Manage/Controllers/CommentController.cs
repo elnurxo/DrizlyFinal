@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class CommentController : Controller
     {
         private readonly DrizlyContext _context;
@@ -23,6 +22,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION (ALL PRODUCT REVIEWS)
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             var reviews = _context.ProductComments.Include(x => x.AppUser).Include(x => x.Product).AsQueryable();
@@ -31,6 +31,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<ProductComment>.Create(reviews, page, pageSize));
         }
         //INDEX ACTION (FOR SPECIFIC PRODUCT)
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult ProductReview(int id, int page = 1)
         {
             var reviews = _context.ProductComments.Include(x => x.AppUser).Include(x => x.Product).Where(x => x.ProductId == id).AsQueryable();
@@ -38,7 +39,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             int pageSize = string.IsNullOrWhiteSpace(pageSizeStr) ? 3 : int.Parse(pageSizeStr);
             return View(PagenatedList<ProductComment>.Create(reviews, page, pageSize));
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         //DELETE ACTION
         public IActionResult Delete(int id)
         {

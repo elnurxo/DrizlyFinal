@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class EmployeeController : Controller
     {
         private readonly DrizlyContext _context;
@@ -24,6 +23,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter,int page = 1)
         {
             ViewBag.Filter = filter;
@@ -39,12 +39,14 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             ViewBag.Positions = _context.Positions.ToList();
 
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(Employee employee)
         {
@@ -95,6 +97,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         // EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Employee employee = _context.Employees.Include(x => x.Position).FirstOrDefault(x => x.Id == id);
@@ -104,6 +107,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(employee);
         }
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Employee employee)
         {
@@ -173,6 +177,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             Employee existEmployee = _context.Employees.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -188,6 +193,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             Employee existEmployee = _context.Employees.FirstOrDefault(x => x.Id == id && x.IsDeleted);

@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class NewsController : Controller
     {
         private readonly DrizlyContext _context;
@@ -23,6 +22,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
@@ -30,10 +30,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<News>.Create(_context.News.AsQueryable(), page, pageSize));
         }
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(News news)
         {
@@ -80,6 +82,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             News news = _context.News.FirstOrDefault(x => x.Id == id);
@@ -88,7 +91,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(news);
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(News news)
         {
@@ -157,6 +160,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             News existNews = _context.News.FirstOrDefault(x => x.Id == id);

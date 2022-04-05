@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class LiquorFlavorController : Controller
     {
         private readonly DrizlyContext _context;
@@ -20,6 +19,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter,int page = 1)
         {
             ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).ToList();
@@ -37,10 +37,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(LiquorFlavor liquorFlavor)
         {
@@ -70,6 +72,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             LiquorFlavor liquorFlavor = _context.LiquorFlavors.FirstOrDefault(x => x.Id == id);
@@ -78,7 +81,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(liquorFlavor);
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(LiquorFlavor liquorFlavor)
         {
@@ -110,6 +113,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             LiquorFlavor existLiquorFlavor = _context.LiquorFlavors.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -131,6 +135,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             LiquorFlavor existLiquorFlavor = _context.LiquorFlavors.FirstOrDefault(x => x.Id == id && x.IsDeleted);

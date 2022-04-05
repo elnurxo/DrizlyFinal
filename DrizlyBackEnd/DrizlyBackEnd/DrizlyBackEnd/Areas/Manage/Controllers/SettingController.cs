@@ -1,4 +1,5 @@
 ﻿using DrizlyBackEnd.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,7 +11,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class SettingController : Controller
     {
         private readonly DrizlyContext _context;
@@ -22,6 +22,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
@@ -30,6 +31,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Settings settings = _context.Settings.FirstOrDefault(x => x.Id == id);
@@ -38,6 +40,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(settings);
         }
+
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Settings settings)
         {

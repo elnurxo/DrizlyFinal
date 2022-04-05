@@ -24,6 +24,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
 
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter,int page = 1)
         {
             ViewBag.Filter = filter;
@@ -40,6 +41,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             ContactUs existMessage = _context.ContactUs.FirstOrDefault(x => x.Id == id);
@@ -54,6 +56,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //MARK-AS-READ ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult MarkAsRead(int id)
         {
             ContactUs existMessage = _context.ContactUs.FirstOrDefault(x => x.Id == id);

@@ -23,6 +23,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
@@ -30,10 +31,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<Service>.Create(_context.Services.AsQueryable(), page, pageSize));
         }
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(Service service)
         {
@@ -79,6 +83,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Service service = _context.Services.FirstOrDefault(x => x.Id == id);
@@ -88,6 +93,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(service);
         }
 
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Service service)
         {
@@ -145,6 +151,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             Service existService = _context.Services.FirstOrDefault(x => x.Id == id);

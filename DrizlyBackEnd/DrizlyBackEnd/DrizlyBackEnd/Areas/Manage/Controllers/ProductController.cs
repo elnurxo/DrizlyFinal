@@ -25,6 +25,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _env = env;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter, int page = 1)
         {
             ViewBag.Filter = filter;
@@ -40,6 +41,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             ViewBag.Brands = _context.Brands.Where(x => !x.IsDeleted).ToList();
@@ -56,6 +58,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View();
         }
         // CREATE POST  ACTION------------------     
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(Product product)
         {
@@ -282,6 +285,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             Product existProduct= _context.Products.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -297,6 +301,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             Product existProduct = _context.Products.FirstOrDefault(x => x.Id == id && x.IsDeleted);
@@ -311,6 +316,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Product product = _context.Products.Where(x => !x.IsDeleted)
@@ -336,6 +342,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(product);
         }
 
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Product product)
         {

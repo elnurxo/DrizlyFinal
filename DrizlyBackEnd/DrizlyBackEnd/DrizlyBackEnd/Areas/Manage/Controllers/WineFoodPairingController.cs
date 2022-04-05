@@ -20,6 +20,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _context = context;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter,int page = 1)
         {
             ViewBag.Products = _context.ProductFoodPairings.ToList();
@@ -37,10 +38,13 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(WineFoodPairing wineFoodPairing)
         {
@@ -71,6 +75,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             WineFoodPairing wineFoodPairing = _context.WineFoodPairings.FirstOrDefault(x => x.Id == id);
@@ -80,6 +85,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(wineFoodPairing);
         }
 
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(WineFoodPairing wineFoodPairing)
         {
@@ -111,6 +117,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             WineFoodPairing existWineFoodPairing = _context.WineFoodPairings.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -133,6 +140,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             WineFoodPairing existWineFoodPairing = _context.WineFoodPairings.FirstOrDefault(x => x.Id == id && x.IsDeleted);

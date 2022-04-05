@@ -21,6 +21,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             var coupons = _context.CouponCategories.AsQueryable();
@@ -31,10 +32,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(CouponCategory coupon)
         {
@@ -60,6 +63,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             CouponCategory existCoupon = _context.CouponCategories.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -74,6 +78,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             CouponCategory existCoupon = _context.CouponCategories.FirstOrDefault(x => x.Id == id && x.IsDeleted);
@@ -88,6 +93,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             CouponCategory coupon = _context.CouponCategories.FirstOrDefault(x => x.Id == id);
@@ -96,7 +102,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(coupon);
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(CouponCategory coupon)
         {

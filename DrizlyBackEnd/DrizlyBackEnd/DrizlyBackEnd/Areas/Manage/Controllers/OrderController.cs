@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
-    //[Authorize(Roles = "Admin,SuperAdmin")]
     [Area("manage")]
     public class OrderController : Controller
     {
@@ -28,6 +27,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
 
         //Index ACTION ORDER
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int? filter, int page = 1)
         {
             ViewBag.Filter = filter;
@@ -44,6 +44,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DETAIL ORDER ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Detail(int id)
         {
             Order order = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
@@ -54,6 +55,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION ORDER
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Order order = _context.Orders.Include(x => x.OrderItems).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
@@ -62,7 +64,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(order);
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Order order)
         {

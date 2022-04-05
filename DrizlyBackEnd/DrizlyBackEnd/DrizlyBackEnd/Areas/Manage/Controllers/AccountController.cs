@@ -17,7 +17,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin")]
     public class AccountController : Controller
     {
         private readonly DrizlyContext _context;
@@ -64,6 +63,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return RedirectToAction("index", "dashboard");
         }
+
 
         //LOGOUT ACTION
         public async Task<IActionResult> Logout()

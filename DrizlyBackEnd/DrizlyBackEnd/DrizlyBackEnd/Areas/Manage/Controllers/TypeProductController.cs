@@ -20,6 +20,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _context = context;
         }
 
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter, int page = 1)
         {
             ViewBag.Products = _context.Products.Where(x => !x.IsDeleted).ToList();
@@ -36,6 +37,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<TypeProduct>.Create(type, page, pageSize));
         }
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             ViewBag.Categories = _context.Categories.ToList();
@@ -43,6 +45,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View();
         }
         // CREATE POST  ACTION------------------     
+
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(TypeProduct typeProduct)
             {
@@ -70,6 +74,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 return RedirectToAction("index");
              }
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             TypeProduct typeProduct = _context.TypeProducts.Include(x=>x.Category).FirstOrDefault(x => x.Id == id);
@@ -79,6 +84,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(typeProduct);
         }
 
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(TypeProduct typeProduct)
         {
@@ -106,6 +112,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             TypeProduct existTypeProduct = _context.TypeProducts.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -127,6 +134,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             TypeProduct existTypeProduct = _context.TypeProducts.FirstOrDefault(x => x.Id == id && x.IsDeleted);

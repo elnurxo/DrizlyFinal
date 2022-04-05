@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin")]
     public class BrandController : Controller
     {
         private readonly DrizlyContext _context;
@@ -21,6 +20,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _context = context;
         }
         //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(string filter, int page = 1)
         {
             ViewBag.Filter = filter;
@@ -35,10 +35,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<Brand>.Create(brands, page, pageSize));
         }
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(Brand brand)
         {
@@ -59,7 +61,9 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Brand brand = _context.Brands.FirstOrDefault(x => x.Id == id);
@@ -68,7 +72,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(brand);
         }
-
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Brand brand)
         {
@@ -86,6 +90,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             Brand existBrand = _context.Brands.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -107,6 +112,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //RESTORE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Restore(int id)
         {
             Brand existBrand = _context.Brands.FirstOrDefault(x => x.Id == id && x.IsDeleted);

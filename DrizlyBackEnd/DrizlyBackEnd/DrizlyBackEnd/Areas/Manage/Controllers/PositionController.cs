@@ -20,7 +20,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         {
             _context = context;
         }
-           //INDEX ACTION
+        //INDEX ACTION
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         public IActionResult Index(int page = 1)
         {
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
@@ -28,10 +29,12 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(PagenatedList<Position>.Create(_context.Positions.Include(x=>x.Employees).AsQueryable(), page, pageSize));
         }
         //CREATE ACTION
+        [Authorize(Roles = "SuperAdmin,Creator")]
         public IActionResult Create()
         {
             return View();
         }
+        [Authorize(Roles = "SuperAdmin,Creator")]
         [HttpPost]
         public IActionResult Create(Position position)
         {
@@ -53,6 +56,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Position position = _context.Positions.FirstOrDefault(x => x.Id == id);
@@ -62,6 +66,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(position);
         }
 
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Position position)
         {
@@ -78,6 +83,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Delete(int id)
         {
             Position existPosition = _context.Positions.FirstOrDefault(x => x.Id == id);

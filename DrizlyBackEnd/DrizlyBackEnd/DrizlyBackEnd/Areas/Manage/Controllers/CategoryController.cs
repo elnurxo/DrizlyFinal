@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 namespace DrizlyBackEnd.Areas.Manage.Controllers
 {
     [Area("manage")]
-    //[Authorize(Roles = "SuperAdmin,Admin")]
     public class CategoryController : Controller
     { 
         private readonly DrizlyContext _context;
@@ -23,7 +22,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _context = context;
             _env = env;
         }
-
+        [Authorize(Roles = "SuperAdmin,Creator,Editor,Reader")]
         //INDEX ACTION
         public IActionResult Index(int page = 1)
         {
@@ -35,6 +34,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         // EDIT ACTION
+        [Authorize(Roles = "SuperAdmin,Editor")]
         public IActionResult Edit(int id)
         {
             Category category = _context.Categories.FirstOrDefault(x => x.Id == id);
@@ -42,6 +42,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             return View(category);
         }
+        [Authorize(Roles = "SuperAdmin,Editor")]
         [HttpPost]
         public IActionResult Edit(Category category)
         {

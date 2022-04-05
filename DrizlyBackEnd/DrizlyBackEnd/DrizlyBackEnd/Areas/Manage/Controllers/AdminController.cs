@@ -39,25 +39,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         public async Task<IActionResult> Index()
         {
             List<AppUser> Admins = _userManager.Users.Where(x => x.IsAdmin == true && x.UserName != User.Identity.Name).ToList();
-            //var Roles = _userManager.GetUsersInRoleAsync(Admins);
-            //List<AdminViewViewModel> adminVM = new List<AdminViewViewModel>
-            //{
-            //     = Adminss,
-            //    AdminRole = (_userManager.GetUsersInRoleAsync(Adminss))
-            //};
-            //foreach (var item in Admins)
-            //{
-            //    AdminViewViewModel adminVM = new AdminViewViewModel
-            //    {
-            //        Admin = item,
-            //        Role = _userManager.GetRolesAsync(item)
-            //    };
-            //}
-            //foreach (var admin in Admins)
 
-            var role = (await _userManager.GetRolesAsync(new AppUser())).FirstOrDefault();
-
-            //{ 
             return View(Admins);
         }
         [Authorize(Roles = "SuperAdmin")]
@@ -66,8 +48,8 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "SuperAdmin")]
         //CREATE ADMIN POST ACTION
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         public async Task<IActionResult> Create(AdminCreateViewModel admincreateVM)
         {
@@ -171,6 +153,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //DELETE ACTION
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Delete(string id)
         {
             AppUser existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
@@ -200,6 +183,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         }
 
         //EDIT ADMIN ACTION GET
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Edit(string id)
         {
             var existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
@@ -209,6 +193,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View(existAdmin);
         }
         //EDIT ADMIN ACTION POST
+        [Authorize(Roles = "SuperAdmin")]
         [HttpPost]
         public async Task<IActionResult> Edit(AppUser admin)
         {
@@ -225,6 +210,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return RedirectToAction("Index");
         }
         //DETAIL ADMIN ACTION
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult Detail(string id)
         {
             var existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
