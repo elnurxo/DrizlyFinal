@@ -1,0 +1,77 @@
+﻿@model AppUser
+<div class="container-fluid">
+
+    <div class="row mt-3">
+        <div class="col-lg-4">
+            <div class="card profile-card-2">
+                <div class="card-img-block">
+                    <img class="img-fluid" src="~/uploads/adminbackgrounds/@(Model.BackgroundImage==null?"adminbackgroundavatar.png":Model.BackgroundImage)" alt="Card image cap">
+                </div>
+                <div class="card-body pt-5">
+                    <img src="~/uploads/admins/@(Model.Image==null?"avatar.png":Model.Image)" style=" height: 75px; object-fit: cover;" alt="profile-image" class="profile">
+                    <h5 class="card-title">@Model.FullName</h5>
+                    <p class="card-text">Age: @Model.Age</p>
+                    <p class="card-text">Email: @Model.Email</p>
+                    <p class="card-text">Role: @Model.RoleName </p>
+
+                    <div class="icon-block">
+                        @if (Model.FacebookUrl != null)
+                        {
+                         <a href="@Model.FacebookUrl"><i class="fa fa-facebook bg-facebook text-white"></i></a>}
+                        @if (Model.TwitterUrl != null)
+                        {
+                          <a href="@Model.TwitterUrl"> <i class="fa fa-twitter bg-twitter text-white"></i></a>}
+                        @if (Model.InstagramUrl != null)
+                        {
+                        <a href="@Model.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                        <li class="nav-item">
+                            <a href="javascript:void();" data-target="#profile" data-toggle="pill" class="nav-link active"><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content p-3">
+                        <div class="tab-pane active" id="profile">
+                            <h5 class="mb-3">Admin Profile</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>About</h6>
+                                    <p>
+                                        Full Name : @Model.FullName
+                                    </p>
+                                    <h6>Email : @Model.Email</h6>
+                                    <p>
+                                        Personal Information : @Model.Age years old
+                                    </p>
+                                    @if (Model.PhoneNumber != null)
+                                    {
+                                    <p>
+                                        Phone Number : @Model.PhoneNumber
+                                    </p>}
+                                </div>
+                                <div class="col-md-6">
+                                    <img width="230" height="210" src="~/uploads/admins/@(Model.Image==null?"avatar.png":Model.Image)" style="border-radius:50%;object-fit:cover;" alt="profile-image" class="profile">
+                                </div>
+                            </div>
+                            <!--/row-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--start overlay-->
+    <div class="overlay toggle-menu"></div>
+    <!--end overlay-->
+</div>
+
+
+

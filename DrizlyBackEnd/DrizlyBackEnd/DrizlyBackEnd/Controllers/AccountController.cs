@@ -72,7 +72,8 @@ namespace DrizlyBackEnd.Controllers
                 UserName = registerVM.UserName,
                 Email = registerVM.Email,
                 Age = registerVM.Age,
-                IsAdmin = false
+                RoleName = "Member",
+                IsAdmin = false             
             };
 
            

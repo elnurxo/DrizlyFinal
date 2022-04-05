@@ -196,12 +196,14 @@
                         </a>
                     </li>
                 }
-
-                <li>
-                    <a asp-controller="admin" asp-action="create" target="_blank">
-                        <i class="zmdi zmdi-account-circle"></i> <span>Create New Admin</span>
-                    </a>
-                </li>
+                @if (User.IsInRole("SuperAdmin"))
+                {
+                    <li>
+                        <a asp-controller="admin" asp-action="create" target="_blank">
+                            <i class="zmdi zmdi-account-circle"></i> <span>Create New Admin</span>
+                        </a>
+                    </li>
+                }
             </ul>
 
         </div>

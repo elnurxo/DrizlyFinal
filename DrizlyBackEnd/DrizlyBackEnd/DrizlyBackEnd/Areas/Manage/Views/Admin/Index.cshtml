@@ -18,7 +18,7 @@
                     <h5 class="card-title">@admin.FullName</h5>
                     <p class="card-text">Age: @admin.Age</p>
                     <p class="card-text">Email: @admin.Email</p>
-                    <p class="card-text">Role: Role </p>
+                    <p class="card-text">Role: @admin.RoleName </p>
 
                     <div class="icon-block">
                         @if (admin.FacebookUrl != null)
@@ -32,9 +32,9 @@
                             <a href="@admin.InstagramUrl"> <i class="fab fa-instagram text-white"></i></a>}
                     </div>
                     <div class="my-2">
-                        <a href="#" class="btn btn-info my-2 mx-1">Details</a>
-                        <a href="#" class="btn btn-warning my-2 mx-1">Edit</a>
-                        <a href="#" class="btn btn-danger my-2 mx-1">Delete</a>
+                        <a asp-controller="admin" asp-action="detail" asp-route-id="@admin.Id" class="btn btn-info my-2 mx-1">Details</a>
+                        <a asp-controller="admin" asp-action="edit" asp-route-id="@admin.Id" class="btn btn-warning my-2 mx-1">Edit</a>
+                        <a asp-controller="admin" asp-action="delete" asp-route-id="@admin.Id" class="btn btn-danger my-2 mx-1 delete-admin">Delete</a>
                     </div>
                 </div>
             </div>

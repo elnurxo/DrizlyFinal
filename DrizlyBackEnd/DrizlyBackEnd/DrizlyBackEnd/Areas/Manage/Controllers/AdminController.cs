@@ -67,7 +67,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return View();
         }
         [Authorize(Roles = "SuperAdmin")]
-        //CREATE POST ACTION
+        //CREATE ADMIN POST ACTION
         [HttpPost]
         public async Task<IActionResult> Create(AdminCreateViewModel admincreateVM)
         {
@@ -101,6 +101,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 Email = admincreateVM.Email,
                 Age = admincreateVM.Age,
                 IsAdmin = true,
+                RoleName = admincreateVM.Role
             };
 
             var result = await _userManager.CreateAsync(admin, admincreateVM.Password);
@@ -169,5 +170,68 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             return RedirectToAction("Index", "Dashboard");
         }
 
+        //DELETE ACTION
+        public IActionResult Delete(string id)
+        {
+            AppUser existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+
+            if (existAdmin == null)
+                return NotFound();
+
+            _context.AppUsers.Remove(existAdmin);
+
+            if (existAdmin.Image!=null)
+            {
+                string existPath = Path.Combine(_env.WebRootPath, "uploads/admins", existAdmin.Image);
+                if (System.IO.File.Exists(existPath))
+                    System.IO.File.Delete(existPath);
+            }
+            if (existAdmin.BackgroundImage!=null)
+            {
+                string existPath = Path.Combine(_env.WebRootPath, "uploads/adminbackgrounds", existAdmin.Image);
+                if (System.IO.File.Exists(existPath))
+                    System.IO.File.Delete(existPath);
+            }
+
+
+            _context.SaveChanges();
+            TempData["Success"] = "Admin Deleted Successfully!";
+            return RedirectToAction("index");
+        }
+
+        //EDIT ADMIN ACTION GET
+        public IActionResult Edit(string id)
+        {
+            var existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+
+            if (existAdmin == null) return NotFound();
+
+            return View(existAdmin);
+        }
+        //EDIT ADMIN ACTION POST
+        [HttpPost]
+        public async Task<IActionResult> Edit(AppUser admin)
+        {
+            var existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == admin.Id);
+
+            await _userManager.RemoveFromRoleAsync(existAdmin, existAdmin.RoleName);
+
+            await _userManager.AddToRoleAsync(existAdmin, admin.RoleName);
+
+
+            existAdmin.RoleName = admin.RoleName;
+            TempData["Success"] = "Admin role edited successfully!";
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        //DETAIL ADMIN ACTION
+        public IActionResult Detail(string id)
+        {
+            var existAdmin = _context.AppUsers.FirstOrDefault(x => x.Id == id);
+
+            if (existAdmin == null) return NotFound();
+
+            return View(existAdmin);
+        }
     }
 }
