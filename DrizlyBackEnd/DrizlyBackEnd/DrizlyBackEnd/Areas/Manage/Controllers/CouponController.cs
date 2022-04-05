@@ -59,7 +59,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.CouponCategories.Add(coupon);
             _context.SaveChanges();
-
+            TempData["Success"] = "Coupon created successfully!";
             return RedirectToAction("index");
         }
         //DELETE ACTION
@@ -73,7 +73,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existCoupon.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Coupon deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -88,7 +88,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existCoupon.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Coupon restored successfully!";
             return RedirectToAction("index");
         }
 
@@ -142,6 +142,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existCoupon.DiscountPercent = coupon.DiscountPercent;
             existCoupon.SaleValue = coupon.SaleValue;
             _context.SaveChanges();
+            TempData["Success"] = "Coupon updated successfully!";
             return RedirectToAction("index");
         }
     }

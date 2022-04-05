@@ -78,7 +78,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             partnership.LastUpdatedAt = DateTime.UtcNow.AddHours(4);
             _context.Partnerships.Add(partnership);
             _context.SaveChanges();
-
+            TempData["Success"] = "Partner created successfully!";
             return RedirectToAction("index");
         }
 
@@ -155,7 +155,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             if (existPartner == null) return NotFound();
             existPartner.Image = partner.Image;
-
+            TempData["Success"] = "Partner updated successfully!";
             _context.SaveChanges();
             return RedirectToAction("index");
         }
@@ -178,7 +178,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existPartner.LastUpdatedAt = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
-
+            TempData["Success"] = "Partner deleted successfully!";
             return RedirectToAction("index");
         }
     }

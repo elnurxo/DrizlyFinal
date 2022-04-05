@@ -70,7 +70,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             wineFoodPairing.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.WineFoodPairings.Add(wineFoodPairing);
             _context.SaveChanges();
-
+            TempData["Success"] = "Wine-Food Pairing created successfully!";
             return RedirectToAction("index");
         }
 
@@ -113,6 +113,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existWineFoodPairing.Name = wineFoodPairing.Name;
             existWineFoodPairing.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
+            TempData["Success"] = "Wine-Food Pairing updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -135,7 +136,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existWineFoodPairing.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Wine-Food Pairing deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -157,7 +158,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existWineFoodPairing.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Wine-Food Pairing restored successfully!";
             return RedirectToAction("index");
         }
     }

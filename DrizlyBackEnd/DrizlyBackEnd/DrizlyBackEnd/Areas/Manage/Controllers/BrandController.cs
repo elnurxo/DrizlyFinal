@@ -58,7 +58,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             brand.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.Brands.Add(brand);
             _context.SaveChanges();
-
+            TempData["Success"] = "Brand created successfully!";
             return RedirectToAction("index");
         }
 
@@ -86,6 +86,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existBrand.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
+            TempData["Success"] = "Brand updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -107,7 +108,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existBrand.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Brand deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -129,7 +130,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existBrand.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Brand restored successfully!";
             return RedirectToAction("index");
         }
     }

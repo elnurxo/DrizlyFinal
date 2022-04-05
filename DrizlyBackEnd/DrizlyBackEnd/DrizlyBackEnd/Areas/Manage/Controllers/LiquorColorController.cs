@@ -70,7 +70,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             liquorColor.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.LiquorColors.Add(liquorColor);
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Color created successfully!";
             return RedirectToAction("index");
         }
 
@@ -112,6 +112,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existliquorColor.Color = liquorColor.Color;
             existliquorColor.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
+            TempData["Success"] = "Liquor Color updated successfully!";
             return RedirectToAction("index");
         }
         //DELETE ACTION
@@ -133,7 +134,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existLiquorColor.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Color deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -155,7 +156,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existLiquorColor.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Color restored successfully!";
             return RedirectToAction("index");
         }
     }

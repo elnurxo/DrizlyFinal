@@ -109,7 +109,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existCategory.DescTitle = category.DescTitle;    
             existCategory.Desc = category.Desc;
             _context.SaveChanges();
-
+            TempData["Success"] = "Category updated successfully!";
             return RedirectToAction("index");
         }
     }

@@ -50,7 +50,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.ProductComments.Remove(existReview);
             _context.SaveChanges();
-
+            TempData["Success"] = "Product comment deleted successfully!";
             return RedirectToAction("index");
         }
     }

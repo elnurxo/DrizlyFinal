@@ -51,7 +51,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.ContactUs.Remove(existMessage);
             _context.SaveChanges();
-
+            TempData["Success"] = "Message deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -66,6 +66,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existMessage.IsRead = true;
             _context.SaveChanges();
+            TempData["Success"] = "Message marked as Read successfully!";
             return RedirectToAction("index");
         }
     }

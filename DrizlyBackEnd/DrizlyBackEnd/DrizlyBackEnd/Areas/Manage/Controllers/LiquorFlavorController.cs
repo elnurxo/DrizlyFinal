@@ -68,7 +68,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             liquorFlavor.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.LiquorFlavors.Add(liquorFlavor);
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Flavor created successfully!";
             return RedirectToAction("index");
         }
         //EDIT ACTION
@@ -109,6 +109,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existLiquorFlavor.Name = liquorFlavor.Name;
             existLiquorFlavor.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
+            TempData["Success"] = "Liquor Flavor updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -130,7 +131,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existLiquorFlavor.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Flavor deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -152,7 +153,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existLiquorFlavor.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Liquor Flavor restored successfully!";
             return RedirectToAction("index");
         }
     }

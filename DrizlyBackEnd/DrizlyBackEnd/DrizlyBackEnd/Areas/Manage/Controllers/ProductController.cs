@@ -280,7 +280,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             product.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.Products.Add(product);
             _context.SaveChanges();
-
+            TempData["Success"] = "Product created successfully!";
             return RedirectToAction("index");
         }
 
@@ -296,7 +296,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existProduct.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Product deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -311,7 +311,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existProduct.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Product restored successfully!";
             return RedirectToAction("index");
         }
 
@@ -534,7 +534,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             }
 
             existProduct.LastUpdateDate = DateTime.UtcNow.AddHours(4);
-
+            TempData["Success"] = "Product updated successfully!";
             _context.SaveChanges();
             return RedirectToAction("index");
         }

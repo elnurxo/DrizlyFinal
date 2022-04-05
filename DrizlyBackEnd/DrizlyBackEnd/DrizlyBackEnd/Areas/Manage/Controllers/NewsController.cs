@@ -77,7 +77,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             news.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.News.Add(news);
             _context.SaveChanges();
-
+            TempData["Success"] = "News created successfully!";
             return RedirectToAction("index");
         }
 
@@ -156,6 +156,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existNews.LastUpdateDate = DateTime.UtcNow.AddHours(4);
             _context.SaveChanges();
+            TempData["Success"] = "News updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -177,7 +178,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
            
             _context.SaveChanges();
-
+            TempData["Success"] = "News deleted successfully!";
             return RedirectToAction("index");
         }
     }

@@ -78,7 +78,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.Services.Add(service);
             _context.SaveChanges();
-
+            TempData["Success"] = "Service created successfully!";
             return RedirectToAction("index");
         }
 
@@ -145,7 +145,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             if (existService == null) return NotFound();
             existService.Title = service.Title;
             existService.Desc = service.Desc;
-
+            TempData["Success"] = "Service updated successfully!";
             _context.SaveChanges();
             return RedirectToAction("index");
         }
@@ -166,7 +166,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 System.IO.File.Delete(existPath);
 
             _context.SaveChanges();
-
+            TempData["Success"] = "Service deleted successfully!";
             return RedirectToAction("index");
         }
     }

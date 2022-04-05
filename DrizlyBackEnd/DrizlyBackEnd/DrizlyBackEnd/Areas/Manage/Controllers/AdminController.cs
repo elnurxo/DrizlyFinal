@@ -207,6 +207,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existAdmin.RoleName = admin.RoleName;
             TempData["Success"] = "Admin role edited successfully!";
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Admin role updated successfully!";
             return RedirectToAction("Index");
         }
         //DETAIL ADMIN ACTION

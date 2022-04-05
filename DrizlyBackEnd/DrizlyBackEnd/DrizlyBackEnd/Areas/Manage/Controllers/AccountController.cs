@@ -60,7 +60,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 ModelState.AddModelError("", "username or password is incorrect");
                 return View();
             }
-
+            TempData["Success"] = "Welcome!";
             return RedirectToAction("index", "dashboard");
         }
 

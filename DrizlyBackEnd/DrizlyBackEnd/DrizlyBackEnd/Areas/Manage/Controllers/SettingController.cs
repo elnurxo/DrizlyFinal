@@ -103,7 +103,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existSetting.Value = settings.Value;
             existSetting.LastUpdateDate = DateTime.UtcNow.AddHours(4);
-
+            TempData["Success"] = "Setting updated successfully!";
             _context.SaveChanges();
             return RedirectToAction("index");
         }

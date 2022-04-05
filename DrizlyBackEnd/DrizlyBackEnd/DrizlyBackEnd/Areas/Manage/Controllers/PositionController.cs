@@ -51,7 +51,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.Positions.Add(position);
             _context.SaveChanges();
-
+            TempData["Success"] = "Position created successfully!";
             return RedirectToAction("index");
         }
 
@@ -79,6 +79,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existPosition.Name = position.Name;
 
             _context.SaveChanges();
+            TempData["Success"] = "Position updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -94,7 +95,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             _context.Positions.Remove(existPosition);
 
             _context.SaveChanges();
-
+            TempData["Success"] = "Position deleted successfully!";
             return RedirectToAction("index");
         }
     }

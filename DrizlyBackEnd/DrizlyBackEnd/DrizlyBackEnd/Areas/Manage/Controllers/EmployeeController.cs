@@ -92,7 +92,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             _context.Employees.Add(employee);
             _context.SaveChanges();
-
+            TempData["Success"] = "Employee created successfully!";
             return RedirectToAction("index");
         }
 
@@ -172,7 +172,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existEmployee.PositionId = employee.PositionId;
 
             _context.SaveChanges();
-
+            TempData["Success"] = "Employee updated successfully!";
             return RedirectToAction("index");
         }
 
@@ -188,7 +188,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existEmployee.IsDeleted = true;
             _context.SaveChanges();
-
+            TempData["Success"] = "Employee deleted successfully!";
             return RedirectToAction("index");
         }
 
@@ -203,7 +203,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
 
             existEmployee.IsDeleted = false;
             _context.SaveChanges();
-
+            TempData["Success"] = "Employee restored successfully!";
             return RedirectToAction("index");
         }
 

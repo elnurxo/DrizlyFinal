@@ -108,7 +108,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             smtp.Host = "smtp.gmail.com";
             smtp.EnableSsl = true;
             smtp.Send(mailMessage);
-
+            TempData["Success"] = "Order Status updated successfully!";
             return RedirectToAction("index");
         }
     }
