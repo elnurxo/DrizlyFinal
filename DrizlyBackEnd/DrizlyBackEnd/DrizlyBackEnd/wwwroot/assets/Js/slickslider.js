@@ -27,7 +27,7 @@
 				infinite: true,
 				slidesToShow: 6,
 				slidesToScroll: 1,
-				autoplay: false,
+				autoplay: true,
 				autoplaySpeed: 1200,
 				responsive: [
 					{

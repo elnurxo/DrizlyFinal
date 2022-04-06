@@ -96,5 +96,10 @@ namespace DrizlyBackEnd.Controllers
             }
             return PartialView("_SearchHeroSectionPartialView", products.ToList());
         }
+
+        public IActionResult Error()
+        {
+            return PartialView("_ErrorPagePartialView");
+        }
     }
 }

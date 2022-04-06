@@ -27,7 +27,7 @@ namespace DrizlyBackEnd.Controllers
         {
             if (id == 0 || id>4)
             {
-                return NotFound();
+                return PartialView("_ErrorPagePartialView");
             }
 
             var products = _context.Products
@@ -105,7 +105,7 @@ namespace DrizlyBackEnd.Controllers
         {
             if (id == 0 || id > 4)
             {
-                return NotFound();
+                return PartialView("_ErrorPagePartialView");
             }
 
             var products = _context.Products
@@ -165,9 +165,7 @@ namespace DrizlyBackEnd.Controllers
             ViewBag.TotalPages = (int)Math.Ceiling(products.Count() / 6d);
             ViewBag.TotalProducts = products.Count();
             productVM.Settings = _context.Settings.ToList();
-            //PRODUCTS
-            products.Skip((page - 1) * 6).Take(6).AsQueryable();
-
+    
             //BRANDS
             productVM.Brands = _context.Brands.Where(x => !x.IsDeleted).Include(x => x.Products).ToList();
             //COUNTRIES
@@ -203,7 +201,10 @@ namespace DrizlyBackEnd.Controllers
                     break;
             }
 
-            productVM.Products = products.ToList();
+            //PRODUCTS
+            var resultproducts =  products.Skip((page - 1) * 6).Take(6).AsQueryable();
+
+            productVM.Products = resultproducts.ToList();
 
             return View(productVM);
         }
@@ -217,7 +218,7 @@ namespace DrizlyBackEnd.Controllers
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
                 .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
-            if (product == null) return NotFound();
+            if (product == null) return PartialView("_ErrorPagePartialView");
 
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
             int pageSize = string.IsNullOrWhiteSpace(pageSizeStr) ? 3 : int.Parse(pageSizeStr);
@@ -255,7 +256,7 @@ namespace DrizlyBackEnd.Controllers
                .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
                .FirstOrDefault(x => x.Id == comment.ProductId && !x.IsDeleted);
 
-            if (product == null) return NotFound();
+            if (product == null) return PartialView("_ErrorPagePartialView"); ;
 
             if (!ModelState.IsValid)
             {
@@ -296,7 +297,7 @@ namespace DrizlyBackEnd.Controllers
         public IActionResult AddBasket(int id, int page = 1)
         {
             if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
-                return NotFound();
+                return PartialView("_ErrorPagePartialView");
 
 
             Product product = _context.Products
@@ -305,7 +306,7 @@ namespace DrizlyBackEnd.Controllers
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
                 .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);
-            if (product == null) return NotFound();
+            if (product == null) return PartialView("_ErrorPagePartialView");
 
             if (product.IsAvailable==false)
             {
@@ -374,7 +375,7 @@ namespace DrizlyBackEnd.Controllers
         public IActionResult RemoveBasket(int id)
         {
             if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
-                return NotFound();
+                return PartialView("_ErrorPagePartialView");
 
             AppUser member = null;
             if (User.Identity.IsAuthenticated)
@@ -436,7 +437,7 @@ namespace DrizlyBackEnd.Controllers
         public IActionResult RemoveAllBasket(int id)
         {
             if (!_context.Products.Any(x => x.Id == id && !x.IsDeleted))
-                return NotFound();
+                return PartialView("_ErrorPagePartialView");
 
             AppUser member = null;
             if (User.Identity.IsAuthenticated)

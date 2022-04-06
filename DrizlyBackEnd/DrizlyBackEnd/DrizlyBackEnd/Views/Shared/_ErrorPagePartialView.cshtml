@@ -1,0 +1,28 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html class="errorhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap Link -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- My Css -->
+    <link rel="stylesheet" href="~/assets/Css/style.css">
+    <!-- Fav Ico -->
+    <link rel="icon" type="image/x-icon" href="assets/Media/drizlyfavico.ico">
+    <title>Error Page</title>
+</head>
+<body class="errorbody">
+    <div class="noise"></div>
+    <div class="overlay"></div>
+    <div class="terminal">
+        <h1>Error <span class="errorcode">404</span></h1>
+        <p class="output">Looks like you had too much fun and tequilla last night</p>
+        <p class="output">Please try to <a class="errortag">get some sleep</a> or <a class="errortag" asp-controller="home" asp-action="index">return to the homepage</a>.</p>
+        <p class="output">Good luck.</p>
+    </div>
+</body>
+</html>

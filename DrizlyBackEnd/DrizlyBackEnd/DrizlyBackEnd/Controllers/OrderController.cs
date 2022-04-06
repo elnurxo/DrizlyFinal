@@ -63,7 +63,7 @@ namespace DrizlyBackEnd.Controllers
         }
 
         //ORDER ACTION
-        //[Authorize(Roles = "Member")]
+        [Authorize(Roles = "Member")]
         [HttpPost]
         public IActionResult Create(Order order,string? coupon)
         {
