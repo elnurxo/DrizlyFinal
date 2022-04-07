@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220407053919_BlackListTableCreatedandIsBannedaddedtoAppUser")]
+    partial class BlackListTableCreatedandIsBannedaddedtoAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,19 +107,17 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<DateTime>("BanEndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("BanStartDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BannedAppUserName")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("BlackLists");
                 });
@@ -1047,6 +1047,9 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
+                    b.Property<int>("BanCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -1114,13 +1117,6 @@ namespace DrizlyBackEnd.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DrizlyBackEnd.Models.BlackList", b =>
-                {
-                    b.HasOne("DrizlyBackEnd.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.Employee", b =>

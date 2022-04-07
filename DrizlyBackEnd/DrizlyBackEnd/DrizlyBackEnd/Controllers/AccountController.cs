@@ -196,7 +196,7 @@ namespace DrizlyBackEnd.Controllers
     //}
 
     //LOGIN ACTION
-    public IActionResult Login()
+        public IActionResult Login()
         {
             return View();
         }
@@ -214,8 +214,21 @@ namespace DrizlyBackEnd.Controllers
                 ModelState.AddModelError("", "username or password is incorrect!");
                 return View();
             }
+            //CHECK IF USER'S BANNED ATM
+            var blackList = _context.BlackLists.ToList();
+            foreach (var item in blackList)
+            {
+                if (item.AppUserId==member.Id && DateTime.UtcNow.AddHours(4) < item.BanEndDate)
+                {
+                    TempData["Warning"] = "Your account is banned, can't log in right now. Try later!";
+                    return RedirectToAction("login");
+                }
+            }
+
 
             var result = await _signInManager.PasswordSignInAsync(member, loginVM.Password, loginVM.IsPersistent, true);
+            member.IsBanned = false;
+            _context.SaveChanges();
             if (result.IsLockedOut)
             {
                 ModelState.AddModelError("", "too many false attempts, try again after 2 minutes ~.~");
@@ -226,7 +239,6 @@ namespace DrizlyBackEnd.Controllers
                 ModelState.AddModelError("", "username or password is incorrect!");
                 return View();
             }
-
 
             return RedirectToAction("index", "home");
         }

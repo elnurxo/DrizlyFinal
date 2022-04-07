@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220407061640_BlackListTableUpdated")]
+    partial class BlackListTableUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,7 +114,10 @@ namespace DrizlyBackEnd.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("BanStartDate")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BannedAppİd")
+                        .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
@@ -1046,6 +1051,9 @@ namespace DrizlyBackEnd.Migrations
                     b.Property<string>("BackgroundImage")
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
+
+                    b.Property<int>("BanCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(50)")

@@ -16,10 +16,12 @@ namespace DrizlyBackEnd.Controllers
     {
         private readonly DrizlyContext _context;
         private readonly UserManager<AppUser> _userManager;
-        public ShopController(DrizlyContext context, UserManager<AppUser> userManager)
+        private readonly SignInManager<AppUser> _signInManager;
+        public ShopController(DrizlyContext context, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         //INDEX ACTION
@@ -244,7 +246,7 @@ namespace DrizlyBackEnd.Controllers
             AppUser member = null;
             if (User.Identity.IsAuthenticated)
             {
-                member = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
+                member = _userManager.Users.Include(x=>x.BlackLists).FirstOrDefault(x => x.UserName == User.Identity.Name && !x.IsAdmin);
             }
             if (member == null)
                 return RedirectToAction("login", "account");
@@ -258,6 +260,7 @@ namespace DrizlyBackEnd.Controllers
 
             if (product == null) return PartialView("_ErrorPagePartialView"); ;
 
+
             if (!ModelState.IsValid)
             {
 
@@ -269,9 +272,46 @@ namespace DrizlyBackEnd.Controllers
 
                 return View("Detail", productDetailVM);
             }
+            //CHECK IF COMMENT CONTENT IS APPROPRIATE
+            var bannedwords = _context.BanWords.ToList();
+            string[] commentSplit = comment.Text.Split(" ");
+            foreach (var item in commentSplit)
+            {
+                foreach (var spam in bannedwords)
+                {
+                    if (item == spam.Text)
+                    {
+                        var spamdetected = item;
+                        //COMMENT CONTAINS SPAM
+                        BlackList blackList = new BlackList();
+                        blackList.AppUserId = member.Id;
+                        blackList.BanStartDate = DateTime.UtcNow.AddHours(4);
+                        if (member.BlackLists.Count==0)
+                        {
+                          blackList.BanEndDate = blackList.BanStartDate.AddMinutes(5);
+                        }
+                        else if (member.BlackLists.Count == 1)
+                        {
+                            blackList.BanEndDate = blackList.BanStartDate.AddMinutes(10);
+                        }
+                        else if (member.BlackLists.Count >= 2)
+                        {
+                            blackList.BanEndDate = blackList.BanStartDate.AddMinutes(15);
+                        }
+                        
 
+                        _context.BlackLists.Add(blackList);
+                        member.IsBanned = true;
+                        _context.SaveChanges();
+                        _signInManager.SignOutAsync();
+                        TempData["Warning"] = $"You can't use {spamdetected} word, your account's banned for {blackList.BanEndDate-blackList.BanStartDate} minutes";
+                        return RedirectToAction("index", "home");
+                    }
+                }
+            }
+
+            //CREATE COMMENT IF EVERYTHING IS OKAY
             comment.AppUserId = member.Id;
-
             comment.CreatedAt = DateTime.UtcNow.AddHours(4);
             product.ProductComments.Add(comment);
             product.Rate = (int)Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count);

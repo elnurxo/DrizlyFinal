@@ -39,6 +39,7 @@ namespace DrizlyBackEnd.Models
         public List<AppUserCoupon> appUserCoupons { get; set; }
         [StringLength(maximumLength: 50)]
         public string RoleName { get; set; }
-
+        public bool IsBanned { get; set; }
+        public List<BlackList> BlackLists { get; set; }
     }
 }

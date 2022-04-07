@@ -36,6 +36,10 @@
     {
         <input type="hidden" id="success-toaster" value="@TempData["Success"]" />
     }
+    @if (TempData["Warning"] != null)
+    {
+        <input type="hidden" id="warning-toaster" value="@TempData["Warning"]" />
+    }
     <!-- Loading Start -->
     <div id="loadingwrapper">
     </div>
@@ -253,6 +257,11 @@
     $(document).ready(function () {
         if ($("#success-toaster").length) {
             toastr["success"]($("#success-toaster").val());
+        }
+    });
+    $(document).ready(function () {
+        if ($("#warning-toaster").length) {
+            toastr["warning"]($("#warning-toaster").val());
         }
     });
 </script>

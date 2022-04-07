@@ -4,14 +4,16 @@ using DrizlyBackEnd.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrizlyBackEnd.Migrations
 {
     [DbContext(typeof(DrizlyContext))]
-    partial class DrizlyContextModelSnapshot : ModelSnapshot
+    [Migration("20220407052801_BanWordTableCreated")]
+    partial class BanWordTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,30 +98,6 @@ namespace DrizlyBackEnd.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("BasketItems");
-                });
-
-            modelBuilder.Entity("DrizlyBackEnd.Models.BlackList", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("BanEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("BanStartDate")
-                        .HasColumnType("datetime2")
-                        .HasMaxLength(256);
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("BlackLists");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.Brand", b =>
@@ -1074,9 +1052,6 @@ namespace DrizlyBackEnd.Migrations
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsBanned")
-                        .HasColumnType("bit");
-
                     b.Property<string>("RoleName")
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
@@ -1114,13 +1089,6 @@ namespace DrizlyBackEnd.Migrations
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("DrizlyBackEnd.Models.BlackList", b =>
-                {
-                    b.HasOne("DrizlyBackEnd.Models.AppUser", "AppUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
                 });
 
             modelBuilder.Entity("DrizlyBackEnd.Models.Employee", b =>
