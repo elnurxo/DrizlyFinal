@@ -220,7 +220,7 @@ namespace DrizlyBackEnd.Controllers
             {
                 if (item.AppUserId==member.Id && DateTime.UtcNow.AddHours(4) < item.BanEndDate)
                 {
-                    TempData["Warning"] = "Your account is banned, can't log in right now. Try later!";
+                    TempData["Warning"] = $"Your account is banned, can't log in right now. Try after {(item.BanEndDate- DateTime.UtcNow.AddHours(4)).TotalMinutes.ToString("0")} minutes!";
                     return RedirectToAction("login");
                 }
             }
@@ -239,7 +239,7 @@ namespace DrizlyBackEnd.Controllers
                 ModelState.AddModelError("", "username or password is incorrect!");
                 return View();
             }
-
+            TempData["Success"] = $"Welcome {member.FullName}";
             return RedirectToAction("index", "home");
         }
 

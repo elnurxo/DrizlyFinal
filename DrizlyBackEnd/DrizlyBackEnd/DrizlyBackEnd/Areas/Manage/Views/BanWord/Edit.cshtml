@@ -1,0 +1,42 @@
+﻿@model BanWord
+@{
+    ViewData["Title"] = "Edit Position";
+}
+
+<div class="content-wrapper" style="margin-left:-25px;padding-top:0px">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="d-flex justify-content-between m-4">
+                    <h3>Ban Word Edit</h3>
+                    <a asp-action="index" class="btn btn-success">Go Back</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Edit Ban Word</div>
+                        <hr>
+                        <form asp-action="edit" method="post">
+
+                            <div class="form-row">
+                                <div class="col">
+                                    <label asp-for="Text">Enter Text</label>
+                                    <input class="form-control" asp-for="Text" placeholder="Banned Word">
+                                    <span class="text-danger" asp-validation-for="Text"></span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-light px-5 mt-3">EDIT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--End Row-->
+        <!--start overlay-->
+        <div class="overlay toggle-menu"></div>
+        <!--end overlay-->
+    </div>
+</div>
+
+

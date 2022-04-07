@@ -188,6 +188,12 @@
                     </a>
                 </li>
 
+                <li>
+                    <a asp-controller="banword" asp-action="index">
+                        <i class="bi bi-exclamation-octagon-fill"></i> <span>Banned Words</span>
+                    </a>
+                </li>
+
                 @if (User.IsInRole("SuperAdmin"))
                 {
                     <li>

@@ -304,7 +304,7 @@ namespace DrizlyBackEnd.Controllers
                         member.IsBanned = true;
                         _context.SaveChanges();
                         _signInManager.SignOutAsync();
-                        TempData["Warning"] = $"You can't use {spamdetected} word, your account's banned for {blackList.BanEndDate-blackList.BanStartDate} minutes";
+                        TempData["Warning"] = $"You can't use {spamdetected} word, your account's banned for {(blackList.BanEndDate-blackList.BanStartDate).TotalMinutes.ToString("0")} minutes";
                         return RedirectToAction("index", "home");
                     }
                 }

@@ -52,20 +52,14 @@
                                             </td>
                                             <td>
                                             @{ int counterproduct = 0;}
-                                            @foreach (var item in category.TypeProducts)
-	                                                {
                                                         @foreach (var product in ViewBag.Products)
                                                         {
-                                                            if (product.CategoryId == @item.CategoryId)
+                                                            if (product.CategoryId == category.Id)
                                                             {
                                                                 counterproduct++;
                                                             }
                                                         }     
-	                                                }
-                                              @{ 
-                                                  var result = counterproduct / 2;
-                                              }
-                                                @result
+                                            @counterproduct
                                             </td>
                                             <td>
                                                 <a asp-action="edit" asp-route-id="@category.Id" class="btn btn-warning mx-3">Edit</a>

@@ -1,7 +1,7 @@
-﻿@model PagenatedList<Position>
+﻿@model PagenatedList<BanWord>
 
 @{
-    ViewData["Title"] = "Positions";
+    ViewData["Title"] = "Banned Words";
     int counter = (Model.PageIndex - 1) * Model.PageSize;
     var temp = -1;
     if (Model.PageIndex == 1)
@@ -23,34 +23,32 @@
 
             <div class="col-lg-12">
                 <div class="d-flex justify-content-between m-4">
-                    <h3>Positions</h3>
+                    <h3>Banned Words</h3>
                     <a asp-action="create" class="btn btn-success">Create</a>
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Positions Table</h5>
+                        <h5 class="card-title">Ban Words Table</h5>
                         <div class="table-responsive">
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Position</th>
-                                        <th scope="col">Employee count in this position</th>
+                                        <th scope="col">Banned Word</th>
                                         <th scope="col"></th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var position in Model)
+                                    @foreach (var spamword in Model)
                                     {
                                         counter++;
                                         <tr>
                                             <th scope="row">@counter</th>
-                                            <td>@position.Name</td>
-                                            <td>@position.Employees.Count()</td>
+                                            <td>@spamword.Text</td>
                                             <td>
-                                                <a asp-action="edit" asp-route-id="@position.Id" class="btn btn-warning mx-3">Edit</a>
-                                                <a asp-action="delete" asp-route-id="@position.Id" class="btn btn-danger delete-position">Delete</a>
+                                                <a asp-action="edit" asp-route-id="@spamword.Id" class="btn btn-warning mx-3">Edit</a>
+                                                <a asp-action="delete" asp-route-id="@spamword.Id" class="btn btn-danger delete-banword">Delete</a>
                                             </td>
                                         </tr>
                                     }
