@@ -21,9 +21,15 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
         public IActionResult Index()
         {
 
+            //var yesterdayOrders = _context.Orders.Where(x => x.CreatedAt >= DateTime.UtcNow.AddHours(4).AddDays(-1) );
+            //var todayOrders = _context.Orders.Where(x => x.CreatedAt < DateTime.UtcNow.AddHours(4)); 
+
+
+
             DashboardViewModel dashboardVM = new DashboardViewModel
             {
-                AppUsers = _context.AppUsers.ToList()
+                AppUsers = _context.AppUsers.ToList(),
+                YesterdayOrders = _context.Orders.Where(x=>x.CreatedAt >= DateTime.UtcNow.AddHours(4).AddDays(-2) && x.CreatedAt <= DateTime.UtcNow.AddHours(4).AddDays(-1)).ToList(),
             };
             return View(dashboardVM);
         }

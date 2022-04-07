@@ -9,5 +9,6 @@ namespace DrizlyBackEnd.Areas.Manage.ViewModels
     public class DashboardViewModel
     {
         public List<AppUser> AppUsers { get; set; }
+        public List<Order> YesterdayOrders { get; set; }
     }
 }

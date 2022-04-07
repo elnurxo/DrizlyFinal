@@ -2,6 +2,9 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "Chart.js/2.9.3": {
+        "type": "package"
+      },
       "Microsoft.AspNet.Mvc/5.1.2": {
         "type": "package",
         "dependencies": {
@@ -2732,6 +2735,21 @@
     }
   },
   "libraries": {
+    "Chart.js/2.9.3": {
+      "sha512": "SY8PuXOJANgsEGMtuXPb/gxazfXdySUuFwTPbQUbw/YKiltR6FJ3mXrLFpr6N2MSCS7oUtfOhTotxLifyJcQNA==",
+      "type": "package",
+      "path": "chart.js/2.9.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "chart.js.2.9.3.nupkg.sha512",
+        "chart.js.nuspec",
+        "content/Content/Chart.css",
+        "content/Content/Chart.min.css",
+        "content/Scripts/Chart.js",
+        "content/Scripts/Chart.min.js"
+      ]
+    },
     "Microsoft.AspNet.Mvc/5.1.2": {
       "sha512": "Ca4JK3k25lzSdVBBWeOKF2YTbt02ehiBmwGU+ySFrx0vZyBc3s9n3l33OZz+MFO1titA8hs0baITlPX3uy49Kg==",
       "type": "package",
@@ -8821,6 +8839,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "Chart.js >= 2.9.3",
       "Microsoft.AspNet.Mvc >= 5.1.2",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 3.1.22",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 3.1.22",
@@ -8875,6 +8894,10 @@
       "netcoreapp3.1": {
         "targetAlias": "netcoreapp3.1",
         "dependencies": {
+          "Chart.js": {
+            "target": "Package",
+            "version": "[2.9.3, )"
+          },
           "Microsoft.AspNet.Mvc": {
             "target": "Package",
             "version": "[5.1.2, )"

@@ -31,6 +31,7 @@
     ".NETCoreApp,Version=v3.1": {
       "DrizlyBackEnd/1.0.0": {
         "dependencies": {
+          "Chart.js": "2.9.3",
           "Microsoft.AspNet.Mvc": "5.1.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "3.1.22",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "3.1.22",
@@ -312,6 +313,7 @@
           "DrizlyBackEnd.dll": {}
         }
       },
+      "Chart.js/2.9.3": {},
       "Microsoft.AspNet.Mvc/5.1.2": {
         "dependencies": {
           "Microsoft.AspNet.Razor": "3.1.2",
@@ -3987,6 +3989,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Chart.js/2.9.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SY8PuXOJANgsEGMtuXPb/gxazfXdySUuFwTPbQUbw/YKiltR6FJ3mXrLFpr6N2MSCS7oUtfOhTotxLifyJcQNA==",
+      "path": "chart.js/2.9.3",
+      "hashPath": "chart.js.2.9.3.nupkg.sha512"
     },
     "Microsoft.AspNet.Mvc/5.1.2": {
       "type": "package",
