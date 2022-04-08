@@ -41,5 +41,6 @@ namespace DrizlyBackEnd.Models
         public string RoleName { get; set; }
         public bool IsBanned { get; set; }
         public List<BlackList> BlackLists { get; set; }
+        public string ConnectionId { get; set; }
     }
 }

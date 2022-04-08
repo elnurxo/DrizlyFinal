@@ -1,3 +1,4 @@
+using DrizlyBackEnd.Hubs;
 using DrizlyBackEnd.Models;
 using DrizlyBackEnd.Services;
 using Microsoft.AspNetCore.Builder;
@@ -49,7 +50,7 @@ namespace DrizlyBackEnd
             }).AddDefaultTokenProviders().AddEntityFrameworkStores<DrizlyContext>();
 
             services.AddScoped<LayoutService>();
-
+            services.AddSignalR().AddJsonProtocol();
             services.AddSession(opt =>
             {
                 opt.IdleTimeout = TimeSpan.FromSeconds(30);
@@ -97,7 +98,9 @@ namespace DrizlyBackEnd
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHub<HubOrderStatus>("/OrderHub");
             });
+           
         }
     }
 }

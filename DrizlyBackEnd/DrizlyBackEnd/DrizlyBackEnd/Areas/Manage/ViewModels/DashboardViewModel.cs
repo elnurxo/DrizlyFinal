@@ -18,6 +18,24 @@ namespace DrizlyBackEnd.Areas.Manage.ViewModels
         public List<ContactUs> TotalMessages { get; set; }
         public List<ContactUs> ThisWeekMessages { get; set; }
         public List<ContactUs> LastWeekMessages { get; set; }
+        public List<Product> Products { get; set; } 
+        public List<OrderItem> CategoryTotalSale { get; set; }
+        public List<Order> RecentOrders { get; set; }
+        //MONTHLY VISITORS
+        public List<WebSiteVisitor> JanuaryVisitors { get; set; }
+        public List<WebSiteVisitor> FebruaryVisitors { get; set; }
+        public List<WebSiteVisitor> MarchVisitors { get; set; }
+        public List<WebSiteVisitor> AprilVisitors { get; set; }
+        public List<WebSiteVisitor> MayVisitors { get; set; }
+        public List<WebSiteVisitor> JuneVisitors { get; set; }
+        public List<WebSiteVisitor> JulyVisitors { get; set; }
+        public List<WebSiteVisitor> AugustVisitors { get; set; }
+        public List<WebSiteVisitor> SeptemberVisitors { get; set; }
+        public List<WebSiteVisitor> OctoberVisitors { get; set; }
+        public List<WebSiteVisitor> NovemberVisitors { get; set; }
+        public List<WebSiteVisitor> DecemberVisitors { get; set; }
+        //END MONTLY VISITORS REPORT
+
 
     }
 }

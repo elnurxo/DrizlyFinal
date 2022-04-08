@@ -353,7 +353,7 @@
     <script src="https://kit.fontawesome.com/51866e0675.js" crossorigin="anonymous"></script>
     <script src="~/manage/assets/plugins/Chart.js/Chart.min.js"></script>
     <!-- Index js -->
-    <script src="~/manage/assets/js/index.js"></script>
+    @*<script src="~/manage/assets/js/index.js"></script>*@
     @*Toastr Script*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -396,6 +396,6 @@
         });
     </script>
 </body>
-
+@RenderSection("ScriptsAdmin", required: false)
 </html>
 

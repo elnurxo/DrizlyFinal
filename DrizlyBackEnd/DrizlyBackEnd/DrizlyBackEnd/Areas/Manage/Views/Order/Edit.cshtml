@@ -9,6 +9,7 @@
             <h1>Edit</h1>
             <div class="card">
                 <div class="card-body">
+                    
                     <h5 class="card-title">FullName: @Model.FullName</h5>
                     <h5 class="card-title">Phone: @Model.PhoneNumber</h5>
                     <h5 class="card-title">Email: @Model.Email</h5>
@@ -29,7 +30,7 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-3">
-                                <button type="submit" class="btn btn-primary orderstatus-change">Save</button>
+                                <button data-id="@Model.AppUserId" type="submit" class="btn btn-primary orderstatus-change">Save</button>
                             </div>
                             <div class="text-danger" asp-validation-summary="ModelOnly"></div>
                         </div>
@@ -41,4 +42,24 @@
         </div>
     </div>
 </div>
+@section ScriptsAdmin{
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script>
+    var connection = new signalR.HubConnectionBuilder().withUrl("/OrderHub").build()
+    connection.start()
 
+    //COMMENT
+    var select = document.getElementById("Status");
+    let result = "";
+    select.addEventListener("change", function () {
+
+         result = this.selectedOptions[0].innerHTML;
+    });
+    let orderid = @Model.Id;
+
+    $(".orderstatus-change").click(function () {
+        var userid = $(this).attr("data-id");
+        connection.invoke("OrderStatusChange", userid, result, orderid);
+    });
+</script>
+ }
