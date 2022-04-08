@@ -24,6 +24,29 @@ namespace DrizlyBackEnd.Controllers
         }
         public async  Task<IActionResult> Index()
         {
+            //VISITOR TASK
+            //string visitorCookie = HttpContext.Request.Cookies["visitor"];
+
+            //if (sessionStorage.getItem("visitor") === null)
+            //{
+            //    //...
+            //}
+
+            //if (!string.IsNullOrWhiteSpace(visitorCookie))
+            //{
+
+            //if (HttpContext.Request.Cookies["visitor"] == null)
+            //{
+            //    HttpContext.Response.SetCookie(new HttpCookie("visitor"));
+
+            //    //do your first time stuff
+            //}
+          
+
+            //}
+            //END VISITOR TASK   
+
+
             if (User.Identity.IsAuthenticated)
             {
                 List<BasketItemViewModel> basketProducts = new List<BasketItemViewModel>();
@@ -41,7 +64,7 @@ namespace DrizlyBackEnd.Controllers
                             AppUserId = user.Id,
                             Count = item.Count,
                             ProductId = item.ProductId,
-                            CreatedAt = DateTime.Now,
+                            CreatedAt = DateTime.UtcNow.AddHours(4),
                         };
                         await _context.BasketItems.AddAsync(memberBasketItem);
 
@@ -67,8 +90,19 @@ namespace DrizlyBackEnd.Controllers
             return View(homeVM);
         }
 
+        [HttpPost]
+        public IActionResult IncrementVisitorCount()
+        {
+            WebSiteVisitor visitor = new WebSiteVisitor();
+            visitor.VisitDate = DateTime.UtcNow.AddHours(4);
+            _context.WebSiteVisitors.Add(visitor);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
         //SEARCH ACTION
-         public IActionResult SearchProduct(string searchString)
+        public IActionResult SearchProduct(string searchString)
         {
             var products = _context.Products.AsQueryable();
             if (!String.IsNullOrEmpty(searchString))

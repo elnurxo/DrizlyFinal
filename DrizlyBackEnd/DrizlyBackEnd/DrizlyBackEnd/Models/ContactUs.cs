@@ -24,5 +24,6 @@ namespace DrizlyBackEnd.Models
         [StringLength(maximumLength: 400)]
         public string YourMessage { get; set; }
         public bool IsRead { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }

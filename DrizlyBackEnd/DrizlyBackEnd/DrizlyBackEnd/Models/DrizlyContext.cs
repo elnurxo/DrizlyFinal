@@ -40,6 +40,7 @@ namespace DrizlyBackEnd.Models
         public DbSet<CouponCategory> CouponCategories { get; set; }
         public DbSet<BanWord> BanWords { get; set; }
         public DbSet<BlackList> BlackLists { get; set; }
+        public DbSet<WebSiteVisitor> WebSiteVisitors { get; set; }
 
     }
 }

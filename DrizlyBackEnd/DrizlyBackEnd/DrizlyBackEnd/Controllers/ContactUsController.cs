@@ -51,7 +51,7 @@ namespace DrizlyBackEnd.Controllers
                 return View();
             }
 
-
+            message.CreatedAt = DateTime.UtcNow.AddHours(4);
             _context.ContactUs.Add(message);
             _context.SaveChanges();
             TempData["Success"] = "Message Sent!";

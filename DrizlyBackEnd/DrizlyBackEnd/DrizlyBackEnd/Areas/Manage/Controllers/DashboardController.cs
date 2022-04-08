@@ -25,11 +25,19 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             //var todayOrders = _context.Orders.Where(x => x.CreatedAt < DateTime.UtcNow.AddHours(4)); 
 
 
-
             DashboardViewModel dashboardVM = new DashboardViewModel
             {
+                
                 AppUsers = _context.AppUsers.ToList(),
-                YesterdayOrders = _context.Orders.Where(x=>x.CreatedAt >= DateTime.UtcNow.AddHours(4).AddDays(-2) && x.CreatedAt <= DateTime.UtcNow.AddHours(4).AddDays(-1)).ToList(),
+                TotalOrders = _context.Orders.ToList(),
+                TillLastWreekOrders = _context.Orders.Where(x=>x.CreatedAt < DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
+                ThisWeekOrders = _context.Orders.Where(x=>x.CreatedAt > DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
+                TotalVisitors = _context.WebSiteVisitors.ToList(),
+                WebSiteVisitorsLastWeek = _context.WebSiteVisitors.Where(x=>x.VisitDate < DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
+                WebSiteVisitorsthisweek = _context.WebSiteVisitors.Where(x => x.VisitDate > DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
+                TotalMessages = _context.ContactUs.ToList(),
+                LastWeekMessages = _context.ContactUs.Where(x => x.CreatedAt < DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
+                ThisWeekMessages = _context.ContactUs.Where(x => x.CreatedAt > DateTime.UtcNow.AddHours(4).AddDays(-7)).ToList(),
             };
             return View(dashboardVM);
         }

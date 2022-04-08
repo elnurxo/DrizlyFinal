@@ -1,4 +1,11 @@
 $(function () {
+    //SET COOKIE FOR WEBSITE VISITOR
+    if (sessionStorage.getItem("visitor") == undefined) {
+        fetch('https://localhost:44321/home/IncrementVisitorCount', { method: 'POST'})
+            .then(async response => await response)
+             sessionStorage.setItem("visitor", "confirmed");
+    }
+
     //TYPE-PRODUCT FILTER
     $(document).on("change", ".typeproductfilter", function (e) {
         $("#filterForm").submit();
@@ -415,7 +422,7 @@ $(function () {
         $(".review-form").css("overflow","hidden");
     });
     //AGE MODAL CLICK
-    $(".age-no").click(function(){
+    $(".age-no").click(function () {
         $(".age-no-clicked").css("display","block");
         $(".age-yes").attr("disabled", true);
         $(".age-yes").css("background", "#d27c7c");
@@ -538,6 +545,5 @@ if (windowurl == "https://localhost:44321/order/basket") {
     console.log("burdayamm");
     console.log(document.getElementById("card-products-section"));
     document.getElementById("card-products-section").style.display = "block";
-    //document.getElementsByClassName("basket-view").style.display = "block";
 }
 
