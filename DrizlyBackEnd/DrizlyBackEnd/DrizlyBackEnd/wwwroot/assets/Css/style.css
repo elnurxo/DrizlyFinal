@@ -3226,7 +3226,7 @@ main .slick-prev:before, main .slick-next:before {
   display: flex;
   -webkit-box-align: end;
       -ms-flex-align: end;
-          align-items: flex-end;
+          align-items: baseline;
 }
 .category-name-sorting h2 {
   margin-bottom: 10px;
