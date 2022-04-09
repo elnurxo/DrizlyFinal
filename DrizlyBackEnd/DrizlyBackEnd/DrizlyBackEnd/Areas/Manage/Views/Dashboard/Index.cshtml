@@ -149,7 +149,7 @@
             </div>
         </div>
     </div>
-
+    @*CARDS*@
     <div class="row">
         <div class="col-12 col-lg-8 col-xl-8">
             <div class="card">
@@ -217,7 +217,35 @@
                 </div>
             </div>
         </div>
-    </div><!--End Row-->
+    </div>
+    <!--End Row-->
+
+    <div class="row">
+        <div class="col-12 col-lg-4 col-xl-4">
+            <div class="card">
+                <div class="card-header">
+                    Product of the All Time <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                </div>
+                <div class="card-body d-flex justify-content-around">
+                        <img  width="160" class="border-radius:6px;" src="~/uploads/products/@Model.MostPopularProduct.Image" />
+                        <div class="product-info px-3">
+                            <h4 class="font-weight-bolder">@Model.MostPopularProduct.Name</h4>
+                            <hr />
+                            <p>View: @Model.MostPopularProduct.ProductViews.Count() <i class="fa fa-eye" aria-hidden="true"></i></p>
+                            <hr />
+                            <p>Category: @Model.MostPopularProduct.TypeProduct.Name</p>
+                            <hr />
+                            <p>Brand: @Model.MostPopularProduct.Brand.Name</p>
+                            <hr />
+                            <p>Country: @Model.MostPopularProduct.Brand.Name</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-8 col-xl-8">
+            <canvas id="myChart" style="width:100%;"></canvas>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-12 col-lg-12">
@@ -267,7 +295,8 @@
                 </div>
             </div>
         </div>
-    </div><!--End Row-->
+    </div>
+    <!--End Row-->
     <!--End Dashboard Content-->
     <!--start overlay-->
     <div class="overlay toggle-menu"></div>
@@ -371,5 +400,73 @@
 
        });
 
+       //BAR CHART
+       var arr = Array.apply(null, Array(5))
+       @{ 
+           string country1 = "";
+           string country2 = "";
+           string country3 = "";
+           string country4 = "";
+           string country5 = "";
+           int country1count = 0;
+           int country2count = 0;
+           int country3count = 0;
+           int country4count = 0;
+           int country5count = 0;
+           for (int i = 0; i < Model.Countries.Count; i++)
+           {
+
+               if (i == 0)
+               {
+                   country1 = Model.Countries[i].Name;
+                   country1count = Model.Countries[i].Products.Count;
+               }
+               else if (i == 1)
+               {
+                   country2 = Model.Countries[i].Name;
+                   country2count = Model.Countries[i].Products.Count;
+               }
+               else if (i == 2)
+               {
+                   country3 = Model.Countries[i].Name;
+                   country3count = Model.Countries[i].Products.Count;
+               }
+               else if (i == 3)
+               {
+                   country4 = Model.Countries[i].Name;
+                   country4count = Model.Countries[i].Products.Count;
+               }
+               else if (i == 4)
+               {
+                   country5 = Model.Countries[i].Name;
+                   country5count = Model.Countries[i].Products.Count;
+               }
+           }
+       }
+       var xValues = ["@country1", "@country2", "@country3", "@country4", "@country5"];
+       var yValues = [@country1count, @country2count, @country3count, @country4count, @country5count];
+       var barColors = ["#ffffff",
+           "rgba(255, 255, 255, 0.80)",
+           "rgba(255, 255, 255, 0.60)",
+           "rgba(255, 255, 255, 0.40)",
+           "rgba(255, 255, 255, 0.20)"];
+
+       new Chart("myChart", {
+           type: "bar",
+           data: {
+               labels: xValues,
+               datasets: [{
+                   backgroundColor: barColors,
+                   data: yValues
+               }]
+           },
+           options: {
+               legend: { display: false },
+               title: {
+                   display: true,
+                   text: "Top 5 Country by popularity"
+               }
+           }
+       });
    </script>
 }

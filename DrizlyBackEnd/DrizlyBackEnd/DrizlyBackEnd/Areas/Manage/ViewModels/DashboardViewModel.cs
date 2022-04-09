@@ -35,7 +35,8 @@ namespace DrizlyBackEnd.Areas.Manage.ViewModels
         public List<WebSiteVisitor> NovemberVisitors { get; set; }
         public List<WebSiteVisitor> DecemberVisitors { get; set; }
         //END MONTLY VISITORS REPORT
-
-
+        public List<Country> Countries { get; set; }
+        //PRODUCT OF ALL TIME
+        public Product MostPopularProduct { get; set; }
     }
 }

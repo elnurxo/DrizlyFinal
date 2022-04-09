@@ -222,6 +222,14 @@ namespace DrizlyBackEnd.Controllers
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
             if (product == null) return PartialView("_ErrorPagePartialView");
 
+            //PRODUCT VIEW
+            ProductView productView = new ProductView();
+            productView.ViewDate = DateTime.UtcNow.AddHours(4);
+            productView.ProductId = id;
+            _context.ProductViews.Add(productView);
+            _context.SaveChanges();
+            //END PRODUCT VIEW
+
             string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
             int pageSize = string.IsNullOrWhiteSpace(pageSizeStr) ? 3 : int.Parse(pageSizeStr);
 

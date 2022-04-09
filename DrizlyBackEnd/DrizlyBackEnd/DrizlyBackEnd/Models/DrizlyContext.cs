@@ -41,6 +41,7 @@ namespace DrizlyBackEnd.Models
         public DbSet<BanWord> BanWords { get; set; }
         public DbSet<BlackList> BlackLists { get; set; }
         public DbSet<WebSiteVisitor> WebSiteVisitors { get; set; }
+        public DbSet<ProductView> ProductViews { get; set; }
 
     }
 }
