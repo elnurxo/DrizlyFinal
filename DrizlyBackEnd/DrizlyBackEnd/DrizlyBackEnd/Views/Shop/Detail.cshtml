@@ -108,6 +108,7 @@
                         {
                             <p class="drink-size">Size: <span>@Model.Product.ProductSize.Size</span></p>
                         }
+                        <p class="product-view">View: <span>@Model.Product.ProductViews.Count() <i class="fa fa-eye" aria-hidden="true"></i></span></p>
                         @if (Model.Product.DiscountPercent > 0)
                         {
                             <p class="drink-price-detail">

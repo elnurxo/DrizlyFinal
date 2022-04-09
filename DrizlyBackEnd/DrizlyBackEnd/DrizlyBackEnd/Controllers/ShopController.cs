@@ -216,7 +216,7 @@ namespace DrizlyBackEnd.Controllers
         {
             Product product = _context.Products
                 .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
-                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x=>x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
+                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x=>x.WineFoodPairing).Include(x=>x.ProductViews).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
                 .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
                 .FirstOrDefault(x => x.Id == id && !x.IsDeleted);   
