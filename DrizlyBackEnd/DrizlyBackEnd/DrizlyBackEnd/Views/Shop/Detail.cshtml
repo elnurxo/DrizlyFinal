@@ -163,6 +163,10 @@
                                         @foreach (var item in Model.Product.ProductFoodPairings)
                                         {
                                             <span>@item.WineFoodPairing.Name</span>
+                                            if (Model.Product.ProductFoodPairings.IndexOf(item) != Model.Product.ProductFoodPairings.Count - 1)
+                                            {
+                                                <span>,</span>
+                                            }
                                         }
                                     </div>
                                 </div>
