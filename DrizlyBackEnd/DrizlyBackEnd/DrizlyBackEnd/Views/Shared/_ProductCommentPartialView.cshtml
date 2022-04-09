@@ -19,6 +19,7 @@
             <div class="form__group">
                 <label asp-for="Text" class="form__label">Your Review</label>
                 <textarea asp-for="Text" class="form__field" placeholder="Your Review" rows="4"></textarea>
+                <span class="text-danger">be careful, what you're posting!</span>
                 <span class="text-danger" asp-validation-for="Text"></span>
             </div>
         </div>
