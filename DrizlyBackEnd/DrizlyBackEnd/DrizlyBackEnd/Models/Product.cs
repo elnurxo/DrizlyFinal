@@ -58,5 +58,6 @@ namespace DrizlyBackEnd.Models
         public List<ProductFoodPairing> ProductFoodPairings { get; set; }
         public List<ProductComment> ProductComments { get; set; }
         public List<ProductView> ProductViews { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
     }
 }

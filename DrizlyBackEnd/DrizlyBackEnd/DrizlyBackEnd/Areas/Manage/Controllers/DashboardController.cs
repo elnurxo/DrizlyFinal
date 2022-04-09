@@ -51,7 +51,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
                 NovemberVisitors = _context.WebSiteVisitors.Where(x => x.VisitDate.Month == 11).ToList(),
                 DecemberVisitors = _context.WebSiteVisitors.Where(x => x.VisitDate.Month == 12).ToList(),
                 //COUNTRIES
-                Countries = _context.Countries.Include(x=>x.Products).OrderByDescending(x=>x.Products.Count).Take(5).ToList(),
+                Countries = _context.Countries.Include(x => x.Products).OrderByDescending(x => x.Products.Count).Take(5).ToList(),
                 //PRODUCT OF THE ALL TIME
                 MostPopularProduct = _context.Products.Include(x => x.ProductViews).Include(x => x.Country).Include(x => x.TypeProduct).ThenInclude(x => x.Category).Include(x => x.Brand).OrderByDescending(x => x.ProductViews.Count).FirstOrDefault()
             };
