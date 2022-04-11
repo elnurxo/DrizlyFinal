@@ -248,7 +248,7 @@ namespace DrizlyBackEnd.Controllers
         //COMMENT ACTION
         [HttpPost]
         [Authorize(Roles = "Member")]
-        public IActionResult Comment(ProductComment comment)
+        public IActionResult Comment(ProductComment comment, int page = 1)
         {
 
             AppUser member = null;
@@ -260,7 +260,7 @@ namespace DrizlyBackEnd.Controllers
                 return RedirectToAction("login", "account");
 
             Product product = _context.Products
-               .Include(x => x.Brand).Include(x => x.Country).Include(x => x.ProductCount).Include(x => x.ProductSize)
+               .Include(x => x.Brand).Include(x => x.Country).Include(x=>x.ProductViews).Include(x => x.ProductCount).Include(x => x.ProductSize)
                .Include(x => x.sweetDryScale).Include(x => x.ProductFoodPairings).ThenInclude(x => x.WineFoodPairing).Include(x => x.LiquorColor).Include(x => x.LiquorFlavor)
                 .Include(x => x.TypeProduct).ThenInclude(x => x.Category)
                .Include(x => x.ProductComments).ThenInclude(c => c.AppUser)
@@ -271,49 +271,58 @@ namespace DrizlyBackEnd.Controllers
 
             if (!ModelState.IsValid)
             {
+                var comments = _context.ProductComments.Where(x=>x.ProductId==product.Id).Include(x=>x.AppUser).AsQueryable();
+                string pageSizeStr = _context.Settings.FirstOrDefault(x => x.Key == "PageSize").Value;
+                int pageSize = string.IsNullOrWhiteSpace(pageSizeStr) ? 3 : int.Parse(pageSizeStr);
+                var resultcomments = PagenatedList<ProductComment>.Create(comments, page, pageSize); 
+
 
                 ProductDetailViewModel productDetailVM = new ProductDetailViewModel
                 {
                     Product = product,
                     Comment = comment,
+                    Comments = resultcomments
                 };
 
                 return View("Detail", productDetailVM);
             }
             //CHECK IF COMMENT CONTENT IS APPROPRIATE
             var bannedwords = _context.BanWords.ToList();
-            string[] commentSplit = comment.Text.Split(" ");
-            foreach (var item in commentSplit)
+            if (comment.Text!=null)
             {
-                foreach (var spam in bannedwords)
+                string[] commentSplit = comment.Text.Split(" ");
+                foreach (var item in commentSplit)
                 {
-                    if (item == spam.Text)
+                    foreach (var spam in bannedwords)
                     {
-                        var spamdetected = item;
-                        //COMMENT CONTAINS SPAM
-                        BlackList blackList = new BlackList();
-                        blackList.AppUserId = member.Id;
-                        blackList.BanStartDate = DateTime.UtcNow.AddHours(4);
-                        if (member.BlackLists.Count==0)
+                        if (item == spam.Text)
                         {
-                          blackList.BanEndDate = blackList.BanStartDate.AddMinutes(5);
-                        }
-                        else if (member.BlackLists.Count == 1)
-                        {
-                            blackList.BanEndDate = blackList.BanStartDate.AddMinutes(10);
-                        }
-                        else if (member.BlackLists.Count >= 2)
-                        {
-                            blackList.BanEndDate = blackList.BanStartDate.AddMinutes(15);
-                        }
-                        
+                            var spamdetected = item;
+                            //COMMENT CONTAINS SPAM
+                            BlackList blackList = new BlackList();
+                            blackList.AppUserId = member.Id;
+                            blackList.BanStartDate = DateTime.UtcNow.AddHours(4);
+                            if (member.BlackLists.Count == 0)
+                            {
+                                blackList.BanEndDate = blackList.BanStartDate.AddMinutes(5);
+                            }
+                            else if (member.BlackLists.Count == 1)
+                            {
+                                blackList.BanEndDate = blackList.BanStartDate.AddMinutes(10);
+                            }
+                            else if (member.BlackLists.Count >= 2)
+                            {
+                                blackList.BanEndDate = blackList.BanStartDate.AddMinutes(15);
+                            }
 
-                        _context.BlackLists.Add(blackList);
-                        member.IsBanned = true;
-                        _context.SaveChanges();
-                        _signInManager.SignOutAsync();
-                        TempData["Warning"] = $"You can't use {spamdetected} word, your account's banned for {(blackList.BanEndDate-blackList.BanStartDate).TotalMinutes.ToString("0")} minutes, some time to think about your mistakes!";
-                        return RedirectToAction("index", "home");
+
+                            _context.BlackLists.Add(blackList);
+                            member.IsBanned = true;
+                            _context.SaveChanges();
+                            _signInManager.SignOutAsync();
+                            TempData["Warning"] = $"You can't use {spamdetected} word, your account's banned for {(blackList.BanEndDate - blackList.BanStartDate).TotalMinutes.ToString("0")} minutes, some time to think about your mistakes!";
+                            return RedirectToAction("index", "home");
+                        }
                     }
                 }
             }
@@ -323,7 +332,6 @@ namespace DrizlyBackEnd.Controllers
             comment.CreatedAt = DateTime.UtcNow.AddHours(4);
             product.ProductComments.Add(comment);
             product.Rate = (int)Math.Ceiling(product.ProductComments.Sum(x => x.Rate) / (double)product.ProductComments.Count);
-
 
             List<ProductComment> existComments = _context.ProductComments.Include(x=>x.AppUser).Include(x=>x.Product).ToList();
             foreach (var existcomment in existComments)

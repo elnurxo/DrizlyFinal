@@ -905,7 +905,7 @@ body::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background-color: #fff;
   position: absolute;
-  z-index: 200;
+  z-index: 2;
   width: 100%;
   height: -webkit-fit-content;
   height: -moz-fit-content;
