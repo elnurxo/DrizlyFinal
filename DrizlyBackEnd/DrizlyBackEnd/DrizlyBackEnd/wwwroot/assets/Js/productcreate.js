@@ -10,6 +10,15 @@
             $(".productCountContainer").hide();
         }
     });
+    //CREATE PRODUCT DOUBLE CLICK
+    $(".create-product-btn").click(function () {
+        setTimeout(function () {
+            $(".create-product-btn").attr("disabled", "disabled");
+        }, 100)
+        setTimeout(function () {
+            $(".create-product-btn").removeAttr("disabled");
+        }, 4000)
+    });
     /*REMOVE THE OTHER ONE (ISPACKET) AT THE END CREATE*/
     $(".create-product-btn").click(function () {
         if ($(".productSizeContainer").css("display")=="none") {

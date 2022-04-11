@@ -1,4 +1,23 @@
 $(function () {
+    //DISABLE BUTTON FOR 5 SECONDS AFTER FIRST CLICK (REGOSTER BUTTON)
+    $(".register-btn").click(function () {
+        setTimeout(function () {
+            $(".register-btn").attr("disabled", "disabled");
+        }, 100)
+        setTimeout(function () {
+            $(".register-btn").removeAttr("disabled");
+        }, 4000)
+    });
+    //ORDER DOUBLE CLICK AVOID   
+    $(".placeorderbtn").click(function () {
+        setTimeout(function () {
+            $(".placeorderbtn").attr("disabled", "disabled");
+        }, 100)
+        setTimeout(function () {
+            $(".placeorderbtn").removeAttr("disabled");
+        }, 4000)
+    });
+
     //SET COOKIE FOR WEBSITE VISITOR
     if (sessionStorage.getItem("visitor") == undefined) {
         fetch('https://localhost:44321/home/IncrementVisitorCount', { method: 'POST'})
