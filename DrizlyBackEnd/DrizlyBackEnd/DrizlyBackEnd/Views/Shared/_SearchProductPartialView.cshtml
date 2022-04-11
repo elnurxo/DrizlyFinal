@@ -11,11 +11,11 @@
                 <span>
                     @if (item.DiscountPercent > 0)
                     {
-                         <span class="regular-price font-weight-bold text-danger">@((item.SalePrice * (1 - item.DiscountPercent / 100)).ToString("0.00")) $</span>
+                         <span class="regular-price font-weight-bold text-danger">@((item.SalePrice * (1 - item.DiscountPercent / 100)).ToString("0.00"))</span>
                     }
                     else
                     {
-                        <span class="regular-price font-weight-bolder text-danger">@item.SalePrice $</span>
+                        <span class="regular-price font-weight-bolder text-danger">@item.SalePrice</span>
                     }
                 </span>
             </a>

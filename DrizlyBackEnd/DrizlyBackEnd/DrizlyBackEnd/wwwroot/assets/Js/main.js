@@ -6,7 +6,7 @@ $(function () {
         }, 100)
         setTimeout(function () {
             $(".register-btn").removeAttr("disabled");
-        }, 4000)
+        }, 5000)
     });
     //ORDER DOUBLE CLICK AVOID   
     $(".placeorderbtn").click(function () {
@@ -15,7 +15,7 @@ $(function () {
         }, 100)
         setTimeout(function () {
             $(".placeorderbtn").removeAttr("disabled");
-        }, 4000)
+        }, 5000)
     });
 
     //SET COOKIE FOR WEBSITE VISITOR
