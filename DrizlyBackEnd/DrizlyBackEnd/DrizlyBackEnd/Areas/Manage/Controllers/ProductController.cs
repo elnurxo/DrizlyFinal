@@ -500,6 +500,7 @@ namespace DrizlyBackEnd.Areas.Manage.Controllers
             existProduct.CostPrice = product.CostPrice;
             existProduct.DiscountPercent = product.DiscountPercent;
             existProduct.IsAvailable = product.IsAvailable;
+            existProduct.IsFeatured = product.IsFeatured;
             existProduct.BrandId = product.BrandId;
             existProduct.CountryId = product.CountryId;
             if (existProduct.ProductCountId != null)
