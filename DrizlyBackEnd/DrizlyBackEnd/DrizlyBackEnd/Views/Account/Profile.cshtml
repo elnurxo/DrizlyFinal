@@ -176,10 +176,16 @@
                                             }
                                             <h3>More About Coupons</h3>
                                             <p class="font-weight-bold">
-                                                Currently we have @Model.CouponCategories.Count kinda coupons: @foreach (var item in Model.CouponCategories)
+                                                Currently we have @Model.CouponCategories.Count kinda coupons:
+                                                @foreach (var item in Model.CouponCategories)
                                                 {
-                                                    @(item.Name+" ")
+                                                    @(item.Name)
+                                                    if (Model.CouponCategories.IndexOf(item) != Model.CouponCategories.Count - 1)
+                                                    {
+                                                        <span>,</span>
+                                                    }
                                                 }
+
                                             </p>
                                             @if (Model.CouponCategories != null)
                                             {
