@@ -1,1 +1,1 @@
-Drizy is an online liquor selling website. I made a copy of this website from zero including backend and frontend. For backend I used C#,ASP.NET Core Framework, MVC structure and MSSql Server, for frontend I used Html 5,css 3,Scss,Bootstrap,Javascript and Jqeury
+
